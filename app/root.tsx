@@ -1,8 +1,9 @@
-import { json } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import {
   Form,
   Link,
   Links,
+  NavLink,
   Meta,
   Outlet,
   Scripts,
@@ -15,7 +16,7 @@ import { createEmptyContact, getContacts } from "./data";
 
 export const action = async () => {
   const contact = await createEmptyContact();
-  return json({ contact });
+  return redirect(`/contacts/${contact.id}/edit`);
 };
 
 export const links: LinksFunction = () => [
@@ -61,23 +62,28 @@ export default function App() {
               <button type="submit">New</button>
             </Form>
           </div>
-        <nav>
+          <nav>
             {contacts.length ? (
               <ul>
                 {contacts.map((contact) => (
                   <li key={contact.id}>
-                    <Link to={`contacts/${contact.id}`}>
-                      {contact.first || contact.last ? (
-                        <>
-                          {contact.first} {contact.last}
-                        </>
-                      ) : (
-                        <i>No Name</i>
-                      )}{" "}
-                      {contact.favorite ? (
-                        <span>★</span>
-                      ) : null}
-                    </Link>
+                    <NavLink
+                      className={({ isActive, isPending }) =>
+                        isActive ? "active" : isPending ? "pending" : ""
+                      }
+                      to={`contancs/${contact.id}`}
+                    >
+                      <Link to={`contacts/${contact.id}`}>
+                        {contact.first || contact.last ? (
+                          <>
+                            {contact.first} {contact.last}
+                          </>
+                        ) : (
+                          <i>No Name</i>
+                        )}{" "}
+                        {contact.favorite ? <span>★</span> : null}
+                      </Link>
+                    </NavLink>
                   </li>
                 ))}
               </ul>
