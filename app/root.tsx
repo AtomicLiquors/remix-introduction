@@ -11,6 +11,8 @@ import {
   useLoaderData,
   useNavigation,
   useSubmit,
+  useResolvedPath,
+  useLocation,
 } from "@remix-run/react";
 import type { 
   LinksFunction,
@@ -45,7 +47,9 @@ export const loader = async ({request,} : LoaderFunctionArgs) => {
 export default function App() {
   const { contacts, q } = useLoaderData<typeof loader>();
   const navigation = useNavigation();
+  // This hook provides information about a 'pending' page navigation.
   const submit = useSubmit();
+  const location = useLocation();
   const searching =
     navigation.location &&
     new URLSearchParams(navigation.location.search).has(
@@ -68,6 +72,7 @@ export default function App() {
         <Links />
       </head>
       <body>
+        { location.pathname !== "/" && 
         <div id="sidebar">
           <div>
             <Form id="search-form" role="search"
@@ -135,7 +140,8 @@ export default function App() {
               </li>
             </ul>
           </nav>
-        </div>
+        </div>}
+        
         <div
           className={
             navigation.state === "loading" && !searching ? "loading" : ""
