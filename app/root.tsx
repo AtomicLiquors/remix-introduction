@@ -135,7 +135,7 @@ export default function App() {
         </div>
         <div
           className={
-            navigation.state === "loading" ? "loading" : ""
+            navigation.state === "loading" && !searching ? "loading" : ""
           }
           id="detail"
         >
