@@ -18,6 +18,7 @@ import type {
   LinksFunction,
   LoaderFunctionArgs,
 } from "@remix-run/node";
+import tailwindStylesHref from "./tailwind.css?url";
 import appStylesHref from "./app.css?url";
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect } from "react";
@@ -28,7 +29,7 @@ export const action = async () => {
 };
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: appStylesHref },
+  { rel: "stylesheet", href: tailwindStylesHref },
 ];
 
 export const loader = async ({request,} : LoaderFunctionArgs) => {
@@ -71,7 +72,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body>  
         { location.pathname !== "/" && 
         <div id="sidebar">
           <div>
