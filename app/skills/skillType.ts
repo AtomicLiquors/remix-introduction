@@ -1,4 +1,5 @@
-export type SkillProps = {
+export interface SkillProps {
     title: string;
     content: string;
+    img: string;
 }
