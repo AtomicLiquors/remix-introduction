@@ -11,7 +11,6 @@ import {
   useLoaderData,
   useNavigation,
   useSubmit,
-  useResolvedPath,
   useLocation,
 } from "@remix-run/react";
 import type { 
@@ -22,6 +21,7 @@ import tailwindStylesHref from "./tailwind.css?url";
 import appStylesHref from "./app.css?url";
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect } from "react";
+import { applyDarkTheme, toggleDarkTheme } from "./theme";
 
 export const action = async () => {
   const contact = await createEmptyContact();
@@ -31,7 +31,15 @@ export const action = async () => {
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindStylesHref },
 ];
-
+/*
+export const meta: MetaFunction = () => {
+  return [
+    {
+      "script:ld+json": "./theme.js",
+    },
+  ];
+};
+*/
 export const loader = async ({request,} : LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const q = url.searchParams.get("q");
@@ -58,13 +66,17 @@ export default function App() {
     );
 
   useEffect(() => {
+    applyDarkTheme();
+  }, []);
+
+  useEffect(() => {
     const searchField = document.getElementById("q");
     if (searchField instanceof HTMLInputElement) {
       searchField.value = q || "";
     }
   }, [q]);
 
-  return (
+  return ( 
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
@@ -150,6 +162,7 @@ export default function App() {
           id="detail"
         >
           <Outlet />
+          <button onClick={toggleDarkTheme}>toggle dark</button>
         </div>
 
         <ScrollRestoration />
