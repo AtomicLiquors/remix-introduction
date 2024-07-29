@@ -1,6 +1,6 @@
 import Center from "@/components/common/Center";
 import Container from "@/components/common/Container";
-import Skills from "@/skills/Skills";
+import SkillsRow from "@/skills/SkillsRow";
 
 export default function Index() {
   return (
@@ -11,7 +11,7 @@ export default function Index() {
         </p>
         <p>Java & JavaScript 개발자 Powered By Remix</p>
       </Center>
-      <Skills />
+      <SkillsRow />
     </Container>
   );
 }
