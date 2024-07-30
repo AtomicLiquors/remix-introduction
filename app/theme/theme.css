@@ -1,0 +1,21 @@
+/* 테마 이름은 ./theme.ts의 THEMES를 확인하여 작성할 것. */
+
+@layer theme {
+  :root {
+    --color-primary: #0ea5e9;
+    --color-secondary: #909090;
+  }
+
+  html[data-theme="dark"] {
+    --color-primary: #909090;
+    --color-secondary: #ebebebeb;
+
+    --bg-color-primary: #222;
+    --bg-color-secondary: #333;
+  }
+
+  html[data-theme="pink"] {
+    --color-primary: #f783ac;
+    --color-secondary: #ffdeeb;
+  }
+}

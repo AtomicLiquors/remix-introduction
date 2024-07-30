@@ -17,11 +17,12 @@ import type {
   LinksFunction,
   LoaderFunctionArgs,
 } from "@remix-run/node";
-import tailwindStylesHref from "./tailwind.css?url";
+import tailwindStylesheet from "./tailwind.css?url";
+import themeStylesheet from "./theme/theme.css?url";
 import appStylesHref from "./app.css?url";
 import { createEmptyContact, getContacts } from "./data";
-import { useEffect } from "react";
-import { applyDarkTheme, toggleDarkTheme } from "./theme";
+import { useEffect, useState } from "react";
+import { applyExistingTheme, clearTheme, switchTheme, THEMES, themeClasses } from "./theme/theme";
 
 export const action = async () => {
   const contact = await createEmptyContact();
@@ -29,17 +30,10 @@ export const action = async () => {
 };
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: tailwindStylesHref },
+  { rel: "stylesheet", href: tailwindStylesheet },
+  { rel: "stylesheet", href: themeStylesheet },
 ];
-/*
-export const meta: MetaFunction = () => {
-  return [
-    {
-      "script:ld+json": "./theme.js",
-    },
-  ];
-};
-*/
+
 export const loader = async ({request,} : LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const q = url.searchParams.get("q");
@@ -49,9 +43,8 @@ export const loader = async ({request,} : LoaderFunctionArgs) => {
 
 /*
  * /app/root.tsx
- * This is what we call the "Root Route".
- * It's the first component in the UI that renders,
- * so it typically contains the global layout for the page.
+ * "Root Route" : the first component in the UI that render.
+ * typically contains the global layout for the page.
  */
 export default function App() {
   const { contacts, q } = useLoaderData<typeof loader>();
@@ -66,7 +59,7 @@ export default function App() {
     );
 
   useEffect(() => {
-    applyDarkTheme();
+    applyExistingTheme();
   }, []);
 
   useEffect(() => {
@@ -76,6 +69,8 @@ export default function App() {
     }
   }, [q]);
 
+  const [ popupVisibility, setPopupVisibility ] = useState(false);
+
   return ( 
     <html lang="en">
       <head>
@@ -84,7 +79,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>  
+      <body className={themeClasses.bg.primary}>  
         { location.pathname !== "/" && 
         <div id="sidebar">
           <div>
@@ -157,12 +152,16 @@ export default function App() {
         
         <div
           className={
-            navigation.state === "loading" && !searching ? "loading" : ""
+            `${navigation.state === "loading" && !searching ? "loading" : ""} relative`
           }
           id="detail"
         >
+          { popupVisibility && <div id="popup_background" className="absolute w-full h-full bg-gray-500/50 backdrop-blur" onClick={() => setPopupVisibility(false)}></div>}
           <Outlet />
-          <button onClick={toggleDarkTheme}>toggle dark</button>
+          {/* To-Do: 테마 변경시 버튼에 애니메이션 적용 */}
+          <button onClick={clearTheme} className={themeClasses.text.secondary}>default</button>
+          <button onClick={() => switchTheme(THEMES.DARK)} className={themeClasses.text.secondary}>toggle dark</button>
+          <button onClick={() => switchTheme(THEMES.PINK)} className={themeClasses.text.secondary}>toggle pink</button>
         </div>
 
         <ScrollRestoration />

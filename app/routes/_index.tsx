@@ -1,17 +1,18 @@
-import Center from "@/components/common/Center";
 import Container from "@/components/common/Container";
-import SkillsRow from "@/skills/SkillsRow";
+import IndexContactMe from "@/pages/index/index_contact_me/IndexContactMe";
+import IndexEducations from "@/pages/index/index_eductaions/IndexEducations";
+import IndexProfile from "@/pages/index/index_profile/IndexProfile";
+import IndexProjects from "@/pages/index/index_projects/IndexProjects";
+import IndexSkills from "@/pages/index/index_skills/IndexSkills";
 
 export default function Index() {
   return (
     <Container>
-      <Center>
-        <p id="index-page" className="text-3xl font-bold underline">
-          최 효 빈
-        </p>
-        <p>Java & JavaScript 개발자 Powered By Remix</p>
-      </Center>
-      <SkillsRow />
+      <IndexProfile/>
+      <IndexSkills/>
+      <IndexProjects/>
+      <IndexEducations/>
+      <IndexContactMe/>
     </Container>
   );
 }
