@@ -164,6 +164,7 @@ export default function App() {
           id="detail"
         >
           <Outlet />
+          {/* To-Do: 테마 변경시 버튼에 애니메이션 적용 */}
           <button onClick={clearTheme} className={themeClasses.text.secondary}>default</button>
           <button onClick={() => switchTheme(THEMES.DARK)} className={themeClasses.text.secondary}>toggle dark</button>
           <button onClick={() => switchTheme(THEMES.PINK)} className={themeClasses.text.secondary}>toggle pink</button>

@@ -2,7 +2,7 @@ import Center from "@/components/common/Center";
 import { SkillProps } from "./skillType";
 import { themeClasses } from "@/theme/theme";
 
-const path = "/skills"
+const path = "/img/skills"
 
 const Skill: React.FC<SkillProps> = ({ title, content, img }) => {
   return (

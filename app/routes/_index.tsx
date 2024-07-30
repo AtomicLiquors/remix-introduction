@@ -1,12 +1,14 @@
 import Center from "@/components/common/Center";
 import Container from "@/components/common/Container";
+import RoundImage from "@/components/common/RoundImage";
 import SkillsRow from "@/skills/SkillsRow";
 import { themeClasses } from "@/theme/theme";
 
 export default function Index() {
   return (
     <Container>
-      <Center>
+      <Center flex>
+        <RoundImage src="/img/photos/profile.png" className="w-64"/>
         <p
           id="index-page"
           className={`${themeClasses.text.primary} text-3xl font-bold underline`}
