@@ -156,7 +156,7 @@ export default function App() {
           }
           id="detail"
         >
-          { popupVisibility && <div id="popup_background" className="absolute w-full h-full bg-gray-500/50" onClick={() => setPopupVisibility(false)}></div>}
+          { popupVisibility && <div id="popup_background" className="absolute w-full h-full bg-gray-500/50 backdrop-blur" onClick={() => setPopupVisibility(false)}></div>}
           <Outlet />
           {/* To-Do: 테마 변경시 버튼에 애니메이션 적용 */}
           <button onClick={clearTheme} className={themeClasses.text.secondary}>default</button>
