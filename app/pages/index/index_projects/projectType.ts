@@ -1,9 +1,11 @@
 export interface ProjectProps {
+    emoji: string;
     title: string;
+    subtitle: string;
     period: string;
     teamSize: number;
     description: string;
-    technologies: string[];
+    stacks: string[];
     role: string;
     responsibilities: string[];
     achievements: string[];

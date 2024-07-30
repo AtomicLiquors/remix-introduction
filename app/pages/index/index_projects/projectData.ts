@@ -2,12 +2,14 @@ import { ProjectProps } from "./projectType";
 
 export const projectData: ProjectProps[] = [
   {
-    title: "🎹 빅데이터 온라인 합주 플랫폼 : OnTheBlock",
+    emoji: "🎹",
+    title: "OnTheBlock",
+    subtitle: "빅데이터 온라인 합주 플랫폼",
     period: "2023.08.28 - 2023.10.06 (6주)",
     teamSize: 5,
     description:
       "뮤지션들이 연주 영상들을 공유하고, 연주 영상을 조합해 합주 영상을 제작하는 서비스",
-    technologies: [
+    stacks: [
       "React.js",
       "SpringBoot",
       "Vite.js",
@@ -30,12 +32,14 @@ export const projectData: ProjectProps[] = [
     screenshot: "",
   },
   {
-    title: "🍏 여행지 커뮤니티 서비스 : Ringo",
+    emoji: "🍏",
+    title: "Ringo",
+    subtitle: "여행지 커뮤니티 서비스",
     period: "2023.05.01 - 2023.05.26 (3주)",
     teamSize: 2,
     description:
       "관광지 공공데이터 기반 여행 계획 작성, 포토 리뷰 기능을 제공하는 여행 정보 커뮤니티 서비스",
-    technologies: ["Spring Framework", "Vue.js"],
+    stacks: ["Spring Framework", "Vue.js"],
     role: "팀장, Full-Stack",
     responsibilities: [
       "회원 기능, 관광지 정보, 포토리뷰, 여행계획 등 주요 핵심 기능의 REST API 및 화면 구현",
@@ -52,12 +56,14 @@ export const projectData: ProjectProps[] = [
     screenshot: "",
   },
   {
+    emoji: "🐶",
     title:
-      "🐶 모바일 AR 반려견 양육 시뮬레이션 : 세나보 - 세상에 나쁜 보호자는 있다",
+      "세나보 - 세상에 나쁜 보호자는 있다",
+    subtitle: "모바일 AR 반려견 양육 시뮬레이션",
     period: "2023.10.09 - 2023.11.17 (7주)",
     teamSize: 6,
     description: "Unity 3D 기반 3D AR 반려견 양육 시뮬레이션",
-    technologies: ["Unity 3D", "C#", "ARCore"],
+    stacks: ["Unity 3D", "C#", "ARCore"],
     role: "3D AR 개발",
     responsibilities: [
       "Unity 3D 활용 평면인식 AR 구현, 3D 및 2D Scene에서의 애니메이션 구현",
