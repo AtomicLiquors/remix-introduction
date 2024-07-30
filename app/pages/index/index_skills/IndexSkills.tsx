@@ -2,7 +2,7 @@ import Center from "@/components/common/Center";
 import Skill from "./Skill";
 import { skillData } from "./skillData";
 
-export default function SkillsRow() {
+export default function IndexSkills() {
   return (
     <Center flex>
     {/* To-Do : uneven size with small screen */}
