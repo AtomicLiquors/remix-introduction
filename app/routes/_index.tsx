@@ -19,6 +19,8 @@ export default function Index() {
           <p>Java & JavaScript 개발자</p>
           <p>Powered By Remix</p>
         </div>
+        <div className={themeClasses.text.secondary}>| 010-2527-9030 · gyqls234@naver.com |</div>
+        <div>github.com/AtomicLiquors</div>
       </Center>
       <SkillsRow />
     </Container>
