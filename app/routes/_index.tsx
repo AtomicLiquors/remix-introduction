@@ -1,6 +1,7 @@
 import Center from "@/components/common/Center";
 import Container from "@/components/common/Container";
 import SkillsRow from "@/skills/SkillsRow";
+import { themeClasses } from "@/theme/theme";
 
 export default function Index() {
   return (
@@ -8,11 +9,11 @@ export default function Index() {
       <Center>
         <p
           id="index-page"
-          className="text-primary text-3xl font-bold underline"
+          className={`${themeClasses.text.primary} text-3xl font-bold underline`}
         >
           최 효 빈
         </p>
-        <div className="text-secondary">
+        <div className={themeClasses.text.secondary}>
           <p>Java & JavaScript 개발자</p>
           <p>Powered By Remix</p>
         </div>

@@ -22,7 +22,7 @@ import themeStylesheet from "./theme/theme.css?url";
 import appStylesHref from "./app.css?url";
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect } from "react";
-import { applyExistingTheme, clearTheme, switchTheme, THEMES } from "./theme/theme";
+import { applyExistingTheme, clearTheme, switchTheme, THEMES, themeClasses } from "./theme/theme";
 
 export const action = async () => {
   const contact = await createEmptyContact();
@@ -86,7 +86,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>  
+      <body className={themeClasses.bg.primary}>  
         { location.pathname !== "/" && 
         <div id="sidebar">
           <div>
@@ -164,9 +164,9 @@ export default function App() {
           id="detail"
         >
           <Outlet />
-          <button onClick={clearTheme}>default</button>
-          <button onClick={() => switchTheme(THEMES.DARK)}>toggle dark</button>
-          <button onClick={() => switchTheme(THEMES.PINK)}>toggle pink</button>
+          <button onClick={clearTheme} className={themeClasses.text.secondary}>default</button>
+          <button onClick={() => switchTheme(THEMES.DARK)} className={themeClasses.text.secondary}>toggle dark</button>
+          <button onClick={() => switchTheme(THEMES.PINK)} className={themeClasses.text.secondary}>toggle pink</button>
         </div>
 
         <ScrollRestoration />

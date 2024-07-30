@@ -8,6 +8,10 @@ export default {
         primary: 'var(--color-primary)',
         secondary: 'var(--color-secondary)',
       },
+      backgroundColor: {
+        primary: 'var(--bg-color-primary)',
+        secondary: 'var(--bg-color-secondary)',
+      }
     },
   },
   plugins: [],
