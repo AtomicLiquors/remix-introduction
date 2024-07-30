@@ -17,7 +17,7 @@ export default function IndexProfile() {
         <p>Powered By Remix</p>
       </div>
       <div className={themeClasses.text.secondary}>
-        | 010-2527-9030 · gyqls234@naver.com |
+        | 010-xxxx-xxxx · gyqls234@naver.com |
       </div>
       <div className="flex">
         <img src="img/github.png" className="w-8 rounded-full bg-white" />
