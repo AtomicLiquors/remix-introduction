@@ -17,11 +17,12 @@ import type {
   LinksFunction,
   LoaderFunctionArgs,
 } from "@remix-run/node";
-import tailwindStylesHref from "./tailwind.css?url";
+import tailwindStylesheet from "./tailwind.css?url";
+import themeStylesheet from "./theme/theme.css?url";
 import appStylesHref from "./app.css?url";
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect } from "react";
-import { applyDarkTheme, toggleDarkTheme } from "./theme";
+import { applyExistingTheme, clearTheme, switchTheme, THEMES } from "./theme/theme";
 
 export const action = async () => {
   const contact = await createEmptyContact();
@@ -29,7 +30,8 @@ export const action = async () => {
 };
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: tailwindStylesHref },
+  { rel: "stylesheet", href: tailwindStylesheet },
+  { rel: "stylesheet", href: themeStylesheet },
 ];
 /*
 export const meta: MetaFunction = () => {
@@ -66,7 +68,7 @@ export default function App() {
     );
 
   useEffect(() => {
-    applyDarkTheme();
+    applyExistingTheme();
   }, []);
 
   useEffect(() => {
@@ -162,7 +164,9 @@ export default function App() {
           id="detail"
         >
           <Outlet />
-          <button onClick={toggleDarkTheme}>toggle dark</button>
+          <button onClick={clearTheme}>default</button>
+          <button onClick={() => switchTheme(THEMES.DARK)}>toggle dark</button>
+          <button onClick={() => switchTheme(THEMES.PINK)}>toggle pink</button>
         </div>
 
         <ScrollRestoration />
