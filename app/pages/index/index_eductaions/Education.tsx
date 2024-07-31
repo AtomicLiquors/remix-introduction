@@ -12,8 +12,8 @@ const Education: React.FC<EducationProps> = (edu) => {
         {edu.time}시간), {edu.location}
       </p>
       <p>
-        {edu.content.map((line) => (
-          <p>{line}</p>
+        {edu.content.map((line, idx) => (
+          <p key={idx}>{line}</p>
         ))}
       </p>
     </>

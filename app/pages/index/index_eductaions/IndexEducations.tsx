@@ -5,7 +5,7 @@ export default function IndexEducations() {
   return (
     <>
       {educationData &&
-        educationData.map((edu) => <Education {...edu} />)}
+        educationData.map((edu, idx) => <Education key={idx} {...edu} />)}
     </>
   );
 }
