@@ -162,6 +162,8 @@ export default function App() {
           <button onClick={clearTheme} className={themeClasses.text.secondary}>default</button>
           <button onClick={() => switchTheme(THEMES.DARK)} className={themeClasses.text.secondary}>toggle dark</button>
           <button onClick={() => switchTheme(THEMES.PINK)} className={themeClasses.text.secondary}>toggle pink</button>
+
+          
         </div>
 
         <ScrollRestoration />
