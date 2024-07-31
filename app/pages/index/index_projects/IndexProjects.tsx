@@ -5,7 +5,7 @@ export default function IndexProjects() {
   return (
     <>
       {projectData &&
-        projectData.map((proj) => <Project {...proj}/>)}
+        projectData.map((proj, idx) => <Project key={idx} {...proj}/>)}
     </>
   );
 }
