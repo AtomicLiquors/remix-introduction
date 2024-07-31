@@ -26,8 +26,6 @@ import appStylesHref from "./app.css?url";
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect, useState } from "react";
 import { applyExistingTheme, clearTheme, switchTheme, THEMES, themeClasses } from "./theme/theme";
-import NotFoundSection from "./pages/error/NotFoundSection";
-import { getSession } from "./sessions/sessions";
 
 export const action = async () => {
   const contact = await createEmptyContact();
@@ -54,7 +52,7 @@ export const loader = async ({request,} : LoaderFunctionArgs) => {
  */
 
 // To-Do : sessionStorage 이용해서 404 에러 정보 전달하기
-export default async function App() {
+export default function App() {
   
   const { contacts, q } = useLoaderData<typeof loader>();
   const navigation = useNavigation();
