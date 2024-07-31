@@ -1,4 +1,4 @@
-import { json, redirect } from "@remix-run/node";
+import { json, redirect, redirectDocument } from "@remix-run/node";
 import {
   Form,
   Link,
@@ -12,6 +12,9 @@ import {
   useNavigation,
   useSubmit,
   useLocation,
+  useRouteError,
+  isRouteErrorResponse,
+  useNavigate,
 } from "@remix-run/react";
 import type { 
   LinksFunction,
@@ -23,6 +26,8 @@ import appStylesHref from "./app.css?url";
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect, useState } from "react";
 import { applyExistingTheme, clearTheme, switchTheme, THEMES, themeClasses } from "./theme/theme";
+import NotFoundSection from "./pages/error/NotFoundSection";
+import { getSession } from "./sessions/sessions";
 
 export const action = async () => {
   const contact = await createEmptyContact();
@@ -41,12 +46,16 @@ export const loader = async ({request,} : LoaderFunctionArgs) => {
   return json({ contacts, q });
 };
 
+
 /*
  * /app/root.tsx
  * "Root Route" : the first component in the UI that render.
  * typically contains the global layout for the page.
  */
-export default function App() {
+
+// To-Do : sessionStorage 이용해서 404 에러 정보 전달하기
+export default async function App() {
+  
   const { contacts, q } = useLoaderData<typeof loader>();
   const navigation = useNavigation();
   // This hook provides information about a 'pending' page navigation.
@@ -56,7 +65,7 @@ export default function App() {
     navigation.location &&
     new URLSearchParams(navigation.location.search).has(
       "q"
-    );
+    );  
 
   useEffect(() => {
     applyExistingTheme();
