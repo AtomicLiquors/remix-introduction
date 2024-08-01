@@ -26,6 +26,7 @@ import appStylesHref from "./app.css?url";
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect, useState } from "react";
 import { applyExistingTheme, clearTheme, switchTheme, THEMES, themeClasses } from "./theme/theme";
+import Button from "./components/common/Button";
 
 export const action = async () => {
   const contact = await createEmptyContact();
@@ -166,14 +167,12 @@ export default function App() {
           { popupVisibility && <div id="popup_background" className="absolute w-full h-full bg-gray-500/50 backdrop-blur" onClick={() => setPopupVisibility(false)}></div>}
           <Outlet />
           {/* To-Do: 테마 변경시 버튼에 애니메이션 적용 */}
-          <button onClick={clearTheme} className={themeClasses.text.secondary}>default</button>
+          <Button onClick={clearTheme} text="default"/>
           <button onClick={() => switchTheme(THEMES.DARK)} className={themeClasses.text.secondary}>toggle dark</button>
           <button onClick={() => switchTheme(THEMES.PINK)} className={themeClasses.text.secondary}>toggle pink</button>
-
           
         </div>
-
-        <ScrollRestoration />
+        <ScrollRestoration /> 
         <Scripts />
       </body>
     </html>
