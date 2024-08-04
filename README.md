@@ -1,7 +1,8 @@
 # Remix-Introduction
+Remix와 TypeScript를 사용해 만든 자기소개 페이지입니다.
 
 ## 실행 및 빌드
-pnpm을 사용한 프로젝트입니다.
+pnpm을 사용합니다.
 
 ### 실행
 ```sh
