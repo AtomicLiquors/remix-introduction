@@ -20,7 +20,7 @@ const Project: React.FC<ProjectProps> = (proj) => {
         </div>
         <div className={themeClasses.text.secondary}>{proj.description}</div>
         <br></br>
-        <div className="font-bold">성과 및 리뷰</div>
+        <div className={`${themeClasses.text.primary} font-bold`}>성과 및 리뷰</div>
         {/*
           <div>
             {proj.achievements.map((achievement, idx) => (
