@@ -8,6 +8,7 @@ import {
 
 export default function Sidebar() {
 return <>
+{/* 
 { location.pathname !== "/" && 
         <div id="sidebar">
           <div>
@@ -77,6 +78,6 @@ return <>
             </ul>
           </nav>
         </div>}
-        
+         */}
 </>
 }

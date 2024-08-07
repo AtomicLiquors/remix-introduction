@@ -7,12 +7,14 @@ import IndexSkills from "@/pages/index/index_skills/IndexSkills";
 
 export default function Index() {
   return (
-    <Container>
-      <IndexProfile/>
-      <IndexSkills/>
-      <IndexProjects/>
-      <IndexEducations/>
-      <IndexContactMe/>
-    </Container>
+    <>
+      <IndexProfile />
+      <Container>
+        <IndexSkills />
+        <IndexProjects />
+        <IndexEducations />
+        <IndexContactMe />
+      </Container>
+    </>
   );
 }
