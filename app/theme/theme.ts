@@ -10,9 +10,11 @@ export const themeClasses = {
   },
 
   bg: {
-    primary: "bg-primary",
-    secondary: "bg-secondary",
+    card: "bg-primary",
+    empty: "bg-secondary",
   },
+
+  border: "border-gray-200"
 };
 
 type Theme = (typeof THEMES)[keyof typeof THEMES];

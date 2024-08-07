@@ -4,7 +4,7 @@ import { themeClasses } from "@/theme/theme";
 
 export default function IndexProfile() {
   return (
-    <div className={`${themeClasses.bg.secondary} w-full bg-gray border-b p-8 shadow-md`}>
+    <div className={`${themeClasses.bg.card} w-full bg-gray border-b p-8 shadow-md`}>
       <Center flex>
         <RoundImage src="/img/photos/profile.png" className="w-64" />
         <p

@@ -87,7 +87,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className={themeClasses.bg.secondary}>  
+      <body className={themeClasses.bg.empty}>  
         { location.pathname !== "/" && 
         <div id="sidebar">
           <div>
