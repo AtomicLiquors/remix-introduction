@@ -1,14 +1,15 @@
 import RowCard from "@/components/common/card/RowCard";
 import Education from "./Education";
 import { educationData } from "./educationData";
+import Timeline from "@/components/common/timeline/Timeline";
 
 export default function IndexEducations() {
   return (
     <RowCard>
-      <ol className="ml-8 relative border-s border-gray-200 dark:border-gray-700">
+      <Timeline>
         {educationData &&
           educationData.map((edu, idx) => <Education key={idx} {...edu} />)}
-      </ol>
+      </Timeline>
     </RowCard>
   );
 }
