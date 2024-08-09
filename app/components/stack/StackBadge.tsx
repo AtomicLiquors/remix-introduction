@@ -22,15 +22,13 @@ function getLuminance(hex: string) {
 
 function isLight(color: string) {  
   
-  const match = color.match(/[0-9A-Fa-f]{6}/);
+  const match = color.match(/#[0-9A-Fa-f]{6}/);
   if(!match){
     console.log(`invalid hex code : ${match}`);
     return false;
   }    
 
-  const hex = `#${match.map(c => Number(c).toString(16).padStart(2, '0')).join('')}`;
-
-  return getLuminance(hex) > 0.5;
+  return getLuminance(match[0]) > 0.5;
 }
 
 
@@ -43,7 +41,7 @@ export default function SkillBadge({
 
   return (
     <div className={`${bg} rounded pl-2 pr-2 font-bold `}>
-      <span className={`${isLight(bg) ? 'text-white' : 'text-black' }`}>{!!stack ? stack.name : stackKey}</span>
+      <span className={`${isLight(bg) ? 'text-black' : 'text-white'}`}>{!!stack ? stack.name : stackKey}</span>
     </div>
   );
 }
