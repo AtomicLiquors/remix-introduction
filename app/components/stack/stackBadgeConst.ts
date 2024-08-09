@@ -1,5 +1,5 @@
-import { backStackConsts } from "./backConsts";
-import { frontStackConsts } from "./frontConsts";
+import { backStackConsts } from "./backStackConsts";
+import { frontStackConsts } from "./frontStackConsts";
 
 export interface StackBadgeInterface {
     name: string;
