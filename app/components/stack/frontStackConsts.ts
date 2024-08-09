@@ -3,52 +3,42 @@ import { StackBadgeInterface } from "./stackBadgeConst";
 export const frontStackConsts = {
   HTML: {
     name: "HTML",
-    color: "#E34F26",
-    bgClassName: "bg-[#E34F26]",
+    tailwindHexBg: "bg-[#E34F26]",
   },
   CSS: {
     name: "CSS",
-    color: "#1572B6",
-    bgClassName: "bg-[#1572B6]",
+    tailwindHexBg: "bg-[#1572B6]",
   },
   JavaScript: {
     name: "JavaScript",
-    color: "#F7DF1E",
-    bgClassName: "bg-yellow-400",
+    tailwindHexBg: "bg-[#F7DF1E]",
   },
   TypeScript: {
     name: "TypeScript",
-    color: "#3178C6",
-    bgClassName: "bg-blue-500",
+    tailwindHexBg: "bg-[#3178C6]",
   },
-  'React.js' : {
+  "React.js": {
     name: "React",
-    color: "#61DAFB",
-    bgClassName: "bg-sky-400",
+    tailwindHexBg: "bg-[#61DAFB]",
   },
-  'Vue.js': {
+  "Vue.js": {
     name: "Vue.js",
-    color: "#42B883",
-    bgClassName: "bg-emerald-500",
+    tailwindHexBg: "bg-[#42B883]",
   },
   Angular: {
     name: "Angular",
-    color: "#DD0031",
-    bgClassName: "bg-red-700",
+    tailwindHexBg: "bg-[#DD0031]",
   },
   SASS: {
     name: "SASS",
-    color: "#CC6699",
-    bgClassName: "bg-pink-500",
+    tailwindHexBg: "bg-[#CC6699]",
   },
   Tailwind: {
     name: "Tailwind CSS",
-    color: "#06B6D4",
-    bgClassName: "bg-teal-400",
+    tailwindHexBg: "bg-[#06B6D4]",
   },
   Bootstrap: {
     name: "Bootstrap",
-    color: "#7952B3",
-    bgClassName: "bg-purple-600",
+    tailwindHexBg: "bg-[#7952B3]",
   },
 } as const satisfies Record<string, StackBadgeInterface>;

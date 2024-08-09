@@ -3,8 +3,7 @@ import { frontStackConsts } from "./frontStackConsts";
 
 export interface StackBadgeInterface {
     name: string;
-    color: string;
-    bgClassName: string;
+    tailwindHexBg: string;
 }
 
 export const stackBadgeDataMap = new Map<string, StackBadgeInterface>([
