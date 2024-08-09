@@ -5,6 +5,9 @@ const config: Config = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   transformIgnorePatterns: [],
   testEnvironment: 'jsdom',
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/app/$1',
+  },
   transform: {
     '.*\\.(tsx?|jsx?)$': [
       '@swc/jest',
