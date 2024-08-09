@@ -39,7 +39,7 @@ export const projectData: ProjectProps[] = [
     teamSize: 2,
     description:
       "관광지 공공데이터 기반 여행 계획 작성, 포토 리뷰 기능을 제공하는 여행 정보 커뮤니티 서비스",
-    stacks: ["Spring Framework", "Vue.js"],
+    stacks: ["SpringBoot", "Vue.js"],
     role: "팀장, Full-Stack",
     responsibilities: [
       "회원 기능, 관광지 정보, 포토리뷰, 여행계획 등 주요 핵심 기능의 REST API 및 화면 구현",

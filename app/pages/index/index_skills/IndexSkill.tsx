@@ -1,5 +1,5 @@
 import Center from "@/components/common/Center";
-import { SkillProps } from "./skillType";
+import { SkillProps } from "./indexSkillType";
 import { themeClasses } from "@/theme/theme";
 
 const path = "/img/skills"

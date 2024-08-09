@@ -1,6 +1,7 @@
 import { themeClasses } from "@/theme/theme";
 import { ProjectProps } from "./projectType";
 import RowCard from "@/components/common/card/RowCard";
+import StackBadge from "@/components/stack/StackBadge";
 
 const Project: React.FC<ProjectProps> = (proj) => {
   return (
@@ -12,9 +13,7 @@ const Project: React.FC<ProjectProps> = (proj) => {
       </div>
       <div className="flex gap-4">
         {proj.stacks.map((stack, idx) => (
-          <span key={idx} className="text-gray-700 text-base">
-            {stack}
-          </span>
+          <StackBadge key={idx} stackKey={stack}/>
         ))}
       </div>
       <div className={themeClasses.text.secondary}>{proj.description}</div>
