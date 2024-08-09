@@ -1,7 +1,7 @@
 const frontConsts = {
     HTML: { 
       name: 'HTML', 
-      color: '#E34F26' 
+      color: '#E34F26',
     },
     CSS: { 
       name: 'CSS', 
@@ -39,6 +39,6 @@ const frontConsts = {
       name: 'Bootstrap', 
       color: '#7952B3' 
     }
-  } as const;
+  } as const satisfies Record<string, SkillConst>;
   
   type FrontConst = typeof frontConsts[keyof typeof frontConsts];

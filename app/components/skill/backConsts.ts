@@ -39,6 +39,6 @@ const backConsts = {
       name: 'MongoDB', 
       color: '#47A248' 
     }
-  } as const;
+  } as const satisfies Record<string, SkillConst>;
   
   type BackConst = typeof backConsts[keyof typeof backConsts];

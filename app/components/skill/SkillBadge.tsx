@@ -1,5 +1,9 @@
 
-export default function ProjectSkillBadge() {
+interface SkillBadgeProps {
+
+}
+
+export default function SkillBadge() {
   return (
     <div className='rounded bg-gray'>
       
