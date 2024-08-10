@@ -1,4 +1,4 @@
-import RowCard from "@/components/common/card/RowCard";
+import RowCard from "@/common/display/card/RowCard";
 import Education from "./Education";
 import { educationData } from "./educationData";
 import Timeline from "@/components/common/timeline/Timeline";

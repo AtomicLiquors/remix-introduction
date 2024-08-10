@@ -1,4 +1,5 @@
-import Center from "@/components/common/Center";
+
+import Center from "@/common/display/Center";
 import { SkillProps } from "./indexSkillType";
 import { themeClasses } from "@/theme/theme";
 

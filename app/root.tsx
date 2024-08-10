@@ -1,4 +1,4 @@
-import { json, redirect, redirectDocument } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import {
   Form,
   Link,
@@ -12,9 +12,6 @@ import {
   useNavigation,
   useSubmit,
   useLocation,
-  useRouteError,
-  isRouteErrorResponse,
-  useNavigate,
 } from "@remix-run/react";
 import type { 
   LinksFunction,
@@ -26,7 +23,7 @@ import appStylesHref from "./app.css?url";
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect, useState } from "react";
 import { applyExistingTheme, clearTheme, switchTheme, THEMES, themeClasses } from "./theme/theme";
-import Button from "./components/common/Button";
+import Button from "./common/interaction/Button";
 
 export const action = async () => {
   const contact = await createEmptyContact();
