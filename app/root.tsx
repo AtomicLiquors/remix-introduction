@@ -23,7 +23,7 @@ import appStylesHref from "./app.css?url";
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect, useState } from "react";
 import { applyExistingTheme, clearTheme, switchTheme, THEMES, themeClasses } from "./theme/theme";
-import Button from "./common/interaction/Button";
+import Button from "./common/components/atoms/Button";
 
 export const action = async () => {
   const contact = await createEmptyContact();

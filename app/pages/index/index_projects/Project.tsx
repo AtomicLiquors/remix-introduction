@@ -1,8 +1,8 @@
 import { themeClasses } from "@/theme/theme";
 import { ProjectProps } from "./projectType";
 
-import StackBadge from "@/components/stack/StackBadge";
-import RowCard from "@/common/display/card/RowCard";
+import StackBadge from "@/common/components/organisms/stack/StackBadge";
+import RowCard from "@/common/components/molecules/RowCard";
 
 const Project: React.FC<ProjectProps> = (proj) => {
   return (

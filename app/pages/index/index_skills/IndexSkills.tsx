@@ -1,6 +1,6 @@
 import Skill from "./IndexSkill";
 import { skillData } from "./indexSkillData";
-import Center from "@/common/display/Center";
+import Center from "@/common/components/display/Center";
 
 export default function IndexSkills() {
   return (

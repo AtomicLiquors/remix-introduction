@@ -1,4 +1,4 @@
-import Center from "@/common/display/Center";
+import Center from "@/common/components/atoms/Center";
 import { themeClasses } from "@/theme/theme";
 
 // To-Do : Zustand 설치와 화면 비활성화, 하단 파업 구현
