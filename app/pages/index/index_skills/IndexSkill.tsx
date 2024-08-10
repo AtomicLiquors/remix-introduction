@@ -1,5 +1,5 @@
 
-import Center from "@/common/components/display/Center";
+import Center from "@/common/components/atoms/Center";
 import { SkillProps } from "./indexSkillType";
 import { themeClasses } from "@/theme/theme";
 
