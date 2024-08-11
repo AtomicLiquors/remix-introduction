@@ -1,20 +1,7 @@
-import Container from "@/components/common/Container";
-import IndexContactMe from "@/pages/index/index_contact_me/IndexContactMe";
-import IndexEducations from "@/pages/index/index_eductaions/IndexEducations";
-import IndexProfile from "@/pages/index/index_profile/IndexProfile";
-import IndexProjects from "@/pages/index/index_projects/IndexProjects";
-import IndexSkills from "@/pages/index/index_skills/IndexSkills";
+import Index from "@/pages/index/Index";
 
-export default function Index() {
+export default function IndexRoute() {
   return (
-    <>
-      <IndexProfile />
-      <Container>
-        <IndexSkills />
-        <IndexProjects />
-        <IndexEducations />
-        <IndexContactMe />
-      </Container>
-    </>
+    <Index/>
   );
 }
