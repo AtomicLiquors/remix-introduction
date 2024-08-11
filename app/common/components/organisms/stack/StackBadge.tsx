@@ -14,7 +14,7 @@ export default function SkillBadge({
   const bg = !!stack ? stack.tailwindHexBg : 'bg-[#999999]';
 
   return (
-    <div className={`${bg} rounded pl-2 pr-2 font-bold `}>
+    <div className={`${bg} rounded pl-2 pr-2 pb-1 font-bold `}>
       <span className={`${isHexcodeLight(bg) ? 'text-black' : 'text-white'}`}>{!!stack ? stack.name : stackKey}</span>
     </div>
   );
