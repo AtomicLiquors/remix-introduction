@@ -6,7 +6,7 @@
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
     "**/.client/**/*.tsx", 
-    "jest.config.ts"  ],
+    "jest.config.ts" ],
     
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
