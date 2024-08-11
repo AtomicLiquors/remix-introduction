@@ -1,10 +1,10 @@
-import Center from "@/components/common/Center";
-import RoundImage from "@/components/common/RoundImage";
+import Center from "@/common/components/atoms/Center";
+import RoundImage from "@/common/components/atoms/RoundImage";
 import { themeClasses } from "@/theme/theme";
 
 export default function IndexProfile() {
   return (
-    <div className={`${themeClasses.bg.card} w-full bg-gray border-b p-8 shadow-md`}>
+    <div className={`${themeClasses.bg.card} w-full p-8 shadow-md`}>
       <Center flex>
         <RoundImage src="/img/photos/profile.png" className="w-64" />
         <p

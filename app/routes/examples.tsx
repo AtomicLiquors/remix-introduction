@@ -1,4 +1,4 @@
-import Comments from "@/components/comments/Comments"
+import Comments from "@/common/components/organisms/comments/Comments"
 
 function examples() {
   return (

@@ -1,4 +1,4 @@
-import { SkillProps } from "./skillType";
+import { SkillProps } from "./indexSkillType";
 
 export const skillData: SkillProps[] = [
   {
