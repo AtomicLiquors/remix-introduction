@@ -1,5 +1,5 @@
-import RowCard from "@/components/common/card/RowCard";
-import Timeline from "@/components/common/timeline/Timeline";
+import RowCard from "@/common/components/molecules/RowCard";
+import Timeline from "@/common/components/organisms/timeline/Timeline";
 
 export default function IndexCertificates() {
   return (

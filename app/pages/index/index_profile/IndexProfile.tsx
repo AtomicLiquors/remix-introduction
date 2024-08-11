@@ -1,5 +1,5 @@
-import Center from "@/components/common/Center";
-import RoundImage from "@/components/common/RoundImage";
+import Center from "@/common/components/atoms/Center";
+import RoundImage from "@/common/components/atoms/RoundImage";
 import { themeClasses } from "@/theme/theme";
 
 export default function IndexProfile() {

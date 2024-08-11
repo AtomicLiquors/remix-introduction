@@ -1,7 +1,6 @@
-import Center from "@/components/common/Center";
 import Skill from "./IndexSkill";
 import { skillData } from "./indexSkillData";
-import { themeClasses } from "@/theme/theme";
+import Center from "@/common/components/atoms/Center";
 
 export default function IndexSkills() {
   return (

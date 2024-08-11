@@ -1,4 +1,5 @@
-import Container from "@/components/common/Container";
+
+import Container from "@/common/components/atoms/Container";
 import IndexCertificates from "@/pages/index/index_certificates/IndexCertificates";
 import IndexContactMe from "@/pages/index/index_contact_me/IndexContactMe";
 import IndexEducations from "@/pages/index/index_eductaions/IndexEducations";
