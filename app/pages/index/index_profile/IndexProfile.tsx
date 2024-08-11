@@ -5,7 +5,7 @@ import { themeClasses } from "@/theme/theme";
 export default function IndexProfile() {
   return (
     <div className={`${themeClasses.bg.card} w-full p-8 shadow-md`}>
-      <Center flex>
+      <Center flex flexCol>
         <RoundImage src="/img/photos/profile.png" className="w-64" />
         <p
           id="index-page"
