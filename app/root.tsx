@@ -19,6 +19,7 @@ import type {
 } from "@remix-run/node";
 import tailwindStylesheet from "./tailwind.css?url";
 import themeStylesheet from "./theme/theme.css?url";
+import fontStylesheet from "./font.css?url";
 import appStylesHref from "./app.css?url";
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect, useState } from "react";
@@ -33,6 +34,7 @@ export const action = async () => {
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindStylesheet },
   { rel: "stylesheet", href: themeStylesheet },
+  { rel: "stylesheet", href: fontStylesheet },
 ];
 
 export const loader = async ({request,} : LoaderFunctionArgs) => {
