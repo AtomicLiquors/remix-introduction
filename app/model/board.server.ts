@@ -1,5 +1,33 @@
+import { redirect } from "@remix-run/node";
 import { sql } from "@vercel/postgres";
 //import { seed } from "~/utils/seed";
+import {z} from "zod";
+
+const Board = z.object({
+  post_id: z.number(),
+  title: z.string(),
+  content: z.string(),
+  author: z.string(),
+  created_at: z.date(),
+  updated_at: z.date(),
+  approved: z.boolean(),
+});
+
+export async function createBoard() {
+
+  const { title, content, author} = {
+    title: 'sample title',
+    content: 'sample content',
+    author: 'sample author'
+  }
+
+  await sql`
+    INSERT INTO community_board(title, content, author)
+    VALUES (${title}, ${content}, ${author})
+  `;
+
+  redirect('/');
+}
 
 export async function getBoard() {
   let data;
@@ -25,9 +53,4 @@ export async function getBoard() {
 
   const { rows: boards } = data;
   return { boards: boards, duration: Date.now() - startTime };
-}
-
-export async function createBoard(formData: FormData){
-  
-
 }
