@@ -26,3 +26,8 @@ export async function getBoard() {
   const { rows: boards } = data;
   return { boards: boards, duration: Date.now() - startTime };
 }
+
+export async function createBoard(formData: FormData){
+  
+
+}
