@@ -86,7 +86,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className={themeClasses.bg.empty}>  
+      <body className={`${themeClasses.bg.empty} min-h-screen`}>  
         {/* location.pathname !== "/" && <인덱스 외부에서 표시할 컴포넌트>*/}
         
         <div

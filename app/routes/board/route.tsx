@@ -1,5 +1,5 @@
 import type { ShouldRevalidateFunction } from "@remix-run/react";
-import Board from "./component/Board";
+import Board from "./components/Board";
 import { useLoaderData } from "@remix-run/react";
 import { createBoard, getBoard } from "@/model/board.server";
 import { ActionFunctionArgs, redirect } from "@remix-run/node";
