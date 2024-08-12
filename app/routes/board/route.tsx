@@ -1,5 +1,5 @@
 import type { ShouldRevalidateFunction } from "@remix-run/react";
-import Board from "./board/Board";
+import Board from "./component/Board";
 import { useLoaderData } from "@remix-run/react";
 import { createBoard, getBoard } from "@/model/board.server";
 import { ActionFunctionArgs, redirect } from "@remix-run/node";
@@ -38,6 +38,14 @@ export default function BoardRoute() {
     })
     setLoading(false); 
   }
+  
+  const handleDeleteBtnClick = async () => {
+    setLoading(true);
+    await fetch("/board/destroy", {
+      method: "DELETE"
+    })
+    setLoading(false); 
+  }
   //const data = useLoaderData<typeof loader>(); 차이점은?
   const data = useLoaderData();
   console.log(data);
@@ -46,6 +54,7 @@ export default function BoardRoute() {
     <>
       <Board />
       <button onClick={handleButtonClick} disabled={loading}>{loading ? 'Waiting...' : 'Create' }</button>
+      <button onClick={handleDeleteBtnClick} disabled={loading}>{loading ? 'Waiting...' : 'Delete' }</button>
       {JSON.stringify(data)}
     </>
   );

@@ -13,6 +13,21 @@ const Board = z.object({
   approved: z.boolean(),
 });
 
+export async function deleteBoard() {
+  
+  //To-Do: SQL문 에러났을때 에러처리.
+  await sql`
+    DELETE FROM community_board
+    WHERE post_id IN (
+        SELECT post_id FROM community_board
+        ORDER BY created_at DESC
+        LIMIT 3
+    )
+  `;
+
+  redirect('/');
+}
+
 export async function createBoard() {
 
   const { title, content, author} = {
