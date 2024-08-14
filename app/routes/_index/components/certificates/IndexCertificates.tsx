@@ -7,16 +7,16 @@ import { FONT_AWESOME_TYPES } from "@/common/icon/FontAwesome";
 export default function IndexCertificates() {
   return (
     <RowCard>
-      <Timeline icon={FONT_AWESOME_TYPES.CARD} className="mb-8">
+      <Timeline className="mb-8">
         {certificateData &&
           certificateData.map((cert, idx) => (
-            <Certificate key={idx} {...cert} />
+            <Certificate key={idx} {...cert} icon={FONT_AWESOME_TYPES.CARD}/>
           ))}
       </Timeline>
-      <Timeline icon={FONT_AWESOME_TYPES.WORLD}>
+      <Timeline>
         {linguisticsData &&
           linguisticsData.map((cert, idx) => (
-            <Certificate key={idx} {...cert} />
+            <Certificate key={idx} {...cert} icon={FONT_AWESOME_TYPES.WORLD}/>
           ))}
       </Timeline>
     </RowCard>

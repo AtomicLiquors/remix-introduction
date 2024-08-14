@@ -4,20 +4,19 @@ import TimelineListItem from "./TimelineListItem";
 interface TimelineProps {
   children: React.ReactNode;
   className?: string;
-  icon: FAType;
 }
 
 export default function Timeline({
-  children, icon, className
+  children, className
 }: TimelineProps): React.ReactElement {
   return (
-    <ol className={`ml-8 relative border-s border-gray-200 dark:border-gray-700 ${className}`}>
+    <ol className={`lg:ml-8 relative border-s border-gray-200 dark:border-gray-700 ${className}`}>
       {Array.isArray(children) ? (
         children.map((chlid, idx) => (
-          <TimelineListItem key={idx} icon={icon}>{chlid}</TimelineListItem>
+          <TimelineListItem key={idx}>{chlid}</TimelineListItem>
         ))
       ) : (
-        <TimelineListItem icon={icon}>{children}</TimelineListItem>
+        <TimelineListItem>{children}</TimelineListItem>
       )}
     </ol>
   );

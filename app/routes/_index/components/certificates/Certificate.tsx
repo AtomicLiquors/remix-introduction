@@ -2,11 +2,16 @@
 import TLItemTitle from "@/common/components/atoms/timeline/TLItemTitle";
 import TLItemCaption from "@/common/components/atoms/timeline/TLItemTime";
 import { CertificateProps } from "./certificateType";
+import { FAType, FONT_AWESOME_TYPES } from "@/common/icon/FontAwesome";
 
-const Certificate: React.FC<CertificateProps> = (cert) => {
+interface CertificateComponentProps extends CertificateProps{
+  icon: FAType;
+}
+
+const Certificate: React.FC<CertificateComponentProps> = (cert) => {
   return (
     <>
-      <TLItemTitle>{cert.alias && `${cert.alias}:`} {cert.name} {cert.rank && `(${(cert.rank)})`}</TLItemTitle>
+      <TLItemTitle title={`${cert.alias ? `${cert.alias}: ` :''}${cert.name} ${cert.rank ? `(${cert.rank})` : ''}`} icon={cert.icon}/>
       <TLItemCaption>
         {cert.date.toLocaleDateString("ko-KR")} {cert.authority}
       </TLItemCaption>

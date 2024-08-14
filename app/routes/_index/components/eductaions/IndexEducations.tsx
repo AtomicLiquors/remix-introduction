@@ -7,7 +7,7 @@ import { FONT_AWESOME_TYPES } from "@/common/icon/FontAwesome";
 export default function IndexEducations() {
   return (
     <RowCard>
-      <Timeline icon={FONT_AWESOME_TYPES.EDUCATION}>
+      <Timeline>
         {educationData &&
           educationData.map((edu, idx) => <Education key={idx} {...edu} />)}
       </Timeline>

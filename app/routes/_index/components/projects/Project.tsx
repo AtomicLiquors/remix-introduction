@@ -30,15 +30,15 @@ const Project: React.FC<ProjectProps> = (proj) => {
       ))}
 
       {proj.links.code && (
-        <div className="flex items-center">
+        <div className="flex items-center mt-4">
           <img
             className="w-10 h-10 rounded-full mr-4"
             src="/img/github.png"
             alt="Github"
           />
           <div className="text-sm">
-            <p className="text-gray-900 leading-none">| 소스 코드 |</p>
-            <p className="text-gray-600">{proj.links.code}</p>
+            <p className="text-gray-900 leading-none font-bold">| 소스 코드 |</p>
+            <p className="text-gray-600 mt-1">{proj.links.code}</p>
           </div>
         </div>
       )}

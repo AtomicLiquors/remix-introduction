@@ -7,7 +7,7 @@ import { FONT_AWESOME_TYPES } from "@/common/icon/FontAwesome";
 export default function IndexAwards() {
   return (
     <RowCard>
-      <Timeline icon={FONT_AWESOME_TYPES.AWARD} className="mb-8">
+      <Timeline className="mb-8">
         {awardsData &&
           awardsData.map((cert, idx) => (
             <Award key={idx} {...cert} />
