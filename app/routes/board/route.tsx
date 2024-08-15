@@ -1,7 +1,7 @@
 import { useFetcher, useLoaderData } from "@remix-run/react";
 import { createBoard, getBoard } from "@/model/board.server";
 import { ActionFunctionArgs, redirect } from "@remix-run/node";
-import MarkdownRenderer from "@/common/markdown/MarkdownRenderer";
+import MarkdownEditor from "@/common/markdown/MarkdownEditor";
 
 export const loader = async () => {
   return await getBoard();
@@ -44,6 +44,8 @@ export default function BoardRoute() {
   const data = useLoaderData<typeof loader>();
 
   //To-Do: Loading시 기존 화면 뿌옇게 표시.
+
+  
   return (
     <>
       <button onClick={handleButtonClick} disabled={loading}>{loading ? 'Waiting...' : 'Create' }</button>
@@ -52,7 +54,10 @@ export default function BoardRoute() {
       {
         data?.boards!.map((board, idx) => <div key={idx}>{board.post_id} {board.title} {board.content} </div>)
       }
+      {/*
       <MarkdownRenderer/>
+       */}
+      <MarkdownEditor/>
     </>
   );
 }

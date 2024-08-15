@@ -7,5 +7,4 @@ export default function MarkdownRenderer() {
     return (
         <ReactMarkdown className="prose" children ={markdown} remarkPlugins={[remarkGfm]}/>
     );
-  }
-  
+}
