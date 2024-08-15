@@ -49,7 +49,7 @@ export default function BoardRoute() {
   return (
     <>
       <button onClick={handleButtonClick} disabled={loading}>{loading ? 'Waiting...' : 'Create' }</button>
-      <button onClick={() => handleDeleteBtnClick(26)} disabled={loading}>{loading ? 'Waiting...' : 'Delete' }</button>
+      <button onClick={() => handleDeleteBtnClick(17)} disabled={loading}>{loading ? 'Waiting...' : 'Delete' }</button>
       
       {
         data?.boards!.map((board, idx) => <div key={idx}>{board.post_id} {board.title} {board.content} </div>)
