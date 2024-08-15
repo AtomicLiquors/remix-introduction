@@ -1,8 +1,7 @@
 import { useFetcher, useLoaderData } from "@remix-run/react";
 import { createBoard, getBoard } from "@/model/board.server";
-import { ActionFunctionArgs, redirect } from "@remix-run/node";
+import { ActionFunctionArgs } from "@remix-run/node";
 import MarkdownEditor from "@/common/markdown/MarkdownEditor";
-import Comments from "./comments/Comments";
 import BoardItem, { BoardItemProps } from "./components/BoardItem";
 
 export const loader = async () => {
@@ -49,7 +48,6 @@ export default function BoardRoute() {
       <MarkdownRenderer/>
        */}
       <MarkdownEditor/>
-      <Comments/>
     </>
   );
 }
