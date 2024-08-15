@@ -1,5 +1,6 @@
 import { redirect } from "@remix-run/node";
 import { sql } from "@vercel/postgres";
+
 //import { seed } from "~/utils/seed";
 import {z} from "zod";
 
@@ -13,17 +14,11 @@ const Board = z.object({
   approved: z.boolean(),
 });
 
-export async function deleteBoard() {
+export async function deleteBoard(postId: number) {
   
   //To-Do: SQL문 에러났을때 에러처리.
-  await sql`
-    DELETE FROM community_board
-    WHERE post_id IN (
-        SELECT post_id FROM community_board
-        ORDER BY created_at DESC
-        LIMIT 3
-    )
-  `;
+  //To-Do: postId zod로 검증.
+  await sql`DELETE FROM community_board WHERE post_id = ${postId}`;
 
   redirect('/');
 }

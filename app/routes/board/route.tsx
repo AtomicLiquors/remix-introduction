@@ -1,9 +1,10 @@
 import type { ShouldRevalidateFunction } from "@remix-run/react";
 import Board from "./components/Board";
-import { useLoaderData } from "@remix-run/react";
+import { useFetcher, useLoaderData } from "@remix-run/react";
 import { createBoard, getBoard } from "@/model/board.server";
 import { ActionFunctionArgs, redirect } from "@remix-run/node";
 import { useState } from "react";
+import { useRevalidator } from "@remix-run/react";
 
 export const shouldRevalidateFunction: ShouldRevalidateFunction = ({
   actionResult,
@@ -29,25 +30,33 @@ export const action = async ({
 
 
 export default function BoardRoute() {
-  const [loading, setLoading] = useState(false);
+  const fetcher = useFetcher();
+  const loading = fetcher.state !== "idle";
   
   const handleButtonClick = async () => {
-    setLoading(true);
+    /*
     await fetch("/board", {
       method: "POST"
     })
-    setLoading(false); 
+    */
+    fetcher.submit(
+      null, 
+      {
+        action: `/board`,
+        method: "POST",
+      }
+    );
   }
   
   const handleDeleteBtnClick = async () => {
-    setLoading(true);
+    
     await fetch("/board/destroy", {
       method: "DELETE"
     })
-    setLoading(false); 
+    
   }
-  //const data = useLoaderData<typeof loader>(); 차이점은?
-  const data = useLoaderData();
+  const data = useLoaderData<typeof loader>(); // 차이점은?
+  //const data = useLoaderData();
   console.log(data);
 
   return (
@@ -55,7 +64,10 @@ export default function BoardRoute() {
       <Board />
       <button onClick={handleButtonClick} disabled={loading}>{loading ? 'Waiting...' : 'Create' }</button>
       <button onClick={handleDeleteBtnClick} disabled={loading}>{loading ? 'Waiting...' : 'Delete' }</button>
-      {JSON.stringify(data)}
+      
+      {
+        data?.boards!.map((board) => <div>{board.post_id} {board.title} {board.content} </div>)
+      }
     </>
   );
 }
