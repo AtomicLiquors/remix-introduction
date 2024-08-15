@@ -1,9 +1,9 @@
-import Comments from "@/common/components/organisms/comments/Comments"
+import Comments from "@/routes/board/comments/Comments"
 
 function examples() {
   return (
     <div>
-        <Comments/>
+       
     </div>
   )
 }

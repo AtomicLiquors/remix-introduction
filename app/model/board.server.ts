@@ -9,6 +9,8 @@ const Board = z.object({
   title: z.string(),
   content: z.string(),
   author: z.string(),
+  avatar_id : z.number(),
+  password: z.string(),
   created_at: z.date(),
   updated_at: z.date(),
   approved: z.boolean(),
