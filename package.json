@@ -24,6 +24,7 @@
     "@swc/jest": "^0.2.36",
     "@tailwindcss/typography": "^0.5.14",
     "@types/jest": "^29.5.12",
+    "@uiw/react-md-editor": "^4.0.4",
     "@vercel/postgres": "^0.9.0",
     "chart.js": "^4.4.3",
     "fortawesome": "0.0.1-security",

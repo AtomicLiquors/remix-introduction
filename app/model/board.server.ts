@@ -4,11 +4,13 @@ import { sql } from "@vercel/postgres";
 //import { seed } from "~/utils/seed";
 import {z} from "zod";
 
+//To-Do : 익명 게시판 패스워드 은닉을 위한 가상 테이블 활용?
 const Board = z.object({
   post_id: z.number(),
   title: z.string(),
   content: z.string(),
   author: z.string(),
+  password: z.string(),
   created_at: z.date(),
   updated_at: z.date(),
   approved: z.boolean(),
