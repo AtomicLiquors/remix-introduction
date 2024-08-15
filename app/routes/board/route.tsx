@@ -31,7 +31,7 @@ export default function BoardRoute() {
   const handleDeleteBtnClick = async (post_id: number) => {
 
     fetcher.submit(
-      {post_id: post_id}, 
+      null, 
       {
         action: `/board/${post_id}/destroy/`,
         method: "DELETE",
@@ -46,7 +46,7 @@ export default function BoardRoute() {
   return (
     <>
       <button onClick={handleButtonClick} disabled={loading}>{loading ? 'Waiting...' : 'Create' }</button>
-      <button onClick={() => handleDeleteBtnClick(16)} disabled={loading}>{loading ? 'Waiting...' : 'Delete' }</button>
+      <button onClick={() => handleDeleteBtnClick(26)} disabled={loading}>{loading ? 'Waiting...' : 'Delete' }</button>
       
       {
         data?.boards!.map((board, idx) => <div key={idx}>{board.post_id} {board.title} {board.content} </div>)
