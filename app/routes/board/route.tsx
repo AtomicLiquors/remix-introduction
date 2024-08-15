@@ -1,6 +1,7 @@
 import { useFetcher, useLoaderData } from "@remix-run/react";
 import { createBoard, getBoard } from "@/model/board.server";
 import { ActionFunctionArgs, redirect } from "@remix-run/node";
+import MarkdownRenderer from "@/common/markdown/MarkdownRenderer";
 
 export const loader = async () => {
   return await getBoard();
@@ -51,6 +52,7 @@ export default function BoardRoute() {
       {
         data?.boards!.map((board, idx) => <div key={idx}>{board.post_id} {board.title} {board.content} </div>)
       }
+      <MarkdownRenderer/>
     </>
   );
 }
