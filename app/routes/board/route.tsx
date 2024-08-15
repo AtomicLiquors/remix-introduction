@@ -3,6 +3,7 @@ import { createBoard, getBoard } from "@/model/board.server";
 import { ActionFunctionArgs, redirect } from "@remix-run/node";
 import MarkdownEditor from "@/common/markdown/MarkdownEditor";
 import Comments from "./comments/Comments";
+import BoardItem, { BoardItemProps } from "./components/BoardItem";
 
 export const loader = async () => {
   return await getBoard();
@@ -30,17 +31,7 @@ export default function BoardRoute() {
     );
   }
   
-  const handleDeleteBtnClick = async (post_id: number) => {
-
-    fetcher.submit(
-      null, 
-      {
-        action: `/board/${post_id}/destroy/`,
-        method: "DELETE",
-      }
-    );
-    
-  }
+  
 
   const data = useLoaderData<typeof loader>();
 
@@ -50,10 +41,9 @@ export default function BoardRoute() {
   return (
     <>
       <button onClick={handleButtonClick} disabled={loading}>{loading ? 'Waiting...' : 'Create' }</button>
-      <button onClick={() => handleDeleteBtnClick(17)} disabled={loading}>{loading ? 'Waiting...' : 'Delete' }</button>
       
       {
-        data?.boards!.map((board, idx) => <div key={idx}>{board.post_id} {board.title} {board.content} </div>)
+        data?.boards!.map((board, idx) => <BoardItem key={idx} {...board as BoardItemProps}></BoardItem>)
       }
       {/*
       <MarkdownRenderer/>
