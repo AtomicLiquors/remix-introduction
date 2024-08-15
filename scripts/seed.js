@@ -28,24 +28,25 @@ async function seed() {
         created_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
         approved BOOLEAN NOT NULL DEFAULT FALSE,
+        author_ip VARCHAR(45) NOT NULL,
         PRIMARY KEY (post_id)
     );
     `
     console.log(`Created ${tableName} table`);
 
     await client.sql`
-        INSERT INTO community_board (title, content, author, password)
+        INSERT INTO community_board (title, content, author, password, author_ip)
 VALUES
-        ('First Post', 'This is the content of the first post.', 'Alice', 'password123'),
-        ('Second Post', 'Here is some more content.', 'Bob', 'password123'),
-        ('Third Post', 'Yet another post content.', 'Charlie', 'password123'),
-        ('Fourth Post', 'More content for testing.', 'David', 'password123'),
-        ('Fifth Post', 'Sample content in fifth post.', 'Eve', 'password123'),
-        ('Sixth Post', 'Content for the sixth post.', 'Frank', 'password123'),
-        ('Seventh Post', 'Seventh post content here.', 'Grace', 'password123'),
-        ('Eighth Post', 'Eighth post with some content.', 'Heidi', 'password123'),
-        ('Ninth Post', 'Ninth post content for testing.', 'Ivan', 'password123'),
-        ('Tenth Post', 'Tenth post and its content.', 'Judy', 'password123');
+        ('First Post', 'This is the content of the first post.', 'Alice', 'password123', '175.223'),
+        ('Second Post', 'Here is some more content.', 'Bob', 'password123', '175.223'),
+        ('Third Post', 'Yet another post content.', 'Charlie', 'password123', '175.223'),
+        ('Fourth Post', 'More content for testing.', 'David', 'password123', '175.223'),
+        ('Fifth Post', 'Sample content in fifth post.', 'Eve', 'password123', '175.223'),
+        ('Sixth Post', 'Content for the sixth post.', 'Frank', 'password123', '175.223'),
+        ('Seventh Post', 'Seventh post content here.', 'Grace', 'password123', '175.223'),
+        ('Eighth Post', 'Eighth post with some content.', 'Heidi', 'password123', '175.223'),
+        ('Ninth Post', 'Ninth post content for testing.', 'Ivan', 'password123', '175.223'),
+        ('Tenth Post', 'Tenth post and its content.', 'Judy', 'password123', '175.223');
     `  
     console.log(`inserted sample data`); 
     await client.end();

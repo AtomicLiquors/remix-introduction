@@ -25,17 +25,11 @@ export async function deleteBoard(postId: number) {
   redirect('/');
 }
 
-export async function createBoard() {
-
-  const { title, content, author} = {
-    title: 'sample title',
-    content: 'sample content',
-    author: 'sample author'
-  }
+export async function createBoard(title: string, content: string, author: string, password: string, ip: string) {
 
   await sql`
-    INSERT INTO community_board(title, content, author)
-    VALUES (${title}, ${content}, ${author})
+    INSERT INTO community_board(title, content, author, password, author_ip)
+    VALUES (${title}, ${content}, ${author}, ${password}, ${ip})
   `;
 
   redirect('/');
