@@ -1,5 +1,5 @@
 import { useFetcher, useLoaderData } from "@remix-run/react";
-import { createBoard, getBoard as getBoards, PartialBoard } from "@/model/board.server";
+import { createBoard, getBoards, PartialBoard } from "@/model/board.server";
 import { ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
 import MarkdownEditor from "@/common/markdown/MarkdownEditor";
 import BoardItem, { BoardItemProps } from "./components/BoardItem";

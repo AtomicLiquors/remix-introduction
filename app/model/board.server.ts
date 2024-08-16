@@ -45,7 +45,7 @@ export async function createBoard(data: PartialBoard) {
   `;
 }
 
-export async function getBoard() {
+export async function getBoards() {
   let data;
   let startTime = Date.now();
 
