@@ -2,9 +2,11 @@ import { useFetcher } from "@remix-run/react";
 
 export default function NewBoard() {
   const fetcher = useFetcher();
+  const loading = fetcher.state !== "idle";
 
   return (
-    <fetcher.Form method="post" action="/board/">
+    <fetcher.Form method="post" action="/board/create">
+      {loading ? "loading..." : ""}
       <div>
         <label htmlFor="title">Title:</label>
         <input type="text" id="title" name="title" required />

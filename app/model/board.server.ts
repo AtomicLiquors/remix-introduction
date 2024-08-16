@@ -27,49 +27,30 @@ const partialBoard = board.partial().required({
 
 export type PartialBoard = z.infer<typeof partialBoard>;
 
-export async function deleteBoard(postId: number) {
+export async function deleteBoardById(postId: number) {
   
   //To-Do: SQL문 에러났을때 에러처리.
   //To-Do: postId zod로 검증.
   //To-Do: 적용 가능한 에러 타입이 있나?
-  try {
-    await sql`DELETE FROM community_board WHERE post_id = ${postId}`;
-  } catch(e: any){
-    throw e;
-  }
-  redirect('/');
-}
-
-export async function deleteBoardWithClient(client: VercelClient, postId: number) {
-  
-  //To-Do: SQL문 에러났을때 에러처리.
-  //To-Do: postId zod로 검증.
-  //To-Do: 적용 가능한 에러 타입이 있나?
-  try {
-    await client.sql`DELETE FROM community_board WHERE post_id = ${postId}`;
-  } catch(e: any){
-    throw e;
-  }
-  redirect('/');
+ 
+  return await sql`DELETE FROM community_board WHERE post_id = ${postId}`;
 }
 
 export async function createBoard(data: PartialBoard) {
   const { title, content, author, password, ip } = data;
 
-  await sql`
+  return await sql`
     INSERT INTO community_board(title, content, author, password, author_ip)
     VALUES (${title}, ${content}, ${author}, ${password}, ${ip})
   `;
-
-  redirect('/');
 }
 
-export async function getBoard() {
-  let data;
+export async function getBoards() {
+  let boards;
   let startTime = Date.now();
 
   try {
-    data = await sql`SELECT * FROM community_board`;
+    boards = await sql`SELECT * FROM community_board`;
   } catch (e: any) {
     if (e.message === `relation "community_board" does not exist`) {
       console.log(
@@ -80,12 +61,17 @@ export async function getBoard() {
       //To-Do: 테이블 초기화를 위한 Seed 구현하기
      // await seed();
       startTime = Date.now();
-      data = await sql`SELECT * FROM users`;
+      boards = await sql`SELECT * FROM users`;
     } else {
       throw e;
     }
   }
 
-  const { rows: boards } = data;
-  return { boards: boards, duration: Date.now() - startTime };
+  const { rows: data } = boards;
+  return { data: data, duration: Date.now() - startTime };
+}
+
+
+export async function getBoardById(post_id: number) {
+  return await sql`SELECT * FROM community_board WHERE post_id = ${post_id}`;
 }
