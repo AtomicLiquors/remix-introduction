@@ -13,13 +13,13 @@ export default function BoardRoute() {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
 
-  const data = useLoaderData<typeof loader>();
+  const result = useLoaderData<typeof loader>();
 
   //To-Do: Loading시 기존 화면 뿌옇게 표시.
 
   return (
     <>
-      {data?.boards!.map((board, idx) => (
+      {result?.data!.map((board, idx) => (
         <BoardItem key={idx} {...(board as BoardItemProps)}></BoardItem>
       ))}
       {/*

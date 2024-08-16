@@ -46,11 +46,11 @@ export async function createBoard(data: PartialBoard) {
 }
 
 export async function getBoards() {
-  let data;
+  let boards;
   let startTime = Date.now();
 
   try {
-    data = await sql`SELECT * FROM community_board`;
+    boards = await sql`SELECT * FROM community_board`;
   } catch (e: any) {
     if (e.message === `relation "community_board" does not exist`) {
       console.log(
@@ -61,14 +61,14 @@ export async function getBoards() {
       //To-Do: 테이블 초기화를 위한 Seed 구현하기
      // await seed();
       startTime = Date.now();
-      data = await sql`SELECT * FROM users`;
+      boards = await sql`SELECT * FROM users`;
     } else {
       throw e;
     }
   }
 
-  const { rows: boards } = data;
-  return { boards: boards, duration: Date.now() - startTime };
+  const { rows: data } = boards;
+  return { data: data, duration: Date.now() - startTime };
 }
 
 
