@@ -70,3 +70,8 @@ export async function getBoards() {
   const { rows: boards } = data;
   return { boards: boards, duration: Date.now() - startTime };
 }
+
+
+export async function getBoardById(post_id: number) {
+  return await sql`SELECT * FROM community_board WHERE post_id = ${post_id}`;
+}
