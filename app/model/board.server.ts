@@ -1,31 +1,47 @@
 import { redirect } from "@remix-run/node";
 import { sql } from "@vercel/postgres";
-
-//import { seed } from "~/utils/seed";
 import {z} from "zod";
 
-const Board = z.object({
+const board = z.object({
   post_id: z.number(),
   title: z.string(),
   content: z.string(),
   author: z.string(),
-  avatar_id : z.number(),
   password: z.string(),
+  ip: z.string(),
+  avatar_id : z.number(),
   created_at: z.date(),
   updated_at: z.date(),
   approved: z.boolean(),
 });
 
+type Board = z.infer<typeof board>;
+
+const partialBoard = board.partial().required({
+  title: true,
+  content: true,
+  author: true,
+  password: true,
+  ip: true,
+});
+
+export type PartialBoard = z.infer<typeof partialBoard>;
+
 export async function deleteBoard(postId: number) {
   
   //To-Do: SQL문 에러났을때 에러처리.
   //To-Do: postId zod로 검증.
-  await sql`DELETE FROM community_board WHERE post_id = ${postId}`;
-
+  //To-Do: 적용 가능한 에러 타입이 있나?
+  try {
+    await sql`DELETE FROM community_board WHERE post_id = ${postId}`;
+  } catch(e: any){
+    throw e;
+  }
   redirect('/');
 }
 
-export async function createBoard(title: string, content: string, author: string, password: string, ip: string) {
+export async function createBoard(data: PartialBoard) {
+  const { title, content, author, password, ip } = data;
 
   await sql`
     INSERT INTO community_board(title, content, author, password, author_ip)

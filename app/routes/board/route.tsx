@@ -1,5 +1,5 @@
 import { useFetcher, useLoaderData } from "@remix-run/react";
-import { createBoard, getBoard } from "@/model/board.server";
+import { createBoard, getBoard, PartialBoard } from "@/model/board.server";
 import { ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
 import MarkdownEditor from "@/common/markdown/MarkdownEditor";
 import BoardItem, { BoardItemProps } from "./components/BoardItem";
@@ -22,7 +22,15 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
   }
   const ip = request.headers.get('x-forwarded-for') || 'Unknown IP';
 
-  const result = createBoard(title, content, author, password, ip);
+  const data: PartialBoard = {
+    title: title, 
+    content: content, 
+    author: author, 
+    password: password, 
+    ip: ip
+  }
+
+  const result = createBoard(data);
   return true;
 };
 
