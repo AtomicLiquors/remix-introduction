@@ -32,23 +32,17 @@ export async function deleteBoard(postId: number) {
   //To-Do: SQL문 에러났을때 에러처리.
   //To-Do: postId zod로 검증.
   //To-Do: 적용 가능한 에러 타입이 있나?
-  try {
-    await sql`DELETE FROM community_board WHERE post_id = ${postId}`;
-  } catch(e: any){
-    throw e;
-  }
-  redirect('/');
+ 
+  return await sql`DELETE FROM community_board WHERE post_id = ${postId}`;
 }
 
 export async function createBoard(data: PartialBoard) {
   const { title, content, author, password, ip } = data;
 
-  await sql`
+  return await sql`
     INSERT INTO community_board(title, content, author, password, author_ip)
     VALUES (${title}, ${content}, ${author}, ${password}, ${ip})
   `;
-
-  redirect('/');
 }
 
 export async function getBoard() {
