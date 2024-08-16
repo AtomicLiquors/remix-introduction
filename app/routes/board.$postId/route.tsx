@@ -18,5 +18,5 @@ export const loader: LoaderFunction = async ({
 
 export default function BoardByIdRoute() {
   const result = useLoaderData<typeof loader>();
-  return <div>{result}</div>;
+  return <div>{JSON.stringify(result)}</div>;
 }
