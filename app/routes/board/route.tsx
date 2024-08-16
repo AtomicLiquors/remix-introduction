@@ -9,41 +9,9 @@ export const loader = async () => {
   return await getBoard();
 };
 
-export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
-  const formData = await request.formData();
-  const title = formData.get('title') as string;
-  const content = formData.get('content') as string;
-  const author = formData.get('author') as string;
-  const password = formData.get('password') as string;
-
-
-  if (!title || !content || !author || !password) {
-    return json({ success: false, error: 'missing field' }, { status: 422 });
-  }
-  const ip = request.headers.get('x-forwarded-for') || 'Unknown IP';
-
-  const data: PartialBoard = {
-    title: title, 
-    content: content, 
-    author: author, 
-    password: password, 
-    ip: ip
-  }
-
-  const result = createBoard(data);
-  return true;
-};
-
 export default function BoardRoute() {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
-
-  const handleButtonClick = async () => {
-    fetcher.submit(null, {
-      action: `/board`,
-      method: "POST",
-    });
-  };
 
   const data = useLoaderData<typeof loader>();
 
@@ -51,10 +19,6 @@ export default function BoardRoute() {
 
   return (
     <>
-      <button onClick={handleButtonClick} disabled={loading}>
-        {loading ? "Waiting..." : "Create"}
-      </button>
-
       {data?.boards!.map((board, idx) => (
         <BoardItem key={idx} {...(board as BoardItemProps)}></BoardItem>
       ))}
