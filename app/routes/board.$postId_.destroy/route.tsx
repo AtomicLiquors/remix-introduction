@@ -1,5 +1,6 @@
-import { deleteBoard } from "@/model/board.server";
+import { deleteBoard, deleteBoardWithClient } from "@/model/board.server";
 import { ActionFunctionArgs } from "@remix-run/node";
+import { createClient } from "@vercel/postgres";
 
 export const action = async ({ params }: ActionFunctionArgs) => {
   //To - Do
@@ -16,6 +17,12 @@ export const action = async ({ params }: ActionFunctionArgs) => {
     return false;
   }
 
+
   const result = await deleteBoard(+postId);
+
+  // const client = createClient();
+  // client.connect();
+  // const result = await deleteBoardWithClient(client, +postId);
+  // client.end();
   return true;
 };

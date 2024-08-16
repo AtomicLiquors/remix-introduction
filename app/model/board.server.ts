@@ -1,5 +1,5 @@
 import { redirect } from "@remix-run/node";
-import { sql } from "@vercel/postgres";
+import { sql, VercelClient } from "@vercel/postgres";
 import {z} from "zod";
 
 const board = z.object({
@@ -34,6 +34,19 @@ export async function deleteBoard(postId: number) {
   //To-Do: 적용 가능한 에러 타입이 있나?
   try {
     await sql`DELETE FROM community_board WHERE post_id = ${postId}`;
+  } catch(e: any){
+    throw e;
+  }
+  redirect('/');
+}
+
+export async function deleteBoardWithClient(client: VercelClient, postId: number) {
+  
+  //To-Do: SQL문 에러났을때 에러처리.
+  //To-Do: postId zod로 검증.
+  //To-Do: 적용 가능한 에러 타입이 있나?
+  try {
+    await client.sql`DELETE FROM community_board WHERE post_id = ${postId}`;
   } catch(e: any){
     throw e;
   }
