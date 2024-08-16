@@ -18,7 +18,7 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
 
 
   if (!title || !content || !author || !password) {
-    return json({ success: false, error: 'missing field' }, { status: 400 });
+    return json({ success: false, error: 'missing field' }, { status: 422 });
   }
   const ip = request.headers.get('x-forwarded-for') || 'Unknown IP';
 
