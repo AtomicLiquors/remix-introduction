@@ -19,6 +19,7 @@ import type {
 } from "@remix-run/node";
 import tailwindStylesheet from "./tailwind.css?url";
 import themeStylesheet from "./theme/theme.css?url";
+import fontStylesheet from "./font.css?url";
 import appStylesHref from "./app.css?url";
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect, useState } from "react";
@@ -33,6 +34,7 @@ export const action = async () => {
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindStylesheet },
   { rel: "stylesheet", href: themeStylesheet },
+  { rel: "stylesheet", href: fontStylesheet },
 ];
 
 export const loader = async ({request,} : LoaderFunctionArgs) => {
@@ -84,76 +86,8 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className={themeClasses.bg.empty}>  
-        { location.pathname !== "/" && 
-        <div id="sidebar">
-          <div>
-            <Form id="search-form" role="search"
-              onChange={(event) => {
-                const isFirstSearch = q === null;
-                submit(event.currentTarget, {
-                  replace: !isFirstSearch,
-                });
-              }}
-            >
-              <input
-                id="q"
-                aria-label="Search contacts"
-                className={searching ? "loading" : ""}
-                defaultValue={q || ""}
-                placeholder="Search"
-                type="search"
-                name="q"
-              />
-              <div id="search-spinner" aria-hidden hidden={!searching} />
-            </Form>
-            <Form method="post">
-              <button type="submit">New</button>
-            </Form>
-          </div>
-          <nav>
-            {contacts.length ? (
-              <ul>
-                {contacts.map((contact) => (
-                  <li key={contact.id}>
-                    <NavLink
-                      className={({ isActive, isPending }) =>
-                        isActive ? "active" : isPending ? "pending" : ""
-                      }
-                      to={`contacts/${contact.id}`}
-                    >
-                      <Link to={`contacts/${contact.id}`}>
-                        {contact.first || contact.last ? (
-                          <>
-                            {contact.first} {contact.last}
-                          </>
-                        ) : (
-                          <i>No Name</i>
-                        )}{" "}
-                        {contact.favorite ? <span>★</span> : null}
-                      </Link>
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>
-                <i>No contacts</i>
-              </p>
-            )}
-          </nav>
-          <h1>Remix Contacts</h1>
-          <nav>
-            <ul>
-              <li>
-                <Link to={`/contacts/1`}>Your Name</Link>
-              </li>
-              <li>
-                <a href={`/contacts/2`}>Your Friend</a>
-              </li>
-            </ul>
-          </nav>
-        </div>}
+      <body className={`${themeClasses.bg.empty} min-h-screen`}>  
+        {/* location.pathname !== "/" && <인덱스 외부에서 표시할 컴포넌트>*/}
         
         <div
           className={

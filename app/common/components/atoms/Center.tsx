@@ -1,13 +1,14 @@
 import { ReactNode } from "react";
 
-interface ContainerProps {
+interface CenterProps {
   children: ReactNode;
   className?: string;
   flex?: boolean;
+  flexCol?: boolean;
 }
 
-const Center: React.FC<ContainerProps> = ({ children, className, flex }) => {
-  return <div className={`text-center ${className} ${flex && 'flex flex-col items-center justify-center align-center'}`}>{children}</div>;
+const Center: React.FC<CenterProps> = ({ children, className, flex, flexCol }) => {
+  return <div className={`text-center ${className} ${flex && 'flex items-center justify-center align-center'} ${flexCol && 'flex-col'}`}>{children}</div>;
 };
 
 export default Center;
