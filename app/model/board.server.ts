@@ -27,7 +27,7 @@ const partialBoard = board.partial().required({
 
 export type PartialBoard = z.infer<typeof partialBoard>;
 
-export async function deleteBoard(postId: number) {
+export async function deleteBoardById(postId: number) {
   
   //To-Do: SQL문 에러났을때 에러처리.
   //To-Do: postId zod로 검증.
