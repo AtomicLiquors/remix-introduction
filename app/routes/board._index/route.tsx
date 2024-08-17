@@ -1,12 +1,8 @@
 import { useFetcher, useLoaderData } from "@remix-run/react";
-import { createBoard, getBoards, PartialBoard } from "@/model/board.server";
-import { ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
-import MarkdownEditor from "@/common/markdown/MarkdownEditor";
+import { getBoards } from "@/model/board.server";
 import BoardItem, { BoardItemProps } from "./components/BoardItem";
 import NewBoard from "./components/NewBoard";
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import Center from "@/common/components/atoms/Center";
 
 export const loader = async () => {
