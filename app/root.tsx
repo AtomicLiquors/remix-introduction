@@ -25,6 +25,7 @@ import { createEmptyContact, getContacts } from "./data";
 import { useEffect, useState } from "react";
 import { applyExistingTheme, clearTheme, switchTheme, THEMES, themeClasses } from "./theme/theme";
 import Button from "./common/components/atoms/Button";
+import Center from "./common/components/atoms/Center";
 
 export const action = async () => {
   const contact = await createEmptyContact();
@@ -52,7 +53,21 @@ export const loader = async ({request,} : LoaderFunctionArgs) => {
  */
 
 // To-Do : sessionStorage 이용해서 404 에러 정보 전달하기
+
+
 export default function App() {
+
+  const checkError = () => {   
+    const error = sessionStorage.getItem('error');
+    error && setErrorMsg(error);
+    setTimeout(() => sessionStorage.removeItem('error'), 3000);
+  }
+  
+
+  useEffect(() => {
+    applyExistingTheme();
+    checkError();
+  }, [])
   
   const { contacts, q } = useLoaderData<typeof loader>();
   const navigation = useNavigation();
@@ -66,16 +81,13 @@ export default function App() {
     );  
 
   useEffect(() => {
-    applyExistingTheme();
-  }, []);
-
-  useEffect(() => {
     const searchField = document.getElementById("q");
     if (searchField instanceof HTMLInputElement) {
       searchField.value = q || "";
     }
   }, [q]);
 
+  const [errorMsg, setErrorMsg] = useState<string>("");
   const [ popupVisibility, setPopupVisibility ] = useState(false);
 
   return ( 
@@ -88,7 +100,7 @@ export default function App() {
       </head>
       <body className={`${themeClasses.bg.empty} min-h-screen`}>  
         {/* location.pathname !== "/" && <인덱스 외부에서 표시할 컴포넌트>*/}
-        
+        { errorMsg && <Center className="bg-red-200">{errorMsg}</Center>}
         <div
           className={
             `${navigation.state === "loading" && !searching ? "loading" : ""} relative`

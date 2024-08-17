@@ -7,6 +7,7 @@ import IndexProfile from "@/routes/_index/components/profile/IndexProfile";
 import IndexProjects from "@/routes/_index/components/projects/IndexProjects";
 import IndexSkills from "@/routes/_index/components/skills/IndexSkills";
 import IndexAwards from "@/routes/_index/components/awards/IndexAwards";
+import { LoaderFunction } from "@remix-run/node";
 
 
 export default function IndexRoute() {
