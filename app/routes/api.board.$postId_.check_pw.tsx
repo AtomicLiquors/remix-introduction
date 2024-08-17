@@ -1,16 +1,17 @@
-import { deleteBoardById } from "@/model/board.server";
-import { ActionFunctionArgs } from "@remix-run/node";
+import { checkPassword } from "@/model/board.server";
+import { ActionFunction, ActionFunctionArgs } from "@remix-run/node";
 
-export const action = async ({ params }: ActionFunctionArgs) => {
+export const action: ActionFunction = async ({ params, request }: ActionFunctionArgs): Promise<boolean> => {
+  
+  const formData = await request.formData();
   
   const postId = params.postId;
-  // 패스워드는 url로 노출되면 안 돼.
-  
+  const password = formData.get('password') as string;
+
   if(!postId){
     console.log(params);
     return false;
-    // throw Error로 변경.
   }
 
-  return null;
+  return await checkPassword(+postId, password);
 };

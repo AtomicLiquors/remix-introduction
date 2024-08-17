@@ -1,7 +1,7 @@
 import { deleteBoardById } from "@/model/board.server";
-import { ActionFunctionArgs } from "@remix-run/node";
+import { ActionFunction, ActionFunctionArgs } from "@remix-run/node";
 
-export const action = async ({ params }: ActionFunctionArgs) => {
+export const action: ActionFunction = async ({ params }: ActionFunctionArgs) => {
   //To - Do
   // 1. 작동확인
   // 2. 에러처리 : 존재하지 않는 아이디 -> 둘 다 상태 코드는 200이고, rowCount가 0과 1로 서로 다르다.
