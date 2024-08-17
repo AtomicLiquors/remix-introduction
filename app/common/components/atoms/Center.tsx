@@ -8,7 +8,7 @@ interface CenterProps {
 }
 
 const Center: React.FC<CenterProps> = ({ children, className, flex, flexCol }) => {
-  return <div className={`text-center ${className} ${flex && 'flex items-center justify-center align-center'} ${flexCol && 'flex-col'}`}>{children}</div>;
+  return <div className={`${className} ${flex ? 'flex items-center justify-center align-center' : 'text-center' } ${flexCol && 'flex-col'}`}>{children}</div>;
 };
 
 export default Center;

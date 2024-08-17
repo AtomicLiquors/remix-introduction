@@ -7,6 +7,7 @@ import NewBoard from "./components/NewBoard";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import Center from "@/common/components/atoms/Center";
 
 export const loader = async () => {
   return await getBoards();
@@ -24,10 +25,10 @@ export default function BoardRoute() {
   return (
     <>
       {isNewBoardFormVisibe ? (
-        <>
-          <NewBoard />
-          <button onClick={() => setIsNewBoardFormVisible(false)}>CLOSE</button>
-        </>
+        <Center flex flexCol>
+            <NewBoard />
+            <button onClick={() => setIsNewBoardFormVisible(false)}>CLOSE</button>
+        </Center>
       ) : (
         <button onClick={() => setIsNewBoardFormVisible(true)}>
           {/* <FontAwesomeIcon icon={faPenToSquare}/> */}
