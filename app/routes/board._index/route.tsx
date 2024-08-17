@@ -5,6 +5,8 @@ import MarkdownEditor from "@/common/markdown/MarkdownEditor";
 import BoardItem, { BoardItemProps } from "./components/BoardItem";
 import NewBoard from "./components/NewBoard";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 export const loader = async () => {
   return await getBoards();
@@ -14,7 +16,6 @@ export default function BoardRoute() {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
 
-  
   const [isNewBoardFormVisibe, setIsNewBoardFormVisible] = useState(false);
   const result = useLoaderData<typeof loader>();
 
@@ -22,8 +23,17 @@ export default function BoardRoute() {
 
   return (
     <>
-    
-      { isNewBoardFormVisibe ? <NewBoard /> : <button onClick={() => setIsNewBoardFormVisible(true)}>Click to show Form</button>}
+      {isNewBoardFormVisibe ? (
+        <>
+          <NewBoard />
+          <button onClick={() => setIsNewBoardFormVisible(false)}>CLOSE</button>
+        </>
+      ) : (
+        <button onClick={() => setIsNewBoardFormVisible(true)}>
+          {/* <FontAwesomeIcon icon={faPenToSquare}/> */}
+          Click to show Form
+        </button>
+      )}
       {result?.data!.map((board, idx) => (
         <BoardItem key={idx} {...(board as BoardItemProps)}></BoardItem>
       ))}

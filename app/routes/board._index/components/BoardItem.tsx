@@ -2,6 +2,8 @@ import Center from "@/common/components/atoms/Center";
 import { useFetcher } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import PasswordChecker from "./PasswordChecker";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleMinus, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 export interface BoardItemProps {
   post_id: number;
@@ -31,19 +33,13 @@ export default function BoardItem({
   const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
 
   const handleEditBtnClick = () => {
-    setIsEditPwCheckOpen(true);
+    setIsEditPwCheckOpen(true);    
+    setIsDeletePwCheckOpen(false);
   };
   const handleDeleteBtnClick = async () => {
     setIsDeletePwCheckOpen(true);
-    /*
-    fetcher.submit(
-      {},
-      {
-        action: `/api/board/${post_id}/destroy/`,
-        method: "DELETE",
-      }
-    );*/
-    //To-Do: 삭제 결과 받아오기
+    setIsEditPwCheckOpen(false);
+
   };
 
   useEffect(() => {
@@ -57,7 +53,7 @@ export default function BoardItem({
         loading && "opacity-50"
       } p-5 order border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700`}
     >
-      <div className="lg:w-5/6 flex justify-between">
+      <div className="w-full lg:w-5/6 flex justify-between">
         <div className="text-left text-gray-600 dark:text-gray-400">
           <div className="text-base font-medium">{title}</div>
           <div className="text-sm font-normal">{content}</div>
@@ -75,25 +71,20 @@ export default function BoardItem({
           </span>
         </div>
 
-        <div>
+        <div className="flex gap-2">
           {isEditPwCheckOpen ? (
-            <PasswordChecker post_id={post_id}>
+            <PasswordChecker post_id={post_id} label="수정하기">
               2kooong2❤
             </PasswordChecker>
           ) : (
-            <span className="cursor-pointer" onClick={handleEditBtnClick}>
-              Edit
-            </span>
+            <FontAwesomeIcon className="cursor-pointer w-5 text-gray-400" onClick={handleEditBtnClick} icon={faPenToSquare}/>
           )}
-          &nbsp;
           {isDeletePwCheckOpen ? (
-            <PasswordChecker post_id={post_id}>
+            <PasswordChecker post_id={post_id} label="삭제하기">
               2kooong2❤
             </PasswordChecker>
           ) : (
-            <span className="cursor-pointer" onClick={handleDeleteBtnClick}>
-              Delete
-            </span>
+            <FontAwesomeIcon className="cursor-pointer w-5 text-gray-400" onClick={handleDeleteBtnClick} icon={faCircleMinus}/>
           )}
         </div>
       </div>
