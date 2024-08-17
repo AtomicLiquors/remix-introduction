@@ -17,6 +17,7 @@ export interface BoardItemProps {
   created_at: Date;
   updated_at: Date;
   approved: boolean;
+  modalId: string;
 }
 
 export default function BoardItem({
