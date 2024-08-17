@@ -38,11 +38,6 @@ export default function BoardRoute() {
       {result?.data!.map((board, idx) => (
         <BoardItem key={idx} {...(board as BoardItemProps)}></BoardItem>
       ))}
-      {/*
-      <MarkdownRenderer/>
-       */}
-
-      <MarkdownEditor />
     </>
   );
 }
