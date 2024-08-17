@@ -6,11 +6,11 @@ export default function useOutsideClickHandler(ref: RefObject<HTMLElement>, call
        * Alert if clicked on outside of element
        */
       function handleClickOutside(event: MouseEvent) {
-        /*
-        if (ref.current instanceof Node && !ref.current.contains(event.target)) {
+        
+        if (ref.current instanceof Node && !ref.current?.contains(event.target as Node)) {
           callback();
         }
-        */
+        
       }
       // Bind the event listener
       document.addEventListener("mousedown", handleClickOutside);
