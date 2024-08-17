@@ -5,6 +5,7 @@ import NewBoard from "./components/NewBoard";
 import { useState } from "react";
 import Center from "@/common/components/atoms/Center";
 import Modal from "@/common/modal/Modal";
+import AlternativeModal from "@/common/modal/AlternativeModal";
 
 
 export const loader = async () => {
@@ -33,7 +34,7 @@ export default function BoardRoute() {
           Click to show Form
         </button>
       )}
-      <Modal/>
+      <AlternativeModal/>
       {result?.data!.map((board, idx) => (
         <BoardItem key={idx} {...(board as BoardItemProps)}></BoardItem>
       ))}
