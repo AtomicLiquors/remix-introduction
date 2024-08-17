@@ -5,7 +5,7 @@ export default function NewBoard() {
   const loading = fetcher.state !== "idle";
 
   return (
-    <fetcher.Form method="post" action="/board/create">
+    <fetcher.Form method="post" action="/api/board/create">
       {loading ? "loading..." : ""}
       <div>
         <label htmlFor="title">Title:</label>

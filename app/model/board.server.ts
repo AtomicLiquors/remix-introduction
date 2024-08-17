@@ -27,6 +27,10 @@ const partialBoard = board.partial().required({
 
 export type PartialBoard = z.infer<typeof partialBoard>;
 
+export async function checkPassword(postId: number, password: string){
+  return await sql`SELECT ${password} = (SELECT password FROM community_board WHERE post_id = ${postId})`
+}
+
 export async function deleteBoardById(postId: number) {
   
   //To-Do: SQL문 에러났을때 에러처리.

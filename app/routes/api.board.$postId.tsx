@@ -16,7 +16,9 @@ export const loader:LoaderFunction = async ({ params }: LoaderFunctionArgs) => {
       return false;
       // throw Error로 변경.
     }
+
+    const data = getBoardById(+postId);
   
-    return getBoardById(+postId);
+    return data;
   };
   

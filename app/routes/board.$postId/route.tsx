@@ -13,7 +13,10 @@ export const loader: LoaderFunction = async ({
     // throw Error로 변경.
   }
 
-  return await getBoardById(+postId);
+  const data = await getBoardById(+postId);
+  if(data.rowCount === 0)
+    return "조회된 데이터가 없어요"
+  return data;
 };
 
 export default function BoardByIdRoute() {

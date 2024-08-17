@@ -1,4 +1,5 @@
 import { useFetcher } from "@remix-run/react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 
 export interface BoardItemProps {
   post_id: number;
@@ -24,22 +25,40 @@ export default function BoardItem({
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
 
-  const handleEditBtnClick = async (post_id: number) => {
-    alert("구현 준비 중입니다.");
+  const [isPwInputOpen, setIsPwInputOpen] = useState(false);
+
+  const handlePwCheckBtnClick = async (post_id: number) => {
+    
+    fetcher.submit(
+      {},
+      {
+        action: `/api/board/${post_id}/check_pw/`,
+        method: "GET",
+      }
+    );
+  }
+  
+  const handleEditBtnClick = () => {
+    setIsPwInputOpen(true);
   };
   const handleDeleteBtnClick = async (post_id: number) => {
     fetcher.submit(
       {},
       {
-        action: `/board/${post_id}/destroy/`,
+        action: `/api/board/${post_id}/destroy/`,
         method: "DELETE",
       }
     );
+    //To-Do: 삭제 결과 받아오기
   };
 
   return (
     <div>
-      <div className={`${loading && 'opacity-50'} p-5 order border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700`}>
+      <div
+        className={`${
+          loading && "opacity-50"
+        } p-5 order border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700`}
+      >
         <ol className="divide-y divider-gray-200 dark:divide-gray-700">
           <li className="flex justify-between">
             <div className="text-gray-600 dark:text-gray-400">
@@ -59,12 +78,18 @@ export default function BoardItem({
               </span>
             </div>
             <div>
-            <span
-                className="cursor-pointer"
-                onClick={() => handleEditBtnClick(post_id)}
-              >
-                Edit
-              </span>
+              {isPwInputOpen ? (
+                <>
+                  <input className="border" type="password" /><span onClick={() => handlePwCheckBtnClick(post_id)}>OK</span>
+                </>
+              ) : (
+                <span
+                  className="cursor-pointer"
+                  onClick={handleEditBtnClick}
+                >
+                  Edit
+                </span>
+              )}
               &nbsp;
               <span
                 className="cursor-pointer"
