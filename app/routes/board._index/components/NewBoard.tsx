@@ -1,6 +1,11 @@
 import Center from "@/common/components/atoms/Center";
 import { useFetcher } from "@remix-run/react";
 
+const handleSubmit = () => {
+  // 입력폼 닫기
+  // 입력 초기화
+}
+
 export default function NewBoard() {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";

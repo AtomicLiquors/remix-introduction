@@ -21,7 +21,7 @@ export default function BoardRoute() {
   return (
     <>
       {isNewBoardFormVisibe ? (
-        <Center flex flexCol>
+        <Center flex flexCol textCenterDisabled>
             <NewBoard />
             <button onClick={() => setIsNewBoardFormVisible(false)}>CLOSE</button>
         </Center>

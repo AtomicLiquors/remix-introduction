@@ -59,7 +59,7 @@ export async function getBoards() {
   let startTime = Date.now();
 
   try {
-    boards = await sql`SELECT * FROM community_board`;
+    boards = await sql`SELECT * FROM community_board ORDER BY created_at DESC`;
   } catch (e: any) {
     if (e.message === `relation "community_board" does not exist`) {
       console.log(
