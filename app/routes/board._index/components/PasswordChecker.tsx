@@ -26,7 +26,7 @@ export default function PasswordChecker({
         password: password,
       },
       {
-        action: `/api/board/${post_id}/check_pw/`,
+        action: `/board/${post_id}/check_pw/`,
         method: "POST",
       }
     );
