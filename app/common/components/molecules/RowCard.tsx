@@ -15,9 +15,7 @@ const RowCard: React.FC<RowCardProps> = ({ children, imgSrc }) => {
         w-full lg:w-5/6 shadow-md p-4 leading-normal`}
       >
         {imgSrc && (
-          <div className="text-white h-48 lg:h-auto lg:w-48 flex-none bg-cover bg-black rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden">
-            {imgSrc}
-          </div>
+          <img src={imgSrc} className="object-cover h-48 lg:h-auto lg:w-96 flex-none bg-cover bg-black rounded-t lg:rounded-l text-center overflow-hidden"/>
         )}
         <div>{children}</div>
       </div>

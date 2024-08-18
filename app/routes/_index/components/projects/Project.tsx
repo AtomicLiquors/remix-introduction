@@ -6,7 +6,7 @@ import RowCard from "@/common/components/molecules/RowCard";
 
 const Project: React.FC<ProjectProps> = (proj) => {
   return (
-    <RowCard imgSrc="image">
+    <RowCard imgSrc={proj.screenshots[0]}>
       <div className={`${themeClasses.text.primary} font-bold text-xl mb-2`}>
         <span className="text-sm text-gray-600">{proj.emoji}</span>
         &nbsp;
