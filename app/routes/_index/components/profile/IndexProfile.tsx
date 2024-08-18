@@ -5,7 +5,7 @@ import { themeClasses } from "@/theme/theme";
 
 export default function IndexProfile() {
 
-  const env = process.env.PHONE_NUMBER;
+  const contact = process.env.CONTACT;
 
   return (
     <div className={`${themeClasses.bg.card} w-full p-8 shadow-md`}>
@@ -35,7 +35,7 @@ export default function IndexProfile() {
           </p>
         </div>
         <div className={themeClasses.text.secondary}>
-          | {env} · gyqls234@naver.com |
+          | {contact} · gyqls234@naver.com |
         </div>
         <div className="flex gap-2">
           <img src="img/github.png" className="w-8 rounded-full bg-white" />
