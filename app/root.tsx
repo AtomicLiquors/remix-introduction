@@ -61,6 +61,9 @@ export const loader = async ({request,} : LoaderFunctionArgs) => {
 
 export default function App() {
 
+  
+  const contact = process.env.CONTACT;
+
   const checkError = () => {   
     const error = sessionStorage.getItem('error');
     error && setErrorMsg(error);
@@ -104,7 +107,9 @@ export default function App() {
       </head>
       <body className={`${themeClasses.bg.empty} min-h-screen`}>  
         {/* location.pathname !== "/" && <인덱스 외부에서 표시할 컴포넌트>*/}
+        
         { errorMsg && <Center className="bg-red-200">{errorMsg}</Center>}
+        {contact}
         <div
           className={
             `${navigation.state === "loading" && !searching ? "loading" : ""} relative`
