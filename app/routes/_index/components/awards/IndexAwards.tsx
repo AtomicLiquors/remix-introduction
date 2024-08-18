@@ -2,17 +2,18 @@ import RowCard from "@/common/components/molecules/RowCard";
 import Timeline from "@/common/components/organisms/timeline/Timeline";
 import { awardsData } from "./awardsData";
 import Award from "./Award";
-import { FONT_AWESOME_TYPES } from "@/common/icon/FontAwesome";
+import IndexItemTitles from "../IndexItemTitles";
 
 export default function IndexAwards() {
   return (
-    <RowCard>
-      <Timeline className="mb-8">
-        {awardsData &&
-          awardsData.map((cert, idx) => (
-            <Award key={idx} {...cert} />
-          ))}
-      </Timeline>
-    </RowCard>
+    <>
+      <IndexItemTitles title="수상내역" />
+      <RowCard>
+        <Timeline className="mb-8">
+          {awardsData &&
+            awardsData.map((cert, idx) => <Award key={idx} {...cert} />)}
+        </Timeline>
+      </RowCard>
+    </>
   );
 }
