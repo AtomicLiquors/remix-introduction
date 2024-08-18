@@ -1,12 +1,12 @@
-import FontAwesome, { FAType, FONT_AWESOME_TYPES } from "@/common/icon/FontAwesome";
+import { ReactNode, ReactElement} from 'react';
 
 interface TimelineListItemProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export default function TimelineListItem({
   children
-}: TimelineListItemProps): React.ReactElement {
+}: TimelineListItemProps): ReactElement {
   return (
     <li className="mb-5 ms-6">
       {children}
