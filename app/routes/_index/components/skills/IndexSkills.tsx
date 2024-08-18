@@ -7,7 +7,7 @@ export default function IndexSkills() {
   return (
     <Center flex flexCol>
     {/* To-Do : uneven size with small screen */}
-      <IndexItemTitles title="스택"/>
+      <IndexItemTitles title="기술 스택"/>
       <div className="flex flex-wrap justify-center gap-16 max-w-128">
         {skillData &&
           skillData.map((skill, idx) => (

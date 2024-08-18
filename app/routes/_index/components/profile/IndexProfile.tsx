@@ -5,11 +5,11 @@ import { themeClasses } from "@/theme/theme";
 export default function IndexProfile() {
   return (
     <div className={`${themeClasses.bg.card} w-full p-8 shadow-md`}>
-      <Center flex flexCol>
+      <Center flex flexCol className="gap-3">
         <RoundImage src="/img/photos/profile.png" className="w-64" />
         <p
           id="index-page"
-          className={`${themeClasses.text.primary} text-3xl font-bold underline`}
+          className={`${themeClasses.text.primary} mb-5 text-3xl font-bold underline`}
         >
           최 효 빈
         </p>
@@ -19,7 +19,7 @@ export default function IndexProfile() {
         <div className={themeClasses.text.secondary}>
           | 010-xxxx-xxxx · gyqls234@naver.com |
         </div>
-        <div className="flex">
+        <div className="flex gap-2">
           <img src="img/github.png" className="w-8 rounded-full bg-white" />
           github.com/AtomicLiquors
         </div>
