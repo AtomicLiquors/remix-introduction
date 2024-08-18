@@ -76,6 +76,6 @@ export const projectData: ProjectProps[] = [
     links: {
       code: "https://github.com/AtomicLiquors/senabo",
     },
-    screenshots: [],
+    screenshots: ["/img/project/senabo/senabo.png"],
   },
 ];
