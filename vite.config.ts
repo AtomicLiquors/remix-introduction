@@ -7,7 +7,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   return {
     define: {
-      "process.env.CONTACT": JSON.stringify(env.CONTACT),
+      'process.env': env
     },
     plugins: [
       remix({
