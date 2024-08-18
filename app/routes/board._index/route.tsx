@@ -5,6 +5,8 @@ import NewBoard from "./components/NewBoard";
 import { useRef, useState } from "react";
 import Center from "@/common/components/atoms/Center";
 import { Modal } from "@/common/modal/Modal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 
 export const loader = async () => {
@@ -21,33 +23,37 @@ export default function BoardRoute() {
   //To-Do: Loading시 기존 화면 뿌옇게 표시.
 
   const modalRef = useRef<{ openModal: () => void; }>(null);
+  const newBoardModalRef = useRef<{ openModal: () => void; }>(null);
 
   function openModal(){
     modalRef.current?.openModal();
+  }
+  function newOpenModal(){
+    newBoardModalRef.current?.openModal();
   }
 
   const [postId, setPostId] = useState<number>();
 
   function handleBoardItemClick(postId: number){
-    alert(postId);
     setPostId(postId);
     openModal();
   }
 
   return (
     <>
+      {/* To-Do: 검색 기능 추가 */}
       {isNewBoardFormVisibe ? (
         <Center flex flexCol textCenterDisabled>
-            <NewBoard />
             <button onClick={() => setIsNewBoardFormVisible(false)}>CLOSE</button>
         </Center>
       ) : (
-        <button onClick={() => openModal()}>
-          {/* <FontAwesomeIcon icon={faPenToSquare}/> */}
-          Click to show Modal
+        <button onClick={() => newOpenModal()}>
+          새글쓰기 <FontAwesomeIcon icon={faPenToSquare}/>
         </button>
       )}
       <Modal ref={modalRef}>you have opened {postId}</Modal>
+      <Modal ref={newBoardModalRef}>
+      <NewBoard /></Modal>
       {result?.data!.map((board, idx) => (
         <BoardItem key={idx} {...(board as BoardItemProps)} onClick={() => handleBoardItemClick(board.post_id)} ></BoardItem>
       ))}

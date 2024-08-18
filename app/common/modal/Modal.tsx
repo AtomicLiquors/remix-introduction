@@ -1,19 +1,23 @@
-import { forwardRef, ReactNode, useEffect, useImperativeHandle, useRef } from "react";
-import Center from "../components/atoms/Center";
+import {
+  forwardRef,
+  ReactNode,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from "react";
+import Center from "@/common/components/atoms/Center";
 
 interface ModalProps {
   children: ReactNode;
 }
 
-export const Modal = forwardRef(function Modal({children}: ModalProps, ref) {
-  
+export const Modal = forwardRef(function Modal({ children }: ModalProps, ref) {
   const modalRef = useRef<HTMLDialogElement>(null);
 
   useImperativeHandle(ref, () => ({
-      openModal() {
-        modalRef.current?.showModal();
-      }
-    
+    openModal() {
+      modalRef.current?.showModal();
+    },
   }));
 
   useEffect(() => {
@@ -35,17 +39,20 @@ export const Modal = forwardRef(function Modal({children}: ModalProps, ref) {
   }, []);
 
   return (
-    <div>
-      <dialog ref={modalRef} id="my_modal_2" className="modal rounded">
-        <div className="modal-box m-5">
+    <dialog
+      ref={modalRef}
+      className="modal rounded w-full h-full md:w-5/6 md:h-5/6"
+    >
+      <div className="flex flex-col justify-between h-full">
+        <div className="modal-box m-5 h-full">
           {children}
         </div>
-        <form method="dialog" className="modal-backdrop">
+        <form method="dialog" className="modal-backdrop p-5 border-t">
           <Center>
-            <button>x</button>
+            <button className="border rounded pl-3 pr-3">CLOSE</button>
           </Center>
         </form>
-      </dialog>
-    </div>
+      </div>
+    </dialog>
   );
 });
