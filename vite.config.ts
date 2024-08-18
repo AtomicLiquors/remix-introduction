@@ -4,11 +4,13 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import * as path from "path";
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), "");
+  //const env = loadEnv(mode, process.cwd(), "");
   return {
+    /*
     define: {
       'process.env': env
     },
+    */
     plugins: [
       remix({
         ignoredRouteFiles: ["**/*.css"],
