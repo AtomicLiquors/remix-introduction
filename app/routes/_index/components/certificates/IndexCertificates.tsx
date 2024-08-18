@@ -7,7 +7,7 @@ import IndexItemTitles from "../IndexItemTitles";
 
 export default function IndexCertificates() {
   return (
-    <>
+    <div>
       <IndexItemTitles title="자격사항" />
       <RowCard>
         <Timeline className="mb-8">
@@ -27,6 +27,6 @@ export default function IndexCertificates() {
             ))}
         </Timeline>
       </RowCard>
-    </>
+    </div>
   );
 }

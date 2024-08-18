@@ -6,7 +6,7 @@ import IndexItemTitles from "../IndexItemTitles";
 
 export default function IndexAwards() {
   return (
-    <>
+    <div>
       <IndexItemTitles title="수상내역" />
       <RowCard>
         <Timeline className="mb-8">
@@ -14,6 +14,6 @@ export default function IndexAwards() {
             awardsData.map((cert, idx) => <Award key={idx} {...cert} />)}
         </Timeline>
       </RowCard>
-    </>
+    </div>
   );
 }

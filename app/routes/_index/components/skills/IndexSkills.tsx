@@ -5,7 +5,7 @@ import Center from "@/common/components/atoms/Center";
 
 export default function IndexSkills() {
   return (
-    <Center flex flexCol>
+    <Center flex flexCol className="gap-5">
     {/* To-Do : uneven size with small screen */}
       <IndexItemTitles title="기술 스택"/>
       <div className="flex flex-wrap justify-center gap-16 max-w-128">

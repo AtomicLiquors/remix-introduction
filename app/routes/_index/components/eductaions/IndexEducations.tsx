@@ -6,7 +6,7 @@ import IndexItemTitles from "../IndexItemTitles";
 
 export default function IndexEducations() {
   return (
-    <>
+    <div>
       <IndexItemTitles title="교육사항" />
       <RowCard>
         <Timeline>
@@ -14,6 +14,6 @@ export default function IndexEducations() {
             educationData.map((edu, idx) => <Education key={idx} {...edu} />)}
         </Timeline>
       </RowCard>
-    </>
+    </div>
   );
 }
