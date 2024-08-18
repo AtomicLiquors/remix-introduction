@@ -11,11 +11,10 @@ import IndexAwards from "@/routes/_index/components/awards/IndexAwards";
 
 export default function IndexRoute() {
 
-  const contact = process.env.CONTACT;
+  //const contact = process.env.CONTACT;
   return (
     <>
       <IndexProfile />
-      {contact}
       <Container className="flex flex-col mt-20 gap-20">
         <IndexSkills />
         <IndexProjects />
