@@ -27,9 +27,9 @@ import { useEffect, useState } from "react";
 import { applyExistingTheme, clearTheme, switchTheme, THEMES, themeClasses } from "./theme/theme";
 import Button from "@/common/components/atoms/Button";
 import Center from "@/common/components/atoms/Center";
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
-dotenv.config();
+// dotenv.config();
 
 export const action = async () => {
   const contact = await createEmptyContact();
