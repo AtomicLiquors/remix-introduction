@@ -14,7 +14,7 @@ export default function IndexRoute() {
   return (
     <>
       <IndexProfile />
-      <Container>
+      <Container className="flex flex-col gap-10">
         <IndexSkills />
         <IndexProjects />
         <IndexEducations />
