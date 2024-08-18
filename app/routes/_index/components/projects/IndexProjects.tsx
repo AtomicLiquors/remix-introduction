@@ -1,6 +1,7 @@
 import { projectData } from "./projectData";
 import Project from "./Project";
 import IndexItemTitles from "../IndexItemTitles";
+import Center from "@/common/components/atoms/Center";
 
 export default function IndexProjects() {
   return (
