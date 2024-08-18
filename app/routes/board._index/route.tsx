@@ -2,9 +2,9 @@ import { useFetcher, useLoaderData } from "@remix-run/react";
 import { getBoards } from "@/model/board.server";
 import BoardItem, { BoardItemProps } from "./components/BoardItem";
 import NewBoard from "./components/NewBoard";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Center from "@/common/components/atoms/Center";
-import Modal from "@/common/modal/Modal";
+import { Modal } from "@/common/modal/Modal";
 
 
 export const loader = async () => {
@@ -20,6 +20,20 @@ export default function BoardRoute() {
 
   //To-Do: Loading시 기존 화면 뿌옇게 표시.
 
+  const modalRef = useRef<{ openModal: () => void; }>(null);
+
+  function openModal(){
+    modalRef.current?.openModal();
+  }
+
+  const [postId, setPostId] = useState<number>();
+
+  function handleBoardItemClick(postId: number){
+    alert(postId);
+    setPostId(postId);
+    openModal();
+  }
+
   return (
     <>
       {isNewBoardFormVisibe ? (
@@ -28,14 +42,14 @@ export default function BoardRoute() {
             <button onClick={() => setIsNewBoardFormVisible(false)}>CLOSE</button>
         </Center>
       ) : (
-        <button onClick={() => setIsNewBoardFormVisible(true)}>
+        <button onClick={() => openModal()}>
           {/* <FontAwesomeIcon icon={faPenToSquare}/> */}
-          Click to show Form
+          Click to show Modal
         </button>
       )}
-      <Modal/>
+      <Modal ref={modalRef}>you have opened {postId}</Modal>
       {result?.data!.map((board, idx) => (
-        <BoardItem key={idx} {...(board as BoardItemProps)}></BoardItem>
+        <BoardItem key={idx} {...(board as BoardItemProps)} onClick={() => handleBoardItemClick(board.post_id)} ></BoardItem>
       ))}
     </>
   );

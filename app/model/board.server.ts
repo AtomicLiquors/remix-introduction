@@ -59,7 +59,7 @@ export async function getBoards() {
   let startTime = Date.now();
 
   try {
-    boards = await sql`SELECT title, content, author, author_ip FROM community_board ORDER BY created_at DESC`;
+    boards = await sql`SELECT post_id, title, content, author, author_ip FROM community_board ORDER BY created_at DESC`;
   } catch (e: any) {
     if (e.message === `relation "community_board" does not exist`) {
       console.log(
@@ -70,7 +70,7 @@ export async function getBoards() {
       //To-Do: 테이블 초기화를 위한 Seed 구현하기
       // await seed();
       startTime = Date.now();
-      boards = await sql`SELECT title, content, author, author_ip FROM community_board ORDER BY created_at DESC`;
+      boards = await sql`SELECT post_id, title, content, author, author_ip FROM community_board ORDER BY created_at DESC`;
     } else {
       throw e;
     }

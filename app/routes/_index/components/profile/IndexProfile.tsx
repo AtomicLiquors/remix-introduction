@@ -5,7 +5,7 @@ import { themeClasses } from "@/theme/theme";
 
 export default function IndexProfile() {
 
-  const contact = "0100000000";
+  const contact = "010-0000-0000";
 
   return (
     <div className={`${themeClasses.bg.card} w-full p-8 shadow-md`}>

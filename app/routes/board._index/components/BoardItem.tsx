@@ -18,6 +18,7 @@ export interface BoardItemProps {
   updated_at: Date;
   approved: boolean;
   modalId: string;
+  onClick: () => void;
 }
 
 export default function BoardItem({
@@ -29,6 +30,7 @@ export default function BoardItem({
   created_at,
   updated_at,
   approved,
+  onClick,
 }: BoardItemProps) {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
@@ -57,7 +59,7 @@ export default function BoardItem({
       } p-5 order border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700`}
     >
       <div className="w-full lg:w-5/6 flex justify-between">
-        <div className="flex">
+        <div className="flex cursor-pointer" onClick={onClick}>
           <Center className="flex-none w-24" flex>{author}</Center>
           <div className="flex-initial w-auto text-left text-gray-600 dark:text-gray-400">
             <div className="text-base font-medium">{title}</div>
