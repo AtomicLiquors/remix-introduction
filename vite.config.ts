@@ -1,19 +1,25 @@
 import { vitePlugin as remix } from "@remix-run/dev";
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-import * as path from 'path';
+import * as path from "path";
 
-export default defineConfig({
-  plugins: [
-    remix({
-      ignoredRouteFiles: ["**/*.css"],
-    }),
-    tsconfigPaths(),
-  ],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'app'),
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
+  return {
+    define: {
+      "process.env.CONTACT": JSON.stringify(env.CONTACT),
     },
-    extensions: ['.js', '.jsx', '.ts', '.tsx']
-  }
+    plugins: [
+      remix({
+        ignoredRouteFiles: ["**/*.css"],
+      }),
+      tsconfigPaths(),
+    ],
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "app"),
+      },
+      extensions: [".js", ".jsx", ".ts", ".tsx"],
+    },
+  };
 });
