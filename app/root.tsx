@@ -27,9 +27,6 @@ import { useEffect, useState } from "react";
 import { applyExistingTheme, clearTheme, switchTheme, THEMES, themeClasses } from "./theme/theme";
 import Button from "@/common/components/atoms/Button";
 import Center from "@/common/components/atoms/Center";
-// import dotenv from 'dotenv';
-
-// dotenv.config();
 
 export const action = async () => {
   const contact = await createEmptyContact();
@@ -60,8 +57,6 @@ export const loader = async ({request,} : LoaderFunctionArgs) => {
 
 
 export default function App() {
-
-  //const contact = process.env.CONTACT;
 
   const checkError = () => {   
     const error = sessionStorage.getItem('error');

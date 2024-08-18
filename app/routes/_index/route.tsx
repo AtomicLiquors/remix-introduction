@@ -11,7 +11,6 @@ import IndexAwards from "@/routes/_index/components/awards/IndexAwards";
 
 export default function IndexRoute() {
 
-  //const contact = process.env.CONTACT;
   return (
     <>
       <IndexProfile />
