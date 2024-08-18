@@ -12,6 +12,7 @@ import {
   useNavigation,
   useSubmit,
   useLocation,
+  MetaFunction,
 } from "@remix-run/react";
 import type { 
   LinksFunction,
@@ -24,12 +25,22 @@ import appStylesHref from "./app.css?url";
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect, useState } from "react";
 import { applyExistingTheme, clearTheme, switchTheme, THEMES, themeClasses } from "./theme/theme";
-import Button from "./common/components/atoms/Button";
-import Center from "./common/components/atoms/Center";
+import Button from "@/common/components/atoms/Button";
+import Center from "@/common/components/atoms/Center";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export const action = async () => {
   const contact = await createEmptyContact();
   return redirect(`/contacts/${contact.id}/edit`);
+};
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "최효빈 | Front-End Developer" },
+    { name: "프론트엔드 웹 개발자 최효빈의 자기소개 페이지입니다."},
+  ];
 };
 
 export const links: LinksFunction = () => [
@@ -46,13 +57,6 @@ export const loader = async ({request,} : LoaderFunctionArgs) => {
 };
 
 
-/*
- * /app/root.tsx
- * "Root Route" : the first component in the UI that render.
- * typically contains the global layout for the page.
- */
-
-// To-Do : sessionStorage 이용해서 404 에러 정보 전달하기
 
 
 export default function App() {

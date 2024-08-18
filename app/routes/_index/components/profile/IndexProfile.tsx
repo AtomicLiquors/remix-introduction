@@ -5,7 +5,7 @@ import { themeClasses } from "@/theme/theme";
 
 export default function IndexProfile() {
 
-  const env = "010-xxxx-xxxx";
+  const env = process.env.PHONE_NUMBER;
 
   return (
     <div className={`${themeClasses.bg.card} w-full p-8 shadow-md`}>
@@ -22,16 +22,16 @@ export default function IndexProfile() {
         </div>
         <div className={themeClasses.text.secondary}>
           <p>
-            코드의 재사용성과 유지보수성을 중시하며, 변경에 유연한 소프트웨어를
-            지향합니다.
+            안녕하세요! 프론트엔드 웹 개발자 최효빈입니다.
           </p>
           <p>
-            핵심 기능 구현을 위해 요구 기술을 빠르게 습득하고, 팀 프로젝트
-            경연에서 우수한 수상실적을 달성해 왔습니다.
+            프론트엔드 분야의 다양한 기술과 빠른 피드백을 즐깁니다.
           </p>
           <p>
-            주어진 기획안을 실현해 내기 위해, 안 되는 이유보다 되게 하는 방법을
-            찾는 개발자입니다.
+            사소한 아이디어도 진지하게 경청하고, 안 되는 이유보다 되는 이유를 찾으며 
+          </p>
+          <p>
+            색다른 소프트웨어를 만들어내는 팀원입니다.
           </p>
         </div>
         <div className={themeClasses.text.secondary}>
