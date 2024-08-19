@@ -1,8 +1,8 @@
 import { useFetcher, useLoaderData } from "@remix-run/react";
-import { getBoards } from "@/model/board.server";
+import { getBoardById, getBoards } from "@/model/board.server";
 import BoardItemPreview, { BoardItemProps } from "./components/boardItem/Preview";
 import NewBoard from "./components/NewBoard";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Center from "@/common/components/atoms/Center";
 import { Modal } from "@/common/modal/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,6 +18,7 @@ export default function BoardRoute() {
   const loading = fetcher.state !== "idle";
 
   const [isNewBoardFormVisibe, setIsNewBoardFormVisible] = useState(false);
+  const [openBoardData, setOpenBoardData] = useState<any>(null);
   const result = useLoaderData<typeof loader>();
 
   //To-Do: Loading시 기존 화면 뿌옇게 표시.
@@ -32,12 +33,17 @@ export default function BoardRoute() {
     newBoardModalRef.current?.openModal();
   }
 
-  const [postId, setPostId] = useState<number>();
-
-  function handleBoardItemClick(postId: number) {
-    setPostId(postId);
+  async function handleBoardItemClick (postId: number) {
     openModal();
+    fetcher.submit({}, {
+      method: 'GET',
+      action: `/api/board/${postId}`
+    })
   }
+
+  useEffect(() => {
+    setOpenBoardData(fetcher.data);
+  }, [fetcher.data])
 
   return (
     <>
@@ -51,7 +57,9 @@ export default function BoardRoute() {
           새글쓰기 <FontAwesomeIcon icon={faPenToSquare} />
         </button>
       )}
-      <Modal ref={modalRef}>you have opened {postId}</Modal>
+      <Modal ref={modalRef}>
+        {openBoardData && JSON.stringify(openBoardData)}
+      </Modal>
       <Modal ref={newBoardModalRef}>
         <BoardItemCreate />
       </Modal>

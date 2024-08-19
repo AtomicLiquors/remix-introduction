@@ -18,8 +18,8 @@ export const loader:LoaderFunction = async ({ params }: LoaderFunctionArgs) => {
       // throw Error로 변경.
     }
 
-    const data = getBoardById(+postId);
+    const data = await getBoardById(+postId);
   
-    return data;
+    return data.rows[0];
   };
   
