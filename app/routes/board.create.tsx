@@ -1,4 +1,4 @@
-import { createBoard, PartialBoard } from "@/model/board.server";
+import { createBoard, BoardCreateRequestDTO } from "@/model/board.server";
 import { ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
 
 export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
@@ -13,7 +13,7 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
     }
     const ip = request.headers.get('x-forwarded-for') || 'Unknown IP';
   
-    const data: PartialBoard = {
+    const data: BoardCreateRequestDTO = {
       title: title, 
       content: content, 
       author: author, 

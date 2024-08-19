@@ -17,7 +17,7 @@ const board = z.object({
 
 type Board = z.infer<typeof board>;
 
-const partialBoard = board.partial().required({
+const boardCreateRequestDTO = board.partial().required({
   title: true,
   content: true,
   author: true,
@@ -25,10 +25,16 @@ const partialBoard = board.partial().required({
   ip: true,
 });
 
-export type PartialBoard = z.infer<typeof partialBoard>;
+const boardEditRequestDTO = board.partial().required({
+  post_id: true,
+  title: true,
+  content: true,
+});
+
+export type BoardCreateRequestDTO = z.infer<typeof boardCreateRequestDTO>;
+export type BoardEditRequestDTO = z.infer<typeof boardEditRequestDTO>;
 
 export async function checkPassword(postId: number, password: string) {
-
   const result: QueryResult =
     await sql`SELECT ${password} = (SELECT password FROM community_board WHERE post_id = ${postId}) as is_pw_correct`;
 
@@ -45,7 +51,7 @@ export async function deleteBoardById(postId: number) {
 //To-Do: postId zod로 검증.
 //To-Do: 적용 가능한 에러 타입이 있나?
 
-export async function createBoard(data: PartialBoard) {
+export async function createBoard(data: BoardCreateRequestDTO) {
   const { title, content, author, password, ip } = data;
 
   return await sql`
@@ -54,12 +60,24 @@ export async function createBoard(data: PartialBoard) {
   `;
 }
 
+export async function editBoard(data: BoardEditRequestDTO) {
+  const { post_id, title, content } = data;
+
+  return await sql`
+    UPDATE community_board
+SET title = ${title},
+    content = ${content},
+WHERE post_id = ${post_id};
+  `;
+}
+
 export async function getBoards() {
   let boards;
   let startTime = Date.now();
 
   try {
-    boards = await sql`SELECT post_id, title, content, author, author_ip FROM community_board ORDER BY created_at DESC`;
+    boards =
+      await sql`SELECT post_id, title, content, author, author_ip FROM community_board ORDER BY created_at DESC`;
   } catch (e: any) {
     if (e.message === `relation "community_board" does not exist`) {
       console.log(
@@ -70,7 +88,8 @@ export async function getBoards() {
       //To-Do: 테이블 초기화를 위한 Seed 구현하기
       // await seed();
       startTime = Date.now();
-      boards = await sql`SELECT post_id, title, content, author, author_ip FROM community_board ORDER BY created_at DESC`;
+      boards =
+        await sql`SELECT post_id, title, content, author, author_ip FROM community_board ORDER BY created_at DESC`;
     } else {
       throw e;
     }
