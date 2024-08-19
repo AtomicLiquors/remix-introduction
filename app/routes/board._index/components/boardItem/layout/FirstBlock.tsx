@@ -9,7 +9,7 @@ export default function BoardItemFirstBlock({
   children,
 }: BoardItemLayoutProps) {
   return (
-    <Center className="flex-none w-24" flex>
+    <Center className="flex-none w-24" flex flexCol>
       {children}
     </Center>
   );

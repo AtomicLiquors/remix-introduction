@@ -11,6 +11,7 @@ import BoardItemContainer from "./layout/Container";
 import BoardItemFirstBlock from "./layout/FirstBlock";
 import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemTitles from "./content/Titles";
+import BoardItemBlockWrapper from "./layout/BlockWrapper";
 
 export interface BoardItemProps {
   post_id: number;
@@ -57,7 +58,8 @@ export default function BoardItemPreview({
 
   return (
     <BoardItemContainer>
-      <div className="flex cursor-pointer" onClick={onClick}>
+      <BoardItemBlockWrapper>
+      {/*<div className="flex cursor-pointer" onClick={onClick}>*/}
         <BoardItemFirstBlock>
           {author}
         </BoardItemFirstBlock>
@@ -76,7 +78,7 @@ export default function BoardItemPreview({
             {approved ? "공개" : "비공개"}
           </span>
         </BoardItemMiddleBlock>
-      </div>
+      </BoardItemBlockWrapper>
 
       <div className="flex gap-2">
         {isEditPwCheckOpen ? (

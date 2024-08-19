@@ -7,6 +7,7 @@ import Center from "@/common/components/atoms/Center";
 import { Modal } from "@/common/modal/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import BoardItemCreate from "./components/boardItem/Create";
 
 export const loader = async () => {
   return await getBoards();
@@ -52,7 +53,7 @@ export default function BoardRoute() {
       )}
       <Modal ref={modalRef}>you have opened {postId}</Modal>
       <Modal ref={newBoardModalRef}>
-        <NewBoard />
+        <BoardItemCreate />
       </Modal>
       {result?.data!.map((board, idx) => (
         <BoardItemPreview
