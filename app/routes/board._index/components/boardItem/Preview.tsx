@@ -53,16 +53,11 @@ export default function BoardItemPreview({
     setIsEditPwCheckOpen(false);
   };
 
-  useEffect(() => {
-    console.log(fetcher.data);
-  }, [fetcher.data]);
-
   return (
     <BoardItemContainer>
       <BoardItemRowContainer>
-        <BoardItemBlockWrapper>
-          {/*<div className="flex cursor-pointer" onClick={onClick}>*/}
-          <BoardItemFirstBlock>{author}</BoardItemFirstBlock>
+        <BoardItemBlockWrapper className="w-full cursor-pointer" onClick={onClick}>
+          <BoardItemFirstBlock><div className="text-sm">{author}</div></BoardItemFirstBlock>
           <BoardItemMiddleBlock>
             <BoardItemTitles title={title} subtitle={content} />
             <span className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">

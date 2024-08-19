@@ -4,14 +4,16 @@ interface BoardItemLayoutProps {
   children: ReactNode;
 }
 
-export default function BoardItemRowContainer({children}:BoardItemLayoutProps) {
+export default function BoardItemRowContainer({
+  children,
+}: BoardItemLayoutProps) {
   return (
     <div
-        className="
+      className="
       w-full lg:w-5/6 flex justify-between
       "
-      >
-        {children}
-      </div>
-  )
+    >
+      {children}
+    </div>
+  );
 }
