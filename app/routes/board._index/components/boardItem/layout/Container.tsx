@@ -8,16 +8,10 @@ interface BoardItemLayoutProps {
 export default function BoardItemContainer({children}: BoardItemLayoutProps) {
   return (
     <Center
-      flex
-      className="p-5 order border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
+      flex flexCol
+      className="gap-5 p-5 order border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
     >
-      <div
-        className="
-      w-full lg:w-5/6 flex justify-between
-      "
-      >
-        {children}
-      </div>
+      {children}
     </Center>
   )
 }
