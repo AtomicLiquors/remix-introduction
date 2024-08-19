@@ -1,4 +1,5 @@
 import Center from "@/common/components/atoms/Center";
+import { themeClasses } from "@/theme/theme";
 import { useFetcher } from "@remix-run/react";
 
 const handleSubmit = () => {
@@ -14,50 +15,58 @@ export default function NewBoard() {
   const loading = fetcher.state !== "idle";
 
   return (
-    <Center flexCol className="h-full">
-      <div >
-        <fetcher.Form method="post" action="/board/create">
-          {loading ? "loading..." : ""}
-          <div>
-            <label htmlFor="title">제목</label>
+    <div>
+      <fetcher.Form method="post" action="/board/create">
+        {loading ? "loading..." : ""}
+        <div className="flex flex-col gap-5">
+          <Center className={`text-3xl font-bold ${themeClasses.text.primary}`}>
+            새 게시글 작성
+          </Center>
+          <div className="flex flex-wrap gap-5">
             <input
-              className="border"
+              className="border p-1"
+              placeholder="작성자"
+              type="text"
+              id="author"
+              name="author"
+              required
+            />
+            <input
+              className="border p-1"
+              placeholder="비밀번호"
+              type="password"
+              id="password"
+              name="password"
+              required
+            />
+          </div>
+          <div>
+            <input
+              className="border p-1 w-full md:w-5/6"
+              placeholder="제목을 입력해주세요."
               type="text"
               id="title"
               name="title"
               required
             />
           </div>
+
           <div>
-            <label htmlFor="author">작성자</label>
-            <input
-              className="border"
-              type="text"
-              id="author"
-              name="author"
+            <textarea
+              className="border p-1 w-full md:w-5/6 h-64"
+              placeholder="내용을 입력해주세요."
+              id="content"
+              name="content"
               required
             />
           </div>
-          <div>
-            <label htmlFor="password">비밀번호</label>
-            <input
-              className="border"
-              type="password"
-              id="password"
-              name="password"
-              required
-            />
-            <small>수정, 삭제에 사용될 비밀번호입니다.</small>
-          </div>
-          <div>
-            <label htmlFor="content">내용</label>
-            <textarea className="border" id="content" name="content" required />
-          </div>
+        </div>
+        <Center>
           <button className="rounded text-blue-500" type="submit">
-            Create Post
+            작성하기
           </button>
-        </fetcher.Form>
-      </div>
-    </Center>
+        </Center>
+      </fetcher.Form>
+    </div>
   );
 }

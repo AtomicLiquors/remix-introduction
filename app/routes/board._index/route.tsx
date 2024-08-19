@@ -8,7 +8,6 @@ import { Modal } from "@/common/modal/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
-
 export const loader = async () => {
   return await getBoards();
 };
@@ -22,19 +21,19 @@ export default function BoardRoute() {
 
   //To-Do: Loading시 기존 화면 뿌옇게 표시.
 
-  const modalRef = useRef<{ openModal: () => void; }>(null);
-  const newBoardModalRef = useRef<{ openModal: () => void; }>(null);
+  const modalRef = useRef<{ openModal: () => void }>(null);
+  const newBoardModalRef = useRef<{ openModal: () => void }>(null);
 
-  function openModal(){
+  function openModal() {
     modalRef.current?.openModal();
   }
-  function newOpenModal(){
+  function newOpenModal() {
     newBoardModalRef.current?.openModal();
   }
 
   const [postId, setPostId] = useState<number>();
 
-  function handleBoardItemClick(postId: number){
+  function handleBoardItemClick(postId: number) {
     setPostId(postId);
     openModal();
   }
@@ -44,18 +43,23 @@ export default function BoardRoute() {
       {/* To-Do: 검색 기능 추가 */}
       {isNewBoardFormVisibe ? (
         <Center flex flexCol textCenterDisabled>
-            <button onClick={() => setIsNewBoardFormVisible(false)}>CLOSE</button>
+          <button onClick={() => setIsNewBoardFormVisible(false)}>CLOSE</button>
         </Center>
       ) : (
         <button onClick={() => newOpenModal()}>
-          새글쓰기 <FontAwesomeIcon icon={faPenToSquare}/>
+          새글쓰기 <FontAwesomeIcon icon={faPenToSquare} />
         </button>
       )}
       <Modal ref={modalRef}>you have opened {postId}</Modal>
       <Modal ref={newBoardModalRef}>
-      <NewBoard /></Modal>
+        <NewBoard />
+      </Modal>
       {result?.data!.map((board, idx) => (
-        <BoardItem key={idx} {...(board as BoardItemProps)} onClick={() => handleBoardItemClick(board.post_id)} ></BoardItem>
+        <BoardItem
+          key={idx}
+          {...(board as BoardItemProps)}
+          onClick={() => handleBoardItemClick(board.post_id)}
+        ></BoardItem>
       ))}
     </>
   );
