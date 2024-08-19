@@ -59,7 +59,7 @@ export default function BoardRoute() {
           key={idx}
           {...(board as BoardItemProps)}
           onClick={() => handleBoardItemClick(board.post_id)}
-        ></BoardItemPreview>
+        />
       ))}
     </>
   );
