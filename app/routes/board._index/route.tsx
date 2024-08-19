@@ -18,11 +18,13 @@ export default function BoardRoute() {
   const loading = fetcher.state !== "idle";
 
   const [isNewBoardFormVisibe, setIsNewBoardFormVisible] = useState(false);
+
+  // To-Do: Type 안정성 확보.
+  // To-Do: 모달 닫으면 setOpenBoardData(null);
   const [openBoardData, setOpenBoardData] = useState<any>(null);
   const result = useLoaderData<typeof loader>();
 
   //To-Do: Loading시 기존 화면 뿌옇게 표시.
-
   const modalRef = useRef<{ openModal: () => void }>(null);
   const newBoardModalRef = useRef<{ openModal: () => void }>(null);
 
