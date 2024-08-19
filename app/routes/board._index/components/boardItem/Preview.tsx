@@ -1,7 +1,7 @@
 import Center from "@/common/components/atoms/Center";
 import { useFetcher } from "@remix-run/react";
 import { useEffect, useState } from "react";
-import PasswordChecker from "./PasswordChecker";
+import PasswordChecker from "../PasswordChecker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleMinus,
@@ -21,7 +21,7 @@ export interface BoardItemProps {
   onClick: () => void;
 }
 
-export default function BoardItem({
+export default function BoardItemPreview({
   post_id,
   avatar_id,
   title,

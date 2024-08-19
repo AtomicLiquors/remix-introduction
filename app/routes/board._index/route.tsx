@@ -1,6 +1,6 @@
 import { useFetcher, useLoaderData } from "@remix-run/react";
 import { getBoards } from "@/model/board.server";
-import BoardItem, { BoardItemProps } from "./components/BoardItem";
+import BoardItemPreview, { BoardItemProps } from "./components/boardItem/Preview";
 import NewBoard from "./components/NewBoard";
 import { useRef, useState } from "react";
 import Center from "@/common/components/atoms/Center";
@@ -55,11 +55,11 @@ export default function BoardRoute() {
         <NewBoard />
       </Modal>
       {result?.data!.map((board, idx) => (
-        <BoardItem
+        <BoardItemPreview
           key={idx}
           {...(board as BoardItemProps)}
           onClick={() => handleBoardItemClick(board.post_id)}
-        ></BoardItem>
+        ></BoardItemPreview>
       ))}
     </>
   );

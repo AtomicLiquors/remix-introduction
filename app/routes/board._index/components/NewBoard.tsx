@@ -1,4 +1,5 @@
 import Center from "@/common/components/atoms/Center";
+import Input from "@/common/components/atoms/Input";
 import { themeClasses } from "@/theme/theme";
 import { useFetcher } from "@remix-run/react";
 
@@ -23,34 +24,15 @@ export default function NewBoard() {
             새 게시글 작성
           </Center>
           <div className="flex flex-wrap gap-5">
-            <input
-              className="border p-1"
-              placeholder="작성자"
-              type="text"
-              id="author"
-              name="author"
-              required
-            />
-            <input
-              className="border p-1"
-              placeholder="비밀번호"
-              type="password"
-              id="password"
-              name="password"
-              required
-            />
+            <Input placeholder="작성자" id="author" name="author" required/>
+            <Input placeholder="비밀번호" id="password" name="password" password required/>
           </div>
           <div>
-            <input
-              className="border p-1 w-full md:w-5/6"
-              placeholder="제목을 입력해주세요."
-              type="text"
+          <Input className="w-full md:w-5/6" 
+              placeholder="제목을 입력해주세요." 
               id="title"
-              name="title"
-              required
-            />
+              name="title" required/>
           </div>
-
           <div>
             <textarea
               className="border p-1 w-full md:w-5/6 h-64"
