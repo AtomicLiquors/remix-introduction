@@ -21,17 +21,11 @@ import fontStylesheet from "./font.css?url";
 import appStylesHref from "./app.css?url";
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect, useState } from "react";
-import {
-  applyExistingTheme,
-  clearTheme,
-  switchTheme,
-  THEMES,
-  themeClasses,
-} from "./theme/theme";
-import Button from "@/common/components/atoms/Button";
+import { applyExistingTheme, themeClasses } from "./theme/theme";
 import Center from "@/common/components/atoms/Center";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import Profile from "./common/profile/Profile";
 
 export const action = async () => {
   const contact = await createEmptyContact();
@@ -114,6 +108,8 @@ export default function App() {
               onClick={() => setPopupVisibility(false)}
             ></div>
           )}
+
+          <Profile />
           <Outlet />
           {/* To-Do: 테마 변경시 버튼에 애니메이션 적용 */}
           <Center flex flexCol className="gap-5 mb-20">
@@ -134,18 +130,24 @@ export default function App() {
               </button>
             </div>
             */}
-            <a href="https://github.com/AtomicLiquors/remix-introduction/issues" target="_blank" className="flex gap-3 p-5">
+            <a
+              href="https://github.com/AtomicLiquors/remix-introduction/issues"
+              target="_blank"
+              className="flex gap-3 p-5"
+            >
               <FontAwesomeIcon className="w-12" icon={faGithub} />
               <div>
                 <p className="font-bold text-lg">
                   방문 중에 불편이 있으셨나요?
                 </p>
-                <p className="text-sm">Github 저장소에서 Issue를 통해 제보해주세요!</p>
+                <p className="text-sm">
+                  Github 저장소에서 Issue를 통해 제보해주세요!
+                </p>
               </div>
             </a>
-              <div className="text-sm text-gray-400">
-                  ⓒ 2024 Hyobin Choe, AtomicLiquors All Rights Reserved.
-              </div>
+            <div className="text-sm text-gray-400">
+              ⓒ 2024 Hyobin Choe, AtomicLiquors All Rights Reserved.
+            </div>
           </Center>
         </div>
         <ScrollRestoration />

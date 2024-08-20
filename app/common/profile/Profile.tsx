@@ -3,7 +3,7 @@ import RoundImage from "@/common/components/atoms/RoundImage";
 import { themeClasses } from "@/theme/theme";
 
 
-export default function IndexProfile() {
+export default function Profile() {
 
   const contact = "010-0000-0000";
 
