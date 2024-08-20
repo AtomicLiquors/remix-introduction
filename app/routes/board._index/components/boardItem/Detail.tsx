@@ -1,4 +1,3 @@
-import { title } from "process";
 import BoardItemTitles from "./content/Titles";
 import BoardItemBlockWrapper from "./layout/BlockWrapper";
 import BoardItemContainer from "./layout/Container";
@@ -24,17 +23,21 @@ export default function BoardItemDetail({
             {loading ? (
               <div className="w-full h-full bg-gray-500"/>
             ) : (
-              <div className="text-sm">{openBoardData.author}</div>
+              openBoardData && <div className="text-sm">{openBoardData.author}</div>
             )}
           </BoardItemFirstBlock>
           <BoardItemMiddleBlock>
             {loading ? (
               <div className="w-full h-full bg-gray-500"/>
             ) : (
-              <BoardItemTitles title={title} subtitle={openBoardData.content} />
+              openBoardData && <BoardItemTitles title={openBoardData.title}/>
             )}
           </BoardItemMiddleBlock>
         </BoardItemBlockWrapper>
+      </BoardItemRowContainer>
+      
+      <BoardItemRowContainer>
+        {openBoardData && openBoardData.content}
       </BoardItemRowContainer>
     </BoardItemContainer>
   );

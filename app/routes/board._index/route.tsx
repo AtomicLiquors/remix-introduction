@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import BoardItemCreate from "./components/boardItem/Create";
 import BoardItemDetail from "./components/boardItem/Detail";
+import BoardItemRowContainer from "./components/boardItem/layout/RowContainer";
+import BoardItemContainer from "./components/boardItem/layout/Container";
 
 export const loader = async () => {
   return await getBoards();
@@ -39,6 +41,7 @@ export default function BoardRoute() {
   }
 
   async function handleBoardItemClick(postId: number) {
+    setOpenBoardData(null);
     openModal();
     fetcher.submit(
       {},
@@ -56,17 +59,14 @@ export default function BoardRoute() {
   return (
     <>
       {/* To-Do: 검색 기능 추가 */}
-      {isNewBoardFormVisibe ? (
-        <Center flex flexCol textCenterDisabled>
-          <button onClick={() => setIsNewBoardFormVisible(false)}>CLOSE</button>
-        </Center>
-      ) : (
+      <BoardItemContainer>
+        <div className="text-3xl font-bold">방명록</div>
         <button onClick={() => newOpenModal()}>
           새글쓰기 <FontAwesomeIcon icon={faPenToSquare} />
         </button>
-      )}
+      </BoardItemContainer>
       <Modal ref={modalRef}>
-        <BoardItemDetail openBoardData={openBoardData} loading={loading}/>
+        <BoardItemDetail openBoardData={openBoardData} loading={loading} />
       </Modal>
       <Modal ref={newBoardModalRef}>
         <BoardItemCreate />
