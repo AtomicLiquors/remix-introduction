@@ -1,10 +1,4 @@
-import {
-  faPenToSquare,
-  faCircleMinus,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { title } from "process";
-import PasswordChecker from "../PasswordChecker";
 import BoardItemTitles from "./content/Titles";
 import BoardItemBlockWrapper from "./layout/BlockWrapper";
 import BoardItemContainer from "./layout/Container";
