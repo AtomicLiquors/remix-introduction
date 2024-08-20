@@ -1,20 +1,25 @@
-
 import Center from "@/common/components/atoms/Center";
 import { SkillProps } from "./indexSkillType";
 import { themeClasses } from "@/theme/theme";
 
-const path = "/img/skills"
+const path = "/img/skills";
 
 const IndexSkill: React.FC<SkillProps> = ({ title, content, img }) => {
   return (
-    <>
-      <Center flex flexCol className={`${themeClasses.bg.card} sm:w-1/2 md:w-1/3 lg:w-1/4 p-4 shadow-md rounded-lg`}>
-        <img src={`${path}/${img}.png`} className="w-64"/>
-        <h3 className={`${themeClasses.text.primary} text-lg text-primary font-semibold mb-2`}>{title}</h3>
+    <div
+      className={`${themeClasses.bg.card} flex gap-5 w-5/6 p-4 shadow-md rounded-lg text-left`}
+    >
+      <img src={`${path}/${img}.png`} className="w-16" />
+      <div>
+        <h3
+          className={`${themeClasses.text.primary} text-lg text-primary font-semibold mb-2`}
+        >
+          {title}
+        </h3>
         <p className={themeClasses.text.secondary}>{content}</p>
-      </Center>
-    </>
+      </div>
+    </div>
   );
-}
+};
 
 export default IndexSkill;
