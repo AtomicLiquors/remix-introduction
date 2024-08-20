@@ -1,17 +1,14 @@
 import { useFetcher, useLoaderData } from "@remix-run/react";
-import { getBoardById, getBoards } from "@/model/board.server";
+import { getBoards } from "@/model/board.server";
 import BoardItemPreview, {
   BoardItemProps,
 } from "./components/boardItem/Preview";
-import NewBoard from "./components/NewBoard";
 import { useEffect, useRef, useState } from "react";
-import Center from "@/common/components/atoms/Center";
 import { Modal } from "@/common/modal/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import BoardItemCreate from "./components/boardItem/Create";
 import BoardItemDetail from "./components/boardItem/Detail";
-import BoardItemRowContainer from "./components/boardItem/layout/RowContainer";
 import BoardItemContainer from "./components/boardItem/layout/Container";
 
 export const loader = async () => {
@@ -21,8 +18,6 @@ export const loader = async () => {
 export default function BoardRoute() {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
-
-  const [isNewBoardFormVisibe, setIsNewBoardFormVisible] = useState(false);
 
   // To-Do: Type 안정성 확보.
   // To-Do: 모달 닫으면 setOpenBoardData(null);

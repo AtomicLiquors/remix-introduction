@@ -18,7 +18,7 @@ export default function BoardItemDetail({
   return (
     <BoardItemContainer>
       <BoardItemRowContainer>
-        <BoardItemBlockWrapper className="w-full cursor-pointer">
+        <BoardItemBlockWrapper className="w-full">
           <BoardItemFirstBlock>
             {loading ? (
               <div className="w-full h-full bg-gray-500"/>
