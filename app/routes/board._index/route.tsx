@@ -1,6 +1,8 @@
 import { useFetcher, useLoaderData } from "@remix-run/react";
 import { getBoardById, getBoards } from "@/model/board.server";
-import BoardItemPreview, { BoardItemProps } from "./components/boardItem/Preview";
+import BoardItemPreview, {
+  BoardItemProps,
+} from "./components/boardItem/Preview";
 import NewBoard from "./components/NewBoard";
 import { useEffect, useRef, useState } from "react";
 import Center from "@/common/components/atoms/Center";
@@ -8,6 +10,7 @@ import { Modal } from "@/common/modal/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import BoardItemCreate from "./components/boardItem/Create";
+import BoardItemDetail from "./components/boardItem/Detail";
 
 export const loader = async () => {
   return await getBoards();
@@ -35,17 +38,20 @@ export default function BoardRoute() {
     newBoardModalRef.current?.openModal();
   }
 
-  async function handleBoardItemClick (postId: number) {
+  async function handleBoardItemClick(postId: number) {
     openModal();
-    fetcher.submit({}, {
-      method: 'GET',
-      action: `/api/board/${postId}`
-    })
+    fetcher.submit(
+      {},
+      {
+        method: "GET",
+        action: `/api/board/${postId}`,
+      }
+    );
   }
 
   useEffect(() => {
     setOpenBoardData(fetcher.data);
-  }, [fetcher.data])
+  }, [fetcher.data]);
 
   return (
     <>
@@ -60,7 +66,7 @@ export default function BoardRoute() {
         </button>
       )}
       <Modal ref={modalRef}>
-        {openBoardData && JSON.stringify(openBoardData)}
+        <BoardItemDetail openBoardData={openBoardData} loading={loading}/>
       </Modal>
       <Modal ref={newBoardModalRef}>
         <BoardItemCreate />

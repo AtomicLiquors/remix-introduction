@@ -1,7 +1,5 @@
 import {
   BoardEditRequestDTO,
-  createBoard,
-  BoardCreateRequestDTO,
   editBoard,
 } from "@/model/board.server";
 import { ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";

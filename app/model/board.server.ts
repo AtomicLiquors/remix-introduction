@@ -31,8 +31,16 @@ const boardEditRequestDTO = board.partial().required({
   content: true,
 });
 
+const boardDetailResponseDTO = board.partial().required({
+  title: true,
+  content: true,
+  author: true,
+  ip: true,
+});
+
 export type BoardCreateRequestDTO = z.infer<typeof boardCreateRequestDTO>;
 export type BoardEditRequestDTO = z.infer<typeof boardEditRequestDTO>;
+export type BoardDetailResponseDTO = z.infer<typeof boardDetailResponseDTO>;
 
 export async function checkPassword(postId: number, password: string) {
   const result: QueryResult =
