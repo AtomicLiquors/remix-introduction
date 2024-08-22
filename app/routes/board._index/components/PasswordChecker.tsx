@@ -1,6 +1,6 @@
 import Center from "@/common/components/atoms/Center";
 import { useFetcher } from "@remix-run/react";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 
 interface PasswordCheckerProps {
   post_id: number;
@@ -31,12 +31,21 @@ export default function PasswordChecker({
       }
     );
   };
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if(fetcher.data === false){
+      inputRef.current!.value = "";
+    }
+  }, [fetcher.data])
   
   return fetcher.data === true ? (
     children
   ) : (
     <Center flex>
       <input
+        ref={inputRef}
         className="border w-auto h-auto" 
         type="password"
         placeholder={

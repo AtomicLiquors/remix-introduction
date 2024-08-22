@@ -32,6 +32,7 @@ const boardEditRequestDTO = board.partial().required({
 });
 
 const boardDetailResponseDTO = board.partial().required({
+  post_id: true,
   title: true,
   content: true,
   author: true,
@@ -55,7 +56,7 @@ export async function checkPassword(postId: number, password: string) {
 export async function deleteBoardById(postId: number) {
   return await sql`DELETE FROM community_board WHERE post_id = ${postId}`;
 }
-//To-Do: SQL문 에러났을때 에러처리.
+//To-Do: SQL문 에러났을때 에러처리!!
 //To-Do: postId zod로 검증.
 //To-Do: 적용 가능한 에러 타입이 있나?
 
@@ -73,9 +74,9 @@ export async function editBoard(data: BoardEditRequestDTO) {
 
   return await sql`
     UPDATE community_board
-SET title = ${title},
-    content = ${content},
-WHERE post_id = ${post_id};
+    SET title = ${title},
+    content = ${content}
+    WHERE post_id = ${post_id};
   `;
 }
 
@@ -108,5 +109,5 @@ export async function getBoards() {
 }
 
 export async function getBoardById(post_id: number) {
-  return await sql`SELECT title, content, author, author_ip FROM community_board WHERE post_id = ${post_id}`;
+  return await sql`SELECT post_id, title, content, author, author_ip FROM community_board WHERE post_id = ${post_id}`;
 }
