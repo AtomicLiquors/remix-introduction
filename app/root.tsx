@@ -110,7 +110,7 @@ export default function App() {
           )}
 
           <Profile />
-          <div className="flex justify-center gap-5">
+          <Center flex className="border-t gap-5 h-8 p-5 shadow-md">
           <NavLink
             preventScrollReset={true}
             to="."
@@ -118,7 +118,7 @@ export default function App() {
               isPending ? "text-gray-200" : isActive ? "text-blue-500" : ""
             }
           >
-            Home
+            HOME
           </NavLink>
           <NavLink
             preventScrollReset={true}
@@ -127,9 +127,9 @@ export default function App() {
               isPending ? "text-gray-200" : isActive ? "text-blue-500" : ""
             }
           >
-            Board
+            BOARD
           </NavLink>
-        </div>
+        </Center>
 
           <ScrollRestoration />
           <Outlet />

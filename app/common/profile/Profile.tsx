@@ -7,7 +7,7 @@ export default function Profile() {
   const contact = "010-0000-0000";
 
   return (
-    <div className={`${themeClasses.bg.card} w-full p-8 shadow-md`}>
+    <div className={`${themeClasses.bg.card} w-full p-8`}>
       <Center flex flexCol className="gap-3">
         <RoundImage src="/img/photos/profile.png" className="w-64" />
         <p
