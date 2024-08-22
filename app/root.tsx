@@ -110,6 +110,28 @@ export default function App() {
           )}
 
           <Profile />
+          <div className="flex justify-center gap-5">
+          <NavLink
+            preventScrollReset={true}
+            to="."
+            className={({ isActive, isPending }) =>
+              isPending ? "text-gray-200" : isActive ? "text-blue-500" : ""
+            }
+          >
+            Home
+          </NavLink>
+          <NavLink
+            preventScrollReset={true}
+            to="board"
+            className={({ isActive, isPending }) =>
+              isPending ? "text-gray-200" : isActive ? "text-blue-500" : ""
+            }
+          >
+            Board
+          </NavLink>
+        </div>
+
+          <ScrollRestoration />
           <Outlet />
           {/* To-Do: 테마 변경시 버튼에 애니메이션 적용 */}
           <Center flex flexCol className="gap-5 mb-20">
@@ -150,7 +172,6 @@ export default function App() {
             </div>
           </Center>
         </div>
-        <ScrollRestoration />
         <Scripts />
       </body>
     </html>

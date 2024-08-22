@@ -1,10 +1,9 @@
 import Center from "@/common/components/atoms/Center";
 import RoundImage from "@/common/components/atoms/RoundImage";
 import { themeClasses } from "@/theme/theme";
-
+import { NavLink } from "@remix-run/react";
 
 export default function Profile() {
-
   const contact = "010-0000-0000";
 
   return (
@@ -20,7 +19,7 @@ export default function Profile() {
         <div className={themeClasses.text.secondary}>
           <p>Java & JavaScript 개발자</p>
         </div>
-        
+
         <div className={themeClasses.text.secondary}>
           | {contact} · gyqls234@naver.com |
         </div>
