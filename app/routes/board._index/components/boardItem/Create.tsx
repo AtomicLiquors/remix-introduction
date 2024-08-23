@@ -4,17 +4,19 @@ import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemBlockWrapper from "./layout/BlockWrapper";
 import BoardItemRowContainer from "./layout/RowContainer";
 import Center from "@/common/components/atoms/Center";
-import { useFetcher } from "@remix-run/react";
-import { useRef, MouseEvent, useEffect } from "react";
+import { useActionData, useFetcher } from "@remix-run/react";
+import { useRef, FormEvent, useEffect } from "react";
 import AvatarSelector from "@/common/avatar/AvatarSelector";
 
 export default function BoardItemCreate() {
+  
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
 
-  const handleSubmit = (e: MouseEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // fetcher로 submit하고 그 결과는 어떻게? useEffect 써서 받아오나?
+    fetcher.submit(e.currentTarget.form);
   }
 
   useEffect(() => {
