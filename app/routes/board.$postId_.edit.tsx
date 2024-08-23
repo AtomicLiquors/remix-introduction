@@ -29,5 +29,6 @@ export const action: ActionFunction = async ({
 
   const result = await editBoard(data);
   console.log(result);
+  // if(result.rowCount === 0)
   return result;
 };

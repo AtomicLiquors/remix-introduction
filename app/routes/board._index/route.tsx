@@ -6,9 +6,14 @@ import BoardItemPreview, {
 import { useEffect, useRef, useState } from "react";
 import { Modal } from "@/common/modal/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCirclePlus,
+  faPenToSquare,
+  faPlusCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import BoardItemCreate from "./components/boardItem/Create";
 import BoardItemDetail from "./components/boardItem/Detail";
+import Center from "@/common/components/atoms/Center";
 import BoardItemContainer from "./components/boardItem/layout/Container";
 
 export const loader = async () => {
@@ -55,10 +60,14 @@ export default function BoardRoute() {
     <>
       {/* To-Do: 검색 기능 추가 */}
       <BoardItemContainer>
-        <div className="text-3xl font-bold">방명록</div>
-        <button onClick={() => newOpenModal()}>
-          새글쓰기 <FontAwesomeIcon icon={faPenToSquare} />
-        </button>
+        <Center
+        flex
+          className="w-full p-8 gap-2 cursor-pointer hover:bg-gray-300"
+          onClick={() => newOpenModal()}
+        >
+          <div>새 게시글 작성하기 </div>
+          <FontAwesomeIcon className="w-8" icon={faCirclePlus} />
+        </Center>
       </BoardItemContainer>
       <Modal ref={modalRef}>
         <BoardItemDetail openBoardData={openBoardData} loading={loading} />

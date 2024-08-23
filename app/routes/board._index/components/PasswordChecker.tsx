@@ -54,7 +54,7 @@ export default function PasswordChecker({
       />
       <span
         className="cursor-pointer"
-        onClick={() => handelSendButtonClick(post_id, "password123")}
+        onClick={() => handelSendButtonClick(post_id, inputRef.current!.value)}
       >
         {label}
       </span>
