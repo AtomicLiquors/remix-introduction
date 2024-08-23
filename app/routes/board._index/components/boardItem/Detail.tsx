@@ -11,10 +11,11 @@ import BoardItemFirstBlock from "./layout/FirstBlock";
 import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemRowContainer from "./layout/RowContainer";
 import { BoardDetailResponseDTO } from "@/model/board.server";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useFetcher } from "@remix-run/react";
 import Center from "@/common/components/atoms/Center";
 import Avatar from "@/common/avatar/Avatar";
+import AvatarSelector from "@/common/avatar/AvatarSelector";
 
 interface BoardItemDetailProps {
   openBoardData: BoardDetailResponseDTO;
@@ -42,7 +43,10 @@ export default function BoardItemDetail({
     setIsEditPwCheckOpen(false);
   };
   const fetcher = useFetcher();
-
+  const avatarIdRef = useRef<HTMLInputElement>(null);
+  const handleAvatarChange = (avatarId: number) => {
+    avatarIdRef.current!.value = avatarId + "";
+  };
   return (
     <fetcher.Form
       method="put"
@@ -51,15 +55,24 @@ export default function BoardItemDetail({
       <BoardItemContainer>
         <BoardItemRowContainer>
           <BoardItemBlockWrapper className="w-full">
-            
+            <input
+              ref={avatarIdRef}
+              type="hidden"
+              name="avatar_id"
+              defaultValue={0}
+            />
             <BoardItemFirstBlock>
-            {loading ? (
-              <Avatar avatarId={0} />
-            ) : (
-              openBoardData && (
-                <Avatar avatarId={openBoardData.avatar_id!} />
-              )
-            )}
+              {loading ? (
+                <Avatar avatarId={0} />
+              ) : (
+                openBoardData &&
+                (isEditing ? (
+                  <AvatarSelector handleAvatarChange={handleAvatarChange} defaultAvatarId={openBoardData.avatar_id!}/>
+                ) : (
+                  /* 수정 직후에 아바타 변경 반영되지 않음. */
+                  <Avatar avatarId={openBoardData.avatar_id!} />
+                ))
+              )}
 
               {loading ? (
                 <div className="w-full h-full bg-gray-500" />

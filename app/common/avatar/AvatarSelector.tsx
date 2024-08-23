@@ -4,10 +4,11 @@ import { avatarSources } from "./avatarLinks";
 
 interface AvatarSelectorProps {
   handleAvatarChange?: (arg0: number) => void;
+  defaultAvatarId?: number;
 }
 
-export default function AvatarSelector({handleAvatarChange}:AvatarSelectorProps) {
-  const [avatarId, setAvatarId] = useState<number>(0);
+export default function AvatarSelector({handleAvatarChange, defaultAvatarId}:AvatarSelectorProps) {
+  const [avatarId, setAvatarId] = useState<number>(defaultAvatarId || 0);
   const [isAvatarSelectorOpen, setIsAvatarSelectorOpen] = useState<boolean>(false);
 
   const handleAvatarSelection = (idx: number) => {

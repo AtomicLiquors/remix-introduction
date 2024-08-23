@@ -23,9 +23,10 @@ export default function BoardItemCreate() {
         <BoardItemRowContainer>
           <BoardItemBlockWrapper>
             <BoardItemFirstBlock>
+              <div className="flex">
               <AvatarSelector handleAvatarChange={handleAvatarChange}/>
               <input ref={avatarIdRef} type="hidden" name="avatar_id" defaultValue={0}/>
-              <div>
+              <div className="w-24">
                 <input
                   type="text"
                   name="author"
@@ -38,6 +39,7 @@ export default function BoardItemCreate() {
                   className="border w-5/6"
                   placeholder="비밀번호"
                 />
+              </div>
               </div>
             </BoardItemFirstBlock>
             <BoardItemMiddleBlock>
