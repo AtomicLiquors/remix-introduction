@@ -5,16 +5,15 @@ import BoardItemBlockWrapper from "./layout/BlockWrapper";
 import BoardItemRowContainer from "./layout/RowContainer";
 import Center from "@/common/components/atoms/Center";
 import { useFetcher } from "@remix-run/react";
-import Avatar from "../../../../common/avatar/Avatar";
-import { useRef, useState } from "react";
-import AvatarSelector from "../../../../common/avatar/AvatarSelector";
+import { useRef } from "react";
+import AvatarSelector from "@/common/avatar/AvatarSelector";
 
 export default function BoardItemCreate() {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
   
   const avatarIdRef = useRef<HTMLInputElement>(null);
-  const setAvatarId = (avatarId: number) => {
+  const handleAvatarChange = (avatarId: number) => {
     avatarIdRef.current!.value = avatarId + '';
   }
   {/* To-Do : 글자수 제한 */}
@@ -24,7 +23,7 @@ export default function BoardItemCreate() {
         <BoardItemRowContainer>
           <BoardItemBlockWrapper>
             <BoardItemFirstBlock>
-              <AvatarSelector handleAvatarChange={setAvatarId}/>
+              <AvatarSelector handleAvatarChange={handleAvatarChange}/>
               <input ref={avatarIdRef} type="hidden" name="avatar_id" defaultValue={0}/>
               <div>
                 <input
