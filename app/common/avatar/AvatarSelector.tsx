@@ -2,13 +2,18 @@ import { useState } from "react";
 import Avatar from "./Avatar";
 import { avatarSources } from "./avatarLinks";
 
-export default function AvatarSelector() {
+interface AvatarSelectorProps {
+  handleAvatarChange?: (arg0: number) => void;
+}
+
+export default function AvatarSelector({handleAvatarChange}:AvatarSelectorProps) {
   const [avatarId, setAvatarId] = useState<number>(0);
   const [isAvatarSelectorOpen, setIsAvatarSelectorOpen] = useState<boolean>(false);
 
   const handleAvatarSelection = (idx: number) => {
     setAvatarId(idx);
     setIsAvatarSelectorOpen(false);
+    handleAvatarChange && handleAvatarChange(idx);
   }
 
   return (

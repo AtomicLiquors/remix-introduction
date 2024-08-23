@@ -19,6 +19,7 @@ type Board = z.infer<typeof board>;
 
 const boardCreateRequestDTO = board.partial().required({
   title: true,
+  avatar_id: true,
   content: true,
   author: true,
   password: true,
@@ -26,6 +27,7 @@ const boardCreateRequestDTO = board.partial().required({
 });
 
 const boardEditRequestDTO = board.partial().required({
+  avatar_id: true,
   post_id: true,
   title: true,
   content: true,
@@ -61,20 +63,21 @@ export async function deleteBoardById(postId: number) {
 //To-Do: 적용 가능한 에러 타입이 있나?
 
 export async function createBoard(data: BoardCreateRequestDTO) {
-  const { title, content, author, password, ip } = data;
+  const { title, avatar_id, content, author, password, ip } = data;
 
   return await sql`
-    INSERT INTO community_board(title, content, author, password, author_ip)
-    VALUES (${title}, ${content}, ${author}, ${password}, ${ip})
+    INSERT INTO community_board(title, avatar_id, content, author, password, author_ip)
+    VALUES (${title}, ${avatar_id}, ${content}, ${author}, ${password}, ${ip})
   `;
 }
 
 export async function editBoard(data: BoardEditRequestDTO) {
-  const { post_id, title, content } = data;
+  const { post_id, avatar_id, title, content } = data;
 
   return await sql`
     UPDATE community_board
     SET title = ${title},
+    avatar_id = ${avatar_id},
     content = ${content}
     WHERE post_id = ${post_id};
   `;

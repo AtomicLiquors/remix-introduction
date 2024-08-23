@@ -7,5 +7,5 @@ interface AvatarProps {
 }
 
 export default function Avatar({avatarId, className, onClick}: AvatarProps) {
-  return <img src={avatarSourcePrefix + avatarSources[avatarId]} className={`${className} rounded-full h-10 w-10 bg-gray-500 relative`} onClick={onClick}/>
+  return <img src={avatarSourcePrefix + (avatarSources[avatarId] || avatarSources[0] )} className={`${className} rounded-full h-10 w-10 bg-gray-500 relative`} onClick={onClick}/>
 }

@@ -6,14 +6,17 @@ import BoardItemRowContainer from "./layout/RowContainer";
 import Center from "@/common/components/atoms/Center";
 import { useFetcher } from "@remix-run/react";
 import Avatar from "../../../../common/avatar/Avatar";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import AvatarSelector from "../../../../common/avatar/AvatarSelector";
 
 export default function BoardItemCreate() {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
   
-  const [avatarId, setAvatarId] = useState(0);
+  const avatarIdRef = useRef<HTMLInputElement>(null);
+  const setAvatarId = (avatarId: number) => {
+    avatarIdRef.current!.value = avatarId + '';
+  }
   {/* To-Do : 글자수 제한 */}
   return (
     <fetcher.Form method="post" action="/board/create">
@@ -21,8 +24,8 @@ export default function BoardItemCreate() {
         <BoardItemRowContainer>
           <BoardItemBlockWrapper>
             <BoardItemFirstBlock>
-              <AvatarSelector/>
-              <input type="hidden" name="avatar_id" value={avatarId}/>
+              <AvatarSelector handleAvatarChange={setAvatarId}/>
+              <input ref={avatarIdRef} type="hidden" name="avatar_id" defaultValue={0}/>
               <div>
                 <input
                   type="text"

@@ -10,6 +10,7 @@ export const action: ActionFunction = async ({
 
   const formData = await request.formData();
   const post_id = +(params.postId as string);
+  const avatar_id = formData.get("avatar_id") as string;
   const title = formData.get("title") as string;
   const content = formData.get("content") as string;
 
@@ -22,6 +23,7 @@ export const action: ActionFunction = async ({
     return response;
   }
   const data: BoardEditRequestDTO = {
+    avatar_id: +avatar_id || 0,
     post_id: post_id,
     title: title,
     content: content,
