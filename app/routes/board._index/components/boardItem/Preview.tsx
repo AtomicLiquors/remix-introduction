@@ -13,7 +13,7 @@ import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemTitles from "./content/Titles";
 import BoardItemBlockWrapper from "./layout/BlockWrapper";
 import BoardItemRowContainer from "./layout/RowContainer";
-import Avatar from "./content/Avatar";
+import Avatar from "../../../../common/avatar/Avatar";
 
 export interface BoardItemProps {
   post_id: number;

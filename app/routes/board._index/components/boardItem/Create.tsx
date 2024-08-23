@@ -5,10 +5,15 @@ import BoardItemBlockWrapper from "./layout/BlockWrapper";
 import BoardItemRowContainer from "./layout/RowContainer";
 import Center from "@/common/components/atoms/Center";
 import { useFetcher } from "@remix-run/react";
+import Avatar from "../../../../common/avatar/Avatar";
+import { useState } from "react";
+import AvatarSelector from "../../../../common/avatar/AvatarSelector";
 
 export default function BoardItemCreate() {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
+  
+  const [avatarId, setAvatarId] = useState(0);
   {/* To-Do : 글자수 제한 */}
   return (
     <fetcher.Form method="post" action="/board/create">
@@ -16,6 +21,8 @@ export default function BoardItemCreate() {
         <BoardItemRowContainer>
           <BoardItemBlockWrapper>
             <BoardItemFirstBlock>
+              <AvatarSelector/>
+              <input type="hidden" name="avatar_id" value={avatarId}/>
               <div>
                 <input
                   type="text"

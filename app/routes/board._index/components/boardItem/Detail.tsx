@@ -14,7 +14,7 @@ import { BoardDetailResponseDTO } from "@/model/board.server";
 import { useState } from "react";
 import { useFetcher } from "@remix-run/react";
 import Center from "@/common/components/atoms/Center";
-import Avatar from "./content/Avatar";
+import Avatar from "@/common/avatar/Avatar";
 
 interface BoardItemDetailProps {
   openBoardData: BoardDetailResponseDTO;
