@@ -5,12 +5,21 @@ import BoardItemBlockWrapper from "./layout/BlockWrapper";
 import BoardItemRowContainer from "./layout/RowContainer";
 import Center from "@/common/components/atoms/Center";
 import { useFetcher } from "@remix-run/react";
-import { useRef } from "react";
+import { useRef, MouseEvent, useEffect } from "react";
 import AvatarSelector from "@/common/avatar/AvatarSelector";
 
 export default function BoardItemCreate() {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
+
+  const handleSubmit = (e: MouseEvent) => {
+    e.preventDefault();
+    // fetcher로 submit하고 그 결과는 어떻게? useEffect 써서 받아오나?
+  }
+
+  useEffect(() => {
+    console.log(fetcher.data);
+  }, [fetcher.data])
   
   const avatarIdRef = useRef<HTMLInputElement>(null);
   const handleAvatarChange = (avatarId: number) => {
@@ -56,7 +65,7 @@ export default function BoardItemCreate() {
           <input type="textarea" name="content" className="min-h-64 border w-full h-auto" />
         </BoardItemRowContainer>
         <Center>
-          <button className="rounded text-blue-500" type="submit">
+          <button className="rounded text-blue-500" type="submit" onClick={(e) => {handleSubmit(e)}}>
             작성하기
           </button>
         </Center>

@@ -18,10 +18,14 @@ export const Modal = forwardRef(function Modal(
 ) {
   const modalRef = useRef<HTMLDialogElement>(null);
 
+  // To-Do: useImperativeHandle 리팩토링
   useImperativeHandle(ref, () => ({
     openModal() {
       modalRef.current?.showModal();
     },
+    closeModal() {
+      modalRef.current?.close();
+    }
   }));
 
   useEffect(() => {
@@ -34,10 +38,10 @@ export const Modal = forwardRef(function Modal(
         }
       };
 
-      modal.addEventListener("click", handleClickOutside);
+      modal.addEventListener("mousedown", handleClickOutside);
 
       return () => {
-        modal.removeEventListener("click", handleClickOutside);
+        modal.removeEventListener("mousedown", handleClickOutside);
       };
     }
   }, []);

@@ -24,7 +24,7 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
       ip: ip
     }
   
-    const result = createBoard(data);
+    const result = await createBoard(data);
     return result;
   };
   
