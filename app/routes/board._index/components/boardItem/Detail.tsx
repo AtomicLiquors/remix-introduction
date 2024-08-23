@@ -14,6 +14,7 @@ import { BoardDetailResponseDTO } from "@/model/board.server";
 import { useState } from "react";
 import { useFetcher } from "@remix-run/react";
 import Center from "@/common/components/atoms/Center";
+import Avatar from "./content/Avatar";
 
 interface BoardItemDetailProps {
   openBoardData: BoardDetailResponseDTO;
@@ -43,11 +44,23 @@ export default function BoardItemDetail({
   const fetcher = useFetcher();
 
   return (
-    <fetcher.Form method="put" action={openBoardData && `/board/${openBoardData.post_id}/edit`}>
+    <fetcher.Form
+      method="put"
+      action={openBoardData && `/board/${openBoardData.post_id}/edit`}
+    >
       <BoardItemContainer>
         <BoardItemRowContainer>
           <BoardItemBlockWrapper className="w-full">
+            
             <BoardItemFirstBlock>
+            {loading ? (
+              <Avatar avatarId={0} />
+            ) : (
+              openBoardData && (
+                <Avatar avatarId={openBoardData.avatar_id!} />
+              )
+            )}
+
               {loading ? (
                 <div className="w-full h-full bg-gray-500" />
               ) : (

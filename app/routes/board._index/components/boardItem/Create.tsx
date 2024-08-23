@@ -9,6 +9,7 @@ import { useFetcher } from "@remix-run/react";
 export default function BoardItemCreate() {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
+  {/* To-Do : 글자수 제한 */}
   return (
     <fetcher.Form method="post" action="/board/create">
       <BoardItemContainer>
