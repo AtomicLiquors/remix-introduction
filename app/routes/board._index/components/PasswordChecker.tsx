@@ -19,7 +19,7 @@ export default function PasswordChecker({
     onPwCheckPassed();
   };
 
-  const handelSendButtonClick = (post_id: number, password: string) => {
+  const handelPasswordInput = (post_id: number, password: string) => {
     sendPwCheck(post_id, password);
   };
 
@@ -42,26 +42,38 @@ export default function PasswordChecker({
     // 반드시 false or true여야 하며 false는 아무 falsy한 값으로 대체해선 안 됨. (초기값이 undefined)
     if (fetcher.data === false) {
       inputRef.current!.value = "";
-    } else if(fetcher.data === true){
+    } else if (fetcher.data === true) {
       handlePasswordCheckPass();
     }
   }, [fetcher.data]);
 
   return (
     <Center flex flexCol>
-      <div className={`text-sm border w-auto h-auto ${loading && "text-gray-500"} ${fetcher.data === false && "border-red-500"}`}>
-      <input
-        ref={inputRef}
-        type="password"
-        className="w-2/3"
-      />
-      <span
-        className={`cursor-pointer`}
-        onClick={() => handelSendButtonClick(post_id, inputRef.current!.value)}
+      <div
+        className={`text-sm border w-auto h-auto ${
+          loading && "text-gray-500"
+        } ${fetcher.data === false && "border-red-500"}`}
       >
-        확인
-      </span>
-      <span onClick={onQuitBtnClick}> X </span>
+        <input
+          onChange={() => handelPasswordInput(post_id, inputRef.current!.value)}
+          ref={inputRef}
+          type="password"
+          className="w-2/3"
+        />
+        {/*
+        <span
+          className="cursor-pointer"
+          onClick={() =>
+            handelPasswordInput(post_id, inputRef.current!.value)
+          }
+        >
+          확인
+        </span>
+           */}
+        <span className="cursor-pointer" onClick={onQuitBtnClick}>
+          {" "}
+          X{" "}
+        </span>
       </div>
     </Center>
   );
