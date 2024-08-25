@@ -83,7 +83,7 @@ export default function BoardRoute() {
         </Center>
       </BoardItemContainer>
       <Modal ref={modalRef}>
-        <BoardItemDetail openBoardData={openBoardData} loading={loading} />
+        <BoardItemDetail openBoardData={openBoardData} loading={loading} closeModal={closeModal}/>
       </Modal>
       <Modal ref={newBoardModalRef}>
         <BoardItemCreate closeModal={closeNewBoardModal}/>

@@ -11,20 +11,23 @@ import BoardItemFirstBlock from "./layout/FirstBlock";
 import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemRowContainer from "./layout/RowContainer";
 import { BoardDetailResponseDTO } from "@/model/board.server";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFetcher } from "@remix-run/react";
 import Center from "@/common/components/atoms/Center";
 import Avatar from "@/common/avatar/Avatar";
 import AvatarSelector from "@/common/avatar/AvatarSelector";
+import { QueryResult } from "@vercel/postgres";
 
 interface BoardItemDetailProps {
   openBoardData: BoardDetailResponseDTO;
   loading: boolean;
+  closeModal: () => void;
 }
 
 export default function BoardItemDetail({
   openBoardData,
   loading,
+  closeModal
 }: BoardItemDetailProps) {
   const [isEditPwCheckOpen, setIsEditPwCheckOpen] = useState(false);
   const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
@@ -42,11 +45,17 @@ export default function BoardItemDetail({
     setIsDeletePwCheckOpen(true);
     setIsEditPwCheckOpen(false);
   };
-  const fetcher = useFetcher();
+  const fetcher = useFetcher<QueryResult>();
   const avatarIdRef = useRef<HTMLInputElement>(null);
   const handleAvatarChange = (avatarId: number) => {
     avatarIdRef.current!.value = avatarId + "";
   };
+
+  useEffect(() => {
+    if(fetcher.data?.rowCount){
+      closeModal();
+  }
+  },[fetcher.data])
   return (
     <fetcher.Form
       method="put"
@@ -59,7 +68,7 @@ export default function BoardItemDetail({
               ref={avatarIdRef}
               type="hidden"
               name="avatar_id"
-              defaultValue={0}
+              defaultValue={openBoardData.avatar_id}
             />
             <BoardItemFirstBlock>
               {loading ? (
