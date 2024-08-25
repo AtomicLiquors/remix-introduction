@@ -1,7 +1,6 @@
 import Center from "@/common/components/atoms/Center";
 import RoundImage from "@/common/components/atoms/RoundImage";
 import { themeClasses } from "@/theme/theme";
-import { NavLink } from "@remix-run/react";
 
 export default function Profile() {
   const contact = "010-0000-0000";
@@ -24,7 +23,7 @@ export default function Profile() {
           | {contact} · gyqls234@naver.com |
         </div>
         <div className="flex gap-2">
-          <img src="img/github.png" className="w-8 rounded-full bg-white" />
+          <img src="/img/github.png" className="w-8 rounded-full bg-white" />
           github.com/AtomicLiquors
         </div>
       </Center>
