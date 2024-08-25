@@ -24,6 +24,7 @@ interface BoardItemDetailProps {
   closeModal: () => void;
 }
 
+{/* To-Do : Modal 닫으면서 수정 내용 초기화 */}
 export default function BoardItemDetail({
   openBoardData,
   loading,
@@ -56,6 +57,15 @@ export default function BoardItemDetail({
       closeModal();
   }
   },[fetcher.data])
+
+  useEffect(() => {
+    if(!loading){
+      setIsEditPwCheckOpen(false);
+      setIsDeletePwCheckOpen(false);
+      setIsEditing(false);
+    }
+  }, [loading])
+  
   return (
     <fetcher.Form
       method="put"
