@@ -1,6 +1,9 @@
 import Center from "@/common/components/atoms/Center";
 import { useFetcher } from "@remix-run/react";
 import { ReactNode, useEffect, useRef } from "react";
+import _ from "lodash";
+import { faCircleXmark, faLock, faX } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface PasswordCheckerProps {
   post_id: number;
@@ -19,9 +22,12 @@ export default function PasswordChecker({
     onPwCheckPassed();
   };
 
-  const handelPasswordInput = (post_id: number, password: string) => {
-    sendPwCheck(post_id, password);
-  };
+  const handelPasswordInput = _.debounce(
+    (post_id: number, password: string) => {
+      sendPwCheck(post_id, password);
+    },
+    200
+  );
 
   const sendPwCheck = (post_id: number, password: string) => {
     fetcher.submit(
@@ -48,32 +54,25 @@ export default function PasswordChecker({
   }, [fetcher.data]);
 
   return (
-    <Center flex flexCol>
-      <div
-        className={`text-sm border w-auto h-auto ${
-          loading && "text-gray-500"
-        } ${fetcher.data === false && "border-red-500"}`}
-      >
+    <Center
+    flex flexCol
+      className={`text-sm w-auto`}
+    >
+      <div className={`flex border max-h-8 p-1 gap-1 ${
+        fetcher.data === false && "border-red-500"
+      }`}>
+        <FontAwesomeIcon icon={faLock} className="w-4 text-gray-500" />
         <input
           onChange={() => handelPasswordInput(post_id, inputRef.current!.value)}
           ref={inputRef}
           type="password"
-          className="w-2/3"
+          className={`w-5/6 ${loading && "text-gray-500"}`}
         />
-        {/*
-        <span
-          className="cursor-pointer"
-          onClick={() =>
-            handelPasswordInput(post_id, inputRef.current!.value)
-          }
-        >
-          확인
-        </span>
-           */}
-        <span className="cursor-pointer" onClick={onQuitBtnClick}>
-          {" "}
-          X{" "}
-        </span>
+        <FontAwesomeIcon
+          className="w-3 cursor-pointer"
+          onClick={onQuitBtnClick}
+          icon={faX}
+        />
       </div>
     </Center>
   );
