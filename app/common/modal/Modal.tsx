@@ -18,7 +18,6 @@ export const Modal = forwardRef(function Modal(
 ) {
   const modalRef = useRef<HTMLDialogElement>(null);
 
-  // To-Do: useImperativeHandle 리팩토링
   useImperativeHandle(ref, () => ({
     openModal() {
       modalRef.current?.showModal();
