@@ -124,11 +124,8 @@ export default function BoardItemDetail({
               <div onClick={() => setIsEditing(false)}>x</div>
             ) : isEditPwCheckOpen ? (
               <PasswordChecker
-                post_id={openBoardData.post_id!}
-                label="수정하기"
-              >
-                2kooong2❤
-              </PasswordChecker>
+                  post_id={openBoardData.post_id!} onPwCheckPassed={()=>{}} onQuitBtnClick={()=>{}}               
+              />
             ) : (
               <FontAwesomeIcon
                 className="cursor-pointer w-5 text-gray-400"
@@ -138,11 +135,8 @@ export default function BoardItemDetail({
             )}
             {isDeletePwCheckOpen ? (
               <PasswordChecker
-                post_id={openBoardData.post_id!}
-                label="삭제하기"
-              >
-                2kooong2❤
-              </PasswordChecker>
+                post_id={openBoardData.post_id!} onPwCheckPassed={()=>{}} onQuitBtnClick={()=>{}}    
+              />
             ) : (
               <FontAwesomeIcon
                 className="cursor-pointer w-5 text-gray-400"
