@@ -4,20 +4,23 @@ import { ReactNode, useEffect, useRef } from "react";
 
 interface PasswordCheckerProps {
   post_id: number;
-  label: string;
-  children: ReactNode;
+  onPwCheckPassed: () => void;
+  onQuitBtnClick: () => void;
 }
 
 export default function PasswordChecker({
   post_id,
-  children,
-  label,
+  onPwCheckPassed,
+  onQuitBtnClick,
 }: PasswordCheckerProps) {
   const fetcher = useFetcher();
 
+  const handlePasswordCheckPass = () => {
+    onPwCheckPassed();
+  };
+
   const handelSendButtonClick = (post_id: number, password: string) => {
     sendPwCheck(post_id, password);
-    // 비밀번호 입력 초기화
   };
 
   const sendPwCheck = (post_id: number, password: string) => {
@@ -33,31 +36,33 @@ export default function PasswordChecker({
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const loading = fetcher.state !== "idle";
 
   useEffect(() => {
-    if(fetcher.data === false){
+    // 반드시 false or true여야 하며 false는 아무 falsy한 값으로 대체해선 안 됨. (초기값이 undefined)
+    if (fetcher.data === false) {
       inputRef.current!.value = "";
+    } else if(fetcher.data === true){
+      handlePasswordCheckPass();
     }
-  }, [fetcher.data])
-  
-  return fetcher.data === true ? (
-    children
-  ) : (
-    <Center flex>
+  }, [fetcher.data]);
+
+  return (
+    <Center flex flexCol>
+      <div className={`text-sm border w-auto h-auto ${loading && "text-gray-500"} ${fetcher.data === false && "border-red-500"}`}>
       <input
         ref={inputRef}
-        className="border w-auto h-auto" 
         type="password"
-        placeholder={
-          fetcher.data === false ? "비밀번호가 일치하지 않습니다." : "비밀번호를 입력하세요."
-        }
+        className="w-2/3"
       />
       <span
-        className="cursor-pointer"
+        className={`cursor-pointer`}
         onClick={() => handelSendButtonClick(post_id, inputRef.current!.value)}
       >
-        {label}
+        확인
       </span>
+      <span onClick={onQuitBtnClick}> X </span>
+      </div>
     </Center>
   );
 }

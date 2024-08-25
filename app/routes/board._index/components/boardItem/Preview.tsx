@@ -1,4 +1,3 @@
-import Center from "@/common/components/atoms/Center";
 import { useFetcher } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import PasswordChecker from "../PasswordChecker";
@@ -13,7 +12,7 @@ import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemTitles from "./content/Titles";
 import BoardItemBlockWrapper from "./layout/BlockWrapper";
 import BoardItemRowContainer from "./layout/RowContainer";
-import Avatar from "../../../../common/avatar/Avatar";
+import Avatar from "@/common/avatar/Avatar";
 
 export interface BoardItemProps {
   post_id: number;
@@ -54,6 +53,14 @@ export default function BoardItemPreview({
     setIsEditPwCheckOpen(false);
   };
 
+  const handleEditPwCheckPass = () => {
+    setIsEditPwCheckOpen(false);
+  }
+
+  const handleDeletePwCheckPass = () => {
+    setIsDeletePwCheckOpen(false);
+  }
+
   return (
     <BoardItemContainer>
       <BoardItemRowContainer>
@@ -71,9 +78,7 @@ export default function BoardItemPreview({
 
         <div className="flex gap-2">
           {isEditPwCheckOpen ? (
-            <PasswordChecker post_id={post_id} label="수정하기">
-              2kooong2❤
-            </PasswordChecker>
+            <PasswordChecker post_id={post_id} onPwCheckPassed={handleEditPwCheckPass} onQuitBtnClick={()=> setIsEditPwCheckOpen(false)}/>
           ) : (
             <FontAwesomeIcon
               className="cursor-pointer w-5 text-gray-400"
@@ -82,9 +87,7 @@ export default function BoardItemPreview({
             />
           )}
           {isDeletePwCheckOpen ? (
-            <PasswordChecker post_id={post_id} label="삭제하기">
-              2kooong2❤
-            </PasswordChecker>
+            <PasswordChecker post_id={post_id} onPwCheckPassed={handleDeletePwCheckPass} onQuitBtnClick={()=> setIsDeletePwCheckOpen(false)}/>
           ) : (
             <FontAwesomeIcon
               className="cursor-pointer w-5 text-gray-400"
