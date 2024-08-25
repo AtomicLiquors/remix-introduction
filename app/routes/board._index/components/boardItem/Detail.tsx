@@ -73,7 +73,7 @@ export default function BoardItemDetail({
     >
       <BoardItemContainer>
         <BoardItemRowContainer>
-          <BoardItemBlockWrapper className="w-full">
+          <BoardItemBlockWrapper >
             <input
               ref={avatarIdRef}
               type="hidden"
@@ -121,21 +121,21 @@ export default function BoardItemDetail({
 
           <div className="flex gap-2">
             {isEditing ? (
-              <div onClick={() => setIsEditing(false)}>x</div>
+              <div onClick={() => setIsEditing(false)}>수정취소</div>
             ) : isEditPwCheckOpen ? (
               <PasswordChecker
-                  post_id={openBoardData.post_id!} onPwCheckPassed={()=>{}} onQuitBtnClick={()=>{}}               
+                  post_id={openBoardData.post_id!} onPwCheckPassed={()=>{}} onQuitBtnClick={()=>{setIsEditPwCheckOpen(false)}}               
               />
             ) : (
               <FontAwesomeIcon
                 className="cursor-pointer w-5 text-gray-400"
-                onClick={handleEditingCheckPassed}
+                onClick={handleEditBtnClick}
                 icon={faPenToSquare}
               />
             )}
             {isDeletePwCheckOpen ? (
               <PasswordChecker
-                post_id={openBoardData.post_id!} onPwCheckPassed={()=>{}} onQuitBtnClick={()=>{}}    
+                post_id={openBoardData.post_id!} onPwCheckPassed={()=>{}} onQuitBtnClick={()=>{setIsDeletePwCheckOpen(false)}}    
               />
             ) : (
               <FontAwesomeIcon
