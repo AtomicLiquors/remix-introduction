@@ -68,7 +68,7 @@ export default function BoardItemDetail({
               ref={avatarIdRef}
               type="hidden"
               name="avatar_id"
-              defaultValue={openBoardData.avatar_id}
+              defaultValue={openBoardData ? openBoardData.avatar_id : 0}
             />
             <BoardItemFirstBlock>
               {loading ? (
