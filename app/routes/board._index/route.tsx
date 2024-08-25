@@ -1,4 +1,4 @@
-import { useFetcher, useLoaderData } from "@remix-run/react";
+import { useActionData, useFetcher, useLoaderData } from "@remix-run/react";
 import { getBoards } from "@/model/board.server";
 import BoardItemPreview, {
   BoardItemProps,
@@ -15,6 +15,7 @@ import BoardItemCreate from "./components/boardItem/Create";
 import BoardItemDetail from "./components/boardItem/Detail";
 import Center from "@/common/components/atoms/Center";
 import BoardItemContainer from "./components/boardItem/layout/Container";
+import { ActionFunction } from "@remix-run/node";
 
 export const loader = async () => {
   return await getBoards();
@@ -30,15 +31,22 @@ export default function BoardRoute() {
   const result = useLoaderData<typeof loader>();
 
   //To-Do: Loading시 기존 화면 뿌옇게 표시.
-  const modalRef = useRef<{ openModal: () => void }>(null);
-  const newBoardModalRef = useRef<{ openModal: () => void }>(null);
+  const modalRef = useRef<{ openModal: () => void, closeModal: () => void }>(null);
+  const newBoardModalRef = useRef<{ openModal: () => void, closeModal: () => void }>(null);
 
   function openModal() {
     modalRef.current?.openModal();
   }
-  function newOpenModal() {
+  function closeModal() {
+    modalRef.current?.closeModal();
+  }
+  function openNewBoardModal() {
     newBoardModalRef.current?.openModal();
   }
+  function closeNewBoardModal() {
+    newBoardModalRef.current?.closeModal();
+  }
+
 
   async function handleBoardItemClick(postId: number) {
     setOpenBoardData(null);
@@ -56,14 +64,19 @@ export default function BoardRoute() {
     setOpenBoardData(fetcher.data);
   }, [fetcher.data]);
 
+  const actionData = useActionData();
+
+  
+
   return (
     <>
       {/* To-Do: 검색 기능 추가 */}
       <BoardItemContainer>
+        {JSON.stringify(actionData)}
         <Center
         flex
           className="w-full p-8 gap-2 cursor-pointer hover:bg-gray-300"
-          onClick={() => newOpenModal()}
+          onClick={() => openNewBoardModal()}
         >
           <div>새 게시글 작성하기 </div>
           <FontAwesomeIcon className="w-8" icon={faCirclePlus} />
@@ -73,7 +86,7 @@ export default function BoardRoute() {
         <BoardItemDetail openBoardData={openBoardData} loading={loading} />
       </Modal>
       <Modal ref={newBoardModalRef}>
-        <BoardItemCreate />
+        <BoardItemCreate closeModal={closeNewBoardModal}/>
       </Modal>
       {result?.data!.map((board, idx) => (
         <BoardItemPreview

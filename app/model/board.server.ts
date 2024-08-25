@@ -65,10 +65,25 @@ export async function deleteBoardById(postId: number) {
 export async function createBoard(data: BoardCreateRequestDTO) {
   const { title, avatar_id, content, author, password, ip } = data;
 
-  return await sql`
+  try {
+    const result = await sql`
     INSERT INTO community_board(title, avatar_id, content, author, password, author_ip)
     VALUES (${title}, ${avatar_id}, ${content}, ${author}, ${password}, ${ip})
   `;
+
+    return result;
+  } catch (error) {
+    /* {
+    "name": "NeonDbError",
+    "severity": "ERROR",
+    "code": "42601",
+    "position": "6",
+    "file": "scan.l",
+    "line": "1241",
+    "routine": "scanner_yyerror"
+}*/
+    return error;
+  }
 }
 
 export async function editBoard(data: BoardEditRequestDTO) {

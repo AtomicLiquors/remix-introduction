@@ -4,23 +4,40 @@ import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemBlockWrapper from "./layout/BlockWrapper";
 import BoardItemRowContainer from "./layout/RowContainer";
 import Center from "@/common/components/atoms/Center";
-import { useActionData, useFetcher } from "@remix-run/react";
+import { useFetcher } from "@remix-run/react";
 import { useRef, FormEvent, useEffect } from "react";
 import AvatarSelector from "@/common/avatar/AvatarSelector";
+import { QueryResult } from "@vercel/postgres";
 
-export default function BoardItemCreate() {
+interface BoardItemCreateProps {
+  closeModal: () => void;
+}
+
+export default function BoardItemCreate({closeModal}: BoardItemCreateProps) {
   
-  const fetcher = useFetcher();
+  const fetcher = useFetcher<QueryResult>();
   const loading = fetcher.state !== "idle";
 
   const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    // fetcher로 submit하고 그 결과는 어떻게? useEffect 써서 받아오나?
     fetcher.submit(e.currentTarget.form);
   }
 
   useEffect(() => {
+    // fetcher로 submit하고 그 결과가 여기서 반응한다.
+
+    // 성공했다 : 
+    // 부모로부터 closeModal을 물려받아라.
+    // 입력값을 초기화하고 closeModal을 실행해라.
+
+    // 실패했다 : 
+    // 컴포넌트 내부에 에러 메시지를 띄워라.
     console.log(fetcher.data);
+    if(fetcher.data?.rowCount){
+        closeModal();
+    }
+    
+    
   }, [fetcher.data])
   
   const avatarIdRef = useRef<HTMLInputElement>(null);
