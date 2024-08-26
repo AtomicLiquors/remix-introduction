@@ -5,6 +5,8 @@ import _ from "lodash";
 import { faCircleXmark, faLock, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+// To-Do: 모바일에서 패스워드 체크 모달로 띄우기.
+
 interface PasswordCheckerProps {
   post_id: number;
   onPwCheckPassed: () => void;
@@ -46,18 +48,28 @@ export default function PasswordChecker({
 
   useEffect(() => {
     // 반드시 false or true여야 하며 false는 아무 falsy한 값으로 대체해선 안 됨. (초기값이 undefined)
-    if (fetcher.data === false) {
-      inputRef.current!.value = "";
-    } else if (fetcher.data === true) {
+    if (fetcher.data === true) {
       handlePasswordCheckPass();
     }
   }, [fetcher.data]);
+
+  const getPasswordInputLabel = (): string  => {
+    if(loading){
+      return '비밀번호 확인 중...';
+    }
+    switch(fetcher.data){
+      /* 빨간 테두리 적용보다 느리다. */
+      case false:
+        return '비밀번호가 일치하지 않습니다.'
+    }
+    return '비밀번호를 입력해 주세요.';
+  }
 
   return (
     <div
       className={`w-auto text-left`}
     >
-      <div className={'text-xs pl-2'}>{loading ? '비밀번호 확인 중...' : '비밀번호를 입력해 주세요.' }</div>
+      <div className={'text-xs pl-2'}>{getPasswordInputLabel()}</div>
       <div className={`flex border max-h-8 p-1 gap-1 ${
         fetcher.data === false && "border-red-500"
       }`}>
