@@ -13,9 +13,8 @@ const board = z.object({
   created_at: z.date(),
   updated_at: z.date(),
   approved: z.boolean(),
+  is_private: z.boolean(),
 });
-
-type Board = z.infer<typeof board>;
 
 const boardCreateRequestDTO = board.partial().required({
   title: true,
@@ -24,6 +23,7 @@ const boardCreateRequestDTO = board.partial().required({
   author: true,
   password: true,
   ip: true,
+  is_private: true,
 });
 
 const boardEditRequestDTO = board.partial().required({
@@ -31,6 +31,7 @@ const boardEditRequestDTO = board.partial().required({
   post_id: true,
   title: true,
   content: true,
+  is_private: true,
 });
 
 const boardDetailResponseDTO = board.partial().required({
@@ -87,13 +88,14 @@ export async function createBoard(data: BoardCreateRequestDTO) {
 }
 
 export async function editBoard(data: BoardEditRequestDTO) {
-  const { post_id, avatar_id, title, content } = data;
+  const { post_id, avatar_id, title, content, is_private } = data;
 
   return await sql`
     UPDATE community_board
     SET title = ${title},
     avatar_id = ${avatar_id},
-    content = ${content}
+    content = ${content},
+    is_private = ${is_private}
     WHERE post_id = ${post_id};
   `;
 }
