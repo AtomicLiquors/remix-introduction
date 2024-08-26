@@ -106,7 +106,7 @@ export async function getBoards() {
 
   try {
     boards =
-      await sql`SELECT post_id, password, avatar_id, title, content, author, author_ip FROM community_board ORDER BY created_at DESC`;
+      await sql`SELECT post_id, password, avatar_id, title, content, author, author_ip, is_private FROM community_board ORDER BY created_at DESC`;
   } catch (e: any) {
     if (e.message === `relation "community_board" does not exist`) {
       console.log(

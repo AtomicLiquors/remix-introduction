@@ -24,7 +24,7 @@ export interface BoardItemProps {
   created_at: Date;
   updated_at: Date;
   approved: boolean;
-  modalId: string;
+  is_private: boolean;
   onClick: () => void;
   onEditPwCheckPass: (postId: number) => void;
 }
@@ -38,6 +38,7 @@ export default function BoardItemPreview({
   created_at,
   updated_at,
   approved,
+  is_private,
   onClick,
   onEditPwCheckPass,
 }: BoardItemProps) {
