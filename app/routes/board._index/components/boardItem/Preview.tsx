@@ -39,7 +39,7 @@ export default function BoardItemPreview({
   updated_at,
   approved,
   is_private,
-  onClick,
+  onClick: onBoardSelect,
   onEditPwCheckPass,
 }: BoardItemProps) {
   const fetcher = useFetcher();
@@ -85,14 +85,17 @@ export default function BoardItemPreview({
   return (
     <BoardItemContainer>
       <BoardItemRowContainer>
-        <BoardItemBlockWrapper className="w-full cursor-pointer" onClick={onClick}>
+        <BoardItemBlockWrapper className="w-full cursor-pointer" onClick={onBoardSelect}>
           <BoardItemFirstBlock>
             <Avatar avatarId={avatar_id}/>
             <div className="text-sm">{author}</div></BoardItemFirstBlock>
           <BoardItemMiddleBlock>
             <BoardItemTitles title={title} subtitle={content} />
             <span className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
-              {!approved && "비공개 게시글입니다. 관리자의 승인 후 열람할 수 있습니다."}
+              {!approved && "관리자의 승인 후 열람할 수 있습니다."}
+            </span>
+            <span>
+              {is_private === true && "비공개 게시글입니다."}
             </span>
           </BoardItemMiddleBlock>
         </BoardItemBlockWrapper>

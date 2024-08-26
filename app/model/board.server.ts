@@ -118,7 +118,7 @@ export async function getBoards() {
       // await seed();
       startTime = Date.now();
       boards =
-        await sql`SELECT post_id, avatar_id, title, content, author, author_ip FROM community_board ORDER BY created_at DESC`;
+        await sql`SELECT post_id, password, avatar_id, title, content, author, author_ip, is_private FROM community_board ORDER BY created_at DESC`;
     } else {
       throw e;
     }
@@ -129,5 +129,5 @@ export async function getBoards() {
 }
 
 export async function getBoardById(post_id: number) {
-  return await sql`SELECT post_id, avatar_id, title, content, author, author_ip FROM community_board WHERE post_id = ${post_id}`;
+  return await sql`SELECT post_id, password, avatar_id, title, content, author, author_ip, is_private FROM community_board WHERE post_id = ${post_id}`;
 }
