@@ -64,12 +64,12 @@ export async function deleteBoardById(postId: number) {
 //To-Do: 적용 가능한 에러 타입이 있나?
 
 export async function createBoard(data: BoardCreateRequestDTO) {
-  const { title, avatar_id, content, author, password, ip } = data;
+  const { title, avatar_id, content, author, password, ip, is_private } = data;
 
   try {
     const result = await sql`
-    INSERT INTO community_board(title, avatar_id, content, author, password, author_ip)
-    VALUES (${title}, ${avatar_id}, ${content}, ${author}, ${password}, ${ip})
+    INSERT INTO community_board(title, avatar_id, content, author, password, author_ip, is_private)
+    VALUES (${title}, ${avatar_id}, ${content}, ${author}, ${password}, ${ip}, ${is_private})
   `;
 
     return result;
