@@ -1,21 +1,18 @@
-import { ScrollRestoration, useActionData, useFetcher, useLoaderData } from "@remix-run/react";
+import { ScrollRestoration, useFetcher, useLoaderData } from "@remix-run/react";
 import { BoardDetailResponseDTO, getBoards } from "@/model/board.server";
 import BoardItemPreview, {
   BoardItemProps,
 } from "./components/boardItem/Preview";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "@/common/modal/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCirclePlus,
-  faPenToSquare,
-  faPlusCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import BoardItemCreate from "./components/boardItem/Create";
 import BoardItemDetail from "./components/boardItem/Detail";
 import Center from "@/common/components/atoms/Center";
 import BoardItemContainer from "./components/boardItem/layout/Container";
-import { ActionFunction } from "@remix-run/node";
 
 export const loader = async () => {
   return await getBoards();
