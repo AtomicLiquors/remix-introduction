@@ -11,22 +11,24 @@ interface ModalProps {
   children: ReactNode;
   closeBtn?: boolean;
   isModalOpen: boolean;
+  setIsModalOpen: (state: boolean) => void;
 }
 
 export const Modal = forwardRef(function Modal(
-  { children, closeBtn, isModalOpen }: ModalProps,
+  { children, closeBtn, isModalOpen, setIsModalOpen }: ModalProps,
   ref
 ) {
-  const modalRef = useRef<HTMLDialogElement>(null);
+  
+  // const modalRef = useRef<HTMLDialogElement>(null);
 
-  useImperativeHandle(ref, () => ({
-    openModal() {
-      modalRef.current?.showModal();
-    },
-    closeModal() {
-      modalRef.current?.close();
-    }
-  }));
+  // useImperativeHandle(ref, () => ({
+  //   openModal() {
+  //     modalRef.current?.showModal();
+  //   },
+  //   closeModal() {
+  //     modalRef.current?.close();
+  //   }
+  // }));
 
   useEffect(() => {
     const modal = modalRef.current;
@@ -34,7 +36,7 @@ export const Modal = forwardRef(function Modal(
     if (modal) {
       const handleClickOutside = (event: MouseEvent) => {
         if (event.target === modal) {
-          modal.close();
+          setIsModalOpen(false);
         }
       };
 
@@ -45,6 +47,19 @@ export const Modal = forwardRef(function Modal(
       };
     }
   }, []);
+
+  const modalRef = useRef<HTMLDialogElement>(null);
+  const modal = modalRef.current;
+
+
+  useEffect(() => {
+    console.log(isModalOpen);
+    if(isModalOpen){
+      modal?.showModal();
+    }else{
+      modal?.close();
+    }
+  }, [isModalOpen])
 
   return (
     <dialog

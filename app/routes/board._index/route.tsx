@@ -35,16 +35,16 @@ export default function BoardRoute() {
   const newBoardModalRef = useRef<{ openModal: () => void, closeModal: () => void }>(null);
 
   function openModal() {
-    modalRef.current?.openModal();
+    setIsBoardDetailOpen(true);
   }
   function closeModal() {
-    modalRef.current?.closeModal();
+    setIsBoardDetailOpen(false);
   }
   function openNewBoardModal() {
-    newBoardModalRef.current?.openModal();
+    setIsBoardCreateOpen(true);
   }
   function closeNewBoardModal() {
-    newBoardModalRef.current?.closeModal();
+    setIsBoardCreateOpen(false);
   }
 
   const [isBoardDetailOpen, setIsBoardDetailOpen] = useState<boolean>(false);
@@ -85,10 +85,10 @@ export default function BoardRoute() {
           <FontAwesomeIcon className="w-8" icon={faCirclePlus} />
         </Center>
       </BoardItemContainer>
-      <Modal ref={modalRef} isModalOpen={isBoardDetailOpen} >
+      <Modal ref={modalRef} isModalOpen={isBoardDetailOpen} setIsModalOpen={setIsBoardDetailOpen} >
         <BoardItemDetail openBoardData={openBoardData} loading={loading} closeModal={closeModal}/>
       </Modal>
-      <Modal ref={newBoardModalRef} isModalOpen={isBoardCreateOpen} >
+      <Modal ref={newBoardModalRef} isModalOpen={isBoardCreateOpen} setIsModalOpen={setIsBoardCreateOpen}  >
         <BoardItemCreate closeModal={closeNewBoardModal}/>
       </Modal>
       {result?.data!.map((board, idx) => (
