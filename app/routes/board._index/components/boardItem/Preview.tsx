@@ -82,10 +82,26 @@ export default function BoardItemPreview({
     )
   }
 
+  const limited = is_private || !approved;
+
+  const handleBoardItemClick = () => {
+    if(limited){
+      setIsPwCheckOpen(true);
+    }else{
+      onBoardSelect();
+    }
+  }
+
+  const handlePWCheckPass = () => {
+    onBoardSelect();
+  }
+
+  const [isPwCheckOpen, setIsPwCheckOpen] = useState<boolean>(false);
+
   return (
     <BoardItemContainer>
       <BoardItemRowContainer>
-        <BoardItemBlockWrapper className="w-full cursor-pointer" onClick={onBoardSelect}>
+        <BoardItemBlockWrapper className="w-full cursor-pointer" onClick={handleBoardItemClick}>
           <BoardItemFirstBlock>
             <Avatar avatarId={avatar_id}/>
             <div className="text-sm">{author}</div></BoardItemFirstBlock>
@@ -97,6 +113,7 @@ export default function BoardItemPreview({
             <span>
               {is_private === true && "비공개 게시글입니다."}
             </span>
+            { isPwCheckOpen && <PasswordChecker post_id={0} onPwCheckPassed={handlePWCheckPass} onQuitBtnClick={() => setIsPwCheckOpen(false)}/>}
           </BoardItemMiddleBlock>
         </BoardItemBlockWrapper>
 
