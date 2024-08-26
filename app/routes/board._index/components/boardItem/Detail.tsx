@@ -43,13 +43,34 @@ export default function BoardItemDetail({
     setIsEditing(true);
   };
 
+  
+  
+  const deleteBoardFetcher = useFetcher<QueryResult>();
+
   const handleDeletePwCheckPassed = () => {
+    if(!openBoardData) 
+      return;
     if(confirm("삭제하시겠습니까? 삭제된 게시글은 복구되지 않습니다.")){
-      alert("정상적으로 제출되었습니다.");
+      sendBoardDeleteRequest(openBoardData.post_id);
     }else{
       setIsDeletePwCheckOpen(false);
     }
   }
+
+  const sendBoardDeleteRequest = (post_id: number) => {
+    deleteBoardFetcher.submit(
+      {},
+      {
+        action: `/board/${post_id}/destroy`,
+        method: "DELETE",
+      }
+    )
+  }
+/*
+  useEffect(() => {
+    if(deleteBoardFetcher.data?.rowCount === 1)
+      closeModal();
+  }, [deleteBoardFetcher.data])*/
 
   /* 수정/삭제 비밀번호 체크 토글 */
   const handleEditBtnClick = () => {
