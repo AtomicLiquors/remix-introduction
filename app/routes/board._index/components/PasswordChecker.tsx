@@ -54,14 +54,14 @@ export default function PasswordChecker({
   }, [fetcher.data]);
 
   return (
-    <Center
-    flex flexCol
-      className={`text-sm w-auto`}
+    <div
+      className={`w-auto text-left`}
     >
+      <div className={'text-xs pl-2'}>{loading ? '비밀번호 확인 중...' : '비밀번호를 입력해 주세요.' }</div>
       <div className={`flex border max-h-8 p-1 gap-1 ${
         fetcher.data === false && "border-red-500"
       }`}>
-        <FontAwesomeIcon icon={faLock} className="w-4 text-gray-500" />
+        <FontAwesomeIcon icon={faLock} className="text-sm w-4 text-gray-500" />
         <input
           onChange={() => handelPasswordInput(post_id, inputRef.current!.value)}
           ref={inputRef}
@@ -69,11 +69,11 @@ export default function PasswordChecker({
           className={`w-5/6 ${loading && "text-gray-500"}`}
         />
         <FontAwesomeIcon
-          className="w-3 cursor-pointer"
+          className="w-2.5 cursor-pointer"
           onClick={onQuitBtnClick}
           icon={faX}
         />
       </div>
-    </Center>
+    </div>
   );
 }
