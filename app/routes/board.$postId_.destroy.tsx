@@ -1,5 +1,5 @@
 import { deleteBoardById } from "@/model/board.server";
-import { ActionFunction, ActionFunctionArgs } from "@remix-run/node";
+import { ActionFunction, ActionFunctionArgs, redirect } from "@remix-run/node";
 
 export const action: ActionFunction = async ({ params }: ActionFunctionArgs) => {
   //To - Do
@@ -17,5 +17,7 @@ export const action: ActionFunction = async ({ params }: ActionFunctionArgs) => 
     // throw Error로 변경.
   }
 
-  return deleteBoardById(+postId);
+  //return 
+  //await deleteBoardById(+postId);
+  return await deleteBoardById(+postId);
 };

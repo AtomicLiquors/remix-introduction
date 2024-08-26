@@ -1,4 +1,3 @@
-import Center from "@/common/components/atoms/Center";
 import { useFetcher } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import PasswordChecker from "../PasswordChecker";
@@ -7,6 +6,14 @@ import {
   faCircleMinus,
   faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
+import BoardItemContainer from "./layout/Container";
+import BoardItemFirstBlock from "./layout/FirstBlock";
+import BoardItemMiddleBlock from "./layout/MiddleBlock";
+import BoardItemTitles from "./content/Titles";
+import BoardItemBlockWrapper from "./layout/BlockWrapper";
+import BoardItemRowContainer from "./layout/RowContainer";
+import Avatar from "@/common/avatar/Avatar";
+import { QueryResult } from "@vercel/postgres";
 
 export interface BoardItemProps {
   post_id: number;
@@ -19,6 +26,7 @@ export interface BoardItemProps {
   approved: boolean;
   modalId: string;
   onClick: () => void;
+  onEditPwCheckPass: (postId: number) => void;
 }
 
 export default function BoardItemPreview({
@@ -31,12 +39,14 @@ export default function BoardItemPreview({
   updated_at,
   approved,
   onClick,
+  onEditPwCheckPass,
 }: BoardItemProps) {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
 
   const [isEditPwCheckOpen, setIsEditPwCheckOpen] = useState(false);
   const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
+
 
   const handleEditBtnClick = () => {
     setIsEditPwCheckOpen(true);
@@ -47,43 +57,48 @@ export default function BoardItemPreview({
     setIsEditPwCheckOpen(false);
   };
 
-  useEffect(() => {
-    console.log(fetcher.data);
-  }, [fetcher.data]);
+  const handleEditPwCheckPass = () => {
+    setIsEditPwCheckOpen(false);
+    onEditPwCheckPass(post_id);
+  }
+
+  const handleDeletePwCheckPass = () => {
+    setIsDeletePwCheckOpen(false);
+    if(confirm("삭제하시겠습니까? 삭제한 게시글은 복구되지 않습니다.")){
+      sendBoardDeleteRequest(post_id);
+    }
+  }
+  
+  const deleteBoardFetcher = useFetcher<QueryResult>();
+
+  const sendBoardDeleteRequest = (post_id: number) => {
+    deleteBoardFetcher.submit(
+      {},
+      {
+        action: `/board/${post_id}/destroy`,
+        method: "DELETE",
+      }
+    )
+  }
 
   return (
-    <Center
-      flex
-      className={`${
-        loading && "opacity-50"
-      } p-5 order border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700`}
-    >
-      <div className="w-full lg:w-5/6 flex justify-between">
-        <div className="flex cursor-pointer" onClick={onClick}>
-          <Center className="flex-none w-24" flex>{author}</Center>
-          <div className="flex-initial w-auto text-left text-gray-600 dark:text-gray-400">
-            <div className="text-base font-medium">{title}</div>
-            <div className="text-sm font-normal">{content}</div>
+    <BoardItemContainer>
+      <BoardItemRowContainer>
+        <BoardItemBlockWrapper className="w-full cursor-pointer" onClick={onClick}>
+          <BoardItemFirstBlock>
+            <Avatar avatarId={avatar_id}/>
+            <div className="text-sm">{author}</div></BoardItemFirstBlock>
+          <BoardItemMiddleBlock>
+            <BoardItemTitles title={title} subtitle={content} />
             <span className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
-              <svg
-                className="w-2.5 h-2.5 me-1"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="M10 .5a9.5 9.5 0 1 0 0 19 9.5 9.5 0 0 0 0-19ZM8.374 17.4a7.6 7.6 0 0 1-5.9-7.4c0-.83.137-1.655.406-2.441l.239.019a3.887 3.887 0 0 1 2.082 2.5 4.1 4.1 0 0 0 2.441 2.8c1.148.522 1.389 2.007.732 4.522Zm3.6-8.829a.997.997 0 0 0-.027-.225 5.456 5.456 0 0 0-2.811-3.662c-.832-.527-1.347-.854-1.486-1.89a7.584 7.584 0 0 1 8.364 2.47c-1.387.208-2.14 2.237-2.14 3.307a1.187 1.187 0 0 1-1.9 0Zm1.626 8.053-.671-2.013a1.9 1.9 0 0 1 1.771-1.757l2.032.619a7.553 7.553 0 0 1-3.132 3.151Z" />
-              </svg>
-              {approved ? "공개" : "비공개"}
+              {!approved && "비공개 게시글입니다. 관리자의 승인 후 열람할 수 있습니다."}
             </span>
-          </div>
-          </div>
+          </BoardItemMiddleBlock>
+        </BoardItemBlockWrapper>
 
         <div className="flex gap-2">
           {isEditPwCheckOpen ? (
-            <PasswordChecker post_id={post_id} label="수정하기">
-              2kooong2❤
-            </PasswordChecker>
+            <PasswordChecker post_id={post_id} onPwCheckPassed={handleEditPwCheckPass} onQuitBtnClick={()=> setIsEditPwCheckOpen(false)}/>
           ) : (
             <FontAwesomeIcon
               className="cursor-pointer w-5 text-gray-400"
@@ -92,9 +107,7 @@ export default function BoardItemPreview({
             />
           )}
           {isDeletePwCheckOpen ? (
-            <PasswordChecker post_id={post_id} label="삭제하기">
-              2kooong2❤
-            </PasswordChecker>
+            <PasswordChecker post_id={post_id} onPwCheckPassed={handleDeletePwCheckPass} onQuitBtnClick={()=> setIsDeletePwCheckOpen(false)}/>
           ) : (
             <FontAwesomeIcon
               className="cursor-pointer w-5 text-gray-400"
@@ -103,7 +116,7 @@ export default function BoardItemPreview({
             />
           )}
         </div>
-      </div>
-    </Center>
+      </BoardItemRowContainer>
+    </BoardItemContainer>
   );
 }
