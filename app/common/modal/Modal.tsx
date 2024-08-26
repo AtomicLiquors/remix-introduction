@@ -14,10 +14,12 @@ interface ModalProps {
   setIsModalOpen: (state: boolean) => void;
 }
 
-export const Modal = forwardRef(function Modal(
-  { children, closeBtn, isModalOpen, setIsModalOpen }: ModalProps,
-  ref
-) {
+export function Modal({ children, closeBtn, isModalOpen, setIsModalOpen }: ModalProps){
+
+// export const Modal = forwardRef(function Modal(
+//   { children, closeBtn, isModalOpen, setIsModalOpen }: ModalProps,
+//   ref
+// ) {
   
   // const modalRef = useRef<HTMLDialogElement>(null);
 
@@ -29,6 +31,9 @@ export const Modal = forwardRef(function Modal(
   //     modalRef.current?.close();
   //   }
   // }));
+
+  const modalRef = useRef<HTMLDialogElement>(null);
+  const modal = modalRef.current;
 
   useEffect(() => {
     const modal = modalRef.current;
@@ -47,10 +52,6 @@ export const Modal = forwardRef(function Modal(
       };
     }
   }, []);
-
-  const modalRef = useRef<HTMLDialogElement>(null);
-  const modal = modalRef.current;
-
 
   useEffect(() => {
     console.log(isModalOpen);
@@ -78,4 +79,4 @@ export const Modal = forwardRef(function Modal(
       </div>
     </dialog>
   );
-});
+};
