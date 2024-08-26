@@ -22,8 +22,8 @@ export const loader = async () => {
 };
 
 export default function BoardRoute() {
-  const fetcher = useFetcher<BoardDetailResponseDTO>();
-  const loading = fetcher.state !== "idle";
+  const openBoardDataFetcher = useFetcher<BoardDetailResponseDTO>();
+  const loading = openBoardDataFetcher.state !== "idle";
   
   // To-Do: 모달 닫으면 setOpenBoardData(null);
   // To-Do: Loading시 기존 화면 뿌옇게 표시.
@@ -57,7 +57,7 @@ export default function BoardRoute() {
   function openBoard(postId: number){
     setOpenBoardData(null);
     openBoardDetailModal();
-    fetcher.submit(
+    openBoardDataFetcher.submit(
       {},
       {
         method: "GET",
@@ -84,13 +84,14 @@ export default function BoardRoute() {
   }
 
   const handleBoardDelete = () => {
+    closeBoardDetailModal();
     setOpenBoardData(null);
   }
 
   useEffect(() => {
     // To-Do: 런타임에 타입스크립트 fetcher가 유효한 타입을 검증하도록 한다.
-    setOpenBoardData(fetcher.data as BoardDetailResponseDTO);
-  }, [fetcher.data]);
+    setOpenBoardData(openBoardDataFetcher.data as BoardDetailResponseDTO);
+  }, [openBoardDataFetcher.data]);
 
   return (
     <>
@@ -108,7 +109,7 @@ export default function BoardRoute() {
         </Center>
       </BoardItemContainer>
       <Modal isModalOpen={isBoardDetailOpen} setIsModalOpen={setIsBoardDetailOpen} >
-        <BoardItemDetail isOpenAsEditMode={isBoardDetailEditMode} isModalOpen={isBoardDetailOpen} openBoardData={openBoardData} loading={loading} closeModal={closeBoardDetailModal}/>
+        <BoardItemDetail isOpenAsEditMode={isBoardDetailEditMode} isModalOpen={isBoardDetailOpen} openBoardData={openBoardData} loading={loading} closeModal={closeBoardDetailModal} onBoardDelete={handleBoardDelete}/>
       </Modal>
       <Modal isModalOpen={isBoardCreateOpen} setIsModalOpen={setIsBoardCreateOpen}  >
         <BoardItemCreate isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal}/>

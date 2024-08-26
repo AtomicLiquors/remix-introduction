@@ -24,6 +24,7 @@ interface BoardItemDetailProps {
   isModalOpen: boolean;
   isOpenAsEditMode: boolean;
   closeModal: () => void;
+  onBoardDelete: () => void;
 }
 
 {/* To-Do : Modal 닫으면서 수정 내용 초기화 */}
@@ -32,7 +33,8 @@ export default function BoardItemDetail({
   loading,
   isModalOpen,
   isOpenAsEditMode,
-  closeModal
+  closeModal,
+  onBoardDelete
 }: BoardItemDetailProps) {
   const [isEditPwCheckOpen, setIsEditPwCheckOpen] = useState(false);
   const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
@@ -51,6 +53,7 @@ export default function BoardItemDetail({
     if(!openBoardData) 
       return;
     if(confirm("삭제하시겠습니까? 삭제된 게시글은 복구되지 않습니다.")){
+      onBoardDelete();
       sendBoardDeleteRequest(openBoardData.post_id);
     }else{
       setIsDeletePwCheckOpen(false);
