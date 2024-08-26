@@ -18,6 +18,6 @@ export const action: ActionFunction = async ({ params }: ActionFunctionArgs) => 
   }
 
   //return 
-  await deleteBoardById(+postId);
-  return redirect("/board");
+  //await deleteBoardById(+postId);
+  return await deleteBoardById(+postId);
 };
