@@ -1,4 +1,4 @@
-import { useActionData, useFetcher, useLoaderData } from "@remix-run/react";
+import { ScrollRestoration, useActionData, useFetcher, useLoaderData } from "@remix-run/react";
 import { BoardDetailResponseDTO, getBoards } from "@/model/board.server";
 import BoardItemPreview, {
   BoardItemProps,
@@ -75,13 +75,16 @@ export default function BoardRoute() {
     openBoard(postId);
   }
 
+  /* 삭제 후 Revalidation 문제 : */
+  // 1. 스크롤 상태가 유지되지 않음.
+  // 2. 삭제한 게시글이 남아있는 것으로 보임.
   const handleBoardEditPWCheckPass = (postId: number) => {
     openBoard(postId);
     setIsBoardDetailEditMode(true);
   }
 
-  const handleBoardDeletePWCheckPass = () => {
-
+  const handleBoardDelete = () => {
+    setOpenBoardData(null);
   }
 
   useEffect(() => {
@@ -94,6 +97,7 @@ export default function BoardRoute() {
       {/* To-Do: 검색 기능 추가 */}
       {/* To-Do: 페이지네이션 */}
       <BoardItemContainer>
+      <ScrollRestoration/>
         <Center
         flex
           className="w-full p-8 gap-2 cursor-pointer hover:bg-gray-300"

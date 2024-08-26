@@ -20,6 +20,6 @@ export const loader:LoaderFunction = async ({ params }: LoaderFunctionArgs) => {
 
     const data = await getBoardById(+postId);
   
-    return data.rows[0];
+    return data.rows[0] || null;
   };
   
