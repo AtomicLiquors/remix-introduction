@@ -44,16 +44,13 @@ export default function BoardItemDetail({
   const handleEditingPWCheckPassed = () => {
     setIsEditing(true);
   };
-
   
-  
-  const deleteBoardFetcher = useFetcher<QueryResult>();
+  const deleteFetcher = useFetcher<QueryResult>();
 
   const handleDeletePwCheckPassed = () => {
     if(!openBoardData) 
       return;
     if(confirm("삭제하시겠습니까? 삭제된 게시글은 복구되지 않습니다.")){
-      onBoardDelete();
       sendBoardDeleteRequest(openBoardData.post_id);
     }else{
       setIsDeletePwCheckOpen(false);
@@ -61,7 +58,7 @@ export default function BoardItemDetail({
   }
 
   const sendBoardDeleteRequest = (post_id: number) => {
-    deleteBoardFetcher.submit(
+    deleteFetcher.submit(
       {},
       {
         action: `/board/${post_id}/destroy`,
@@ -69,11 +66,12 @@ export default function BoardItemDetail({
       }
     )
   }
-/*
+
   useEffect(() => {
-    if(deleteBoardFetcher.data?.rowCount === 1)
-      closeModal();
-  }, [deleteBoardFetcher.data])*/
+    if(deleteFetcher.data?.rowCount === 1){
+      onBoardDelete();
+    }
+  }, [deleteFetcher.data])
 
   /* 수정/삭제 비밀번호 체크 토글 */
   const handleEditBtnClick = () => {
@@ -92,18 +90,10 @@ export default function BoardItemDetail({
     setIsEditPwCheckOpen(false);
     setIsDeletePwCheckOpen(false);
   }
-
-  const fetcher = useFetcher<QueryResult>();
   const avatarIdRef = useRef<HTMLInputElement>(null);
   const handleAvatarChange = (avatarId: number) => {
     avatarIdRef.current!.value = avatarId + "";
   };
-
-  useEffect(() => {
-    if(fetcher.data?.rowCount){
-      closeModal();
-    }
-  },[fetcher.data])
 
   useEffect(() => {
     if(!isModalOpen){
@@ -118,7 +108,7 @@ export default function BoardItemDetail({
   }, [isOpenAsEditMode])
   
   return (
-    <fetcher.Form
+    <deleteFetcher.Form
       method="put"
       action={openBoardData ? `/board/${openBoardData.post_id}/edit` : ""}
     >
@@ -221,6 +211,6 @@ export default function BoardItemDetail({
           </Center>
         )}
       </BoardItemContainer>
-    </fetcher.Form>
+    </deleteFetcher.Form>
   );
 }
