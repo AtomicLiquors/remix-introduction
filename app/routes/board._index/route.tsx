@@ -47,6 +47,9 @@ export default function BoardRoute() {
     newBoardModalRef.current?.closeModal();
   }
 
+  const [isBoardDetailOpen, setIsBoardDetailOpen] = useState<boolean>(false);
+  const [isBoardCreateOpen, setIsBoardCreateOpen] = useState<boolean>(false);
+
 
   async function handleBoardItemClick(postId: number) {
     setOpenBoardData(null);
@@ -82,10 +85,10 @@ export default function BoardRoute() {
           <FontAwesomeIcon className="w-8" icon={faCirclePlus} />
         </Center>
       </BoardItemContainer>
-      <Modal ref={modalRef}>
+      <Modal ref={modalRef} isModalOpen={isBoardDetailOpen} >
         <BoardItemDetail openBoardData={openBoardData} loading={loading} closeModal={closeModal}/>
       </Modal>
-      <Modal ref={newBoardModalRef}>
+      <Modal ref={newBoardModalRef} isModalOpen={isBoardCreateOpen} >
         <BoardItemCreate closeModal={closeNewBoardModal}/>
       </Modal>
       {result?.data!.map((board, idx) => (

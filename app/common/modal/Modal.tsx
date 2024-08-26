@@ -10,10 +10,11 @@ import Center from "@/common/components/atoms/Center";
 interface ModalProps {
   children: ReactNode;
   closeBtn?: boolean;
+  isModalOpen: boolean;
 }
 
 export const Modal = forwardRef(function Modal(
-  { children, closeBtn }: ModalProps,
+  { children, closeBtn, isModalOpen }: ModalProps,
   ref
 ) {
   const modalRef = useRef<HTMLDialogElement>(null);
