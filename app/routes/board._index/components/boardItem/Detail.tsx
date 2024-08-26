@@ -23,7 +23,6 @@ interface BoardItemDetailProps {
   loading: boolean;
   isModalOpen: boolean;
   isOpenAsEditMode: boolean;
-  closeModal: () => void;
   onBoardDelete: () => void;
 }
 
@@ -33,7 +32,6 @@ export default function BoardItemDetail({
   loading,
   isModalOpen,
   isOpenAsEditMode,
-  closeModal,
   onBoardDelete
 }: BoardItemDetailProps) {
   const [isEditPwCheckOpen, setIsEditPwCheckOpen] = useState(false);
