@@ -1,3 +1,9 @@
+import {render, screen} from '@testing-library/react';
+import '@testing-library/jest-dom/jest-globals';
+import '@testing-library/jest-dom';
+
 test('컴포넌트 테스트 예시', () => {
-    //render();
+    //render(<App/>);
+    const linkElement = screen.getByText(/learn react/i);
+    expect(linkElement).toBeInTheDocument();
 });
