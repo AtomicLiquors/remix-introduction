@@ -26,7 +26,7 @@ export default function BoardRoute() {
   const loading = fetcher.state !== "idle";
   
   // To-Do: 모달 닫으면 setOpenBoardData(null);
-  //To-Do: Loading시 기존 화면 뿌옇게 표시.
+  // To-Do: Loading시 기존 화면 뿌옇게 표시.
 
   const result = useLoaderData<typeof loader>();
 
@@ -36,6 +36,7 @@ export default function BoardRoute() {
   }
   function closeBoardDetailModal() {
     setIsBoardDetailOpen(false);
+    setIsBoardDetailEditMode(false);
   }
   function openBoardCreateModal() {
     setIsBoardCreateOpen(true);
@@ -46,13 +47,14 @@ export default function BoardRoute() {
 
   const [isBoardDetailOpen, setIsBoardDetailOpen] = useState<boolean>(false);
   const [isBoardCreateOpen, setIsBoardCreateOpen] = useState<boolean>(false);
-
+  
+  const [isBoardDetailEditMode, setIsBoardDetailEditMode] = useState<boolean>(false);
 
   /* 게시글 선택과 데이터 세팅 */
   // To-Do: Type 안정성 확보.
   const [openBoardData, setOpenBoardData] = useState<BoardDetailResponseDTO | null>(null);
 
-  async function handleBoardItemClick(postId: number) {
+  function openBoard(postId: number){
     setOpenBoardData(null);
     openBoardDetailModal();
     fetcher.submit(
@@ -62,6 +64,24 @@ export default function BoardRoute() {
         action: `/api/board/${postId}`,
       }
     );
+  }
+
+  function handleBoardItemClick(postId: number) {
+    openBoard(postId);
+  }
+
+  /* 조회, 수정, 삭제 패스워드 체크 */
+  const handleBoardOpenPWCheckPass = (postId: number) => {
+    openBoard(postId);
+  }
+
+  const handleBoardEditPWCheckPass = (postId: number) => {
+    openBoard(postId);
+    setIsBoardDetailEditMode(true);
+  }
+
+  const handleBoardDeletePWCheckPass = () => {
+
   }
 
   useEffect(() => {
@@ -84,7 +104,7 @@ export default function BoardRoute() {
         </Center>
       </BoardItemContainer>
       <Modal isModalOpen={isBoardDetailOpen} setIsModalOpen={setIsBoardDetailOpen} >
-        <BoardItemDetail isModalOpen={isBoardDetailOpen} openBoardData={openBoardData} loading={loading} closeModal={closeBoardDetailModal}/>
+        <BoardItemDetail isOpenAsEditMode={isBoardDetailEditMode} isModalOpen={isBoardDetailOpen} openBoardData={openBoardData} loading={loading} closeModal={closeBoardDetailModal}/>
       </Modal>
       <Modal isModalOpen={isBoardCreateOpen} setIsModalOpen={setIsBoardCreateOpen}  >
         <BoardItemCreate isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal}/>
@@ -94,6 +114,7 @@ export default function BoardRoute() {
           key={idx}
           {...(board as BoardItemProps)}
           onClick={() => handleBoardItemClick(board.post_id)}
+          onEditPwCheckPass={handleBoardEditPWCheckPass}
         />
       ))}
     </>

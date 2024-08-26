@@ -22,6 +22,7 @@ interface BoardItemDetailProps {
   openBoardData: BoardDetailResponseDTO | null;
   loading: boolean;
   isModalOpen: boolean;
+  isOpenAsEditMode: boolean;
   closeModal: () => void;
 }
 
@@ -30,6 +31,7 @@ export default function BoardItemDetail({
   openBoardData,
   loading,
   isModalOpen,
+  isOpenAsEditMode,
   closeModal
 }: BoardItemDetailProps) {
   const [isEditPwCheckOpen, setIsEditPwCheckOpen] = useState(false);
@@ -86,6 +88,10 @@ export default function BoardItemDetail({
       setIsEditing(false);
     }
   }, [isModalOpen])
+
+  useEffect(() => {
+    setIsEditing(isOpenAsEditMode);
+  }, [isOpenAsEditMode])
   
   return (
     <fetcher.Form

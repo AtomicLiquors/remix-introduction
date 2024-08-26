@@ -25,6 +25,8 @@ export interface BoardItemProps {
   approved: boolean;
   modalId: string;
   onClick: () => void;
+  onEditPwCheckPass: (postId: number) => void;
+  //onDeletePwCheckPass: () => void;
 }
 
 export default function BoardItemPreview({
@@ -37,6 +39,8 @@ export default function BoardItemPreview({
   updated_at,
   approved,
   onClick,
+  onEditPwCheckPass,
+  //onDeletePwCheckPass,
 }: BoardItemProps) {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
@@ -55,6 +59,7 @@ export default function BoardItemPreview({
 
   const handleEditPwCheckPass = () => {
     setIsEditPwCheckOpen(false);
+    onEditPwCheckPass(post_id);
   }
 
   const handleDeletePwCheckPass = () => {
