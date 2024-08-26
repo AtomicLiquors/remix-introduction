@@ -71,7 +71,7 @@ export default function BoardItemPreview({
           <BoardItemMiddleBlock>
             <BoardItemTitles title={title} subtitle={content} />
             <span className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
-              {!approved && "비공개 게시글입니다."}
+              {!approved && "비공개 게시글입니다. 관리자의 승인 후 열람할 수 있습니다."}
             </span>
           </BoardItemMiddleBlock>
         </BoardItemBlockWrapper>

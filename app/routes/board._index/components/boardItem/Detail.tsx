@@ -19,7 +19,7 @@ import AvatarSelector from "@/common/avatar/AvatarSelector";
 import { QueryResult } from "@vercel/postgres";
 
 interface BoardItemDetailProps {
-  openBoardData: BoardDetailResponseDTO;
+  openBoardData: BoardDetailResponseDTO | null;
   loading: boolean;
   isModalOpen: boolean;
   closeModal: () => void;
@@ -36,25 +36,37 @@ export default function BoardItemDetail({
   const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleEditingCheckPassed = () => {
+  /* 패스워드 체크 */
+  const handleEditingPWCheckPassed = () => {
     setIsEditing(true);
   };
 
+  const handleDeletePwCheckPassed = () => {
+    if(confirm("삭제하시겠습니까? 삭제된 게시글은 복구되지 않습니다.")){
+      alert("정상적으로 제출되었습니다.");
+    }else{
+      setIsDeletePwCheckOpen(false);
+    }
+  }
+
+  /* 수정/삭제 비밀번호 체크 토글 */
   const handleEditBtnClick = () => {
     setIsEditPwCheckOpen(true);
     setIsDeletePwCheckOpen(false);
   };
 
+  const handleDeleteBtnClick = async () => {
+    setIsDeletePwCheckOpen(true);
+    setIsEditPwCheckOpen(false);
+  };
+
+  /* 수정 취소 */
   const handleEditCancelBtnClick = () => {
     setIsEditing(false);
     setIsEditPwCheckOpen(false);
     setIsDeletePwCheckOpen(false);
   }
 
-  const handleDeleteBtnClick = async () => {
-    setIsDeletePwCheckOpen(true);
-    setIsEditPwCheckOpen(false);
-  };
   const fetcher = useFetcher<QueryResult>();
   const avatarIdRef = useRef<HTMLInputElement>(null);
   const handleAvatarChange = (avatarId: number) => {
@@ -78,7 +90,7 @@ export default function BoardItemDetail({
   return (
     <fetcher.Form
       method="put"
-      action={openBoardData && `/board/${openBoardData.post_id}/edit`}
+      action={openBoardData ? `/board/${openBoardData.post_id}/edit` : ""}
     >
       <BoardItemContainer>
         <BoardItemRowContainer>
@@ -132,8 +144,9 @@ export default function BoardItemDetail({
             {isEditing ? (
               <div onClick={handleEditCancelBtnClick}>수정취소</div>
             ) : isEditPwCheckOpen ? (
+              openBoardData && 
               <PasswordChecker
-                  post_id={openBoardData && openBoardData.post_id!} onPwCheckPassed={() => setIsEditing(true)} onQuitBtnClick={()=>{setIsEditPwCheckOpen(false)}}               
+                  post_id={openBoardData.post_id} onPwCheckPassed={handleEditingPWCheckPassed} onQuitBtnClick={()=>{setIsEditPwCheckOpen(false)}}               
               />
             ) : (
               <FontAwesomeIcon
@@ -143,8 +156,9 @@ export default function BoardItemDetail({
               />
             )}
             {isDeletePwCheckOpen ? (
+              openBoardData && 
               <PasswordChecker
-                post_id={openBoardData && openBoardData.post_id!} onPwCheckPassed={()=>{}} onQuitBtnClick={()=>{setIsDeletePwCheckOpen(false)}}    
+                post_id={openBoardData.post_id} onPwCheckPassed={handleDeletePwCheckPassed} onQuitBtnClick={()=>{setIsDeletePwCheckOpen(false)}}    
               />
             ) : (
               <FontAwesomeIcon

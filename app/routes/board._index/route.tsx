@@ -1,5 +1,5 @@
 import { useActionData, useFetcher, useLoaderData } from "@remix-run/react";
-import { getBoards } from "@/model/board.server";
+import { BoardDetailResponseDTO, getBoards } from "@/model/board.server";
 import BoardItemPreview, {
   BoardItemProps,
 } from "./components/boardItem/Preview";
@@ -22,28 +22,27 @@ export const loader = async () => {
 };
 
 export default function BoardRoute() {
-  const fetcher = useFetcher();
+  const fetcher = useFetcher<BoardDetailResponseDTO>();
   const loading = fetcher.state !== "idle";
 
-  // To-Do: Type 안정성 확보.
+  
   // To-Do: 모달 닫으면 setOpenBoardData(null);
-  const [openBoardData, setOpenBoardData] = useState<any>(null);
+  //To-Do: Loading시 기존 화면 뿌옇게 표시.
+
+  // To-Do: Type 안정성 확보.
+  const [openBoardData, setOpenBoardData] = useState<BoardDetailResponseDTO | null>(null);
   const result = useLoaderData<typeof loader>();
 
-  //To-Do: Loading시 기존 화면 뿌옇게 표시.
-  const modalRef = useRef<{ openModal: () => void, closeModal: () => void }>(null);
-  const newBoardModalRef = useRef<{ openModal: () => void, closeModal: () => void }>(null);
-
-  function openModal() {
+  function openBoardDetailModal() {
     setIsBoardDetailOpen(true);
   }
-  function closeModal() {
+  function closeBoardDetailModal() {
     setIsBoardDetailOpen(false);
   }
-  function openNewBoardModal() {
+  function openBoardCreateModal() {
     setIsBoardCreateOpen(true);
   }
-  function closeNewBoardModal() {
+  function closeBoardCreateModal() {
     setIsBoardCreateOpen(false);
   }
 
@@ -53,7 +52,7 @@ export default function BoardRoute() {
 
   async function handleBoardItemClick(postId: number) {
     setOpenBoardData(null);
-    openModal();
+    openBoardDetailModal();
     fetcher.submit(
       {},
       {
@@ -64,7 +63,8 @@ export default function BoardRoute() {
   }
 
   useEffect(() => {
-    setOpenBoardData(fetcher.data);
+    // To-Do: 런타임에 타입스크립트 fetcher가 리턴하게 
+    setOpenBoardData(fetcher.data as BoardDetailResponseDTO);
   }, [fetcher.data]);
 
   const actionData = useActionData();
@@ -79,17 +79,17 @@ export default function BoardRoute() {
         <Center
         flex
           className="w-full p-8 gap-2 cursor-pointer hover:bg-gray-300"
-          onClick={() => openNewBoardModal()}
+          onClick={() => openBoardCreateModal()}
         >
           <div>새 게시글 작성하기 </div>
           <FontAwesomeIcon className="w-8" icon={faCirclePlus} />
         </Center>
       </BoardItemContainer>
       <Modal isModalOpen={isBoardDetailOpen} setIsModalOpen={setIsBoardDetailOpen} >
-        <BoardItemDetail isModalOpen={isBoardDetailOpen} openBoardData={openBoardData} loading={loading} closeModal={closeModal}/>
+        <BoardItemDetail isModalOpen={isBoardDetailOpen} openBoardData={openBoardData} loading={loading} closeModal={closeBoardDetailModal}/>
       </Modal>
       <Modal isModalOpen={isBoardCreateOpen} setIsModalOpen={setIsBoardCreateOpen}  >
-        <BoardItemCreate isModalOpen={isBoardCreateOpen} closeModal={closeNewBoardModal}/>
+        <BoardItemCreate isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal}/>
       </Modal>
       {result?.data!.map((board, idx) => (
         <BoardItemPreview
