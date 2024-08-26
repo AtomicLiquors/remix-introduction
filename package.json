@@ -26,6 +26,7 @@
     "@swc/core": "^1.7.1",
     "@swc/jest": "^0.2.36",
     "@tailwindcss/typography": "^0.5.14",
+    "@testing-library/react": "^16.0.0",
     "@types/jest": "^29.5.12",
     "@types/lodash": "^4.17.7",
     "@vercel/postgres": "^0.9.0",
