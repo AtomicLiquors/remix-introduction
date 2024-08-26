@@ -24,15 +24,13 @@ export const loader = async () => {
 export default function BoardRoute() {
   const fetcher = useFetcher<BoardDetailResponseDTO>();
   const loading = fetcher.state !== "idle";
-
   
   // To-Do: 모달 닫으면 setOpenBoardData(null);
   //To-Do: Loading시 기존 화면 뿌옇게 표시.
 
-  // To-Do: Type 안정성 확보.
-  const [openBoardData, setOpenBoardData] = useState<BoardDetailResponseDTO | null>(null);
   const result = useLoaderData<typeof loader>();
 
+  /* 모달 통제 */
   function openBoardDetailModal() {
     setIsBoardDetailOpen(true);
   }
@@ -50,6 +48,10 @@ export default function BoardRoute() {
   const [isBoardCreateOpen, setIsBoardCreateOpen] = useState<boolean>(false);
 
 
+  /* 게시글 선택과 데이터 세팅 */
+  // To-Do: Type 안정성 확보.
+  const [openBoardData, setOpenBoardData] = useState<BoardDetailResponseDTO | null>(null);
+
   async function handleBoardItemClick(postId: number) {
     setOpenBoardData(null);
     openBoardDetailModal();
@@ -63,23 +65,19 @@ export default function BoardRoute() {
   }
 
   useEffect(() => {
-    // To-Do: 런타임에 타입스크립트 fetcher가 리턴하게 
+    // To-Do: 런타임에 타입스크립트 fetcher가 유효한 타입을 검증하도록 한다.
     setOpenBoardData(fetcher.data as BoardDetailResponseDTO);
   }, [fetcher.data]);
-
-  const actionData = useActionData();
-
-  
 
   return (
     <>
       {/* To-Do: 검색 기능 추가 */}
+      {/* To-Do: 페이지네이션 */}
       <BoardItemContainer>
-        {JSON.stringify(actionData)}
         <Center
         flex
           className="w-full p-8 gap-2 cursor-pointer hover:bg-gray-300"
-          onClick={() => openBoardCreateModal()}
+          onClick={openBoardCreateModal}
         >
           <div>새 게시글 작성하기 </div>
           <FontAwesomeIcon className="w-8" icon={faCirclePlus} />
