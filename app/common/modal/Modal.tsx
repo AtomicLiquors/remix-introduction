@@ -15,23 +15,7 @@ interface ModalProps {
 }
 
 export function Modal({ children, closeBtn, isModalOpen, setIsModalOpen }: ModalProps){
-
-// export const Modal = forwardRef(function Modal(
-//   { children, closeBtn, isModalOpen, setIsModalOpen }: ModalProps,
-//   ref
-// ) {
   
-  // const modalRef = useRef<HTMLDialogElement>(null);
-
-  // useImperativeHandle(ref, () => ({
-  //   openModal() {
-  //     modalRef.current?.showModal();
-  //   },
-  //   closeModal() {
-  //     modalRef.current?.close();
-  //   }
-  // }));
-
   const modalRef = useRef<HTMLDialogElement>(null);
   const modal = modalRef.current;
 
@@ -54,7 +38,6 @@ export function Modal({ children, closeBtn, isModalOpen, setIsModalOpen }: Modal
   }, []);
 
   useEffect(() => {
-    console.log(isModalOpen);
     if(isModalOpen){
       modal?.showModal();
     }else{
