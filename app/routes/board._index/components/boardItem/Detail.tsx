@@ -42,6 +42,13 @@ export default function BoardItemDetail({
     setIsEditPwCheckOpen(true);
     setIsDeletePwCheckOpen(false);
   };
+
+  const handleEditCancelBtnClick = () => {
+    setIsEditing(false);
+    setIsEditPwCheckOpen(false);
+    setIsDeletePwCheckOpen(false);
+  }
+
   const handleDeleteBtnClick = async () => {
     setIsDeletePwCheckOpen(true);
     setIsEditPwCheckOpen(false);
@@ -55,15 +62,17 @@ export default function BoardItemDetail({
   useEffect(() => {
     if(fetcher.data?.rowCount){
       closeModal();
-  }
+    }
   },[fetcher.data])
 
   useEffect(() => {
+    /*
     if(!loading){
       setIsEditPwCheckOpen(false);
       setIsDeletePwCheckOpen(false);
       setIsEditing(false);
     }
+    */
   }, [loading])
   
   return (
@@ -121,10 +130,10 @@ export default function BoardItemDetail({
 
           <div className="flex gap-2">
             {isEditing ? (
-              <div onClick={() => setIsEditing(false)}>수정취소</div>
+              <div onClick={handleEditCancelBtnClick}>수정취소</div>
             ) : isEditPwCheckOpen ? (
               <PasswordChecker
-                  post_id={openBoardData.post_id!} onPwCheckPassed={()=>{}} onQuitBtnClick={()=>{setIsEditPwCheckOpen(false)}}               
+                  post_id={openBoardData.post_id!} onPwCheckPassed={() => setIsEditing(true)} onQuitBtnClick={()=>{setIsEditPwCheckOpen(false)}}               
               />
             ) : (
               <FontAwesomeIcon
