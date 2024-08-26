@@ -10,10 +10,11 @@ import AvatarSelector from "@/common/avatar/AvatarSelector";
 import { QueryResult } from "@vercel/postgres";
 
 interface BoardItemCreateProps {
+  isModalOpen: boolean;
   closeModal: () => void;
 }
 
-export default function BoardItemCreate({closeModal}: BoardItemCreateProps) {
+export default function BoardItemCreate({isModalOpen, closeModal}: BoardItemCreateProps) {
   
   const fetcher = useFetcher<QueryResult>();
   const loading = fetcher.state !== "idle";
@@ -22,6 +23,10 @@ export default function BoardItemCreate({closeModal}: BoardItemCreateProps) {
     e.preventDefault();
     fetcher.submit(e.currentTarget.form);
   }
+
+  useEffect(()=>{
+    // 모달 열고 닫을 때 동작할 액션 넣기.
+  }, [isModalOpen])
 
   useEffect(() => {
     // fetcher로 submit하고 그 결과가 여기서 반응한다.

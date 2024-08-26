@@ -86,10 +86,10 @@ export default function BoardRoute() {
         </Center>
       </BoardItemContainer>
       <Modal isModalOpen={isBoardDetailOpen} setIsModalOpen={setIsBoardDetailOpen} >
-        <BoardItemDetail openBoardData={openBoardData} loading={loading} closeModal={closeModal}/>
+        <BoardItemDetail isModalOpen={isBoardDetailOpen} openBoardData={openBoardData} loading={loading} closeModal={closeModal}/>
       </Modal>
       <Modal isModalOpen={isBoardCreateOpen} setIsModalOpen={setIsBoardCreateOpen}  >
-        <BoardItemCreate closeModal={closeNewBoardModal}/>
+        <BoardItemCreate isModalOpen={isBoardCreateOpen} closeModal={closeNewBoardModal}/>
       </Modal>
       {result?.data!.map((board, idx) => (
         <BoardItemPreview

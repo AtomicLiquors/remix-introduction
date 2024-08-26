@@ -21,6 +21,7 @@ import { QueryResult } from "@vercel/postgres";
 interface BoardItemDetailProps {
   openBoardData: BoardDetailResponseDTO;
   loading: boolean;
+  isModalOpen: boolean;
   closeModal: () => void;
 }
 
@@ -28,6 +29,7 @@ interface BoardItemDetailProps {
 export default function BoardItemDetail({
   openBoardData,
   loading,
+  isModalOpen,
   closeModal
 }: BoardItemDetailProps) {
   const [isEditPwCheckOpen, setIsEditPwCheckOpen] = useState(false);
@@ -66,14 +68,12 @@ export default function BoardItemDetail({
   },[fetcher.data])
 
   useEffect(() => {
-    /*
-    if(!loading){
+    if(!isModalOpen){
       setIsEditPwCheckOpen(false);
       setIsDeletePwCheckOpen(false);
       setIsEditing(false);
     }
-    */
-  }, [loading])
+  }, [isModalOpen])
   
   return (
     <fetcher.Form
@@ -133,7 +133,7 @@ export default function BoardItemDetail({
               <div onClick={handleEditCancelBtnClick}>수정취소</div>
             ) : isEditPwCheckOpen ? (
               <PasswordChecker
-                  post_id={openBoardData.post_id!} onPwCheckPassed={() => setIsEditing(true)} onQuitBtnClick={()=>{setIsEditPwCheckOpen(false)}}               
+                  post_id={openBoardData && openBoardData.post_id!} onPwCheckPassed={() => setIsEditing(true)} onQuitBtnClick={()=>{setIsEditPwCheckOpen(false)}}               
               />
             ) : (
               <FontAwesomeIcon
@@ -144,7 +144,7 @@ export default function BoardItemDetail({
             )}
             {isDeletePwCheckOpen ? (
               <PasswordChecker
-                post_id={openBoardData.post_id!} onPwCheckPassed={()=>{}} onQuitBtnClick={()=>{setIsDeletePwCheckOpen(false)}}    
+                post_id={openBoardData && openBoardData.post_id!} onPwCheckPassed={()=>{}} onQuitBtnClick={()=>{setIsDeletePwCheckOpen(false)}}    
               />
             ) : (
               <FontAwesomeIcon
