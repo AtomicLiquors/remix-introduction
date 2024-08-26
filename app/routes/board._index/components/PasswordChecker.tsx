@@ -4,6 +4,7 @@ import { ReactNode, useEffect, useRef } from "react";
 import _ from "lodash";
 import { faCircleXmark, faLock, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { QueryResult } from "@vercel/postgres";
 
 // To-Do: 모바일에서 패스워드 체크 모달로 띄우기.
 
@@ -18,21 +19,21 @@ export default function PasswordChecker({
   onPwCheckPassed,
   onQuitBtnClick,
 }: PasswordCheckerProps) {
-  const fetcher = useFetcher();
-
+  const pwCheckFetcher = useFetcher<boolean>();
+ 
   const handlePasswordCheckPass = () => {
     onPwCheckPassed();
   };
 
   const handelPasswordInput = _.debounce(
     (post_id: number, password: string) => {
-      sendPwCheck(post_id, password);
+      sendPwCheckRequest(post_id, password);
     },
     200
   );
 
-  const sendPwCheck = (post_id: number, password: string) => {
-    fetcher.submit(
+  const sendPwCheckRequest = (post_id: number, password: string) => {
+    pwCheckFetcher.submit(
       {
         password: password,
       },
@@ -44,20 +45,20 @@ export default function PasswordChecker({
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const loading = fetcher.state !== "idle";
+  const loading = pwCheckFetcher.state !== "idle";
 
   useEffect(() => {
     // 반드시 false or true여야 하며 false는 아무 falsy한 값으로 대체해선 안 됨. (초기값이 undefined)
-    if (fetcher.data === true) {
+    if (pwCheckFetcher.data === true) {
       handlePasswordCheckPass();
     }
-  }, [fetcher.data]);
+  }, [pwCheckFetcher.data]);
 
   const getPasswordInputLabel = (): string  => {
     if(loading){
       return '비밀번호 확인 중...';
     }
-    switch(fetcher.data){
+    switch(pwCheckFetcher.data){
       /* 빨간 테두리 적용보다 느리다. */
       case false:
         return '비밀번호가 일치하지 않습니다.'
@@ -71,7 +72,7 @@ export default function PasswordChecker({
     >
       <div className={'text-xs pl-2'}>{getPasswordInputLabel()}</div>
       <div className={`flex border max-h-8 p-1 gap-1 ${
-        fetcher.data === false && "border-red-500"
+        pwCheckFetcher.data === false && "border-red-500"
       }`}>
         <FontAwesomeIcon icon={faLock} className="text-sm w-4 text-gray-500" />
         <input

@@ -13,6 +13,7 @@ import BoardItemTitles from "./content/Titles";
 import BoardItemBlockWrapper from "./layout/BlockWrapper";
 import BoardItemRowContainer from "./layout/RowContainer";
 import Avatar from "@/common/avatar/Avatar";
+import { QueryResult } from "@vercel/postgres";
 
 export interface BoardItemProps {
   post_id: number;
@@ -46,6 +47,7 @@ export default function BoardItemPreview({
   const [isEditPwCheckOpen, setIsEditPwCheckOpen] = useState(false);
   const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
 
+
   const handleEditBtnClick = () => {
     setIsEditPwCheckOpen(true);
     setIsDeletePwCheckOpen(false);
@@ -62,6 +64,21 @@ export default function BoardItemPreview({
 
   const handleDeletePwCheckPass = () => {
     setIsDeletePwCheckOpen(false);
+    if(confirm("삭제하시겠습니까? 삭제한 게시글은 복구되지 않습니다.")){
+      sendBoardDeleteRequest(post_id);
+    }
+  }
+  
+  const deleteBoardFetcher = useFetcher<QueryResult>();
+
+  const sendBoardDeleteRequest = (post_id: number) => {
+    deleteBoardFetcher.submit(
+      {},
+      {
+        action: `/board/${post_id}/destroy`,
+        method: "DELETE",
+      }
+    )
   }
 
   return (
