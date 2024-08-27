@@ -4,12 +4,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PasswordChecker from "../PasswordChecker";
-import BoardItemTitles from "./content/Titles";
-import BoardItemBlockWrapper from "./layout/BlockWrapper";
-import BoardItemContainer from "./layout/Container";
-import BoardItemFirstBlock from "./layout/FirstBlock";
-import BoardItemMiddleBlock from "./layout/MiddleBlock";
-import BoardItemRowContainer from "./layout/RowContainer";
+import BoardItemTitles from "./component/content/Titles";
+import BoardItemBlockWrapper from "./component/layout/BlockWrapper";
+import BoardItemContainer from "./component/layout/Container";
+import BoardItemFirstBlock from "./component/layout/FirstBlock";
+import BoardItemMiddleBlock from "./component/layout/MiddleBlock";
+import BoardItemRowContainer from "./component/layout/RowContainer";
 import { BoardDetailResponseDTO } from "@/model/board.server";
 import { useEffect, useRef, useState } from "react";
 import { useFetcher } from "@remix-run/react";
@@ -17,6 +17,8 @@ import Center from "@/common/components/atoms/Center";
 import Avatar from "@/common/avatar/Avatar";
 import AvatarSelector from "@/common/avatar/AvatarSelector";
 import { QueryResult } from "@vercel/postgres";
+import { boardInputClassName } from "./style";
+import BoardPrivateCheckbox from "./component/input/PrivateCheckbox";
 
 interface BoardItemDetailProps {
   openBoardData: BoardDetailResponseDTO | null;
@@ -161,7 +163,7 @@ export default function BoardItemDetail({
                 openBoardData &&
                 (isEditing ? (
                   <input
-                    className="text-sm border"
+                    className={`text-sm border ${boardInputClassName}`}
                     name="title"
                     defaultValue={openBoardData.title}
                   />
@@ -218,7 +220,7 @@ export default function BoardItemDetail({
               <input
                 type="textarea"
                 name="content"
-                className="border"
+                className={`${boardInputClassName} w-full min-h-64`}
                 defaultValue={openBoardData.content}
               />
             ) : (
@@ -227,15 +229,7 @@ export default function BoardItemDetail({
         </BoardItemRowContainer>
         {openBoardData &&
           (isEditing ? (
-            <label>
-              <input
-                type="checkbox"
-                name="is_private"
-                checked={isPrivateChecked}
-                onChange={(e) => setIsPrivateChecked(e.target.checked)}
-              />
-              비공개로 게시하기
-            </label>
+            <BoardPrivateCheckbox isPrivateChecked={isPrivateChecked!} setIsPrivateChecked={setIsPrivateChecked}/>
           ) : openBoardData?.is_private ? (
             "비공개 게시글입니다."
           ) : (

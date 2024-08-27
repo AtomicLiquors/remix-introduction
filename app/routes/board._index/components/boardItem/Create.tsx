@@ -1,13 +1,15 @@
-import BoardItemContainer from "./layout/Container";
-import BoardItemFirstBlock from "./layout/FirstBlock";
-import BoardItemMiddleBlock from "./layout/MiddleBlock";
-import BoardItemBlockWrapper from "./layout/BlockWrapper";
-import BoardItemRowContainer from "./layout/RowContainer";
+import BoardItemContainer from "./component/layout/Container";
+import BoardItemFirstBlock from "./component/layout/FirstBlock";
+import BoardItemMiddleBlock from "./component/layout/MiddleBlock";
+import BoardItemBlockWrapper from "./component/layout/BlockWrapper";
+import BoardItemRowContainer from "./component/layout/RowContainer";
 import Center from "@/common/components/atoms/Center";
 import { useFetcher } from "@remix-run/react";
 import { useRef, FormEvent, useEffect, useState } from "react";
 import AvatarSelector from "@/common/avatar/AvatarSelector";
 import { QueryResult } from "@vercel/postgres";
+import { boardInputClassName } from "./style";
+import BoardPrivateCheckbox from "./component/input/PrivateCheckbox";
 
 interface BoardItemCreateProps {
   isModalOpen: boolean;
@@ -68,13 +70,13 @@ export default function BoardItemCreate({
                   <input
                     type="text"
                     name="author"
-                    className="border w-5/6"
+                    className={`${boardInputClassName} w-5/6`}
                     placeholder="작성자"
                   />
                   <input
                     type="password"
                     name="password"
-                    className="border w-5/6"
+                    className={`${boardInputClassName} w-5/6`}
                     placeholder="비밀번호"
                   />
                 </div>
@@ -84,7 +86,7 @@ export default function BoardItemCreate({
               <input
                 type="text"
                 name="title"
-                className="border"
+                className={boardInputClassName}
                 placeholder="제목을 입력하세요."
               />
             </BoardItemMiddleBlock>
@@ -94,22 +96,16 @@ export default function BoardItemCreate({
           <input
             type="textarea"
             name="content"
-            className="min-h-64 border w-full h-auto"
+            className={`${boardInputClassName} min-h-64 w-full h-auto`}
           />
         </BoardItemRowContainer>
+        <div className="text-sm text-gray-700">
         {isPrivateChecked
           ? "이 게시글을 비공개로 게시합니다."
           : "게시글은 관리자의 승인 후 전체 공개 됩니다. 이 게시글을 비공개로 게시할까요?"}
-        <label>
-          <input
-            type="checkbox"
-            name="is_private"
-            onChange={(e) => {
-              setIsPrivateChecked(e.target.checked);
-            }}
-          />
-          비공개로 게시하기
-        </label>
+          </div>
+        
+        <BoardPrivateCheckbox isPrivateChecked={isPrivateChecked!} setIsPrivateChecked={setIsPrivateChecked}/>
 
         <Center>
           <button
