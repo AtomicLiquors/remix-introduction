@@ -69,7 +69,6 @@ export default function BoardItemDetail({
   };
 
   useEffect(() => {
-    alert(isOpenAsEditMode);
     setIsEditing(isOpenAsEditMode);
   }, [isOpenAsEditMode, update])
 
@@ -123,8 +122,6 @@ export default function BoardItemDetail({
       action={openBoardData ? `/board/${openBoardData.post_id}/edit` : ""}
     >
       <BoardItemContainer>
-        {isOpenAsEditMode === false && "false"}
-        {isOpenAsEditMode === true && "true"}
         <BoardItemRowContainer>
           <BoardItemBlockWrapper>
             <input
