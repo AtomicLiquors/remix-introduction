@@ -8,6 +8,7 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
     const content = formData.get('content') as string;
     const author = formData.get('author') as string;
     const password = formData.get('password') as string;
+    const is_private = formData.get("is_private") as string;
   
     if (!title || !content || !author || !password) {
       return json({ success: false, error: 'missing field' }, { status: 422 });
@@ -21,7 +22,8 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
       content: content, 
       author: author, 
       password: password, 
-      ip: ip
+      ip: ip,
+      is_private: is_private === "true",
     }
   
     const result = await createBoard(data);

@@ -13,6 +13,7 @@ export const action: ActionFunction = async ({
   const avatar_id = formData.get("avatar_id") as string;
   const title = formData.get("title") as string;
   const content = formData.get("content") as string;
+  const is_private = formData.get("is_private") as string;
 
   if (!title || !content || !post_id) {
     console.log(title);
@@ -27,6 +28,7 @@ export const action: ActionFunction = async ({
     post_id: post_id,
     title: title,
     content: content,
+    is_private: is_private === "true",
   };
 
   const result = await editBoard(data);
