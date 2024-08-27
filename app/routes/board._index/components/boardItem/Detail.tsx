@@ -24,6 +24,7 @@ interface BoardItemDetailProps {
   isModalOpen: boolean;
   isOpenAsEditMode: boolean;
   onBoardDelete: () => void;
+  update: boolean;
 }
 
 {
@@ -35,6 +36,7 @@ export default function BoardItemDetail({
   isModalOpen,
   isOpenAsEditMode,
   onBoardDelete,
+  update
 }: BoardItemDetailProps) {
   const [isEditPwCheckOpen, setIsEditPwCheckOpen] = useState(false);
   const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
@@ -65,6 +67,11 @@ export default function BoardItemDetail({
       }
     );
   };
+
+  useEffect(() => {
+    alert(isOpenAsEditMode);
+    setIsEditing(isOpenAsEditMode);
+  }, [isOpenAsEditMode, update])
 
   useEffect(() => {
     if (deleteFetcher.data?.rowCount === 1) {
@@ -103,10 +110,6 @@ export default function BoardItemDetail({
   }, [isModalOpen]);
 
   useEffect(() => {
-    setIsEditing(isOpenAsEditMode);
-  }, [isOpenAsEditMode]);
-
-  useEffect(() => {
     if(!openBoardData) 
       return;
     setIsPrivateChecked(openBoardData.is_private);
@@ -120,6 +123,8 @@ export default function BoardItemDetail({
       action={openBoardData ? `/board/${openBoardData.post_id}/edit` : ""}
     >
       <BoardItemContainer>
+        {isOpenAsEditMode === false && "false"}
+        {isOpenAsEditMode === true && "true"}
         <BoardItemRowContainer>
           <BoardItemBlockWrapper>
             <input

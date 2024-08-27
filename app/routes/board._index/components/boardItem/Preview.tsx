@@ -26,7 +26,7 @@ export interface BoardItemProps {
   updated_at: Date;
   approved: boolean;
   is_private: boolean;
-  onClick: () => void;
+  onBoardSelect: () => void;
   onEditPwCheckPass: (postId: number) => void;
 }
 
@@ -40,7 +40,7 @@ export default function BoardItemPreview({
   updated_at,
   approved,
   is_private,
-  onClick: onBoardSelect,
+  onBoardSelect,
   onEditPwCheckPass,
 }: BoardItemProps) {
   const fetcher = useFetcher();
@@ -61,15 +61,15 @@ export default function BoardItemPreview({
   const handleEditPwCheckPass = () => {
     setIsEditPwCheckOpen(false);
     onEditPwCheckPass(post_id);
-  }
+  };
 
   const handleDeletePwCheckPass = () => {
     setIsDeletePwCheckOpen(false);
-    if(confirm("삭제하시겠습니까? 삭제한 게시글은 복구되지 않습니다.")){
+    if (confirm("삭제하시겠습니까? 삭제한 게시글은 복구되지 않습니다.")) {
       sendBoardDeleteRequest(post_id);
     }
-  }
-  
+  };
+
   const deleteBoardFetcher = useFetcher<QueryResult>();
 
   const sendBoardDeleteRequest = (post_id: number) => {
@@ -79,61 +79,69 @@ export default function BoardItemPreview({
         action: `/board/${post_id}/destroy`,
         method: "DELETE",
       }
-    )
-  }
+    );
+  };
 
   const limited = is_private || !approved;
 
   const handleBoardItemClick = () => {
-    if(limited){
+    if (limited) {
       setIsPwCheckOpen(true);
-    }else{
+    } else {
       onBoardSelect();
     }
-  }
+  };
 
   const handlePWCheckPass = () => {
     onBoardSelect();
-  }
+  };
 
   const [isPwCheckOpen, setIsPwCheckOpen] = useState<boolean>(false);
 
   return (
     <BoardItemContainer>
       <BoardItemRowContainer>
-        <BoardItemBlockWrapper className="w-full cursor-pointer" onClick={handleBoardItemClick}>
+        <BoardItemBlockWrapper
+          className="w-full cursor-pointer"
+          onClick={handleBoardItemClick}
+        >
           <BoardItemFirstBlock>
-            <Avatar avatarId={avatar_id}/>
-            <div className="text-sm">{author}</div></BoardItemFirstBlock>
+            <Avatar avatarId={avatar_id} />
+            <div className="text-sm">{author}</div>
+          </BoardItemFirstBlock>
           <BoardItemMiddleBlock>
-            {!limited
-            ?
-            <>
-            <span className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
-              {!approved && "관리자의 승인 후 열람할 수 있습니다."}
-            </span>
-            <span>
-              {is_private && "비공개 게시글입니다."}
-            </span>
-            </>
-            :
-            <>
-              <BoardItemTitles title={title} subtitle={content}/>
-              <div className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
-                {dateToString(created_at)}
-              </div>
-            </>
-            }
-
-            
-            
-            { isPwCheckOpen && <PasswordChecker post_id={0} onPwCheckPassed={handlePWCheckPass} onQuitBtnClick={() => setIsPwCheckOpen(false)}/>}
+            {limited ? (
+              <>
+                <span className="inline-flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
+                  {!approved && "관리자의 승인 후 열람할 수 있습니다."}
+                </span>
+                <span>{is_private && "비공개 게시글입니다."}</span>
+                {isPwCheckOpen && (
+                  <PasswordChecker
+                    post_id={0}
+                    onPwCheckPassed={handlePWCheckPass}
+                    onQuitBtnClick={() => setIsPwCheckOpen(false)}
+                  />
+                )}
+              </>
+            ) : (
+              <>
+                <BoardItemTitles title={title} subtitle={content} />
+              </>
+            )}
+            <div className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
+              {dateToString(created_at)}
+            </div>
           </BoardItemMiddleBlock>
         </BoardItemBlockWrapper>
 
         <div className="flex gap-2">
           {isEditPwCheckOpen ? (
-            <PasswordChecker post_id={post_id} onPwCheckPassed={handleEditPwCheckPass} onQuitBtnClick={()=> setIsEditPwCheckOpen(false)}/>
+            <PasswordChecker
+              post_id={post_id}
+              onPwCheckPassed={handleEditPwCheckPass}
+              onQuitBtnClick={() => setIsEditPwCheckOpen(false)}
+            />
           ) : (
             <FontAwesomeIcon
               className="cursor-pointer w-5 text-gray-400"
@@ -142,7 +150,11 @@ export default function BoardItemPreview({
             />
           )}
           {isDeletePwCheckOpen ? (
-            <PasswordChecker post_id={post_id} onPwCheckPassed={handleDeletePwCheckPass} onQuitBtnClick={()=> setIsDeletePwCheckOpen(false)}/>
+            <PasswordChecker
+              post_id={post_id}
+              onPwCheckPassed={handleDeletePwCheckPass}
+              onQuitBtnClick={() => setIsDeletePwCheckOpen(false)}
+            />
           ) : (
             <FontAwesomeIcon
               className="cursor-pointer w-5 text-gray-400"

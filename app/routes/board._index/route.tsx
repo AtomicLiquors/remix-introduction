@@ -47,6 +47,7 @@ export default function BoardRoute() {
   const [isBoardCreateOpen, setIsBoardCreateOpen] = useState<boolean>(false);
   
   const [isBoardDetailEditMode, setIsBoardDetailEditMode] = useState<boolean>(false);
+  const [boardDetailUpdate, toggleBoardDetailUpdate] = useState<boolean>(false);
 
   /* 게시글 선택과 데이터 세팅 */
   // To-Do: Type 안정성 확보.
@@ -78,6 +79,7 @@ export default function BoardRoute() {
   // 2. 삭제한 게시글이 남아있는 것으로 보임.
   const handleBoardEditPWCheckPass = (postId: number) => {
     openBoard(postId);
+    toggleBoardDetailUpdate(!boardDetailUpdate);
     setIsBoardDetailEditMode(true);
   }
 
@@ -107,7 +109,7 @@ export default function BoardRoute() {
         </Center>
       </BoardItemContainer>
       <Modal isModalOpen={isBoardDetailOpen} setIsModalOpen={setIsBoardDetailOpen} >
-        <BoardItemDetail isOpenAsEditMode={isBoardDetailEditMode} isModalOpen={isBoardDetailOpen} openBoardData={openBoardData} loading={loading} onBoardDelete={handleBoardDelete}/>
+        <BoardItemDetail isOpenAsEditMode={isBoardDetailEditMode} isModalOpen={isBoardDetailOpen} openBoardData={openBoardData} loading={loading} onBoardDelete={handleBoardDelete} update={boardDetailUpdate}/>
       </Modal>
       <Modal isModalOpen={isBoardCreateOpen} setIsModalOpen={setIsBoardCreateOpen}  >
         <BoardItemCreate isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal}/>
@@ -116,7 +118,7 @@ export default function BoardRoute() {
         <BoardItemPreview
           key={idx}
           {...(board as BoardItemProps)}
-          onClick={() => handleBoardItemClick(board.post_id)}
+          onBoardSelect={() => handleBoardItemClick(board.post_id)}
           onEditPwCheckPass={handleBoardEditPWCheckPass}
         />
       ))}
