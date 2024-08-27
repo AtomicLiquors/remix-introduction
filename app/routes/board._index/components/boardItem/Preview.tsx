@@ -48,6 +48,7 @@ export default function BoardItemPreview({
 
   const [isEditPwCheckOpen, setIsEditPwCheckOpen] = useState(false);
   const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
+  const [isOpenPwCheckOpen, setIsOpenPwCheckOpen] = useState<boolean>(false);
 
   const handleEditBtnClick = () => {
     setIsEditPwCheckOpen(true);
@@ -86,7 +87,7 @@ export default function BoardItemPreview({
 
   const handleBoardItemClick = () => {
     if (limited) {
-      setIsPwCheckOpen(true);
+      setIsOpenPwCheckOpen(true);
     } else {
       onBoardSelect();
     }
@@ -95,8 +96,6 @@ export default function BoardItemPreview({
   const handlePWCheckPass = () => {
     onBoardSelect();
   };
-
-  const [isPwCheckOpen, setIsPwCheckOpen] = useState<boolean>(false);
 
   return (
     <BoardItemContainer>
@@ -116,11 +115,11 @@ export default function BoardItemPreview({
                   {!approved && "관리자의 승인 후 열람할 수 있습니다."}
                 </span>
                 <span>{is_private && "비공개 게시글입니다."}</span>
-                {isPwCheckOpen && (
+                {isOpenPwCheckOpen && (
                   <PasswordChecker
                     post_id={post_id}
                     onPwCheckPassed={handlePWCheckPass}
-                    onQuitBtnClick={() => setIsPwCheckOpen(false)}
+                    onQuitBtnClick={(event) => {event!.stopPropagation(); setIsOpenPwCheckOpen(false)}}
                   />
                 )}
               </>

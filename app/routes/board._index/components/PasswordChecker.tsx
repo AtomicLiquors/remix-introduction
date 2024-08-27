@@ -1,6 +1,6 @@
 import Center from "@/common/components/atoms/Center";
 import { useFetcher } from "@remix-run/react";
-import { ReactNode, useEffect, useRef } from "react";
+import { MouseEvent, useEffect, useRef } from "react";
 import _ from "lodash";
 import { faCircleXmark, faLock, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,7 +11,7 @@ import { QueryResult } from "@vercel/postgres";
 interface PasswordCheckerProps {
   post_id: number;
   onPwCheckPassed: () => void;
-  onQuitBtnClick: () => void;
+  onQuitBtnClick: (event: MouseEvent) => void;
 }
 
 export default function PasswordChecker({
