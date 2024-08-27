@@ -109,27 +109,30 @@ export default function BoardItemPreview({
             <div className="text-sm">{author}</div>
           </BoardItemFirstBlock>
           <BoardItemMiddleBlock>
-            {limited ? (
-              <>
-                <span className="inline-flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
-                  {!approved && "관리자의 승인 후 열람할 수 있습니다."}
-                </span>
-                <span>{is_private && "비공개 게시글입니다."}</span>
-                {isOpenPwCheckOpen && (
+            <div>
+              {limited ? (
+                isOpenPwCheckOpen ? (
                   <PasswordChecker
                     post_id={post_id}
                     onPwCheckPassed={handlePWCheckPass}
-                    onQuitBtnClick={(event) => {event!.stopPropagation(); setIsOpenPwCheckOpen(false)}}
+                    onQuitBtnClick={(event) => {
+                      event!.stopPropagation();
+                      setIsOpenPwCheckOpen(false);
+                    }}
                   />
-                )}
-              </>
-            ) : (
-              <>
+                ) : (
+                  
+                <BoardItemTitles title={is_private
+                  ? "🔒 비공개 게시글입니다."
+                  : !approved ? "📝승인 대기 중인 게시글입니다." : ""} subtitle={"작성자만 열람할 수 있습니다."} />
+                )
+                
+              ) : (
                 <BoardItemTitles title={title} subtitle={content} />
-              </>
-            )}
-            <div className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
-              {dateToString(created_at)}
+              )}
+              <div className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
+                {dateToString(created_at)}
+              </div>
             </div>
           </BoardItemMiddleBlock>
         </BoardItemBlockWrapper>
