@@ -15,7 +15,8 @@ import Center from "@/common/components/atoms/Center";
 import BoardItemContainer from "./components/boardItem/layout/Container";
 
 export const loader = async () => {
-  return await getBoards();
+  const list = await getBoards();
+  return list;
 };
 
 export default function BoardRoute() {

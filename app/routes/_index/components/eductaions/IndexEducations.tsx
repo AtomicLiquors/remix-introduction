@@ -1,7 +1,7 @@
 import RowCard from "@/common/components/molecules/RowCard";
 import Education from "./Education";
 import { educationData } from "./educationData";
-import Timeline from "@/common/components/organisms/timeline/Timeline";
+import Timeline from "@/common/timeline/Timeline";
 import IndexItemTitles from "../IndexItemTitles";
 
 export default function IndexEducations() {

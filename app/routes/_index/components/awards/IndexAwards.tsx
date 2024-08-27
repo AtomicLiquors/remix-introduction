@@ -1,5 +1,5 @@
 import RowCard from "@/common/components/molecules/RowCard";
-import Timeline from "@/common/components/organisms/timeline/Timeline";
+import Timeline from "@/common/timeline/Timeline";
 import { awardsData } from "./awardsData";
 import Award from "./Award";
 import IndexItemTitles from "../IndexItemTitles";

@@ -14,6 +14,7 @@ import BoardItemBlockWrapper from "./layout/BlockWrapper";
 import BoardItemRowContainer from "./layout/RowContainer";
 import Avatar from "@/common/avatar/Avatar";
 import { QueryResult } from "@vercel/postgres";
+import { dateToString } from "@/utils/date";
 
 export interface BoardItemProps {
   post_id: number;
@@ -47,7 +48,6 @@ export default function BoardItemPreview({
 
   const [isEditPwCheckOpen, setIsEditPwCheckOpen] = useState(false);
   const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
-
 
   const handleEditBtnClick = () => {
     setIsEditPwCheckOpen(true);
@@ -106,13 +106,27 @@ export default function BoardItemPreview({
             <Avatar avatarId={avatar_id}/>
             <div className="text-sm">{author}</div></BoardItemFirstBlock>
           <BoardItemMiddleBlock>
-            <BoardItemTitles title={title} subtitle={content} />
+            {!limited
+            ?
+            <>
             <span className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
               {!approved && "관리자의 승인 후 열람할 수 있습니다."}
             </span>
             <span>
-              {is_private === true && "비공개 게시글입니다."}
+              {is_private && "비공개 게시글입니다."}
             </span>
+            </>
+            :
+            <>
+              <BoardItemTitles title={title} subtitle={content}/>
+              <div className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
+                {dateToString(created_at)}
+              </div>
+            </>
+            }
+
+            
+            
             { isPwCheckOpen && <PasswordChecker post_id={0} onPwCheckPassed={handlePWCheckPass} onQuitBtnClick={() => setIsPwCheckOpen(false)}/>}
           </BoardItemMiddleBlock>
         </BoardItemBlockWrapper>

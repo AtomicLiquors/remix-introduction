@@ -1,5 +1,5 @@
 import RowCard from "@/common/components/molecules/RowCard";
-import Timeline from "@/common/components/organisms/timeline/Timeline";
+import Timeline from "@/common/timeline/Timeline";
 import { certificateData, linguisticsData } from "./certificateData";
 import Certificate from "./Certificate";
 import { FONT_AWESOME_TYPES } from "@/common/icon/FontAwesome";

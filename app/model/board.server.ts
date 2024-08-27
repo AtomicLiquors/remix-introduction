@@ -106,7 +106,7 @@ export async function getBoards() {
 
   try {
     boards =
-      await sql`SELECT post_id, password, avatar_id, title, content, author, author_ip, is_private FROM community_board ORDER BY created_at DESC`;
+      await sql`SELECT post_id, password, avatar_id, title, content, author, author_ip, is_private, created_at, updated_at FROM community_board ORDER BY created_at DESC`;
   } catch (e: any) {
     if (e.message === `relation "community_board" does not exist`) {
       console.log(
@@ -118,7 +118,7 @@ export async function getBoards() {
       // await seed();
       startTime = Date.now();
       boards =
-        await sql`SELECT post_id, password, avatar_id, title, content, author, author_ip, is_private FROM community_board ORDER BY created_at DESC`;
+        await sql`SELECT post_id, password, avatar_id, title, content, author, author_ip, is_private, created_at, updated_at FROM community_board ORDER BY created_at DESC`;
     } else {
       throw e;
     }
@@ -129,5 +129,5 @@ export async function getBoards() {
 }
 
 export async function getBoardById(post_id: number) {
-  return await sql`SELECT post_id, password, avatar_id, title, content, author, author_ip, is_private FROM community_board WHERE post_id = ${post_id}`;
+  return await sql`SELECT post_id, password, avatar_id, title, content, author, author_ip, is_private, created_at, updated_at FROM community_board WHERE post_id = ${post_id}`;
 }
