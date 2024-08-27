@@ -20,12 +20,12 @@ export default function BoardItemCreate({
 }: BoardItemCreateProps) {
   const [isPrivateChecked, setIsPrivateChecked] = useState<boolean>(false);
 
-  const fetcher = useFetcher<QueryResult>();
-  const loading = fetcher.state !== "idle";
+  const createBoardFetcher = useFetcher<QueryResult>();
+  const loading = createBoardFetcher.state !== "idle";
 
   const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    fetcher.submit(e.currentTarget.form);
+    createBoardFetcher.submit(e.currentTarget.form);
   };
 
   useEffect(() => {
@@ -35,17 +35,13 @@ export default function BoardItemCreate({
   useEffect(() => {
     // fetcher로 submit하고 그 결과가 여기서 반응한다.
 
-    // 성공했다 :
-    // 부모로부터 closeModal을 물려받아라.
-    // 입력값을 초기화하고 closeModal을 실행해라.
-
-    // 실패했다 :
-    // 컴포넌트 내부에 에러 메시지를 띄워라.
-    console.log(fetcher.data);
-    if (fetcher.data?.rowCount) {
+    // To-Do :
+    // 실패시 컴포넌트 내부에 에러 메시지를 띄워라.
+    console.log(createBoardFetcher.data);
+    if (createBoardFetcher.data?.rowCount) {
       closeModal();
     }
-  }, [fetcher.data]);
+  }, [createBoardFetcher.data]);
 
   const avatarIdRef = useRef<HTMLInputElement>(null);
   const handleAvatarChange = (avatarId: number) => {
@@ -55,7 +51,7 @@ export default function BoardItemCreate({
     /* To-Do : 글자수 제한 */
   }
   return (
-    <fetcher.Form method="post" action="/board/create">
+    <createBoardFetcher.Form method="post" action="/board/create">
       <BoardItemContainer>
         <BoardItemRowContainer>
           <BoardItemBlockWrapper>
@@ -127,6 +123,6 @@ export default function BoardItemCreate({
           </button>
         </Center>
       </BoardItemContainer>
-    </fetcher.Form>
+    </createBoardFetcher.Form>
   );
 }
