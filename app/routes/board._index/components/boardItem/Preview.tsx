@@ -118,7 +118,7 @@ export default function BoardItemPreview({
                 <span>{is_private && "비공개 게시글입니다."}</span>
                 {isPwCheckOpen && (
                   <PasswordChecker
-                    post_id={0}
+                    post_id={post_id}
                     onPwCheckPassed={handlePWCheckPass}
                     onQuitBtnClick={() => setIsPwCheckOpen(false)}
                   />
