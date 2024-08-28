@@ -46,6 +46,12 @@ export default function BoardItemDetail({
   const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
+  /* 입력폼 */
+  const titleRef = useRef<HTMLInputElement>(null);
+  const contentRef = useRef<HTMLTextAreaElement>(null);
+  const [isTitleValid, setIsTitleValid] = useState<boolean>(false);
+  const [isContentValid, setIsContentValid] = useState<boolean>(false);
+
   /* 패스워드 체크 */
   const handleEditingPWCheckPassed = () => {
     setIsEditing(true);
@@ -164,7 +170,7 @@ export default function BoardItemDetail({
               ) : (
                 openBoardData &&
                 (isEditing ? (
-                  <BoardTitleInput defaultValue={openBoardData.title}/>
+                  <BoardTitleInput isValid={isTitleValid} defaultValue={openBoardData.title}/>
                 ) : (
                   <BoardItemTitles title={openBoardData.title} />
                 ))
@@ -215,7 +221,7 @@ export default function BoardItemDetail({
         <BoardItemRowContainer>
           {openBoardData &&
             (isEditing ? (
-              <BoardContentTextArea defaultValue={openBoardData.content}/>
+              <BoardContentTextArea isValid={isContentValid} defaultValue={openBoardData.content}/>
             ) : (
               openBoardData.content
             ))}

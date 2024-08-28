@@ -24,6 +24,12 @@ export default function BoardItemCreate({
 }: BoardItemCreateProps) {
   const [isPrivateChecked, setIsPrivateChecked] = useState<boolean>(false);
 
+  /* 입력폼 */
+  const titleRef = useRef<HTMLInputElement>(null);
+  const contentRef = useRef<HTMLTextAreaElement>(null);
+  const [isTitleValid, setIsTitleValid] = useState<boolean>(false);
+  const [isContentValid, setIsContentValid] = useState<boolean>(false);
+
   const createBoardFetcher = useFetcher<QueryResult>();
   const loading = createBoardFetcher.state !== "idle";
 
@@ -85,12 +91,12 @@ export default function BoardItemCreate({
               </div>
             </BoardItemFirstBlock>
             <BoardItemMiddleBlock>
-              <BoardTitleInput/>
+              <BoardTitleInput isValid={isTitleValid}/>
             </BoardItemMiddleBlock>
           </BoardItemBlockWrapper>
         </BoardItemRowContainer>
         <BoardItemRowContainer>
-        <BoardContentTextArea/>
+        <BoardContentTextArea isValid={isContentValid}/>
         </BoardItemRowContainer>
         
         {isPrivateChecked
