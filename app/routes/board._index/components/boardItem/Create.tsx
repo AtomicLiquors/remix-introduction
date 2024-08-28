@@ -12,7 +12,8 @@ import { boardInputClassName } from "../../util/boardTailwind";
 import BoardPrivateCheckbox from "./form/PrivateCheckbox";
 import BoardTitleInput from "./form/TitleInput";
 import BoardContentTextArea from "./form/ContentTextarea";
-import { isValidContent, isValidTitle } from "../../util/verify";
+import { validateAuthor, validateContent, validatePassword, validateTitle } from "../../util/validateForm";
+import { invalidMessage } from "../../util/invalidMessage";
 
 interface BoardItemCreateProps {
   isModalOpen: boolean;
@@ -25,28 +26,50 @@ export default function BoardItemCreate({
 }: BoardItemCreateProps) {
   const [isPrivateChecked, setIsPrivateChecked] = useState<boolean>(false);
 
-  /* 입력폼 */
-  const authorRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const titleRef = useRef<HTMLInputElement>(null);
-  const contentRef = useRef<HTMLTextAreaElement>(null);
-
   const [isTitleValid, setIsTitleValid] = useState<boolean>(true);
   const [isContentValid, setIsContentValid] = useState<boolean>(true);
   const [isAuthorValid, setIsAuthorValid] = useState<boolean>(true);
   const [isPasswordValid, setIsPasswordValid] = useState<boolean>(true);
+  const [invalidFormMsg, setInvalidFormMsg] = useState<string | null>(null);
 
   const createBoardFetcher = useFetcher<QueryResult>();
   const loading = createBoardFetcher.state !== "idle";
 
-  const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    
+    const author = formData.get("author")?.toString();
+    const password = formData.get("password")?.toString();
+    const title = formData.get("title")?.toString();
+    const content = formData.get("content")?.toString();
 
-    const title = titleRef.current!.value;
-    const content = contentRef.current!.value;
-    setIsTitleValid(isValidTitle(title));
-    setIsContentValid(isValidContent(content));
-    //createBoardFetcher.submit(e.currentTarget.form);
+    if(!author || !password || !title || !content){
+      setInvalidFormMsg("이름, 비밀번호, 제목, 내용을 올바르게 입력해 주세요.");
+      return;
+    }
+
+    setIsAuthorValid(validateAuthor(author));
+    setIsPasswordValid(validatePassword(password));
+    setIsTitleValid(validateTitle(title));
+    setIsContentValid(validateContent(content));
+
+    if(!isAuthorValid){
+      setInvalidFormMsg(invalidMessage.author)
+      return;
+    }else if(!isPasswordValid){
+      setInvalidFormMsg(invalidMessage.password)
+      return;
+    }else if(!isTitleValid){
+      setInvalidFormMsg(invalidMessage.title)
+      return;
+    }else if(!isContentValid){
+      setInvalidFormMsg(invalidMessage.content)
+      return;
+    }
+
+    setInvalidFormMsg(null);
+    createBoardFetcher.submit(e.currentTarget.form);
   };
 
   useEffect(() => {
@@ -58,7 +81,6 @@ export default function BoardItemCreate({
 
     // To-Do :
     // 실패시 컴포넌트 내부에 에러 메시지를 띄워라.
-    console.log(createBoardFetcher.data);
     if (createBoardFetcher.data?.rowCount) {
       closeModal();
     }
@@ -72,8 +94,9 @@ export default function BoardItemCreate({
     /* To-Do : 글자수 제한 */
   }
   return (
-    <createBoardFetcher.Form method="post" action="/board/create">
+    <createBoardFetcher.Form onSubmit={handleSubmit} method="post" action="/board/create">
       <BoardItemContainer>
+        {!!invalidFormMsg && <div className="w-full text-sm p-1 bg-red-200">{invalidFormMsg}</div>}
         <BoardItemRowContainer>
           <BoardItemBlockWrapper>
             <BoardItemFirstBlock>
@@ -89,27 +112,25 @@ export default function BoardItemCreate({
                   <input
                     type="text"
                     name="author"
-                    ref={authorRef}
-                    className={`${boardInputClassName} w-5/6 `}
+                    className={`${boardInputClassName} w-5/6 ${isAuthorValid || 'border-red-200'}`}
                     placeholder="작성자"
                   />
                   <input
                     type="password"
                     name="password"
-                    ref={passwordRef}
-                    className={`${boardInputClassName} w-5/6`}
+                    className={`${boardInputClassName} w-5/6 ${isPasswordValid || 'border-red-200'}`}
                     placeholder="비밀번호"
                   />
                 </div>
               </div>
             </BoardItemFirstBlock>
             <BoardItemMiddleBlock>
-              <BoardTitleInput ref={titleRef} isValid={isTitleValid}/>
+              <BoardTitleInput isValid={isTitleValid}/>
             </BoardItemMiddleBlock>
           </BoardItemBlockWrapper>
         </BoardItemRowContainer>
         <BoardItemRowContainer>
-        <BoardContentTextArea ref={contentRef} isValid={isContentValid}/>
+        <BoardContentTextArea isValid={isContentValid}/>
         </BoardItemRowContainer>
         
         {isPrivateChecked
@@ -123,9 +144,6 @@ export default function BoardItemCreate({
           <button
             className="rounded text-blue-500"
             type="submit"
-            onClick={(e) => {
-              handleSubmit(e);
-            }}
           >
             작성하기
           </button>

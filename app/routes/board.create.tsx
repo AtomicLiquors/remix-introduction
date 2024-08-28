@@ -1,6 +1,6 @@
 import { createBoard, BoardCreateRequestDTO } from "@/model/board.server";
 import { ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
-import { isValidCreateInput } from "./board._index/util/verify";
+import { validateCreateInput } from "./board._index/util/validateForm";
 import { number } from "zod";
 
 
@@ -17,7 +17,7 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
       return json({ success: false, error: '비어 있는 입력값' }, { status: 422 });
     }
     
-    const [isValid, msg]: [boolean, string] = isValidCreateInput(title, content, author, password);
+    const [isValid, msg]: [boolean, string] = validateCreateInput(title, content, author, password);
 
     if (!isValid){
       return json({ success: false, error: `유효하지 않은 ${msg}` }, { status: 422 });

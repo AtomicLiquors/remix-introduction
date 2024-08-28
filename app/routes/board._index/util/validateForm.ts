@@ -3,23 +3,23 @@ const verifyRegex = {
   password: /^[A-Za-z0-9~`!@#$%^&*()_\-+=\[\]{}|\\;:'",.<>\/?]{4,15}$/,
 };
 
-export const isValidTitle = (title: string): boolean => {
+export const validateTitle = (title: string): boolean => {
   return title.length >= 4 && title.length <= 50;
 };
 
-export const isValidAuthor = (author: string): boolean => {
+export const validateAuthor = (author: string): boolean => {
   return verifyRegex.author.test(author);
 };
 
-export const isValidPassword = (password: string): boolean => {
+export const validatePassword = (password: string): boolean => {
   return verifyRegex.password.test(password);
 };
 
-export const isValidContent = (content: string): boolean => {
+export const validateContent = (content: string): boolean => {
   return content.length > 0;
 };
 
-export const isValidCreateInput = (
+export const validateCreateInput = (
   title: string,
   content: string,
   author: string,
@@ -28,16 +28,16 @@ export const isValidCreateInput = (
   let result: boolean = true;
   let msg: string = "";
 
-  if (!isValidTitle(title)) {
+  if (!validateTitle(title)) {
     result = false;
     msg = "제목";
-  } else if (!isValidContent(content)) {
+  } else if (!validateContent(content)) {
     result = false;
     msg = "내용";
-  } else if (!isValidAuthor(author)) {
+  } else if (!validateAuthor(author)) {
     result = false;
     msg = "작성자";
-  } else if (!isValidPassword(password)) {
+  } else if (!validatePassword(password)) {
     result = false;
     msg = "비밀번호";
   }
@@ -52,10 +52,10 @@ export const isValidEditInput = (
     let result: boolean = true;
     let msg: string = "";
   
-    if (!isValidTitle(title)) {
+    if (!validateTitle(title)) {
       result = false;
       msg = "제목";
-    } else if (!isValidContent(content)) {
+    } else if (!validateContent(content)) {
       result = false;
       msg = "내용";
     } 

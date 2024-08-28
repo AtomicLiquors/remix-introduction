@@ -1,4 +1,4 @@
-import { isValidCreateInput } from "@/routes/board._index/util/verify";
+
 
 /* To-Do : 메서드 모킹 시 타입에러 해결 */
 /*

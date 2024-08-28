@@ -1,4 +1,4 @@
-export const verifyMessage = {
+export const invalidMessage = {
   title: "게시글 제목은 4자리 이상, 50자리 이하로 입력해 주세요.",
   // [한 문장은 40자 안팎이 적당] https://www.hani.co.kr/arti/society/schooling/212012.html
   author:
