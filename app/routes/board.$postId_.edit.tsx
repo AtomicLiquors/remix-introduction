@@ -11,9 +11,11 @@ export const action: ActionFunction = async ({
   const formData = await request.formData();
   const post_id = +(params.postId as string);
   const avatar_id = formData.get("avatar_id") as string;
-  const title = formData.get("title") as string;
-  const content = formData.get("content") as string;
+  const title = (formData.get("title") as string).trim();
+  const content = (formData.get("content") as string).trim();
   const is_private = formData.get("is_private") as string;
+
+  //To-Do: 유효성 규칙 검증
 
   if (!title || !content || !post_id) {
     console.log(title);

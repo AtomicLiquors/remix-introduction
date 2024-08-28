@@ -4,10 +4,10 @@ import { ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
 export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
     const formData = await request.formData();
     const avatarId = formData.get('avatar_id') as string;
-    const title = formData.get('title') as string;
-    const content = formData.get('content') as string;
-    const author = formData.get('author') as string;
-    const password = formData.get('password') as string;
+    const title = (formData.get('title') as string).trim();
+    const content = (formData.get('content') as string).trim();
+    const author = (formData.get('author') as string).trim();
+    const password = (formData.get('password') as string).trim();
     const is_private = formData.get("is_private") as string;
   
     if (!title || !content || !author || !password) {
