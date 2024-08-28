@@ -1,29 +1,8 @@
 import { createBoard, BoardCreateRequestDTO } from "@/model/board.server";
 import { ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
-import { isValidAuthor, isValidContent, isValidPassword, isValidTitle } from "./board._index/util/verify";
+import { isValidCreateInput } from "./board._index/util/verify";
 import { number } from "zod";
 
-const isValidCreateInput = (title: string, content: string, author: string, password: string): [result: boolean, msg: string] => {
-
-  let result: boolean = true;
-  let msg: string = "";
-
-  if (!isValidTitle(title)){
-    result = false;
-    msg = "제목";
-  }else if(!isValidContent(content)){
-    result = false;
-    msg = "내용";
-  }else if (!isValidAuthor(author)){
-    result = false;
-    msg = "작성자";
-  }else if(!isValidPassword(password)){
-    result = false;
-    msg = "비밀번호";
-  }
-
-  return [true, ""];
-}
 
 export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
     const formData = await request.formData();
@@ -38,7 +17,7 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
       return json({ success: false, error: '비어 있는 입력값' }, { status: 422 });
     }
     
-    const [isValid, msg] = isValidCreateInput(title, content, author, password);
+    const [isValid, msg]: [boolean, string] = isValidCreateInput(title, content, author, password);
 
     if (!isValid){
       return json({ success: false, error: `유효하지 않은 ${msg}` }, { status: 422 });
