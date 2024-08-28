@@ -23,12 +23,14 @@ import BoardTitleInput from "./form/TitleInput";
 import BoardContentTextArea from "./form/ContentTextarea";
 import { validateContent, validateTitle } from "../../util/validateForm";
 import { invalidMessage } from "../../util/invalidMessage";
+import InvalidFormMsg from "./form/InvalidFormMsg";
 
 interface BoardItemDetailProps {
   openBoardData: BoardDetailResponseDTO | null;
   loading: boolean;
   isModalOpen: boolean;
   isOpenAsEditMode: boolean;
+  onBoardEdit: () => void;
   onBoardDelete: () => void;
   update: boolean;
 }
@@ -42,23 +44,24 @@ export default function BoardItemDetail({
   isModalOpen,
   isOpenAsEditMode,
   onBoardDelete,
-  update
+  onBoardEdit,
+  update,
 }: BoardItemDetailProps) {
   const [isEditPwCheckOpen, setIsEditPwCheckOpen] = useState(false);
   const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   /* 입력폼 */
-  const [isTitleValid, setIsTitleValid] = useState<boolean>(false);
-  const [isContentValid, setIsContentValid] = useState<boolean>(false);
+  const [isTitleValid, setIsTitleValid] = useState<boolean>(true);
+  const [isContentValid, setIsContentValid] = useState<boolean>(true);
 
   /* 패스워드 체크 */
   const handleEditingPWCheckPassed = () => {
     setIsEditing(true);
   };
-  
+
   const [invalidFormMsg, setInvalidFormMsg] = useState<string | null>(null);
-  
+
   const handleEditSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -66,14 +69,14 @@ export default function BoardItemDetail({
     const title = formData.get("title")?.toString();
     const content = formData.get("content")?.toString();
 
-    if (!title || !content) {
-      setInvalidFormMsg("이름, 비밀번호, 제목, 내용을 입력해 주세요.");
+    if (!title) {
+      setInvalidFormMsg("제목을 입력해 주세요.");
       return;
     }
 
     // 유효성 검증 결과
     const titleValidation = validateTitle(title);
-    const contentValidation = validateContent(content);
+    const contentValidation = !!content && validateContent(content);
 
     // 상태 업데이트
     setIsTitleValid(titleValidation);
@@ -90,15 +93,15 @@ export default function BoardItemDetail({
 
     setInvalidFormMsg(null);
 
-    if(openBoardData){
-      editFecther.submit(formData, {
+    if (openBoardData) {
+      editFetcher.submit(formData, {
         method: "put",
         action: `/board/${openBoardData.post_id}/edit`,
       });
     }
-  }
+  };
 
-  const editFecther = useFetcher<QueryResult>();
+  const editFetcher = useFetcher<QueryResult>();
   const deleteFetcher = useFetcher<QueryResult>();
 
   const handleDeletePwCheckPassed = () => {
@@ -122,7 +125,15 @@ export default function BoardItemDetail({
 
   useEffect(() => {
     setIsEditing(isOpenAsEditMode);
-  }, [isOpenAsEditMode, update])
+  }, [isOpenAsEditMode, update]);
+
+  
+  useEffect(() => {
+    if (editFetcher.data?.rowCount === 1) {
+      setIsEditing(false);
+      onBoardEdit();
+    }
+  }, [editFetcher.data]);
 
   useEffect(() => {
     if (deleteFetcher.data?.rowCount === 1) {
@@ -161,16 +172,16 @@ export default function BoardItemDetail({
   }, [isModalOpen]);
 
   useEffect(() => {
-    if(!openBoardData) 
-      return;
+    if (!openBoardData) return;
     setIsPrivateChecked(openBoardData.is_private);
-  }, [openBoardData])
+  }, [openBoardData]);
 
   const [isPrivateChecked, setIsPrivateChecked] = useState<boolean>();
 
   return (
-    <editFecther.Form onSubmit={handleEditSubmit}>
+    <editFetcher.Form onSubmit={handleEditSubmit}>
       <BoardItemContainer>
+        {!!invalidFormMsg && <InvalidFormMsg msg={invalidFormMsg} />}
         <BoardItemRowContainer>
           <BoardItemBlockWrapper>
             <input
@@ -209,7 +220,10 @@ export default function BoardItemDetail({
               ) : (
                 openBoardData &&
                 (isEditing ? (
-                  <BoardTitleInput isValid={isTitleValid} defaultValue={openBoardData.title}/>
+                  <BoardTitleInput
+                    isValid={isTitleValid}
+                    defaultValue={openBoardData.title}
+                  />
                 ) : (
                   <BoardItemTitles title={openBoardData.title} />
                 ))
@@ -260,14 +274,20 @@ export default function BoardItemDetail({
         <BoardItemRowContainer>
           {openBoardData &&
             (isEditing ? (
-              <BoardContentTextArea isValid={isContentValid} defaultValue={openBoardData.content}/>
+              <BoardContentTextArea
+                isValid={isContentValid}
+                defaultValue={openBoardData.content}
+              />
             ) : (
               openBoardData.content
             ))}
         </BoardItemRowContainer>
         {openBoardData &&
           (isEditing ? (
-            <BoardPrivateCheckbox isPrivateChecked={isPrivateChecked!} setIsPrivateChecked={setIsPrivateChecked}/>
+            <BoardPrivateCheckbox
+              isPrivateChecked={isPrivateChecked!}
+              setIsPrivateChecked={setIsPrivateChecked}
+            />
           ) : openBoardData?.is_private ? (
             "비공개 게시글입니다."
           ) : (
@@ -281,6 +301,6 @@ export default function BoardItemDetail({
           </Center>
         )}
       </BoardItemContainer>
-    </editFecther.Form>
+    </editFetcher.Form>
   );
 }

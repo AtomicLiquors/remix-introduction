@@ -19,6 +19,7 @@ import {
   validateTitle,
 } from "../../util/validateForm";
 import { invalidMessage } from "../../util/invalidMessage";
+import InvalidFormMsg from "./form/InvalidFormMsg";
 
 interface BoardItemCreateProps {
   isModalOpen: boolean;
@@ -114,7 +115,7 @@ export default function BoardItemCreate({
     <createBoardFetcher.Form onSubmit={handleSubmit}>
       <BoardItemContainer>
         {!!invalidFormMsg && (
-          <div className="w-full text-sm p-1 bg-red-200">{invalidFormMsg}</div>
+          <InvalidFormMsg msg={invalidFormMsg}/>
         )}
         <BoardItemRowContainer>
           <BoardItemBlockWrapper>

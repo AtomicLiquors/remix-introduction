@@ -53,9 +53,13 @@ export default function BoardRoute() {
   // To-Do: Type 안정성 확보.
   const [openBoardData, setOpenBoardData] = useState<BoardDetailResponseDTO | null>(null);
 
-  function openBoard(postId: number){
+  const openBoard = (postId: number) => {
     setOpenBoardData(null);
     openBoardDetailModal();
+    requestBoardById(postId);
+  }
+
+  const requestBoardById = (postId: number) => {
     openBoardDataFetcher.submit(
       {},
       {
@@ -87,6 +91,10 @@ export default function BoardRoute() {
     closeBoardDetailModal();
     setOpenBoardData(null);
   }
+  
+  const handleBoardEdit = () => {
+    requestBoardById(openBoardData?.post_id!);
+  }
 
   useEffect(() => {
     // To-Do: 런타임에 타입스크립트 fetcher가 유효한 타입을 검증하도록 한다.
@@ -109,7 +117,7 @@ export default function BoardRoute() {
         </Center>
       </BoardItemContainer>
       <Modal isModalOpen={isBoardDetailOpen} setIsModalOpen={setIsBoardDetailOpen} >
-        <BoardItemDetail isOpenAsEditMode={isBoardDetailEditMode} isModalOpen={isBoardDetailOpen} openBoardData={openBoardData} loading={loading} onBoardDelete={handleBoardDelete} update={boardDetailUpdate}/>
+        <BoardItemDetail isOpenAsEditMode={isBoardDetailEditMode} isModalOpen={isBoardDetailOpen} openBoardData={openBoardData} loading={loading} onBoardDelete={handleBoardDelete} onBoardEdit={handleBoardEdit} update={boardDetailUpdate}/>
       </Modal>
       <Modal isModalOpen={isBoardCreateOpen} setIsModalOpen={setIsBoardCreateOpen}  >
         <BoardItemCreate isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal}/>
