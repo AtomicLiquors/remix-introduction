@@ -4,12 +4,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PasswordChecker from "../PasswordChecker";
-import BoardItemTitles from "./component/content/Titles";
-import BoardItemBlockWrapper from "./component/layout/BlockWrapper";
-import BoardItemContainer from "./component/layout/Container";
-import BoardItemFirstBlock from "./component/layout/FirstBlock";
-import BoardItemMiddleBlock from "./component/layout/MiddleBlock";
-import BoardItemRowContainer from "./component/layout/RowContainer";
+import BoardItemTitles from "./content/Titles";
+import BoardItemBlockWrapper from "./layout/BlockWrapper";
+import BoardItemContainer from "./layout/Container";
+import BoardItemFirstBlock from "./layout/FirstBlock";
+import BoardItemMiddleBlock from "./layout/MiddleBlock";
+import BoardItemRowContainer from "./layout/RowContainer";
 import { BoardDetailResponseDTO } from "@/model/board.server";
 import { useEffect, useRef, useState } from "react";
 import { useFetcher } from "@remix-run/react";
@@ -17,8 +17,10 @@ import Center from "@/common/components/atoms/Center";
 import Avatar from "@/common/avatar/Avatar";
 import AvatarSelector from "@/common/avatar/AvatarSelector";
 import { QueryResult } from "@vercel/postgres";
-import { boardInputClassName } from "./style";
-import BoardPrivateCheckbox from "./component/input/PrivateCheckbox";
+import { boardInputClassName } from "../../util/boardTailwind";
+import BoardPrivateCheckbox from "./form/PrivateCheckbox";
+import BoardTitleInput from "./form/TitleInput";
+import BoardContentTextArea from "./form/ContentTextarea";
 
 interface BoardItemDetailProps {
   openBoardData: BoardDetailResponseDTO | null;
@@ -162,11 +164,7 @@ export default function BoardItemDetail({
               ) : (
                 openBoardData &&
                 (isEditing ? (
-                  <input
-                    className={`text-sm border ${boardInputClassName}`}
-                    name="title"
-                    defaultValue={openBoardData.title}
-                  />
+                  <BoardTitleInput defaultValue={openBoardData.title}/>
                 ) : (
                   <BoardItemTitles title={openBoardData.title} />
                 ))
@@ -217,12 +215,7 @@ export default function BoardItemDetail({
         <BoardItemRowContainer>
           {openBoardData &&
             (isEditing ? (
-              <input
-                type="textarea"
-                name="content"
-                className={`${boardInputClassName} w-full min-h-64`}
-                defaultValue={openBoardData.content}
-              />
+              <BoardContentTextArea defaultValue={openBoardData.content}/>
             ) : (
               openBoardData.content
             ))}

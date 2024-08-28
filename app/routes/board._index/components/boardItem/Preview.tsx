@@ -6,12 +6,12 @@ import {
   faCircleMinus,
   faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
-import BoardItemContainer from "./component/layout/Container";
-import BoardItemFirstBlock from "./component/layout/FirstBlock";
-import BoardItemMiddleBlock from "./component/layout/MiddleBlock";
-import BoardItemTitles from "./component/content/Titles";
-import BoardItemBlockWrapper from "./component/layout/BlockWrapper";
-import BoardItemRowContainer from "./component/layout/RowContainer";
+import BoardItemContainer from "./layout/Container";
+import BoardItemFirstBlock from "./layout/FirstBlock";
+import BoardItemMiddleBlock from "./layout/MiddleBlock";
+import BoardItemTitles from "./content/Titles";
+import BoardItemBlockWrapper from "./layout/BlockWrapper";
+import BoardItemRowContainer from "./layout/RowContainer";
 import Avatar from "@/common/avatar/Avatar";
 import { QueryResult } from "@vercel/postgres";
 import { dateToString } from "@/utils/date";

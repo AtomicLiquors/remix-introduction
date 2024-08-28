@@ -1,4 +1,5 @@
-import { isValidTitle, verifyMessage } from "@/routes/board._index/util/verify";
+import { isValidTitle } from "@/routes/board._index/util/verify";
+import { verifyMessage } from "@/routes/board._index/util/verifyMessage";
 
 describe('작성자 이름 검증', () => {
     console.log(`현재 규칙 : ${verifyMessage.content}`)

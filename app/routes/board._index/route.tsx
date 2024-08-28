@@ -12,7 +12,7 @@ import {
 import BoardItemCreate from "./components/boardItem/Create";
 import BoardItemDetail from "./components/boardItem/Detail";
 import Center from "@/common/components/atoms/Center";
-import BoardItemContainer from "./components/boardItem/component/layout/Container";
+import BoardItemContainer from "./components/boardItem/layout/Container";
 
 export const loader = async () => {
   const list = await getBoards();

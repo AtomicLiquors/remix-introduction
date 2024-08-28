@@ -1,15 +1,17 @@
-import BoardItemContainer from "./component/layout/Container";
-import BoardItemFirstBlock from "./component/layout/FirstBlock";
-import BoardItemMiddleBlock from "./component/layout/MiddleBlock";
-import BoardItemBlockWrapper from "./component/layout/BlockWrapper";
-import BoardItemRowContainer from "./component/layout/RowContainer";
+import BoardItemContainer from "./layout/Container";
+import BoardItemFirstBlock from "./layout/FirstBlock";
+import BoardItemMiddleBlock from "./layout/MiddleBlock";
+import BoardItemBlockWrapper from "./layout/BlockWrapper";
+import BoardItemRowContainer from "./layout/RowContainer";
 import Center from "@/common/components/atoms/Center";
 import { useFetcher } from "@remix-run/react";
 import { useRef, FormEvent, useEffect, useState } from "react";
 import AvatarSelector from "@/common/avatar/AvatarSelector";
 import { QueryResult } from "@vercel/postgres";
-import { boardInputClassName } from "./style";
-import BoardPrivateCheckbox from "./component/input/PrivateCheckbox";
+import { boardInputClassName } from "../../util/boardTailwind";
+import BoardPrivateCheckbox from "./form/PrivateCheckbox";
+import BoardTitleInput from "./form/TitleInput";
+import BoardContentTextArea from "./form/ContentTextarea";
 
 interface BoardItemCreateProps {
   isModalOpen: boolean;
@@ -83,27 +85,18 @@ export default function BoardItemCreate({
               </div>
             </BoardItemFirstBlock>
             <BoardItemMiddleBlock>
-              <input
-                type="text"
-                name="title"
-                className={boardInputClassName}
-                placeholder="제목을 입력하세요."
-              />
+              <BoardTitleInput/>
             </BoardItemMiddleBlock>
           </BoardItemBlockWrapper>
         </BoardItemRowContainer>
         <BoardItemRowContainer>
-          <input
-            type="textarea"
-            name="content"
-            className={`${boardInputClassName} min-h-64 w-full h-auto`}
-          />
+        <BoardContentTextArea/>
         </BoardItemRowContainer>
-        <div className="text-sm text-gray-700">
+        
         {isPrivateChecked
-          ? "이 게시글을 비공개로 게시합니다."
-          : "게시글은 관리자의 승인 후 전체 공개 됩니다.\n공개를 원치 않으시면 비공개로 게시할 수 있습니다."}
-          </div>
+          ? <div className="text-sm text-gray-700">"이 게시글을 비공개로 게시합니다."</div>
+          : <div className="text-sm text-gray-700"><div>"게시글은 관리자의 승인 후 전체 공개 됩니다.</div><div>공개를 원치 않으시면 비공개로 게시할 수 있습니다."</div></div>}
+          
         
         <BoardPrivateCheckbox isPrivateChecked={isPrivateChecked!} setIsPrivateChecked={setIsPrivateChecked}/>
 
