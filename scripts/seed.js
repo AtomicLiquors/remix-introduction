@@ -4,6 +4,10 @@ const dropTable = async (client, table) => {
     await client.sql`DROP TABLE IF EXISTS ${table};` 
 }
 
+const clearTable = async (client, table) => {
+    await client.sql`TRUNCATE ${table};` 
+}
+
 async function seed() {
 
     const client = await db.connect();
