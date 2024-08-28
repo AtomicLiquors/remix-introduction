@@ -23,7 +23,7 @@ export default function Profile() {
         </div>
 
         <div className={themeClasses.text.secondary}>
-          | {contact} · gyqls234@naver.com |
+          email | gyqls234@naver.com
         </div>
         <div className="flex gap-2">
           <img src="/img/github.png" className="w-8 rounded-full bg-white" />
