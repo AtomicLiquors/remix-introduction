@@ -6,8 +6,7 @@ import * as path from "path";
 export default defineConfig(() => {
   return {
     define: {
-      __VITE_CONTACT__: process.env.VITE_CONTACT,
-      VITE_CONTACT: process.env.VITE_CONTACT,
+      __VITE_CONTACT__: JSON.stringify(process.env.VITE_CONTACT),
     },
     plugins: [
       remix({
