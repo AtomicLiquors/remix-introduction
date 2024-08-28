@@ -26,7 +26,7 @@ import { applyExistingTheme, themeClasses } from "./theme/theme";
 import Center from "@/common/components/atoms/Center";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import Profile from "./common/profile/Profile";
+import Profile from "./common/layout/profile/Profile";
 
 export const action = async () => {
   const contact = await createEmptyContact();

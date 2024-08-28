@@ -1,9 +1,12 @@
 import Center from "@/common/components/atoms/Center";
 import RoundImage from "@/common/components/atoms/RoundImage";
 import { themeClasses } from "@/theme/theme";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export default function Profile() {
-  const contact = "010-0000-0000";
+  const contact = process.env.VITE_CONTACT;
 
   return (
     <div className={`${themeClasses.bg.card} w-full p-8`}>
