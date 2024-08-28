@@ -1,3 +1,4 @@
+import { encrypt, verifyPassword } from "@/utils/passwordEncrypt";
 import { redirect } from "@remix-run/node";
 import { QueryResult, sql, VercelClient } from "@vercel/postgres";
 import { z } from "zod";
@@ -46,14 +47,15 @@ export type BoardCreateRequestDTO = z.infer<typeof boardCreateRequestDTO>;
 export type BoardEditRequestDTO = z.infer<typeof boardEditRequestDTO>;
 export type BoardDetailResponseDTO = z.infer<typeof boardDetailResponseDTO>;
 
-export async function checkPassword(postId: number, password: string) {
+export async function checkPassword(postId: number, inputPassword: string) {
   const result: QueryResult =
-    await sql`SELECT ${password} = (SELECT password FROM community_board WHERE post_id = ${postId}) as is_pw_correct`;
+    await sql`SELECT password FROM community_board WHERE post_id = ${postId}`;
 
   // if(result.rowCount !== 1) throw error
 
   const { rows: data } = result;
-  return data[0].is_pw_correct;
+  
+  return await verifyPassword(inputPassword, data[0].password);
 }
 
 export async function deleteBoardById(postId: number) {
@@ -66,10 +68,12 @@ export async function deleteBoardById(postId: number) {
 export async function createBoard(data: BoardCreateRequestDTO) {
   const { title, avatar_id, content, author, password, ip, is_private } = data;
 
+  const encryptedPassword = await encrypt(password);
+
   try {
     const result = await sql`
     INSERT INTO community_board(title, avatar_id, content, author, password, author_ip, is_private)
-    VALUES (${title}, ${avatar_id}, ${content}, ${author}, ${password}, ${ip}, ${is_private})
+    VALUES (${title}, ${avatar_id}, ${content}, ${author}, ${encryptedPassword}, ${ip}, ${is_private})
   `;
 
     return result;
