@@ -11,7 +11,7 @@ import { QueryResult } from "@vercel/postgres";
 import { boardInputClassName } from "../../util/boardTailwind";
 import BoardPrivateCheckbox from "./form/PrivateCheckbox";
 import BoardTitleInput from "./form/TitleInput";
-import BoardContentTextArea from "./form/ContentTextarea";
+import BoardContentTextArea from "./form/ContentTextArea";
 import {
   validateAuthor,
   validateContent,
