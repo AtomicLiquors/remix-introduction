@@ -9,6 +9,7 @@ export const loader:LoaderFunction = async ({ params }: LoaderFunctionArgs) => {
     // 4. 타입확인
     // 5. 500 서버 에러 : TypeError: Content-Type was not one of "multipart/form-data" or "application/x-www-form-urlencoded".
     
+    // postId 확인에 Invariant가 사용된다. invariant의 역할은?
     const postId = params.postId;
     
     if(!postId){
@@ -16,7 +17,9 @@ export const loader:LoaderFunction = async ({ params }: LoaderFunctionArgs) => {
       return false;
       // throw Error로 변경.
     }
+
+    const data = await getBoardById(+postId);
   
-    return getBoardById(+postId);
+    return data.rows[0] || null;
   };
   

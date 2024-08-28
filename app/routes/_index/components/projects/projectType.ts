@@ -13,5 +13,5 @@ export interface ProjectProps {
         code?: string;
         demo?: string;
     };
-    screenshot: string;
+    screenshots: string[];
 }

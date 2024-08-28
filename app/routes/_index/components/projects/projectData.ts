@@ -29,7 +29,7 @@ export const projectData: ProjectProps[] = [
     links: {
       code: "https://github.com/AtomicLiquors/ontheblock",
     },
-    screenshot: "",
+    screenshots: ["/img/project/ontheblock/ontheblock.png"],
   },
   {
     emoji: "🍏",
@@ -53,7 +53,7 @@ export const projectData: ProjectProps[] = [
     links: {
       demo: "https://www.youtube.com/watch?v=Zujd17yREBY",
     },
-    screenshot: "",
+    screenshots: [],
   },
   {
     emoji: "🐶",
@@ -76,6 +76,6 @@ export const projectData: ProjectProps[] = [
     links: {
       code: "https://github.com/AtomicLiquors/senabo",
     },
-    screenshot: "",
+    screenshots: ["/img/project/senabo/senabo.png"],
   },
 ];
