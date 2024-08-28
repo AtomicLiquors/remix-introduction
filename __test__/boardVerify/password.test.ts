@@ -11,7 +11,7 @@ describe('isValidPassword', () => {
     });
 
     test('유효하지 않은 케이스', () => {
-        expect(validatePassword('abc')).toBe(false); // 3자리 (짧음)
+        expect(validatePassword('123')).toBe(false); // 3자리 (짧음)
         expect(validatePassword('abcdefghijklmno123456')).toBe(false); // 21자리 (제한 초과)
         expect(validatePassword('abc def')).toBe(false); // 공백 포함
         expect(validatePassword('abc123$%^&*(DEFG')).toBe(false); // 16자리 (제한 초과)

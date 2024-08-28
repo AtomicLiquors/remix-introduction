@@ -12,7 +12,12 @@ import { boardInputClassName } from "../../util/boardTailwind";
 import BoardPrivateCheckbox from "./form/PrivateCheckbox";
 import BoardTitleInput from "./form/TitleInput";
 import BoardContentTextArea from "./form/ContentTextarea";
-import { validateAuthor, validateContent, validatePassword, validateTitle } from "../../util/validateForm";
+import {
+  validateAuthor,
+  validateContent,
+  validatePassword,
+  validateTitle,
+} from "../../util/validateForm";
 import { invalidMessage } from "../../util/invalidMessage";
 
 interface BoardItemCreateProps {
@@ -38,41 +43,49 @@ export default function BoardItemCreate({
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    
+
     const author = formData.get("author")?.toString();
     const password = formData.get("password")?.toString();
     const title = formData.get("title")?.toString();
     const content = formData.get("content")?.toString();
 
-    if(!author || !password || !title || !content){
-      setInvalidFormMsg("이름, 비밀번호, 제목, 내용을 올바르게 입력해 주세요.");
+    if (!author || !password || !title || !content) {
+      setInvalidFormMsg("이름, 비밀번호, 제목, 내용을 입력해 주세요.");
       return;
     }
 
-    setIsAuthorValid(validateAuthor(author));
-    setIsPasswordValid(validatePassword(password));
-    setIsTitleValid(validateTitle(title));
-    setIsContentValid(validateContent(content));
+    // 유효성 검증 결과
+    const authorValidation = validateAuthor(author);
+    const passwordValidation = validatePassword(password);
+    const titleValidation = validateTitle(title);
+    const contentValidation = validateContent(content);
 
-    if(!isAuthorValid){
-      setInvalidFormMsg(invalidMessage.author)
+    // 상태 업데이트
+    setIsAuthorValid(authorValidation);
+    setIsPasswordValid(passwordValidation);
+    setIsTitleValid(titleValidation);
+    setIsContentValid(contentValidation);
+
+    // 유효성 검증 실패 시 에러 메시지 출력
+    if (!authorValidation) {
+      setInvalidFormMsg(invalidMessage.author);
       return;
-    }else if(!isPasswordValid){
-      setInvalidFormMsg(invalidMessage.password)
+    } else if (!passwordValidation) {
+      setInvalidFormMsg(invalidMessage.password);
       return;
-    }else if(!isTitleValid){
-      setInvalidFormMsg(invalidMessage.title)
+    } else if (!titleValidation) {
+      setInvalidFormMsg(invalidMessage.title);
       return;
-    }else if(!isContentValid){
-      setInvalidFormMsg(invalidMessage.content)
+    } else if (!contentValidation) {
+      setInvalidFormMsg(invalidMessage.content);
       return;
     }
 
     setInvalidFormMsg(null);
-    
+
     createBoardFetcher.submit(formData, {
       method: "post",
-      action: "/board/create"
+      action: "/board/create",
     });
   };
 
@@ -100,8 +113,9 @@ export default function BoardItemCreate({
   return (
     <createBoardFetcher.Form onSubmit={handleSubmit}>
       <BoardItemContainer>
-      {invalidFormMsg}
-        {!!invalidFormMsg && <div className="w-full text-sm p-1 bg-red-200">{invalidFormMsg}</div>}
+        {!!invalidFormMsg && (
+          <div className="w-full text-sm p-1 bg-red-200">{invalidFormMsg}</div>
+        )}
         <BoardItemRowContainer>
           <BoardItemBlockWrapper>
             <BoardItemFirstBlock>
@@ -117,39 +131,49 @@ export default function BoardItemCreate({
                   <input
                     type="text"
                     name="author"
-                    className={`${boardInputClassName} w-5/6 ${isAuthorValid || 'border-red-200'}`}
+                    className={`${boardInputClassName} w-5/6 ${
+                      isAuthorValid || "border-red-200"
+                    }`}
                     placeholder="작성자"
                   />
                   <input
                     type="password"
                     name="password"
-                    className={`${boardInputClassName} w-5/6 ${isPasswordValid || 'border-red-200'}`}
+                    className={`${boardInputClassName} w-5/6 ${
+                      isPasswordValid || "border-red-200"
+                    }`}
                     placeholder="비밀번호"
                   />
                 </div>
               </div>
             </BoardItemFirstBlock>
             <BoardItemMiddleBlock>
-              <BoardTitleInput isValid={isTitleValid}/>
+              <BoardTitleInput isValid={isTitleValid} />
             </BoardItemMiddleBlock>
           </BoardItemBlockWrapper>
         </BoardItemRowContainer>
         <BoardItemRowContainer>
-        <BoardContentTextArea isValid={isContentValid}/>
+          <BoardContentTextArea isValid={isContentValid} />
         </BoardItemRowContainer>
-        
-        {isPrivateChecked
-          ? <div className="text-sm text-gray-700">이 게시글을 비공개로 게시합니다.</div>
-          : <div className="text-sm text-gray-700"><div>게시글은 관리자의 승인 후 전체 공개 됩니다.</div><div>공개를 원치 않으시면 비공개로 게시할 수 있습니다.</div></div>}
-          
-        
-        <BoardPrivateCheckbox isPrivateChecked={isPrivateChecked!} setIsPrivateChecked={setIsPrivateChecked}/>
+
+        {isPrivateChecked ? (
+          <div className="text-sm text-gray-700">
+            이 게시글을 비공개로 게시합니다.
+          </div>
+        ) : (
+          <div className="text-sm text-gray-700">
+            <div>게시글은 관리자의 승인 후 전체 공개 됩니다.</div>
+            <div>공개를 원치 않으시면 비공개로 게시할 수 있습니다.</div>
+          </div>
+        )}
+
+        <BoardPrivateCheckbox
+          isPrivateChecked={isPrivateChecked!}
+          setIsPrivateChecked={setIsPrivateChecked}
+        />
 
         <Center>
-          <button
-            className="rounded text-blue-500"
-            type="submit"
-          >
+          <button className="rounded text-blue-500" type="submit">
             작성하기
           </button>
         </Center>

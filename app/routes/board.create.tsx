@@ -4,7 +4,6 @@ import { validateCreateInput } from "./board._index/util/validateForm";
 
 export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
     const formData = await request.formData();
-    console.log(formData);
     const avatarId = formData.get('avatar_id') as string;
     const title = (formData.get('title') as string).trim();
     const content = (formData.get('content') as string).trim();
