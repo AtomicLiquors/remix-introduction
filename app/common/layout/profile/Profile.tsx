@@ -1,15 +1,11 @@
 import Center from "@/common/components/atoms/Center";
 import RoundImage from "@/common/components/atoms/RoundImage";
 import { themeClasses } from "@/theme/theme";
+
 /*
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-
-*/
 const contact = import.meta.env.VITE_CONTACT;
 console.log(contact);
+*/
 
 export default function Profile() {
 
