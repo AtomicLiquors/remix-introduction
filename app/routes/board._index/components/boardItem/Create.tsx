@@ -4,7 +4,7 @@ import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemBlockWrapper from "./layout/BlockWrapper";
 import BoardItemRowContainer from "./layout/RowContainer";
 import Center from "@/common/components/atoms/Center";
-import { useFetcher } from "@remix-run/react";
+import { ErrorResponse, useFetcher } from "@remix-run/react";
 import { useRef, FormEvent, useEffect, useState } from "react";
 import AvatarSelector from "@/common/avatar/AvatarSelector";
 import { QueryResult } from "@vercel/postgres";
@@ -69,7 +69,11 @@ export default function BoardItemCreate({
     }
 
     setInvalidFormMsg(null);
-    createBoardFetcher.submit(e.currentTarget.form);
+    
+    createBoardFetcher.submit(formData, {
+      method: "post",
+      action: "/board/create"
+    });
   };
 
   useEffect(() => {
@@ -94,8 +98,9 @@ export default function BoardItemCreate({
     /* To-Do : 글자수 제한 */
   }
   return (
-    <createBoardFetcher.Form onSubmit={handleSubmit} method="post" action="/board/create">
+    <createBoardFetcher.Form onSubmit={handleSubmit}>
       <BoardItemContainer>
+      {invalidFormMsg}
         {!!invalidFormMsg && <div className="w-full text-sm p-1 bg-red-200">{invalidFormMsg}</div>}
         <BoardItemRowContainer>
           <BoardItemBlockWrapper>
@@ -134,8 +139,8 @@ export default function BoardItemCreate({
         </BoardItemRowContainer>
         
         {isPrivateChecked
-          ? <div className="text-sm text-gray-700">"이 게시글을 비공개로 게시합니다."</div>
-          : <div className="text-sm text-gray-700"><div>"게시글은 관리자의 승인 후 전체 공개 됩니다.</div><div>공개를 원치 않으시면 비공개로 게시할 수 있습니다."</div></div>}
+          ? <div className="text-sm text-gray-700">이 게시글을 비공개로 게시합니다.</div>
+          : <div className="text-sm text-gray-700"><div>게시글은 관리자의 승인 후 전체 공개 됩니다.</div><div>공개를 원치 않으시면 비공개로 게시할 수 있습니다.</div></div>}
           
         
         <BoardPrivateCheckbox isPrivateChecked={isPrivateChecked!} setIsPrivateChecked={setIsPrivateChecked}/>

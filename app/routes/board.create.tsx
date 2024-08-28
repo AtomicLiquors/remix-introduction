@@ -1,11 +1,10 @@
 import { createBoard, BoardCreateRequestDTO } from "@/model/board.server";
 import { ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
 import { validateCreateInput } from "./board._index/util/validateForm";
-import { number } from "zod";
-
 
 export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
     const formData = await request.formData();
+    console.log(formData);
     const avatarId = formData.get('avatar_id') as string;
     const title = (formData.get('title') as string).trim();
     const content = (formData.get('content') as string).trim();
@@ -14,6 +13,7 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
     const is_private = formData.get('is_private') as string;
   
     if (!title || !content || !author || !password) {
+      // To-Do : Throw Error로 변경하고 에러처리하기.
       return json({ success: false, error: '비어 있는 입력값' }, { status: 422 });
     }
     
