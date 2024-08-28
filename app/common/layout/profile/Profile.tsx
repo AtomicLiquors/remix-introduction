@@ -16,7 +16,8 @@ export default function Profile() {
   return (
     <div className={`${themeClasses.bg.card} w-full p-8`}>
       <Center flex flexCol className="gap-3">
-        <RoundImage src="/img/photos/profile.png" className="w-64" />
+        {/* /img/photos/profile.png */}
+        <RoundImage src="/img/avatars/blank.png" className="w-64" />
         <p
           id="index-page"
           className={`${themeClasses.text.primary} mb-5 text-3xl font-bold underline`}
