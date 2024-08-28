@@ -3,6 +3,7 @@ import {
   editBoard,
 } from "@/model/board.server";
 import { ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
+import { isValidEditInput } from "./board._index/util/verify";
 
 export const action: ActionFunction = async ({
   params, request,
@@ -25,6 +26,13 @@ export const action: ActionFunction = async ({
     console.log(response);
     return response;
   }
+
+  const [isValid, msg]: [boolean, string] = isValidEditInput(title, content);
+
+  if (!isValid){
+    return json({ success: false, error: `유효하지 않은 ${msg}` }, { status: 422 });
+  }
+
   const data: BoardEditRequestDTO = {
     avatar_id: +avatar_id || 0,
     post_id: post_id,

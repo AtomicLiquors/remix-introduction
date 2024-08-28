@@ -54,3 +54,22 @@ export const isValidCreateInput = (
 
   return [result, msg];
 };
+
+export const isValidEditInput = (
+    title: string,
+    content: string,
+  ): [result: boolean, msg: string] => {
+    let result: boolean = true;
+    let msg: string = "";
+  
+    if (!isValidTitle(title)) {
+      result = false;
+      msg = "제목";
+    } else if (!isValidContent(content)) {
+      result = false;
+      msg = "내용";
+    } 
+      
+    return [result, msg];
+  };
+  
