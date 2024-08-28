@@ -170,7 +170,7 @@ export default function BoardItemDetail({
               ) : (
                 openBoardData &&
                 (isEditing ? (
-                  <BoardTitleInput isValid={isTitleValid} defaultValue={openBoardData.title}/>
+                  <BoardTitleInput ref={titleRef} isValid={isTitleValid} defaultValue={openBoardData.title}/>
                 ) : (
                   <BoardItemTitles title={openBoardData.title} />
                 ))
@@ -221,7 +221,7 @@ export default function BoardItemDetail({
         <BoardItemRowContainer>
           {openBoardData &&
             (isEditing ? (
-              <BoardContentTextArea isValid={isContentValid} defaultValue={openBoardData.content}/>
+              <BoardContentTextArea ref={contentRef} isValid={isContentValid} defaultValue={openBoardData.content}/>
             ) : (
               openBoardData.content
             ))}

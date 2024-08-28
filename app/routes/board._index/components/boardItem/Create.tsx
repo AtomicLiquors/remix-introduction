@@ -12,6 +12,7 @@ import { boardInputClassName } from "../../util/boardTailwind";
 import BoardPrivateCheckbox from "./form/PrivateCheckbox";
 import BoardTitleInput from "./form/TitleInput";
 import BoardContentTextArea from "./form/ContentTextarea";
+import { isValidContent, isValidTitle } from "../../util/verify";
 
 interface BoardItemCreateProps {
   isModalOpen: boolean;
@@ -25,17 +26,27 @@ export default function BoardItemCreate({
   const [isPrivateChecked, setIsPrivateChecked] = useState<boolean>(false);
 
   /* 입력폼 */
+  const authorRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
-  const [isTitleValid, setIsTitleValid] = useState<boolean>(false);
-  const [isContentValid, setIsContentValid] = useState<boolean>(false);
+
+  const [isTitleValid, setIsTitleValid] = useState<boolean>(true);
+  const [isContentValid, setIsContentValid] = useState<boolean>(true);
+  const [isAuthorValid, setIsAuthorValid] = useState<boolean>(true);
+  const [isPasswordValid, setIsPasswordValid] = useState<boolean>(true);
 
   const createBoardFetcher = useFetcher<QueryResult>();
   const loading = createBoardFetcher.state !== "idle";
 
   const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    createBoardFetcher.submit(e.currentTarget.form);
+
+    const title = titleRef.current!.value;
+    const content = contentRef.current!.value;
+    setIsTitleValid(isValidTitle(title));
+    setIsContentValid(isValidContent(content));
+    //createBoardFetcher.submit(e.currentTarget.form);
   };
 
   useEffect(() => {
@@ -78,12 +89,14 @@ export default function BoardItemCreate({
                   <input
                     type="text"
                     name="author"
-                    className={`${boardInputClassName} w-5/6`}
+                    ref={authorRef}
+                    className={`${boardInputClassName} w-5/6 `}
                     placeholder="작성자"
                   />
                   <input
                     type="password"
                     name="password"
+                    ref={passwordRef}
                     className={`${boardInputClassName} w-5/6`}
                     placeholder="비밀번호"
                   />
@@ -91,12 +104,12 @@ export default function BoardItemCreate({
               </div>
             </BoardItemFirstBlock>
             <BoardItemMiddleBlock>
-              <BoardTitleInput isValid={isTitleValid}/>
+              <BoardTitleInput ref={titleRef} isValid={isTitleValid}/>
             </BoardItemMiddleBlock>
           </BoardItemBlockWrapper>
         </BoardItemRowContainer>
         <BoardItemRowContainer>
-        <BoardContentTextArea isValid={isContentValid}/>
+        <BoardContentTextArea ref={contentRef} isValid={isContentValid}/>
         </BoardItemRowContainer>
         
         {isPrivateChecked
