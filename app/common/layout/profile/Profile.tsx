@@ -5,9 +5,13 @@ import { themeClasses } from "@/theme/theme";
 import dotenv from 'dotenv';
 
 dotenv.config();
+
+
 */
+const contact = import.meta.env.VITE_CONTACT;
+console.log(contact);
+
 export default function Profile() {
-  //const contact = process.env.VITE_CONTACT;
 
   return (
     <div className={`${themeClasses.bg.card} w-full p-8`}>

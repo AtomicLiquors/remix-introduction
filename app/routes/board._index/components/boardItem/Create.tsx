@@ -102,7 +102,7 @@ export default function BoardItemCreate({
         <div className="text-sm text-gray-700">
         {isPrivateChecked
           ? "이 게시글을 비공개로 게시합니다."
-          : "게시글은 관리자의 승인 후 전체 공개 됩니다. 이 게시글을 비공개로 게시할까요?"}
+          : "게시글은 관리자의 승인 후 전체 공개 됩니다.\n공개를 원치 않으시면 비공개로 게시할 수 있습니다."}
           </div>
         
         <BoardPrivateCheckbox isPrivateChecked={isPrivateChecked!} setIsPrivateChecked={setIsPrivateChecked}/>

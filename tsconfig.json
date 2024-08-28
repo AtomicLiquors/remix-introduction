@@ -10,6 +10,7 @@
     "scripts/seed.js", ],
 
   "compilerOptions": {
+    "module": "ES2022",
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "types": ["@testing-library/jest-dom", "@remix-run/node", "vite/client", "jest"],
     "isolatedModules": true,
