@@ -11,7 +11,7 @@ import BoardItemFirstBlock from "./layout/FirstBlock";
 import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemRowContainer from "./layout/RowContainer";
 import { BoardDetailResponseDTO } from "@/model/board.server";
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { useFetcher } from "@remix-run/react";
 import Center from "@/common/components/atoms/Center";
 import Avatar from "@/common/avatar/Avatar";
@@ -21,6 +21,8 @@ import { boardInputClassName } from "../../util/boardTailwind";
 import BoardPrivateCheckbox from "./form/PrivateCheckbox";
 import BoardTitleInput from "./form/TitleInput";
 import BoardContentTextArea from "./form/ContentTextarea";
+import { validateContent, validateTitle } from "../../util/validateForm";
+import { invalidMessage } from "../../util/invalidMessage";
 
 interface BoardItemDetailProps {
   openBoardData: BoardDetailResponseDTO | null;
@@ -47,8 +49,6 @@ export default function BoardItemDetail({
   const [isEditing, setIsEditing] = useState(false);
 
   /* 입력폼 */
-  const titleRef = useRef<HTMLInputElement>(null);
-  const contentRef = useRef<HTMLTextAreaElement>(null);
   const [isTitleValid, setIsTitleValid] = useState<boolean>(false);
   const [isContentValid, setIsContentValid] = useState<boolean>(false);
 
@@ -56,7 +56,49 @@ export default function BoardItemDetail({
   const handleEditingPWCheckPassed = () => {
     setIsEditing(true);
   };
+  
+  const [invalidFormMsg, setInvalidFormMsg] = useState<string | null>(null);
+  
+  const handleEditSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
 
+    const title = formData.get("title")?.toString();
+    const content = formData.get("content")?.toString();
+
+    if (!title || !content) {
+      setInvalidFormMsg("이름, 비밀번호, 제목, 내용을 입력해 주세요.");
+      return;
+    }
+
+    // 유효성 검증 결과
+    const titleValidation = validateTitle(title);
+    const contentValidation = validateContent(content);
+
+    // 상태 업데이트
+    setIsTitleValid(titleValidation);
+    setIsContentValid(contentValidation);
+
+    // 유효성 검증 실패 시 에러 메시지 출력
+    if (!titleValidation) {
+      setInvalidFormMsg(invalidMessage.title);
+      return;
+    } else if (!contentValidation) {
+      setInvalidFormMsg(invalidMessage.content);
+      return;
+    }
+
+    setInvalidFormMsg(null);
+
+    if(openBoardData){
+      editFecther.submit(formData, {
+        method: "put",
+        action: `/board/${openBoardData.post_id}/edit`,
+      });
+    }
+  }
+
+  const editFecther = useFetcher<QueryResult>();
   const deleteFetcher = useFetcher<QueryResult>();
 
   const handleDeletePwCheckPassed = () => {
@@ -127,10 +169,7 @@ export default function BoardItemDetail({
   const [isPrivateChecked, setIsPrivateChecked] = useState<boolean>();
 
   return (
-    <deleteFetcher.Form
-      method="put"
-      action={openBoardData ? `/board/${openBoardData.post_id}/edit` : ""}
-    >
+    <editFecther.Form onSubmit={handleEditSubmit}>
       <BoardItemContainer>
         <BoardItemRowContainer>
           <BoardItemBlockWrapper>
@@ -170,7 +209,7 @@ export default function BoardItemDetail({
               ) : (
                 openBoardData &&
                 (isEditing ? (
-                  <BoardTitleInput ref={titleRef} isValid={isTitleValid} defaultValue={openBoardData.title}/>
+                  <BoardTitleInput isValid={isTitleValid} defaultValue={openBoardData.title}/>
                 ) : (
                   <BoardItemTitles title={openBoardData.title} />
                 ))
@@ -221,7 +260,7 @@ export default function BoardItemDetail({
         <BoardItemRowContainer>
           {openBoardData &&
             (isEditing ? (
-              <BoardContentTextArea ref={contentRef} isValid={isContentValid} defaultValue={openBoardData.content}/>
+              <BoardContentTextArea isValid={isContentValid} defaultValue={openBoardData.content}/>
             ) : (
               openBoardData.content
             ))}
@@ -242,6 +281,6 @@ export default function BoardItemDetail({
           </Center>
         )}
       </BoardItemContainer>
-    </deleteFetcher.Form>
+    </editFecther.Form>
   );
 }
