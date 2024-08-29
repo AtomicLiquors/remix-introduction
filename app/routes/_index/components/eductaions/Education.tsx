@@ -16,7 +16,7 @@ const Education: React.FC<EducationProps> = (edu) => {
       </TLItemCaption>
       <TLItemDescription>
         {edu.content.map((line, idx) => (
-          <p key={idx}>{line}</p>
+          <p className="text-sm" key={idx}>{line}</p>
         ))}
       </TLItemDescription>
     </>
