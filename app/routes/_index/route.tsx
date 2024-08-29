@@ -5,9 +5,6 @@ import IndexEducations from "@/routes/_index/components/eductaions/IndexEducatio
 import IndexProjects from "@/routes/_index/components/projects/IndexProjects";
 import IndexSkills from "@/routes/_index/components/skills/IndexSkills";
 import IndexAwards from "@/routes/_index/components/awards/IndexAwards";
-import { themeClasses } from "@/theme/theme";
-import Center from "@/common/components/atoms/Center";
-import IndexItemTitles from "./components/IndexItemTitles";
 import IndexIntroduction from "./components/introduction/IndexIntroduction";
 
 export default function IndexRoute() {
