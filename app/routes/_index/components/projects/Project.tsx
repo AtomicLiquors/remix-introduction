@@ -3,6 +3,7 @@ import { ProjectProps } from "./projectType";
 
 import StackBadge from "@/common/stack/StackBadge";
 import RowCard from "@/common/components/molecules/RowCard";
+import GridWithFarLeftItem from "@/common/components/atoms/GridWithFarLeftItem";
 
 const Project: React.FC<ProjectProps> = (proj) => {
   return (
@@ -46,6 +47,13 @@ const Project: React.FC<ProjectProps> = (proj) => {
           </div>
         </div>
       )}
+      {proj.links.code && (
+     <GridWithFarLeftItem left={<img
+            className="w-10 h-10 rounded-full mr-4"
+            src="/img/github.png"
+            alt="Github"
+          />} up={<p className="text-gray-900 leading-none font-bold">| 소스 코드 |</p>} down={<p className="text-gray-600 mt-1">{proj.links.code}</p>}/>
+     )}
     </RowCard>
   );
 };
