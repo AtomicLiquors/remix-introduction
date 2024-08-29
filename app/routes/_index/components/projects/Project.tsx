@@ -27,7 +27,7 @@ const Project: React.FC<ProjectProps> = (proj) => {
           성과 및 리뷰
         </div>
         {proj.achievements.map((achievement, idx) => (
-          <p key={idx} className="break-keep text-gray-700 text-base">
+          <p key={idx} className="break-keep text-gray-700 text-sm">
             <div className="flex gap-1">
               <div>-</div>
               {achievement}
