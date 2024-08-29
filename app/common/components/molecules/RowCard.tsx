@@ -11,6 +11,7 @@ const RowCard: React.FC<RowCardProps> = ({ children, imgSrc, imgLink }) => {
   const img: ReactNode = (
     <img
       src={imgSrc}
+      className="lg:h-full lg:object-cover "
     />
   );
 
@@ -23,8 +24,8 @@ const RowCard: React.FC<RowCardProps> = ({ children, imgSrc, imgLink }) => {
       >
         {imgSrc && 
         <div 
-          className="max-h-48 lg:w-48 xl:w-96 flex-none rounded-t lg:rounded-b overflow-hidden">
-        {imgLink ? <a href={imgLink} target="blank">{img}</a> : img}
+          className="max-h-48 lg:w-48 lg:h-48 xl:h-auto xl:w-96 flex-none rounded-t lg:rounded-b overflow-hidden">
+        {imgLink ? <a href={imgLink} target="blank" className="lg:h-full">{img}</a> : img}
         </div>}
         <div>{children}</div>
       </div>
