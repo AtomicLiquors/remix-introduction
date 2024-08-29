@@ -5,5 +5,5 @@ interface LineBreakProps {
 }
 
 export default function LineBreak({ children }: LineBreakProps) {
-  return <span className="inline-block">{children}</span>;
+  return <span className="inline-block">&nbsp;{children}</span>;
 }
