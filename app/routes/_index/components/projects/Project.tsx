@@ -15,45 +15,50 @@ const Project: React.FC<ProjectProps> = (proj) => {
       </div>
       <div className="flex gap-2 flex-wrap text-sm sm:text-base">
         {proj.stacks.map((stack, idx) => (
-          <StackBadge key={idx} stackKey={stack}/>
+          <StackBadge key={idx} stackKey={stack} />
         ))}
       </div>
-      <div className={`break-keep ${themeClasses.text.secondary}`}>{proj.description}</div>
-      <br/>
-      <div className="hidden sm:block">
-      <div className={`${themeClasses.text.primary} font-bold`}>
-        성과 및 리뷰
+      <div className={`break-keep ${themeClasses.text.secondary}`}>
+        {proj.description}
       </div>
-      {proj.achievements.map((achievement, idx) => (
-        <p key={idx} className="break-keep text-gray-700 text-base">
-          <div className="flex gap-1">
-            <div>-</div>
-          {achievement}
-          </div>
-        </p>
-      ))}
+      <br />
+      <div className="hidden sm:block">
+        <div className={`${themeClasses.text.primary} font-bold`}>
+          성과 및 리뷰
+        </div>
+        {proj.achievements.map((achievement, idx) => (
+          <p key={idx} className="break-keep text-gray-700 text-base">
+            <div className="flex gap-1">
+              <div>-</div>
+              {achievement}
+            </div>
+          </p>
+        ))}
       </div>
 
       {proj.links.code && (
-        <div className="flex items-center mt-4">
-          <img
-            className="w-10 h-10 rounded-full mr-4"
-            src="/img/github.png"
-            alt="Github"
-          />
-          <div className="text-sm">
-            <p className="text-gray-900 leading-none font-bold">| 소스 코드 |</p>
-            <p className="text-gray-600 mt-1">{proj.links.code}</p>
-          </div>
-        </div>
+        <GridWithFarLeftItem
+          className={"text-sm mt-4"}
+          onClick={() => {}}
+          left={
+            <img
+              className="h-[1.5rem] sm:h-[3rem] rounded-full mr-1"
+              src="/img/github.png"
+              alt="Github"
+            />
+          }
+          up={
+            <div className="flex items-center h-full text-gray-900 leading-none font-bold">
+              | 소스 코드 |
+            </div>
+          }
+          down={
+            <div className="flex items-center text-gray-600">
+              {proj.links.code}
+            </div>
+          }
+        />
       )}
-      {proj.links.code && (
-     <GridWithFarLeftItem left={<img
-            className="w-10 h-10 rounded-full mr-4"
-            src="/img/github.png"
-            alt="Github"
-          />} up={<p className="text-gray-900 leading-none font-bold">| 소스 코드 |</p>} down={<p className="text-gray-600 mt-1">{proj.links.code}</p>}/>
-     )}
     </RowCard>
   );
 };
