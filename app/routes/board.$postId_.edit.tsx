@@ -2,7 +2,7 @@ import {
   BoardEditRequestDTO,
   editBoard,
 } from "@/model/board.server";
-import { ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
+import { ErrorResponse, ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
 import { isValidEditInput } from "./board._index/util/validateForm";
 
 export const action: ActionFunction = async ({
@@ -16,14 +16,12 @@ export const action: ActionFunction = async ({
   const content = (formData.get("content") as string).trim();
   const is_private = formData.get("is_private") as string;
 
-  //To-Do: 유효성 규칙 검증
+  //To-Do: 유효성 규칙 검증은 Action에서 하고, 
+  // UI는 에러를 반환받아서 처리만 하고 유효성 검증을 중복해서 하지 않음
 
-  if (!title || !content || !post_id) {
-    console.log(title);
-    console.log(content);
-    console.log(post_id);
+  if (!title || !content || !post_id ) {
     const response = json({ success: false, error: "missing field" }, { status: 422 });
-    console.log(response);
+    // ErrorResponse로 대체
     return response;
   }
 
