@@ -7,7 +7,7 @@ import GridWithFarLeftItem from "@/common/components/atoms/GridWithFarLeftItem";
 
 const Project: React.FC<ProjectProps> = (proj) => {
   return (
-    <RowCard imgSrc={proj.screenshots[0]}>
+    <RowCard imgSrc={proj.screenshots[0]} imgLink={proj.links.code || ""}>
       <div className={`${themeClasses.text.primary} font-bold text-xl mb-2`}>
         <span className="text-sm text-gray-600">{proj.emoji}</span>
         &nbsp;
@@ -37,27 +37,28 @@ const Project: React.FC<ProjectProps> = (proj) => {
       </div>
 
       {proj.links.code && (
-        <GridWithFarLeftItem
-          className={"text-sm mt-4"}
-          onClick={() => {}}
-          left={
-            <img
-              className="h-[1.5rem] sm:h-[3rem] rounded-full mr-1"
-              src="/img/github.png"
-              alt="Github"
-            />
-          }
-          up={
-            <div className="flex items-center h-full text-gray-900 leading-none font-bold">
-              | 소스 코드 |
-            </div>
-          }
-          down={
-            <div className="flex items-center text-gray-600">
-              {proj.links.code}
-            </div>
-          }
-        />
+        <a href={proj.links.code} target="blank">
+          <GridWithFarLeftItem
+            className={"text-sm mt-1 sm:mt-6"}
+            left={
+              <img
+                className="h-[1.5rem] sm:h-[2.5rem] rounded-full mr-1"
+                src="/img/github.png"
+                alt="Github"
+              />
+            }
+            up={
+              <div className="flex items-center h-full text-gray-900 leading-none font-bold">
+                | 소스 코드 |
+              </div>
+            }
+            down={
+              <div className="flex items-center text-gray-600">
+                {proj.links.code}
+              </div>
+            }
+          />
+        </a>
       )}
     </RowCard>
   );
