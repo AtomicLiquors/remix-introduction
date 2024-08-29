@@ -19,10 +19,10 @@ const Project: React.FC<ProjectProps> = (proj) => {
       </div>
       <div className={`break-keep ${themeClasses.text.secondary}`}>{proj.description}</div>
       <br/>
+      <div className="hidden sm:block">
       <div className={`${themeClasses.text.primary} font-bold`}>
         성과 및 리뷰
       </div>
-
       {proj.achievements.map((achievement, idx) => (
         <p key={idx} className="break-keep text-gray-700 text-base">
           <div className="flex gap-1">
@@ -31,6 +31,7 @@ const Project: React.FC<ProjectProps> = (proj) => {
           </div>
         </p>
       ))}
+      </div>
 
       {proj.links.code && (
         <div className="flex items-center mt-4">
