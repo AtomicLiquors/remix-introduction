@@ -12,7 +12,7 @@ const Project: React.FC<ProjectProps> = (proj) => {
         &nbsp;
         {proj.title}
       </div>
-      <div className="flex gap-2 flex-wrap">
+      <div className="flex gap-2 flex-wrap text-sm sm:text-base">
         {proj.stacks.map((stack, idx) => (
           <StackBadge key={idx} stackKey={stack}/>
         ))}
