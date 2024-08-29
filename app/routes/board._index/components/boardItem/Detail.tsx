@@ -68,14 +68,14 @@ export default function BoardItemDetail({
     const title = formData.get("title")?.toString();
     const content = formData.get("content")?.toString();
 
-    if (!title) {
-      setInvalidFormMsg("제목을 입력해 주세요.");
+    if (!title || !content) {
+      setInvalidFormMsg("제목, 내용을 입력해 주세요.");
       return;
     }
 
     // 유효성 검증 결과
     const titleValidation = validateTitle(title);
-    const contentValidation = !!content && validateContent(content);
+    const contentValidation = validateContent(content);
 
     // 상태 업데이트
     setIsTitleValid(titleValidation);

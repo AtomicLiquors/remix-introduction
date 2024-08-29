@@ -1,3 +1,5 @@
+//To-Do : 글자수 제한 변수화, 정규식/조건식/메시지에 반영
+
 const verifyRegex = {
   author: /^[0-9A-Za-zㄱ-ㅎㅏ-ㅣ가-힣_]{2,8}$/,
   password: /^[A-Za-z0-9~`!@#$%^&*()_\-+=\[\]{}|\\;:'",.<>\/?]{4,15}$/,
@@ -16,7 +18,7 @@ export const validatePassword = (password: string): boolean => {
 };
 
 export const validateContent = (content: string): boolean => {
-  return content.length > 0;
+  return content.length > 0 && content.length <= 1000 ;
 };
 
 export const validateCreateInput = (
