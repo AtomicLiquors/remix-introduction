@@ -5,7 +5,7 @@ import LineBreak from "@/common/components/atoms/LineBreak";
 
 export default function IndexIntroduction() {
   return (
-    <>
+    <div>
       <IndexItemTitles title="Introduction" />
       <Center className={`mt-5 ${themeClasses.text.secondary}`}>
         <p>안녕하세요!
@@ -18,6 +18,6 @@ export default function IndexIntroduction() {
         </p>
         <p>색다른 소프트웨어를<LineBreak>만들어내는 팀원입니다.</LineBreak></p>
       </Center>
-    </>
+    </div>
   );
 }
