@@ -17,15 +17,18 @@ const Project: React.FC<ProjectProps> = (proj) => {
           <StackBadge key={idx} stackKey={stack}/>
         ))}
       </div>
-      <div className={themeClasses.text.secondary}>{proj.description}</div>
-      <br></br>
+      <div className={`break-keep ${themeClasses.text.secondary}`}>{proj.description}</div>
+      <br/>
       <div className={`${themeClasses.text.primary} font-bold`}>
         성과 및 리뷰
       </div>
 
       {proj.achievements.map((achievement, idx) => (
-        <p key={idx} className="text-gray-700 text-base">
-          - {achievement}
+        <p key={idx} className="break-keep text-gray-700 text-base">
+          <div className="flex gap-1">
+            <div>-</div>
+          {achievement}
+          </div>
         </p>
       ))}
 
