@@ -7,7 +7,7 @@ export default function IndexIntroduction() {
     <>
       <IndexItemTitles title="Introduction" />
       <Center className={`mt-5 ${themeClasses.text.secondary}`}>
-        <p>안녕하세요! 프론트엔드 웹 개발자 최효빈입니다.</p>
+        <p>안녕하세요!<span className="inline-block">프론트엔드 웹 개발자 최효빈입니다.</span></p>
         <p>프론트엔드 분야의 다양한 기술과 빠른 피드백을 즐깁니다.</p>
         <p>
           사소한 아이디어도 진지하게 경청하고, 안 되는 이유보다 되는 이유를

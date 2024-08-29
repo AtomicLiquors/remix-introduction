@@ -1,7 +1,7 @@
 import { EducationProps } from "./educationType";
-import TLItemTitle from "@/common/components/atoms/timeline/TLItemTitle";
-import TLItemCaption from "@/common/components/atoms/timeline/TLItemTime";
-import TLItemDescription from "@/common/components/atoms/timeline/TLItemContent";
+import TLItemTitle from "@/common/timeline/atoms/timeline/TLItemTitle";
+import TLItemCaption from "@/common/timeline/atoms/timeline/TLItemTime";
+import TLItemDescription from "@/common/timeline/atoms/timeline/TLItemContent";
 import { FONT_AWESOME_TYPES } from "@/common/icon/FontAwesome";
 import IndexItemTitles from "../IndexItemTitles";
 
