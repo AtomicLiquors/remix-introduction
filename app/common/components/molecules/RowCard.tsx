@@ -23,7 +23,7 @@ const RowCard: React.FC<RowCardProps> = ({ children, imgSrc, imgLink }) => {
       >
         {imgSrc && 
         <div 
-          className="max-h-48 lg:h-auto lg:w-48 xl:w-96 flex-none rounded-t lg:rounded-b overflow-hidden">
+          className="max-h-48 lg:w-48 xl:w-96 flex-none rounded-t lg:rounded-b overflow-hidden">
         {imgLink ? <a href={imgLink} target="blank">{img}</a> : img}
         </div>}
         <div>{children}</div>
