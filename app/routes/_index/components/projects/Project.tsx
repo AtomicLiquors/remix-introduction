@@ -53,8 +53,8 @@ const Project: React.FC<ProjectProps> = (proj) => {
               </div>
             }
             down={
-              <div className={`flex items-center text-blue-400 overflow-hidden ${themeClasses.text.primary}`}>
-                {proj.links.code}
+              <div className={`flex items-center ${themeClasses.text.primary}`}>
+                <div className="truncate">{proj.links.code}</div>
               </div>
             }
           />
