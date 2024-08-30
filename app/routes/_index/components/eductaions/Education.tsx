@@ -1,7 +1,7 @@
 import { EducationProps } from "./educationType";
-import TLItemTitle from "@/common/timeline/atoms/timeline/TLItemTitle";
-import TLItemCaption from "@/common/timeline/atoms/timeline/TLItemTime";
-import TLItemDescription from "@/common/timeline/atoms/timeline/TLItemContent";
+import TLItemTitle from "@/common/timeline/atoms/TLItemTitle";
+import TLItemCaption from "@/common/timeline/atoms/TLItemTime";
+import TLItemDescription from "@/common/timeline/atoms/TLItemContent";
 import { FONT_AWESOME_TYPES, TAILWIND_COLOR_TYPES } from "@/common/icon/FontAwesome";
 
 const Education: React.FC<EducationProps> = (edu) => {

@@ -1,6 +1,6 @@
 
-import TLItemTitle from "@/common/timeline/atoms/timeline/TLItemTitle";
-import TLItemCaption from "@/common/timeline/atoms/timeline/TLItemTime";
+import TLItemTitle from "@/common/timeline/atoms/TLItemTitle";
+import TLItemCaption from "@/common/timeline/atoms/TLItemTime";
 import { CertificateProps } from "./certificateType";
 import { FAType, FONT_AWESOME_TYPES, TCType } from "@/common/icon/FontAwesome";
 

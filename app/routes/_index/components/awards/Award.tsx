@@ -1,6 +1,6 @@
 
-import TLItemTitle from "@/common/timeline/atoms/timeline/TLItemTitle";
-import TLItemCaption from "@/common/timeline/atoms/timeline/TLItemTime";
+import TLItemTitle from "@/common/timeline/atoms/TLItemTitle";
+import TLItemCaption from "@/common/timeline/atoms/TLItemTime";
 import { AwardProps } from "./awardType";
 import { FONT_AWESOME_TYPES, TAILWIND_COLOR_TYPES } from "@/common/icon/FontAwesome";
 
