@@ -16,7 +16,7 @@ const RowCard: React.FC<RowCardProps> = ({ children, imgSrc, imgLink }) => {
   );
 
   return (
-    <div className="p-4 flex justify-center">
+    <div className="p-1 sm:p-4 flex justify-center">
       <div
         className={`${themeClasses.bg.card} 
         ${imgSrc && "flex flex-col lg:flex-row-reverse justify-between"} 
