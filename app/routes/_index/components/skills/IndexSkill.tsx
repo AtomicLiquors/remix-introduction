@@ -1,7 +1,6 @@
 import LineBreak, { breakpoint } from "@/common/components/atoms/LineBreak";
 import { SkillProps } from "./indexSkillType";
 import { themeClasses } from "@/theme/theme";
-import BulletList from "@/common/components/molecules/BulletList";
 
 const path = "/img/skills";
 
@@ -33,6 +32,7 @@ const IndexSkill: React.FC<SkillProps> = ({ title, content, img }) => {
             </div>
           ))}
         </div>
+
       </div>
     </div>
   );
