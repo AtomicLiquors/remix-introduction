@@ -3,17 +3,22 @@ import { SkillProps } from "./indexSkillType";
 export const skillData: SkillProps[] = [
   {
     title: "JavaScript",
-    content: "Proficient in ES6 and beyond.",
+    content: [
+      "debouncing 활용 사용자 입력 처리 최적화",
+      "Node.js 환경에서 동작하는 CRON 작업 기반 그룹 스터디용 Discord 봇 개발",
+      "Jest 활용 안정적 클라이언트 애플리케이션 개발 경험",
+      "Remix 기반 풀스택 애플리케이션 개발 경험"
+    ],
     img: "javascript",
   },
   {
     title: "TypeScript",
-    content: "Strong understanding of static typing and type inference.",
+    content: ["Interface 활용 타입 안정적 애플리케이션 개발"],
     img: "typescript",
   },
   {
     title: "React",
-    content: "Experienced in building dynamic user interfaces with React.",
+    content: ["Zustand 활용 전역 상태관리", "useMemo 훅을 이용한 컴포넌트 렌더링 최적화", "커스텀 hook을 활용한 UI와 컴포넌트 상태 분리"],
     img: "react",
   },
   /*
