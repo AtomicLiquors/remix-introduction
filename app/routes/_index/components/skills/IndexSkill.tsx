@@ -17,15 +17,21 @@ const IndexSkill: React.FC<SkillProps> = ({ title, content, img }) => {
           {title}
         </h3>
         {/* To-Do: Indent 글머리 기호 리스트 */}
-        <ol className="list-disc list-outside space-y-2 pl-5">
-        {content.map((line, lineIdx) => (
-          <li className={themeClasses.text.secondary} key={lineIdx}>
-            {line.split(breakpoint).map((token, tokenIdx) => (
-              <LineBreak key={tokenIdx}>{token}</LineBreak>
-            ))}
-          </li>
-        ))}
-        </ol>
+        <div className="space-y-2">
+          {content.map((line, lineIdx) => (
+            <div
+              className={`flex text-left items-start ${themeClasses.text.secondary}`}
+              key={lineIdx}
+            >
+              <span className="mr-2">•</span>
+              <div className="block">
+                {line.split(breakpoint).map((token, tokenIdx) => (
+                  <LineBreak key={tokenIdx}>{token}</LineBreak>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
