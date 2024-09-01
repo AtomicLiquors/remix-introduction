@@ -11,7 +11,7 @@ const Education: React.FC<EducationProps> = (edu) => {
       <TLItemTitle title={edu.title} icon={FONT_AWESOME_TYPES.EDUCATION} color={TAILWIND_COLOR_TYPES.EDUCATION}/>
       <TLItemCaption>
         {edu.startDate.toLocaleDateString("ko-KR")} -{" "}
-        {edu.endDate.toLocaleDateString("ko-KR")} ({edu.time}시간) <span className="hidden sm:inline">|</span>
+        {edu.endDate.toLocaleDateString("ko-KR")} ({edu.time}시간) <span className="hidden sm:inline">|{" "}</span>
         <LineBreak>{edu.location}</LineBreak>
       </TLItemCaption>
       <TLItemDescription>
