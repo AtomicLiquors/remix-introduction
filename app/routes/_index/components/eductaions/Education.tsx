@@ -27,10 +27,10 @@ const Education: React.FC<EducationProps> = (edu) => {
         </div>
       </TLItemCaption>
       <TLItemDescription>
-        {edu.content.map((line, idx) => (
-          <p className="text-sm" key={idx}>
-            {line.split(breakpoint).map((e) => (
-              <LineBreak>{e}</LineBreak>
+        {edu.content.map((line, lineIdx) => (
+          <p className="text-sm" key={lineIdx}>
+            {line.split(breakpoint).map((token, tokenIdx) => (
+              <LineBreak key={tokenIdx}>{token}</LineBreak>
             ))}
           </p>
         ))}
