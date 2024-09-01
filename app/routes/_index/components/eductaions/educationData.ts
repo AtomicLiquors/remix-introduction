@@ -10,9 +10,9 @@ export const educationData: EducationProps[] = [
     time: 1600,
     location: "삼성전자주식회사 · 멀티캠퍼스 역삼",
     content: [
-      "• 수료등급 : 우수 (상위 30% 이내)",
-      `• 1학기 몰입형 코딩 집중 교육 (800시간) :${breakpoint}Java + JavaScript 웹 개발 실습,${breakpoint}Java 알고리즘 문제 해결`,
-      `• 2학기 심화 프로젝트 (800시간) :${breakpoint}자기주도형 팀 프로젝트 기반${breakpoint}실전 SW 개발 실습`,
+      "수료등급 : 우수 (상위 30% 이내)",
+      `1학기 몰입형 코딩 집중 교육 (800시간) :${breakpoint}Java + JavaScript 웹 개발 실습,${breakpoint}Java 알고리즘 문제 해결`,
+      `2학기 심화 프로젝트 (800시간) :${breakpoint}자기주도형 팀 프로젝트 기반${breakpoint}실전 SW 개발 실습`,
     ],
   },
   {

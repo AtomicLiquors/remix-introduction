@@ -7,6 +7,7 @@ import {
   TAILWIND_COLOR_TYPES,
 } from "@/common/icon/FontAwesome";
 import LineBreak, { breakpoint } from "@/common/components/atoms/LineBreak";
+import BulletListItem from "@/common/components/atoms/BulletListItem";
 
 const Education: React.FC<EducationProps> = (edu) => {
   return (
@@ -28,12 +29,10 @@ const Education: React.FC<EducationProps> = (edu) => {
       </TLItemCaption>
       <TLItemDescription>
         {edu.content.map((line, lineIdx) => (
-          <p className="text-sm" key={lineIdx}>
-            {line.split(breakpoint).map((token, tokenIdx) => (
+        <BulletListItem className={"text-sm"} key={lineIdx} spacing={0} bullet={<>‧</>} item={line.split(breakpoint).map((token, tokenIdx) => (
               <LineBreak key={tokenIdx}>{token}</LineBreak>
-            ))}
-          </p>
-        ))}
+            ))}/>
+          ))}
       </TLItemDescription>
     </>
   );

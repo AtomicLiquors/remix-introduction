@@ -21,7 +21,7 @@ const IndexSkill: React.FC<SkillProps> = ({ title, content, img }) => {
         
         <BulletListContainer className={themeClasses.text.secondary}>
           {content.map((line, lineIdx) => (
-            <BulletListItem key={lineIdx} bullet={<>•</>} item={line.split(breakpoint).map((token, tokenIdx) => (
+            <BulletListItem key={lineIdx} spacing={1} bullet={<>•</>} item={line.split(breakpoint).map((token, tokenIdx) => (
               <LineBreak key={tokenIdx}>{token}</LineBreak>
             ))}/>
           ))}
