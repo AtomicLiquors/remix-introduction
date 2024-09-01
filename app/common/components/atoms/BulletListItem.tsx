@@ -11,9 +11,9 @@ interface ListItemProps {
 const spacingTWClass: {
   [key: number]: string;
 } = {
-  0: "",
-  1: "mr-1",
-  2: "mr-2",
+  0: "mr-2 sm: mr-0",
+  1: "mr-3 sm: mr-1",
+  2: "mr-4 sm: mr-2",
 };
 
 export default function BulletListItem({
