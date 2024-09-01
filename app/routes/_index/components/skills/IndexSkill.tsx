@@ -1,6 +1,8 @@
 import LineBreak, { breakpoint } from "@/common/components/atoms/LineBreak";
 import { SkillProps } from "./indexSkillType";
 import { themeClasses } from "@/theme/theme";
+import BulletListContainer from "@/common/components/molecules/BulletListContainer";
+import BulletListItem from "@/common/components/atoms/BulletListItem";
 
 const path = "/img/skills";
 
@@ -17,21 +19,13 @@ const IndexSkill: React.FC<SkillProps> = ({ title, content, img }) => {
           {title}
         </h3>
         
-        <div className="space-y-1">
+        <BulletListContainer className={themeClasses.text.secondary}>
           {content.map((line, lineIdx) => (
-            <div
-              className={`flex text-left items-start ${themeClasses.text.secondary}`}
-              key={lineIdx}
-            >
-              <span className="mr-2">•</span>
-              <div className="block">
-                {line.split(breakpoint).map((token, tokenIdx) => (
-                  <LineBreak key={tokenIdx}>{token}</LineBreak>
-                ))}
-              </div>
-            </div>
+            <BulletListItem key={lineIdx} bullet={<>•</>} item={line.split(breakpoint).map((token, tokenIdx) => (
+              <LineBreak key={tokenIdx}>{token}</LineBreak>
+            ))}/>
           ))}
-        </div>
+        </BulletListContainer>
 
       </div>
     </div>
