@@ -1,8 +1,6 @@
 import {
-  forwardRef,
   ReactNode,
   useEffect,
-  useImperativeHandle,
   useRef,
 } from "react";
 import Center from "@/common/components/atoms/Center";
@@ -11,10 +9,10 @@ interface ModalProps {
   children: ReactNode;
   closeBtn?: boolean;
   isModalOpen: boolean;
-  setIsModalOpen: (state: boolean) => void;
+  closeModal: () => void;
 }
 
-export function Modal({ children, closeBtn, isModalOpen, setIsModalOpen }: ModalProps){
+export function Modal({ children, closeBtn, isModalOpen, closeModal: closeCurrModal }: ModalProps){
   
   const modalRef = useRef<HTMLDialogElement>(null);
   const modal = modalRef.current;
@@ -25,7 +23,7 @@ export function Modal({ children, closeBtn, isModalOpen, setIsModalOpen }: Modal
     if (modal) {
       const handleClickOutside = (event: MouseEvent) => {
         if (event.target === modal) {
-          setIsModalOpen(false);
+          closeCurrModal();
         }
       };
 
