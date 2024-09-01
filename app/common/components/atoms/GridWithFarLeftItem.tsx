@@ -9,7 +9,7 @@ interface GridWithFarLeftItemProps {
 
 export default function GridWithFarLeftItem({className, left, up, down}: GridWithFarLeftItemProps) {
   return (
-    <div className={`grid grid-cols-[auto_1fr] grid-rows-2 ${className}`}>
+    <div className={`grid grid-cols-[auto_1fr] grid-rows-[auto_1fr]  ${className}`}>
       <div className="row-span-1 col-span-1 sm:row-span-2">
         {left}
       </div>
