@@ -18,6 +18,7 @@ export default function IndexRoute() {
         <IndexAwards />
         <IndexCertificates />
         <IndexContactMe />
+        <div></div> {/* Container의 flex gap을 통해 하단 여백을 주기 위한 빈 div */}
       </Container>
     </>
   );

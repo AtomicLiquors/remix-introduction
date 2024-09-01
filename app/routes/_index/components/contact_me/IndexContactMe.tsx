@@ -10,7 +10,7 @@ const handleMailButtonclick = () => {
 
 export default function IndexContactMe() {
   return (
-    <Center flex flexCol className="h-64">
+    <Center flex flexCol>
       <div className={`${themeClasses.text.primary} font-bold text-4xl`}>
         Contact Me!
       </div>
