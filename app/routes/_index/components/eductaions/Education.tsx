@@ -3,7 +3,7 @@ import TLItemTitle from "@/common/timeline/atoms/TLItemTitle";
 import TLItemCaption from "@/common/timeline/atoms/TLItemTime";
 import TLItemDescription from "@/common/timeline/atoms/TLItemContent";
 import { FONT_AWESOME_TYPES, TAILWIND_COLOR_TYPES } from "@/common/icon/FontAwesome";
-import LineBreak from "@/common/components/atoms/LineBreak";
+import LineBreak, { breakpoint } from "@/common/components/atoms/LineBreak";
 
 const Education: React.FC<EducationProps> = (edu) => {
   return (
@@ -16,7 +16,7 @@ const Education: React.FC<EducationProps> = (edu) => {
       </TLItemCaption>
       <TLItemDescription>
         {edu.content.map((line, idx) => (
-          <p className="text-sm" key={idx}>{line}</p>
+          <p className="text-sm" key={idx}>{line.split(breakpoint).map((e) => <LineBreak>{e}</LineBreak> )}</p>
         ))}
       </TLItemDescription>
     </>
