@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import BulletListItem from "../atoms/BulletListItem";
 
 interface BulletListProps {
-  listItemClassName: string;
+  listItemClassName?: string;
   bullet: ReactNode;
   data: ReactNode[];
 }

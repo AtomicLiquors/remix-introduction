@@ -1,6 +1,7 @@
 import LineBreak, { breakpoint } from "@/common/components/atoms/LineBreak";
 import { SkillProps } from "./indexSkillType";
 import { themeClasses } from "@/theme/theme";
+import BulletList from "@/common/components/molecules/BulletList";
 
 const path = "/img/skills";
 

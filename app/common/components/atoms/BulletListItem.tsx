@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 interface ListItemProps {
-  className: string;
+  className?: string;
   bullet: ReactNode;
   item: ReactNode;
 }
