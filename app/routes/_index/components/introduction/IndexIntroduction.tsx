@@ -17,10 +17,10 @@ export default function IndexIntroduction() {
             <LineBreak>Java & JavaScript를 활용한</LineBreak>
             <LineBreak>팀 프로젝트 및</LineBreak>
           </p>
-          <p>웹 애플리케이션 개발 경험과</p>
+          <p>웹 애플리케이션 개발 경험을 통해</p>
           <p>
             <LineBreak>프론트엔드 & 백엔드 포지션의</LineBreak>
-            <LineBreak>기반 지식을 이해하고 있으며,</LineBreak>
+            <LineBreak>기반 역량을 보유하고 있으며,</LineBreak>
           </p>
           <p>
             <LineBreak>특히 프론트엔드 분야의 다양한 기술과</LineBreak>
