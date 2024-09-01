@@ -8,7 +8,7 @@ import { ErrorResponse, useFetcher } from "@remix-run/react";
 import { useRef, FormEvent, useEffect, useState } from "react";
 import AvatarSelector from "@/common/avatar/AvatarSelector";
 import { QueryResult } from "@vercel/postgres";
-import { boardInputClassName } from "../../util/boardTailwind";
+import { boardInputClassName } from "../../utils/boardTailwind";
 import BoardPrivateCheckbox from "./form/PrivateCheckbox";
 import BoardTitleInput from "./form/TitleInput";
 import BoardContentTextArea from "./form/ContentTextArea";
@@ -17,8 +17,8 @@ import {
   validateContent,
   validatePassword,
   validateTitle,
-} from "../../util/validateForm";
-import { invalidMessage } from "../../util/invalidMessage";
+} from "../../utils/validateForm";
+import { invalidMessage } from "../../utils/invalidMessage";
 import InvalidFormMsg from "./form/InvalidFormMsg";
 
 interface BoardItemCreateProps {

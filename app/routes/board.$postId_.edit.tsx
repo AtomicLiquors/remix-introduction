@@ -3,7 +3,7 @@ import {
   editBoard,
 } from "@/model/board.server";
 import { ErrorResponse, ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
-import { isValidEditInput } from "./board._index/util/validateForm";
+import { isValidEditInput } from "./board._index/utils/validateForm";
 
 export const action: ActionFunction = async ({
   params, request,

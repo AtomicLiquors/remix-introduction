@@ -1,4 +1,4 @@
-import { boardInputClassName } from "../../../util/boardTailwind";
+import { boardInputClassName } from "../../../utils/boardTailwind";
 import _ from "lodash";
 
 interface BoardTitleInputProps {

@@ -20,8 +20,8 @@ import { QueryResult } from "@vercel/postgres";
 import BoardPrivateCheckbox from "./form/PrivateCheckbox";
 import BoardTitleInput from "./form/TitleInput";
 import BoardContentTextArea from "./form/ContentTextArea";
-import { validateContent, validateTitle } from "../../util/validateForm";
-import { invalidMessage } from "../../util/invalidMessage";
+import { validateContent, validateTitle } from "../../utils/validateForm";
+import { invalidMessage } from "../../utils/invalidMessage";
 import InvalidFormMsg from "./form/InvalidFormMsg";
 
 interface BoardItemDetailProps {

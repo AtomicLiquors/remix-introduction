@@ -1,6 +1,6 @@
 
 import _ from "lodash";
-import { boardInputClassName } from "@/routes/board._index/util/boardTailwind";
+import { boardInputClassName } from "@/routes/board._index/utils/boardTailwind";
 
 interface BoardContentTextareaProps {
   isValid: boolean;

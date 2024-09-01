@@ -45,7 +45,7 @@ const IndexSkill: React.FC<SkillProps> = ({ title, content, img }) => {
           </h3>
         }
         down={
-          <BulletListContainer className={`ml-2 text-sm sm:text-base ${themeClasses.text.secondary}`}>
+          <BulletListContainer className={`ml-3 text-sm sm:text-base ${themeClasses.text.secondary}`}>
             {content.map((line, lineIdx) => (
               <BulletListItem
                 key={lineIdx}
