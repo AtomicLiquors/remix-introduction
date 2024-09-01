@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import BulletListItem from "./BulletListItem";
+import BulletListItem from "../atoms/BulletListItem";
 
 interface BulletListProps {
   listItemClassName: string;
