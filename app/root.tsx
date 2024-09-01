@@ -27,6 +27,8 @@ import Center from "@/common/components/atoms/Center";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import Profile from "./common/layout/profile/Profile";
+import LineBreak from "./common/components/atoms/LineBreak";
+import Footer from "./common/layout/Footer";
 
 export const action = async () => {
   const contact = await createEmptyContact();
@@ -154,24 +156,7 @@ export default function App() {
               </button>
             </div>
             */}
-            <a
-              href="https://github.com/AtomicLiquors/remix-introduction/issues"
-              target="_blank"
-              className="flex gap-3 p-5"
-            >
-              <FontAwesomeIcon className="w-12" icon={faGithub} />
-              <div>
-                <p className="font-bold text-lg">
-                  방문 중에 불편이 있으셨나요?
-                </p>
-                <p className="text-sm">
-                  Github 저장소에서 Issue를 통해 제보해주세요!
-                </p>
-              </div>
-            </a>
-            <div className="text-sm text-gray-400">
-              ⓒ 2024 Hyobin Choe, AtomicLiquors All Rights Reserved.
-            </div>
+            <Footer/>
           </Center>
         </div>
         <Scripts />
