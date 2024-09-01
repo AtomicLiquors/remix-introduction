@@ -15,7 +15,7 @@ export default function Timeline({
           <TimelineListItem key={idx}>{chlid}</TimelineListItem>
         ))
       ) : (
-        <TimelineListItem>{children}</TimelineListItem>
+        <TimelineListItem key={0}>{children}</TimelineListItem>
       )}
     </ol>
   );
