@@ -7,11 +7,7 @@ export default function IndexIntroduction() {
   return (
     <div>
       <IndexItemTitles title="Introduction" />
-      <Center
-        flex
-        flexCol
-        className={`mt-5 ${themeClasses.text.secondary} gap-2`}
-      >
+      <Center className={`mt-5 ${themeClasses.text.secondary} space-y-2`}>
         <div>
           <LineBreak>안녕하세요!</LineBreak>
           <LineBreak>풀스택 웹 개발자 최효빈입니다.</LineBreak>
@@ -21,11 +17,10 @@ export default function IndexIntroduction() {
             <LineBreak>Java & JavaScript를 활용한</LineBreak>
             <LineBreak>팀 프로젝트 및</LineBreak>
           </p>
-          <p>웹 애플리케이션 개발 경험을 통해</p>
+          <p>웹 애플리케이션 개발 경험과</p>
           <p>
-            <LineBreak>
-              프론트 백엔드 포지션에서 요구하는 기반 지식을 이해하고 있으며,
-            </LineBreak>
+            <LineBreak>프론트엔드 & 백엔드 포지션의</LineBreak>
+            <LineBreak>기반 지식을 이해하고 있으며,</LineBreak>
           </p>
           <p>
             <LineBreak>특히 프론트엔드 분야의 다양한 기술과</LineBreak>
@@ -33,10 +28,8 @@ export default function IndexIntroduction() {
           </p>
         </div>
         <div>
-          <p>
-            <LineBreak>사소한 아이디어도 진지하게 경청하고,</LineBreak>
-            <LineBreak>안 되는 이유보다 되는 이유를 찾으며</LineBreak>
-          </p>
+          <p>사소한 아이디어도 진지하게 경청하고,</p>
+          <p>안 되는 이유보다 되는 이유를 찾으며</p>
           <p>
             <LineBreak>색다른 소프트웨어를</LineBreak>
             <LineBreak>만들어내는 팀원입니다.</LineBreak>

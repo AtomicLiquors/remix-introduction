@@ -37,8 +37,8 @@ export const action = async () => {
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "최효빈 | Front-End Developer" },
-    { name: "프론트엔드 웹 개발자 최효빈의 자기소개 페이지입니다." },
+    { title: "최효빈 | Full-Stack Developer" },
+    { name: "풀스택 웹 개발자 최효빈의 자기소개 페이지입니다." },
   ];
 };
 
