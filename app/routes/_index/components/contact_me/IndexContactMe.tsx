@@ -8,6 +8,8 @@ const handleMailButtonclick = () => {
   alert("구현 준비 중입니다.");
 };
 
+const tailwindIconSizing = "h-8 sm: h-16"
+
 export default function IndexContactMe() {
   return (
     <Center flex flexCol>
@@ -16,16 +18,16 @@ export default function IndexContactMe() {
       </div>
       <Center flex className={`mt-4 gap-4 text-gray-400`}>
         <a href="https://www.linkedin.com/in/atomicliquors/" target="blank">
-          <FontAwesomeIcon icon={faLinkedin} className="h-16"/>
+          <FontAwesomeIcon icon={faLinkedin} className={tailwindIconSizing}/>
         </a>
         <a
           href="https://discordapp.com/users/1026412188753207356"
           target="blank"
         >
-          <FontAwesomeIcon icon={faDiscord} className="h-16"/>
+          <FontAwesomeIcon icon={faDiscord} className={tailwindIconSizing}/>
         </a>
         <a href="https://github.com/atomicliquors" target="blank">
-          <FontAwesomeIcon icon={faGithub} className="h-16"/>
+          <FontAwesomeIcon icon={faGithub} className={tailwindIconSizing}/>
         </a>
 {/*
         <button onClick={handleMailButtonclick}>
