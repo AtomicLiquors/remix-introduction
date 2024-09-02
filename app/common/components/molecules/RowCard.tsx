@@ -11,12 +11,12 @@ const RowCard: React.FC<RowCardProps> = ({ children, imgSrc, imgLink }) => {
   const img: ReactNode = (
     <img
       src={imgSrc}
-      className="lg:h-full lg:object-cover "
+      className="w-full h-auto object-cover lg:w-full lg:h-full"
     />
   );
 
   return (
-    <div className="p-1 sm:p-4 flex justify-center">
+    <div className="p-2 sm:p-4 flex justify-center">
       <div
         className={`${themeClasses.bg.card} 
         ${imgSrc && "flex flex-col lg:flex-row-reverse justify-between"} 
@@ -24,7 +24,7 @@ const RowCard: React.FC<RowCardProps> = ({ children, imgSrc, imgLink }) => {
       >
         {imgSrc && 
         <div 
-          className="max-h-48 lg:w-48 lg:h-48 xl:h-auto xl:w-96 flex-none rounded-t lg:rounded-b overflow-hidden">
+        className="max-h-48 w-full lg:w-48 lg:h-48 xl:h-auto xl:w-96 flex-none rounded-t lg:rounded-b overflow-hidden">
         {imgLink ? <a href={imgLink} target="blank" className="lg:h-full">{img}</a> : img}
         </div>}
         <div>{children}</div>
