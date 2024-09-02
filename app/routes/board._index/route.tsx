@@ -110,10 +110,10 @@ export default function BoardRoute() {
           <FontAwesomeIcon className="w-8" icon={faCirclePlus} />
         </Center>
       </BoardItemContainer>
-      <Modal isModalOpen={isBoardDetailOpen} closeModal={closeBoardDetailModal} >
+      <Modal isModalOpen={isBoardDetailOpen} closeModal={closeBoardDetailModal} closeBtn>
         <BoardItemDetail isOpenAsEditMode={isBoardDetailEditMode} isModalOpen={isBoardDetailOpen} openBoardData={openBoardData} loading={loading} onBoardDelete={handleBoardDelete} onBoardEdit={handleBoardEdit} update={boardDetailUpdate}/>
       </Modal>
-      <Modal isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal}  >
+      <Modal isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal} closeBtn>
         <BoardItemCreate isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal}/>
       </Modal>
       {result?.data!.map((board, idx) => (
