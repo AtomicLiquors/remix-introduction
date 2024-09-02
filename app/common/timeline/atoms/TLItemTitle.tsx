@@ -20,7 +20,7 @@ const TLItemTitle: React.FC<TLItemTitleProps> = ({ title, icon, color }) => {
           color={color}
         />
       </div>
-      &nbsp;<div>{title.split(breakpoint).map((e) => <LineBreak>{e}</LineBreak>)}</div>
+      &nbsp;<div>{title.split(breakpoint).map((e, idx) => <LineBreak key={idx}>{e}</LineBreak>)}</div>
     </h3>
   );
 };
