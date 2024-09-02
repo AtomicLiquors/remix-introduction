@@ -9,10 +9,10 @@ interface ModalProps {
   children: ReactNode;
   closeBtn?: boolean;
   isModalOpen: boolean;
-  closeCurrModal: () => void;
+  closeModal: () => void;
 }
 
-export function Modal({ children, closeBtn, isModalOpen, closeCurrModal }: ModalProps){
+export function Modal({ children, closeBtn, isModalOpen, closeModal: closeCurrModal }: ModalProps){
   
   const modalRef = useRef<HTMLDialogElement>(null);
   const modal = modalRef.current;
@@ -51,11 +51,11 @@ export function Modal({ children, closeBtn, isModalOpen, closeCurrModal }: Modal
       <div className="flex flex-col justify-between h-full">
         <div className="modal-box sm:m-5 h-full">{children}</div>
         {closeBtn && (
-          <form method="dialog" className="modal-backdrop p-5 border-t">
+          <div className="modal-backdrop p-5 border-t">
             <Center>
-              <button className="border rounded pl-3 pr-3">닫기</button>
-            </Center>
-          </form>
+              <button onClick={closeCurrModal} className="border rounded pl-3 pr-3">닫기</button>
+            </Center> 
+          </div>
         )}
       </div>
     </dialog>
