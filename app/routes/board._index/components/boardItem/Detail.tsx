@@ -58,6 +58,7 @@ export default function BoardItemDetail({
 
   /* 패스워드 체크 */
   const handleEditingPWCheckPassed = () => {
+    setIsEditPwCheckOpen(false);
     setIsEditing(true);
   };
 
@@ -128,7 +129,6 @@ export default function BoardItemDetail({
     setIsEditing(isOpenAsEditMode);
   }, [isOpenAsEditMode, update]);
 
-  
   useEffect(() => {
     if (editFetcher.data?.rowCount === 1) {
       setIsEditing(false);
@@ -179,34 +179,44 @@ export default function BoardItemDetail({
 
   const [isPrivateChecked, setIsPrivateChecked] = useState<boolean>();
 
-  const editPasswordChecker = (post_id: number) => <PasswordChecker
-    post_id={post_id}
-    onPwCheckPassed={handleEditingPWCheckPassed}
-    onQuitBtnClick={() => {
-      setIsEditPwCheckOpen(false);
-    }}
-    label="수정하려면 "
-  />
+  const editPasswordChecker = (post_id: number) => (
+    <PasswordChecker
+      post_id={post_id}
+      onPwCheckPassed={handleEditingPWCheckPassed}
+      onQuitBtnClick={() => {
+        setIsEditPwCheckOpen(false);
+      }}
+      label="수정하려면 "
+    />
+  );
 
-  const deletePasswordChecker = (post_id: number) => <PasswordChecker
-  post_id={post_id}
-  onPwCheckPassed={handleDeletePwCheckPassed}
-  onQuitBtnClick={() => {
-    setIsDeletePwCheckOpen(false);
-  }}
-  label="삭제하려면 "
-/>
+  const deletePasswordChecker = (post_id: number) => (
+    <PasswordChecker
+      post_id={post_id}
+      onPwCheckPassed={handleDeletePwCheckPassed}
+      onQuitBtnClick={() => {
+        setIsDeletePwCheckOpen(false);
+      }}
+      label="삭제하려면 "
+    />
+  );
 
   return (
     <editFetcher.Form onSubmit={handleEditSubmit} className="h-full">
       <BoardDetailContainer>
         {!!invalidFormMsg && <InvalidFormMsg msg={invalidFormMsg} />}
-        <BoardItemRowContainer  className="relative">
-          {openBoardData && (isEditPwCheckOpen || isDeletePwCheckOpen) &&
-          <Center flex flexCol className="sm:hidden absolute w-[101%] h-full backdrop-blur-sm">
+        <BoardItemRowContainer className="relative">
+          {openBoardData && (isEditPwCheckOpen || isDeletePwCheckOpen) && (
+            <Center
+              flex
+              flexCol
+              className="sm:hidden absolute w-[101%] h-full backdrop-blur-sm"
+            >
               {isEditPwCheckOpen && editPasswordChecker(openBoardData.post_id)}
-              {isDeletePwCheckOpen && deletePasswordChecker(openBoardData.post_id)}
-          </Center>}
+              {isDeletePwCheckOpen &&
+                deletePasswordChecker(openBoardData.post_id)}
+            </Center>
+          )}
           <BoardItemBlockWrapper>
             <input
               ref={avatarIdRef}
@@ -229,22 +239,24 @@ export default function BoardItemDetail({
                   <Avatar avatarId={openBoardData.avatar_id!} />
                 ))
               )}
-
-              
             </BoardItemFirstBlock>
             <BoardItemMiddleBlock>
-            {loading ? (
+              {loading ? (
                 <div className="w-full h-full bg-gray-500" />
               ) : (
                 openBoardData && (
-                  <div className="text-base font-bold">{openBoardData.author}</div>
+                  <div className="text-base font-bold">
+                    {openBoardData.author}
+                  </div>
                 )
               )}
               {loading ? (
                 <div className="w-full h-full bg-gray-500" />
               ) : (
                 openBoardData && (
-                  <div className="text-sm">{dateToString(openBoardData.created_at!)}</div>
+                  <div className="text-sm">
+                    {dateToString(openBoardData.created_at!)}
+                  </div>
                 )
               )}
             </BoardItemMiddleBlock>
@@ -258,7 +270,11 @@ export default function BoardItemDetail({
                 icon={faPenToSquare}
               />
             ) : isEditPwCheckOpen ? (
-              openBoardData && <div className="hidden sm:visible">editPasswordChecker(openBoardData.post_id)</div>
+              openBoardData && (
+                <div className="hidden sm:visible">
+                  editPasswordChecker(openBoardData.post_id)
+                </div>
+              )
             ) : (
               <FontAwesomeIcon
                 className="cursor-pointer w-5 text-gray-400"
@@ -267,7 +283,11 @@ export default function BoardItemDetail({
               />
             )}
             {isDeletePwCheckOpen ? (
-              openBoardData && <div className="hidden sm:visible">{deletePasswordChecker(openBoardData.post_id)}</div>
+              openBoardData && (
+                <div className="hidden sm:visible">
+                  {deletePasswordChecker(openBoardData.post_id)}
+                </div>
+              )
             ) : (
               <FontAwesomeIcon
                 className="cursor-pointer w-5 text-gray-400"
@@ -278,19 +298,19 @@ export default function BoardItemDetail({
           </div>
         </BoardItemRowContainer>
         <BoardItemRowContainer>
-        {loading ? (
-                <div className="w-full h-full bg-gray-500" />
-              ) : (
-                openBoardData &&
-                (isEditing ? (
-                  <BoardTitleInput
-                    isValid={isTitleValid}
-                    defaultValue={openBoardData.title}
-                  />
-                ) : (
-                  <BoardItemTitles title={openBoardData.title} />
-                ))
-              )}
+          {loading ? (
+            <div className="w-full h-full bg-gray-500" />
+          ) : (
+            openBoardData &&
+            (isEditing ? (
+              <BoardTitleInput
+                isValid={isTitleValid}
+                defaultValue={openBoardData.title}
+              />
+            ) : (
+              <BoardItemTitles title={openBoardData.title} />
+            ))
+          )}
         </BoardItemRowContainer>
         <BoardItemRowContainer>
           {openBoardData &&
