@@ -23,6 +23,7 @@ import BoardContentTextArea from "./form/ContentTextArea";
 import { validateContent, validateTitle } from "../../utils/validateForm";
 import { invalidMessage } from "../../utils/invalidMessage";
 import InvalidFormMsg from "./form/InvalidFormMsg";
+import { dateToString } from "@/utils/date";
 
 interface BoardItemDetailProps {
   openBoardData: BoardDetailResponseDTO | null;
@@ -205,27 +206,22 @@ export default function BoardItemDetail({
                 ))
               )}
 
+              
+            </BoardItemFirstBlock>
+            <BoardItemMiddleBlock>
+            {loading ? (
+                <div className="w-full h-full bg-gray-500" />
+              ) : (
+                openBoardData && (
+                  <div className="text-base font-bold">{openBoardData.author}</div>
+                )
+              )}
               {loading ? (
                 <div className="w-full h-full bg-gray-500" />
               ) : (
                 openBoardData && (
-                  <div className="text-sm">{openBoardData.author}</div>
+                  <div className="text-sm">{dateToString(openBoardData.created_at!)}</div>
                 )
-              )}
-            </BoardItemFirstBlock>
-            <BoardItemMiddleBlock>
-              {loading ? (
-                <div className="w-full h-full bg-gray-500" />
-              ) : (
-                openBoardData &&
-                (isEditing ? (
-                  <BoardTitleInput
-                    isValid={isTitleValid}
-                    defaultValue={openBoardData.title}
-                  />
-                ) : (
-                  <BoardItemTitles title={openBoardData.title} />
-                ))
               )}
             </BoardItemMiddleBlock>
           </BoardItemBlockWrapper>
@@ -271,7 +267,21 @@ export default function BoardItemDetail({
             )}
           </div>
         </BoardItemRowContainer>
-
+        <BoardItemRowContainer>
+        {loading ? (
+                <div className="w-full h-full bg-gray-500" />
+              ) : (
+                openBoardData &&
+                (isEditing ? (
+                  <BoardTitleInput
+                    isValid={isTitleValid}
+                    defaultValue={openBoardData.title}
+                  />
+                ) : (
+                  <BoardItemTitles title={openBoardData.title} />
+                ))
+              )}
+        </BoardItemRowContainer>
         <BoardItemRowContainer>
           {openBoardData &&
             (isEditing ? (
