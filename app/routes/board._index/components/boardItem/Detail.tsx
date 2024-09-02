@@ -295,7 +295,7 @@ export default function BoardItemDetail({
                 defaultValue={openBoardData.content}
               />
             ) : (
-              openBoardData.content
+              <div className="break-keep">{openBoardData.content}</div>
             ))}
         </BoardItemRowContainer>
         {openBoardData &&
