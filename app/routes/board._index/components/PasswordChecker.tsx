@@ -71,7 +71,7 @@ export default function PasswordChecker({
 
   return (
     <div
-      className={`w-auto max-w-56 text-left`}
+      className={`w-auto max-w-52 text-left`}
     >
       <div className={'text-xs pl-2'}>{getPasswordInputLabel()}</div>
       <div className={`flex border max-h-8 p-1 gap-1 ${

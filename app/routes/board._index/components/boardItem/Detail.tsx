@@ -183,7 +183,12 @@ export default function BoardItemDetail({
     <editFetcher.Form onSubmit={handleEditSubmit} className="h-full">
       <BoardDetailContainer>
         {!!invalidFormMsg && <InvalidFormMsg msg={invalidFormMsg} />}
-        <BoardItemRowContainer>
+        <BoardItemRowContainer  className="relative">
+          {/*
+          <Center flex flexCol className="absolute w-[101%] h-full backdrop-blur-sm">
+            2koooong2
+          </Center>
+          */}
           <BoardItemBlockWrapper>
             <input
               ref={avatarIdRef}
