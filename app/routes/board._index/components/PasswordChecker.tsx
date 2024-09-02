@@ -74,7 +74,7 @@ export default function PasswordChecker({
       className={`w-auto max-w-52 text-left`}
     >
       <div className={'text-xs pl-2'}>{getPasswordInputLabel()}</div>
-      <div className={`flex border max-h-8 p-1 gap-1 ${
+      <div className={`flex border bg-white max-h-8 p-1 gap-1 ${
         pwCheckFetcher.data === false && "border-red-500"
       }`}>
         <FontAwesomeIcon icon={faLock} className="text-sm w-4 text-gray-500" />
