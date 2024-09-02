@@ -228,7 +228,11 @@ export default function BoardItemDetail({
 
           <div className="flex gap-2">
             {isEditing ? (
-              <div onClick={handleEditCancelBtnClick}>수정취소</div>
+              <FontAwesomeIcon
+                className="cursor-pointer w-5 text-blue-400 hover:text-blue-500"
+                onClick={handleEditCancelBtnClick}
+                icon={faPenToSquare}
+              />
             ) : isEditPwCheckOpen ? (
               openBoardData && (
                 <PasswordChecker
