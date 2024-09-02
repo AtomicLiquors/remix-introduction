@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PasswordChecker from "../PasswordChecker";
 import BoardItemTitles from "./content/Titles";
 import BoardItemBlockWrapper from "./layout/BlockWrapper";
-import BoardItemContainer from "./layout/Container";
+import BoardItemContainer from "./layout/ItemContainer";
 import BoardItemFirstBlock from "./layout/FirstBlock";
 import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemRowContainer from "./layout/RowContainer";
@@ -24,6 +24,7 @@ import { validateContent, validateTitle } from "../../utils/validateForm";
 import { invalidMessage } from "../../utils/invalidMessage";
 import InvalidFormMsg from "./form/InvalidFormMsg";
 import { dateToString } from "@/utils/date";
+import BoardDetailContainer from "./layout/DetailContainer";
 
 interface BoardItemDetailProps {
   openBoardData: BoardDetailResponseDTO | null;
@@ -179,8 +180,8 @@ export default function BoardItemDetail({
   const [isPrivateChecked, setIsPrivateChecked] = useState<boolean>();
 
   return (
-    <editFetcher.Form onSubmit={handleEditSubmit}>
-      <BoardItemContainer>
+    <editFetcher.Form onSubmit={handleEditSubmit} className="h-full">
+      <BoardDetailContainer>
         {!!invalidFormMsg && <InvalidFormMsg msg={invalidFormMsg} />}
         <BoardItemRowContainer>
           <BoardItemBlockWrapper>
@@ -315,7 +316,7 @@ export default function BoardItemDetail({
             </button>
           </Center>
         )}
-      </BoardItemContainer>
+      </BoardDetailContainer>
     </editFetcher.Form>
   );
 }

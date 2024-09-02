@@ -11,8 +11,8 @@ export default function BoardItemTitles({
 }: BoardItemTitlesProps) {
   return (
     <>
-      <div className="text-base font-medium">{title}</div>
-      <div className="text-sm font-normal">{subtitle}</div>
+      <div className="break-keep text-left text-base font-medium">{title}</div>
+      <div className="text-sm text-left font-normal">{subtitle}</div>
     </>
   );
 }
