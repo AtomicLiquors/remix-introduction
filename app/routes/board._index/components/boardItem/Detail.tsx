@@ -241,6 +241,7 @@ export default function BoardItemDetail({
                   onQuitBtnClick={() => {
                     setIsEditPwCheckOpen(false);
                   }}
+                  label="수정하려면 "
                 />
               )
             ) : (
@@ -258,6 +259,7 @@ export default function BoardItemDetail({
                   onQuitBtnClick={() => {
                     setIsDeletePwCheckOpen(false);
                   }}
+                  label="삭제하려면 "
                 />
               )
             ) : (
