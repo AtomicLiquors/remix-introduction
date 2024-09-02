@@ -49,11 +49,11 @@ export function Modal({ children, closeBtn, isModalOpen, closeModal: closeCurrMo
       className="modal rounded w-full h-full md:w-5/6 md:h-5/6"
     >
       <div className="flex flex-col justify-between h-full">
-        <div className="modal-box m-5 h-full">{children}</div>
+        <div className="modal-box sm:m-5 h-full">{children}</div>
         {closeBtn && (
           <form method="dialog" className="modal-backdrop p-5 border-t">
             <Center>
-              <button className="border rounded pl-3 pr-3">CLOSE</button>
+              <button className="border rounded pl-3 pr-3">닫기</button>
             </Center>
           </form>
         )}

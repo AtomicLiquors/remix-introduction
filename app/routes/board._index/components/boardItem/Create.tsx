@@ -1,4 +1,4 @@
-import BoardItemContainer from "./layout/Container";
+import BoardItemContainer from "./layout/ItemContainer";
 import BoardItemFirstBlock from "./layout/FirstBlock";
 import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemBlockWrapper from "./layout/BlockWrapper";

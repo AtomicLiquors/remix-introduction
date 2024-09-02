@@ -1,12 +1,12 @@
 import { useFetcher } from "@remix-run/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, MouseEvent } from "react";
 import PasswordChecker from "../PasswordChecker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleMinus,
   faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
-import BoardItemContainer from "./layout/Container";
+import BoardItemContainer from "./layout/ItemContainer";
 import BoardItemFirstBlock from "./layout/FirstBlock";
 import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemTitles from "./content/Titles";
@@ -50,13 +50,31 @@ export default function BoardItemPreview({
   const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
   const [isOpenPwCheckOpen, setIsOpenPwCheckOpen] = useState<boolean>(false);
 
+  const handleOpenPwCheckOpen = () => {
+    setIsOpenPwCheckOpen(true);
+    setIsDeletePwCheckOpen(false);
+    setIsEditPwCheckOpen(false);
+  };
+
   const handleEditBtnClick = () => {
+    setIsOpenPwCheckOpen(false);
     setIsEditPwCheckOpen(true);
     setIsDeletePwCheckOpen(false);
   };
   const handleDeleteBtnClick = async () => {
+    setIsOpenPwCheckOpen(false);
     setIsDeletePwCheckOpen(true);
     setIsEditPwCheckOpen(false);
+  };
+
+  const handleEditPwCheckQuit = (event: MouseEvent<Element>) => {
+    event.stopPropagation();
+    setIsEditPwCheckOpen(false);
+  };
+
+  const handleDeletePwCheckQuit = (event: MouseEvent<Element>) => {
+    event.stopPropagation();
+    setIsDeletePwCheckOpen(false);
   };
 
   const handleEditPwCheckPass = () => {
@@ -86,8 +104,10 @@ export default function BoardItemPreview({
   const limited = is_private || !approved;
 
   const handleBoardItemClick = () => {
+    if (isDeletePwCheckOpen || isEditPwCheckOpen) return;
+
     if (limited) {
-      setIsOpenPwCheckOpen(true);
+      handleOpenPwCheckOpen();
     } else {
       onBoardSelect();
     }
@@ -110,9 +130,29 @@ export default function BoardItemPreview({
           </BoardItemFirstBlock>
           <BoardItemMiddleBlock>
             <div>
-              {limited ? (
+              {isEditPwCheckOpen || isDeletePwCheckOpen ? (
+                <>
+                  {isEditPwCheckOpen && (
+                    <PasswordChecker
+                      label="수정하려면 "
+                      post_id={post_id}
+                      onPwCheckPassed={handleEditPwCheckPass}
+                      onQuitBtnClick={handleEditPwCheckQuit}
+                    />
+                  )}
+                  {isDeletePwCheckOpen && (
+                    <PasswordChecker
+                      label="삭제하려면 "
+                      post_id={post_id}
+                      onPwCheckPassed={handleDeletePwCheckPass}
+                      onQuitBtnClick={handleDeletePwCheckQuit}
+                    />
+                  )}
+                </>
+              ) : limited ? (
                 isOpenPwCheckOpen ? (
                   <PasswordChecker
+                    label="조회하려면 "
                     post_id={post_id}
                     onPwCheckPassed={handlePWCheckPass}
                     onQuitBtnClick={(event) => {
@@ -121,12 +161,17 @@ export default function BoardItemPreview({
                     }}
                   />
                 ) : (
-                  
-                <BoardItemTitles title={is_private
-                  ? "🔒 비공개 게시글입니다."
-                  : !approved ? "📝승인 대기 중인 게시글입니다." : ""} subtitle={"작성자만 열람할 수 있습니다."} />
+                  <BoardItemTitles
+                    title={
+                      is_private
+                        ? "🔒 비공개 게시글입니다."
+                        : !approved
+                        ? "📝승인 대기 중인 게시글입니다."
+                        : ""
+                    }
+                    subtitle={"작성자만 열람할 수 있습니다."}
+                  />
                 )
-                
               ) : (
                 <BoardItemTitles title={title} subtitle={content} />
               )}
@@ -138,32 +183,20 @@ export default function BoardItemPreview({
         </BoardItemBlockWrapper>
 
         <div className="flex gap-2">
-          {isEditPwCheckOpen ? (
-            <PasswordChecker
-              post_id={post_id}
-              onPwCheckPassed={handleEditPwCheckPass}
-              onQuitBtnClick={() => setIsEditPwCheckOpen(false)}
-            />
-          ) : (
-            <FontAwesomeIcon
-              className="cursor-pointer w-5 text-gray-400"
-              onClick={handleEditBtnClick}
-              icon={faPenToSquare}
-            />
-          )}
-          {isDeletePwCheckOpen ? (
-            <PasswordChecker
-              post_id={post_id}
-              onPwCheckPassed={handleDeletePwCheckPass}
-              onQuitBtnClick={() => setIsDeletePwCheckOpen(false)}
-            />
-          ) : (
-            <FontAwesomeIcon
-              className="cursor-pointer w-5 text-gray-400"
-              onClick={handleDeleteBtnClick}
-              icon={faCircleMinus}
-            />
-          )}
+          <FontAwesomeIcon
+            className={`cursor-pointer w-5 ${
+              isEditPwCheckOpen ? "text-blue-400" : "text-gray-400"
+            }`}
+            onClick={handleEditBtnClick}
+            icon={faPenToSquare}
+          />
+          <FontAwesomeIcon
+            className={`cursor-pointer w-5 ${
+              isDeletePwCheckOpen ? "text-red-400" : "text-gray-400"
+            }`}
+            onClick={handleDeleteBtnClick}
+            icon={faCircleMinus}
+          />
         </div>
       </BoardItemRowContainer>
     </BoardItemContainer>

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PasswordChecker from "../PasswordChecker";
 import BoardItemTitles from "./content/Titles";
 import BoardItemBlockWrapper from "./layout/BlockWrapper";
-import BoardItemContainer from "./layout/Container";
+import BoardItemContainer from "./layout/ItemContainer";
 import BoardItemFirstBlock from "./layout/FirstBlock";
 import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemRowContainer from "./layout/RowContainer";
@@ -23,6 +23,8 @@ import BoardContentTextArea from "./form/ContentTextArea";
 import { validateContent, validateTitle } from "../../utils/validateForm";
 import { invalidMessage } from "../../utils/invalidMessage";
 import InvalidFormMsg from "./form/InvalidFormMsg";
+import { dateToString } from "@/utils/date";
+import BoardDetailContainer from "./layout/DetailContainer";
 
 interface BoardItemDetailProps {
   openBoardData: BoardDetailResponseDTO | null;
@@ -178,8 +180,8 @@ export default function BoardItemDetail({
   const [isPrivateChecked, setIsPrivateChecked] = useState<boolean>();
 
   return (
-    <editFetcher.Form onSubmit={handleEditSubmit}>
-      <BoardItemContainer>
+    <editFetcher.Form onSubmit={handleEditSubmit} className="h-full">
+      <BoardDetailContainer>
         {!!invalidFormMsg && <InvalidFormMsg msg={invalidFormMsg} />}
         <BoardItemRowContainer>
           <BoardItemBlockWrapper>
@@ -205,34 +207,33 @@ export default function BoardItemDetail({
                 ))
               )}
 
+              
+            </BoardItemFirstBlock>
+            <BoardItemMiddleBlock>
+            {loading ? (
+                <div className="w-full h-full bg-gray-500" />
+              ) : (
+                openBoardData && (
+                  <div className="text-base font-bold">{openBoardData.author}</div>
+                )
+              )}
               {loading ? (
                 <div className="w-full h-full bg-gray-500" />
               ) : (
                 openBoardData && (
-                  <div className="text-sm">{openBoardData.author}</div>
+                  <div className="text-sm">{dateToString(openBoardData.created_at!)}</div>
                 )
-              )}
-            </BoardItemFirstBlock>
-            <BoardItemMiddleBlock>
-              {loading ? (
-                <div className="w-full h-full bg-gray-500" />
-              ) : (
-                openBoardData &&
-                (isEditing ? (
-                  <BoardTitleInput
-                    isValid={isTitleValid}
-                    defaultValue={openBoardData.title}
-                  />
-                ) : (
-                  <BoardItemTitles title={openBoardData.title} />
-                ))
               )}
             </BoardItemMiddleBlock>
           </BoardItemBlockWrapper>
 
           <div className="flex gap-2">
             {isEditing ? (
-              <div onClick={handleEditCancelBtnClick}>수정취소</div>
+              <FontAwesomeIcon
+                className="cursor-pointer w-5 text-blue-400 hover:text-blue-500"
+                onClick={handleEditCancelBtnClick}
+                icon={faPenToSquare}
+              />
             ) : isEditPwCheckOpen ? (
               openBoardData && (
                 <PasswordChecker
@@ -241,6 +242,7 @@ export default function BoardItemDetail({
                   onQuitBtnClick={() => {
                     setIsEditPwCheckOpen(false);
                   }}
+                  label="수정하려면 "
                 />
               )
             ) : (
@@ -258,6 +260,7 @@ export default function BoardItemDetail({
                   onQuitBtnClick={() => {
                     setIsDeletePwCheckOpen(false);
                   }}
+                  label="삭제하려면 "
                 />
               )
             ) : (
@@ -269,7 +272,21 @@ export default function BoardItemDetail({
             )}
           </div>
         </BoardItemRowContainer>
-
+        <BoardItemRowContainer>
+        {loading ? (
+                <div className="w-full h-full bg-gray-500" />
+              ) : (
+                openBoardData &&
+                (isEditing ? (
+                  <BoardTitleInput
+                    isValid={isTitleValid}
+                    defaultValue={openBoardData.title}
+                  />
+                ) : (
+                  <BoardItemTitles title={openBoardData.title} />
+                ))
+              )}
+        </BoardItemRowContainer>
         <BoardItemRowContainer>
           {openBoardData &&
             (isEditing ? (
@@ -299,7 +316,7 @@ export default function BoardItemDetail({
             </button>
           </Center>
         )}
-      </BoardItemContainer>
+      </BoardDetailContainer>
     </editFetcher.Form>
   );
 }
