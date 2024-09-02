@@ -67,16 +67,15 @@ export default function BoardItemPreview({
     setIsEditPwCheckOpen(false);
   };
 
-  
   const handleEditPwCheckQuit = (event: MouseEvent<Element>) => {
     event.stopPropagation();
     setIsEditPwCheckOpen(false);
-  }
+  };
 
   const handleDeletePwCheckQuit = (event: MouseEvent<Element>) => {
     event.stopPropagation();
     setIsDeletePwCheckOpen(false);
-  }
+  };
 
   const handleEditPwCheckPass = () => {
     setIsEditPwCheckOpen(false);
@@ -105,8 +104,7 @@ export default function BoardItemPreview({
   const limited = is_private || !approved;
 
   const handleBoardItemClick = () => {
-    if(isDeletePwCheckOpen || isEditPwCheckOpen)
-      return;
+    if (isDeletePwCheckOpen || isEditPwCheckOpen) return;
 
     if (limited) {
       handleOpenPwCheckOpen();
@@ -132,39 +130,36 @@ export default function BoardItemPreview({
           </BoardItemFirstBlock>
           <BoardItemMiddleBlock>
             <div>
-              {limited ? (
-                isOpenPwCheckOpen ||
-                isEditPwCheckOpen ||
-                isDeletePwCheckOpen ? (
-                  <>
-                    {isOpenPwCheckOpen && (
-                      <PasswordChecker
-                        label="조회하려면 "
-                        post_id={post_id}
-                        onPwCheckPassed={handlePWCheckPass}
-                        onQuitBtnClick={(event) => {
-                          event!.stopPropagation();
-                          setIsOpenPwCheckOpen(false);
-                        }}
-                      />
-                    )}
-                    {isEditPwCheckOpen && (
-                      <PasswordChecker
-                        label="수정하려면 "
-                        post_id={post_id}
-                        onPwCheckPassed={handleEditPwCheckPass}
-                        onQuitBtnClick={handleEditPwCheckQuit}
-                      />
-                    )}
-                    {isDeletePwCheckOpen && (
-                      <PasswordChecker
-                        label="삭제하려면 "
-                        post_id={post_id}
-                        onPwCheckPassed={handleDeletePwCheckPass}
-                        onQuitBtnClick={handleDeletePwCheckQuit}
-                      />
-                    )}
-                  </>
+              {isEditPwCheckOpen || isDeletePwCheckOpen ? (
+                <>
+                  {isEditPwCheckOpen && (
+                    <PasswordChecker
+                      label="수정하려면 "
+                      post_id={post_id}
+                      onPwCheckPassed={handleEditPwCheckPass}
+                      onQuitBtnClick={handleEditPwCheckQuit}
+                    />
+                  )}
+                  {isDeletePwCheckOpen && (
+                    <PasswordChecker
+                      label="삭제하려면 "
+                      post_id={post_id}
+                      onPwCheckPassed={handleDeletePwCheckPass}
+                      onQuitBtnClick={handleDeletePwCheckQuit}
+                    />
+                  )}
+                </>
+              ) : limited ? (
+                isOpenPwCheckOpen ? (
+                  <PasswordChecker
+                    label="조회하려면 "
+                    post_id={post_id}
+                    onPwCheckPassed={handlePWCheckPass}
+                    onQuitBtnClick={(event) => {
+                      event!.stopPropagation();
+                      setIsOpenPwCheckOpen(false);
+                    }}
+                  />
                 ) : (
                   <BoardItemTitles
                     title={
@@ -189,15 +184,15 @@ export default function BoardItemPreview({
 
         <div className="flex gap-2">
           <FontAwesomeIcon
-            className={`cursor-pointer w-5 text-gray-400 ${
-              isEditPwCheckOpen && "text-blue-400"
+            className={`cursor-pointer w-5 ${
+              isEditPwCheckOpen ? "text-blue-400" : "text-gray-400"
             }`}
             onClick={handleEditBtnClick}
             icon={faPenToSquare}
           />
           <FontAwesomeIcon
-            className={`cursor-pointer w-5 text-gray-400 ${
-              isDeletePwCheckOpen && "text-red-400"
+            className={`cursor-pointer w-5 ${
+              isDeletePwCheckOpen ? "text-red-400" : "text-gray-400"
             }`}
             onClick={handleDeleteBtnClick}
             icon={faCircleMinus}
