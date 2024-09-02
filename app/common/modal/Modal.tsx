@@ -9,10 +9,10 @@ interface ModalProps {
   children: ReactNode;
   closeBtn?: boolean;
   isModalOpen: boolean;
-  closeModal: () => void;
+  closeCurrModal: () => void;
 }
 
-export function Modal({ children, closeBtn, isModalOpen, closeModal: closeCurrModal }: ModalProps){
+export function Modal({ children, closeBtn, isModalOpen, closeCurrModal }: ModalProps){
   
   const modalRef = useRef<HTMLDialogElement>(null);
   const modal = modalRef.current;
