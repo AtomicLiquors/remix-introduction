@@ -12,7 +12,7 @@ interface ModalProps {
   closeModal: () => void;
 }
 
-export function Modal({ children, closeBtn, isModalOpen, closeModal: closeCurrModal }: ModalProps){
+export function Modal({ children, closeBtn, isModalOpen, closeModal }: ModalProps){
   
   const modalRef = useRef<HTMLDialogElement>(null);
   const modal = modalRef.current;
@@ -22,9 +22,20 @@ export function Modal({ children, closeBtn, isModalOpen, closeModal: closeCurrMo
 
     if (modal) {
       const handleClickOutside = (event: MouseEvent) => {
-        if (event.target === modal) {
-          closeCurrModal();
-        }
+        if (event.target === modal){
+          
+          /* getBoundingclientRect는 event 발생 시에 지정해줘야 한다. (스크롤바 유무가 반영되는 것 같다.) */
+          const rect = modal.getBoundingClientRect();
+          const isClickedOutside =
+          event.clientX >= rect.right ||
+          event.clientY >= rect.bottom ||
+          event.clientX <= rect.left ||
+          event.clientY <= rect.top;
+
+          if (isClickedOutside)
+            closeModal();
+          }
+
       };
 
       modal.addEventListener("mousedown", handleClickOutside);
@@ -53,7 +64,7 @@ export function Modal({ children, closeBtn, isModalOpen, closeModal: closeCurrMo
         {closeBtn && (
           <div className="modal-backdrop p-5 border-t">
             <Center>
-              <button onClick={closeCurrModal} className="border rounded pl-3 pr-3">닫기</button>
+              <button onClick={closeModal} className="border rounded pl-3 pr-3">닫기</button>
             </Center> 
           </div>
         )}

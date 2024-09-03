@@ -24,7 +24,7 @@ import { validateContent, validateTitle } from "../../utils/validateForm";
 import { invalidMessage } from "../../utils/invalidMessage";
 import InvalidFormMsg from "./form/InvalidFormMsg";
 import { dateToString } from "@/utils/date";
-import BoardDetailContainer from "./layout/DetailContainer";
+import BoardModalContainer from "./layout/DetailContainer";
 
 interface BoardItemDetailProps {
   openBoardData: BoardDetailResponseDTO | null;
@@ -203,7 +203,7 @@ export default function BoardItemDetail({
 
   return (
     <editFetcher.Form onSubmit={handleEditSubmit} className="h-full">
-      <BoardDetailContainer>
+      <BoardModalContainer>
         {!!invalidFormMsg && <InvalidFormMsg msg={invalidFormMsg} />}
         <BoardItemRowContainer className="relative">
           {openBoardData && (isEditPwCheckOpen || isDeletePwCheckOpen) && (
@@ -341,7 +341,7 @@ export default function BoardItemDetail({
             </button>
           </Center>
         )}
-      </BoardDetailContainer>
+      </BoardModalContainer>
     </editFetcher.Form>
   );
 }

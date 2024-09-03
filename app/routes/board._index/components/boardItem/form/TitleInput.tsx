@@ -28,6 +28,7 @@ export default function BoardTitleInput({
           isValid || "border-red-200"
         }`}
         defaultValue={defaultValue}
+        placeholder={`제목을 입력하세요. (최대 ${maxDigits}자)`}
       />
       <div className={`text-xs ${digits > maxDigits && "text-red-400"}`}>{digits}/{maxDigits}</div>
     </div>

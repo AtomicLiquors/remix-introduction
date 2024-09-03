@@ -20,6 +20,7 @@ import {
 } from "../../utils/validateForm";
 import { invalidMessage } from "../../utils/invalidMessage";
 import InvalidFormMsg from "./form/InvalidFormMsg";
+import BoardModalContainer from "./layout/DetailContainer";
 
 interface BoardItemCreateProps {
   isModalOpen: boolean;
@@ -112,8 +113,8 @@ export default function BoardItemCreate({
     /* To-Do : 글자수 제한 */
   }
   return (
-    <createBoardFetcher.Form onSubmit={handleSubmit}>
-      <BoardItemContainer>
+    <createBoardFetcher.Form onSubmit={handleSubmit} className="h-full">
+      <BoardModalContainer>
         {!!invalidFormMsg && (
           <InvalidFormMsg msg={invalidFormMsg}/>
         )}
@@ -148,10 +149,10 @@ export default function BoardItemCreate({
                 </div>
               </div>
             </BoardItemFirstBlock>
-            <BoardItemMiddleBlock>
-              <BoardTitleInput isValid={isTitleValid} />
-            </BoardItemMiddleBlock>
           </BoardItemBlockWrapper>
+        </BoardItemRowContainer>
+        <BoardItemRowContainer>
+        <BoardTitleInput isValid={isTitleValid} />
         </BoardItemRowContainer>
         <BoardItemRowContainer>
           <BoardContentTextArea isValid={isContentValid} />
@@ -178,7 +179,7 @@ export default function BoardItemCreate({
             작성하기
           </button>
         </Center>
-      </BoardItemContainer>
+      </BoardModalContainer>
     </createBoardFetcher.Form>
   );
 }
