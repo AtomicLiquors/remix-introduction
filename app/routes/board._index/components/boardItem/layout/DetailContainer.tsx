@@ -1,4 +1,3 @@
-import Center from "@/common/components/atoms/Center";
 import { ReactNode } from "react";
 
 interface BoardDetailContainerLayoutProps {
