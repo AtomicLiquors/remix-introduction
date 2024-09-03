@@ -1,11 +1,10 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faCheckSquare, faCoffee, faTrophy, faBellSlash, faGraduationCap, faLink, faCreditCard, faGlobe, faSliders, faHashtag } from '@fortawesome/free-solid-svg-icons'
+import { faTrophy, faGraduationCap, faCreditCard, faGlobe } from '@fortawesome/free-solid-svg-icons'
 
 interface FontAwesomeProps {
-  icon: FAType
+  icon: FAType,
+  color: TCType
 }
 
 export const FONT_AWESOME_TYPES = {
@@ -14,13 +13,21 @@ export const FONT_AWESOME_TYPES = {
   WORLD: faGlobe,
   CARD: faCreditCard,
 } as const;
-
 export type FAType = (typeof FONT_AWESOME_TYPES)[keyof typeof FONT_AWESOME_TYPES];
 
+export const TAILWIND_COLOR_TYPES = {
+  AWARD: "text-yellow-500" ,
+  EDUCATION: "text-blue-500",
+  WORLD: "text-blue-500" ,
+  CARD: "text-dark-500" ,
+} as const;
+
+export type TCType = (typeof TAILWIND_COLOR_TYPES)[keyof typeof TAILWIND_COLOR_TYPES];
+
 export default function FontAwesome({
-  icon
+  icon, color
 }: FontAwesomeProps) {
   return (
-    <FontAwesomeIcon className="text-blue-500" icon={icon} transform="shrink-6"/>
+    <FontAwesomeIcon className={color} icon={icon} transform="shrink-6"/>
   );
 }

@@ -8,7 +8,7 @@ export default function TimelineListItem({
   children
 }: TimelineListItemProps): ReactElement {
   return (
-    <li className="mb-5 ms-6">
+    <li className="mb-5 sm:ms-6">
       {children}
     </li>
   );

@@ -12,7 +12,8 @@ import {
 import BoardItemCreate from "./components/boardItem/Create";
 import BoardItemDetail from "./components/boardItem/Detail";
 import Center from "@/common/components/atoms/Center";
-import BoardItemContainer from "./components/boardItem/layout/Container";
+import BoardItemContainer from "./components/boardItem/layout/ItemContainer";
+import { useBoardModal } from "./useBoardModal.hook";
 
 export const loader = async () => {
   const list = await getBoards();
@@ -29,24 +30,17 @@ export default function BoardRoute() {
   const result = useLoaderData<typeof loader>();
 
   /* 모달 통제 */
-  function openBoardDetailModal() {
-    setIsBoardDetailOpen(true);
-  }
-  function closeBoardDetailModal() {
-    setIsBoardDetailOpen(false);
-    setIsBoardDetailEditMode(false);
-  }
-  function openBoardCreateModal() {
-    setIsBoardCreateOpen(true);
-  }
-  function closeBoardCreateModal() {
-    setIsBoardCreateOpen(false);
-  }
-
-  const [isBoardDetailOpen, setIsBoardDetailOpen] = useState<boolean>(false);
-  const [isBoardCreateOpen, setIsBoardCreateOpen] = useState<boolean>(false);
+  const [
+    isBoardDetailOpen,
+    isBoardCreateOpen,
+    isBoardDetailEditMode,
+    openBoardDetailModal,
+    closeBoardDetailModal,
+    openBoardCreateModal,
+    closeBoardCreateModal,
+    setIsBoardDetailEditMode
+  ] = useBoardModal();
   
-  const [isBoardDetailEditMode, setIsBoardDetailEditMode] = useState<boolean>(false);
   const [boardDetailUpdate, toggleBoardDetailUpdate] = useState<boolean>(false);
 
   /* 게시글 선택과 데이터 세팅 */
@@ -116,10 +110,10 @@ export default function BoardRoute() {
           <FontAwesomeIcon className="w-8" icon={faCirclePlus} />
         </Center>
       </BoardItemContainer>
-      <Modal isModalOpen={isBoardDetailOpen} setIsModalOpen={setIsBoardDetailOpen} >
+      <Modal isModalOpen={isBoardDetailOpen} closeModal={closeBoardDetailModal} closeBtn>
         <BoardItemDetail isOpenAsEditMode={isBoardDetailEditMode} isModalOpen={isBoardDetailOpen} openBoardData={openBoardData} loading={loading} onBoardDelete={handleBoardDelete} onBoardEdit={handleBoardEdit} update={boardDetailUpdate}/>
       </Modal>
-      <Modal isModalOpen={isBoardCreateOpen} setIsModalOpen={setIsBoardCreateOpen}  >
+      <Modal isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal} closeBtn>
         <BoardItemCreate isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal}/>
       </Modal>
       {result?.data!.map((board, idx) => (

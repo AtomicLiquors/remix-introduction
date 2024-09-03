@@ -1,4 +1,4 @@
-import BoardItemContainer from "./layout/Container";
+import BoardItemContainer from "./layout/ItemContainer";
 import BoardItemFirstBlock from "./layout/FirstBlock";
 import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemBlockWrapper from "./layout/BlockWrapper";
@@ -8,7 +8,7 @@ import { ErrorResponse, useFetcher } from "@remix-run/react";
 import { useRef, FormEvent, useEffect, useState } from "react";
 import AvatarSelector from "@/common/avatar/AvatarSelector";
 import { QueryResult } from "@vercel/postgres";
-import { boardInputClassName } from "../../util/boardTailwind";
+import { boardInputClassName } from "../../utils/boardTailwind";
 import BoardPrivateCheckbox from "./form/PrivateCheckbox";
 import BoardTitleInput from "./form/TitleInput";
 import BoardContentTextArea from "./form/ContentTextArea";
@@ -17,9 +17,10 @@ import {
   validateContent,
   validatePassword,
   validateTitle,
-} from "../../util/validateForm";
-import { invalidMessage } from "../../util/invalidMessage";
+} from "../../utils/validateForm";
+import { invalidMessage } from "../../utils/invalidMessage";
 import InvalidFormMsg from "./form/InvalidFormMsg";
+import BoardModalContainer from "./layout/DetailContainer";
 
 interface BoardItemCreateProps {
   isModalOpen: boolean;
@@ -112,8 +113,8 @@ export default function BoardItemCreate({
     /* To-Do : 글자수 제한 */
   }
   return (
-    <createBoardFetcher.Form onSubmit={handleSubmit}>
-      <BoardItemContainer>
+    <createBoardFetcher.Form onSubmit={handleSubmit} className="h-full">
+      <BoardModalContainer>
         {!!invalidFormMsg && (
           <InvalidFormMsg msg={invalidFormMsg}/>
         )}
@@ -148,10 +149,10 @@ export default function BoardItemCreate({
                 </div>
               </div>
             </BoardItemFirstBlock>
-            <BoardItemMiddleBlock>
-              <BoardTitleInput isValid={isTitleValid} />
-            </BoardItemMiddleBlock>
           </BoardItemBlockWrapper>
+        </BoardItemRowContainer>
+        <BoardItemRowContainer>
+        <BoardTitleInput isValid={isTitleValid} />
         </BoardItemRowContainer>
         <BoardItemRowContainer>
           <BoardContentTextArea isValid={isContentValid} />
@@ -178,7 +179,7 @@ export default function BoardItemCreate({
             작성하기
           </button>
         </Center>
-      </BoardItemContainer>
+      </BoardModalContainer>
     </createBoardFetcher.Form>
   );
 }

@@ -1,5 +1,5 @@
 export interface SkillProps {
     title: string;
-    content: string;
+    content: string[];
     img: string;
 }

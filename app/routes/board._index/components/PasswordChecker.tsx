@@ -9,12 +9,14 @@ import { QueryResult } from "@vercel/postgres";
 // To-Do: 모바일에서 패스워드 체크 모달로 띄우기.
 
 interface PasswordCheckerProps {
+  label?: string;
   post_id: number;
   onPwCheckPassed: () => void;
   onQuitBtnClick: (event: MouseEvent) => void;
 }
 
 export default function PasswordChecker({
+  label,
   post_id,
   onPwCheckPassed,
   onQuitBtnClick,
@@ -46,6 +48,7 @@ export default function PasswordChecker({
 
   const inputRef = useRef<HTMLInputElement>(null);
   const loading = pwCheckFetcher.state !== "idle";
+  const defaultLabel = `${label} 비밀번호를 입력해 주세요.`;
 
   useEffect(() => {
     // 반드시 false or true여야 하며 false는 아무 falsy한 값으로 대체해선 안 됨. (초기값이 undefined)
@@ -63,15 +66,15 @@ export default function PasswordChecker({
       case false:
         return '비밀번호가 일치하지 않습니다.'
     }
-    return '비밀번호를 입력해 주세요.';
+    return defaultLabel;
   }
 
   return (
     <div
-      className={`w-auto text-left`}
+      className={`w-auto max-w-52 text-left`}
     >
       <div className={'text-xs pl-2'}>{getPasswordInputLabel()}</div>
-      <div className={`flex border max-h-8 p-1 gap-1 ${
+      <div className={`flex border bg-white max-h-8 p-1 gap-1 ${
         pwCheckFetcher.data === false && "border-red-500"
       }`}>
         <FontAwesomeIcon icon={faLock} className="text-sm w-4 text-gray-500" />

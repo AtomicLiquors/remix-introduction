@@ -1,17 +1,18 @@
 import { ReactNode } from "react";
 
 interface BoardItemLayoutProps {
+  className?: string;
   children: ReactNode;
 }
 
 export default function BoardItemRowContainer({
-  children,
+  children, className
 }: BoardItemLayoutProps) {
   return (
     <div
-      className="
+      className={`${className} 
       w-full lg:w-5/6 flex justify-between
-      "
+      `}
     >
       {children}
     </div>

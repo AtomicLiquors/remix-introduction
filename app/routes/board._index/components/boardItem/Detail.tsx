@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PasswordChecker from "../PasswordChecker";
 import BoardItemTitles from "./content/Titles";
 import BoardItemBlockWrapper from "./layout/BlockWrapper";
-import BoardItemContainer from "./layout/Container";
+import BoardItemContainer from "./layout/ItemContainer";
 import BoardItemFirstBlock from "./layout/FirstBlock";
 import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemRowContainer from "./layout/RowContainer";
@@ -20,9 +20,11 @@ import { QueryResult } from "@vercel/postgres";
 import BoardPrivateCheckbox from "./form/PrivateCheckbox";
 import BoardTitleInput from "./form/TitleInput";
 import BoardContentTextArea from "./form/ContentTextArea";
-import { validateContent, validateTitle } from "../../util/validateForm";
-import { invalidMessage } from "../../util/invalidMessage";
+import { validateContent, validateTitle } from "../../utils/validateForm";
+import { invalidMessage } from "../../utils/invalidMessage";
 import InvalidFormMsg from "./form/InvalidFormMsg";
+import { dateToString } from "@/utils/date";
+import BoardModalContainer from "./layout/DetailContainer";
 
 interface BoardItemDetailProps {
   openBoardData: BoardDetailResponseDTO | null;
@@ -56,6 +58,7 @@ export default function BoardItemDetail({
 
   /* 패스워드 체크 */
   const handleEditingPWCheckPassed = () => {
+    setIsEditPwCheckOpen(false);
     setIsEditing(true);
   };
 
@@ -68,14 +71,14 @@ export default function BoardItemDetail({
     const title = formData.get("title")?.toString();
     const content = formData.get("content")?.toString();
 
-    if (!title) {
-      setInvalidFormMsg("제목을 입력해 주세요.");
+    if (!title || !content) {
+      setInvalidFormMsg("제목, 내용을 입력해 주세요.");
       return;
     }
 
     // 유효성 검증 결과
     const titleValidation = validateTitle(title);
-    const contentValidation = !!content && validateContent(content);
+    const contentValidation = validateContent(content);
 
     // 상태 업데이트
     setIsTitleValid(titleValidation);
@@ -126,7 +129,6 @@ export default function BoardItemDetail({
     setIsEditing(isOpenAsEditMode);
   }, [isOpenAsEditMode, update]);
 
-  
   useEffect(() => {
     if (editFetcher.data?.rowCount === 1) {
       setIsEditing(false);
@@ -177,11 +179,44 @@ export default function BoardItemDetail({
 
   const [isPrivateChecked, setIsPrivateChecked] = useState<boolean>();
 
+  const editPasswordChecker = (post_id: number) => (
+    <PasswordChecker
+      post_id={post_id}
+      onPwCheckPassed={handleEditingPWCheckPassed}
+      onQuitBtnClick={() => {
+        setIsEditPwCheckOpen(false);
+      }}
+      label="수정하려면 "
+    />
+  );
+
+  const deletePasswordChecker = (post_id: number) => (
+    <PasswordChecker
+      post_id={post_id}
+      onPwCheckPassed={handleDeletePwCheckPassed}
+      onQuitBtnClick={() => {
+        setIsDeletePwCheckOpen(false);
+      }}
+      label="삭제하려면 "
+    />
+  );
+
   return (
-    <editFetcher.Form onSubmit={handleEditSubmit}>
-      <BoardItemContainer>
+    <editFetcher.Form onSubmit={handleEditSubmit} className="h-full">
+      <BoardModalContainer>
         {!!invalidFormMsg && <InvalidFormMsg msg={invalidFormMsg} />}
-        <BoardItemRowContainer>
+        <BoardItemRowContainer className="relative">
+          {openBoardData && (isEditPwCheckOpen || isDeletePwCheckOpen) && (
+            <Center
+              flex
+              flexCol
+              className="sm:hidden absolute w-[101%] h-full backdrop-blur-sm"
+            >
+              {isEditPwCheckOpen && editPasswordChecker(openBoardData.post_id)}
+              {isDeletePwCheckOpen &&
+                deletePasswordChecker(openBoardData.post_id)}
+            </Center>
+          )}
           <BoardItemBlockWrapper>
             <input
               ref={avatarIdRef}
@@ -204,44 +239,41 @@ export default function BoardItemDetail({
                   <Avatar avatarId={openBoardData.avatar_id!} />
                 ))
               )}
-
-              {loading ? (
-                <div className="w-full h-full bg-gray-500" />
-              ) : (
-                openBoardData && (
-                  <div className="text-sm">{openBoardData.author}</div>
-                )
-              )}
             </BoardItemFirstBlock>
             <BoardItemMiddleBlock>
               {loading ? (
                 <div className="w-full h-full bg-gray-500" />
               ) : (
-                openBoardData &&
-                (isEditing ? (
-                  <BoardTitleInput
-                    isValid={isTitleValid}
-                    defaultValue={openBoardData.title}
-                  />
-                ) : (
-                  <BoardItemTitles title={openBoardData.title} />
-                ))
+                openBoardData && (
+                  <div className="text-base font-bold">
+                    {openBoardData.author}
+                  </div>
+                )
+              )}
+              {loading ? (
+                <div className="w-full h-full bg-gray-500" />
+              ) : (
+                openBoardData && (
+                  <div className="text-sm">
+                    {dateToString(openBoardData.created_at!)}
+                  </div>
+                )
               )}
             </BoardItemMiddleBlock>
           </BoardItemBlockWrapper>
 
           <div className="flex gap-2">
             {isEditing ? (
-              <div onClick={handleEditCancelBtnClick}>수정취소</div>
+              <FontAwesomeIcon
+                className="cursor-pointer w-5 text-blue-400 hover:text-blue-500"
+                onClick={handleEditCancelBtnClick}
+                icon={faPenToSquare}
+              />
             ) : isEditPwCheckOpen ? (
               openBoardData && (
-                <PasswordChecker
-                  post_id={openBoardData.post_id}
-                  onPwCheckPassed={handleEditingPWCheckPassed}
-                  onQuitBtnClick={() => {
-                    setIsEditPwCheckOpen(false);
-                  }}
-                />
+                <div className="hidden sm:visible">
+                  editPasswordChecker(openBoardData.post_id)
+                </div>
               )
             ) : (
               <FontAwesomeIcon
@@ -252,13 +284,9 @@ export default function BoardItemDetail({
             )}
             {isDeletePwCheckOpen ? (
               openBoardData && (
-                <PasswordChecker
-                  post_id={openBoardData.post_id}
-                  onPwCheckPassed={handleDeletePwCheckPassed}
-                  onQuitBtnClick={() => {
-                    setIsDeletePwCheckOpen(false);
-                  }}
-                />
+                <div className="hidden sm:visible">
+                  {deletePasswordChecker(openBoardData.post_id)}
+                </div>
               )
             ) : (
               <FontAwesomeIcon
@@ -269,7 +297,21 @@ export default function BoardItemDetail({
             )}
           </div>
         </BoardItemRowContainer>
-
+        <BoardItemRowContainer>
+          {loading ? (
+            <div className="w-full h-full bg-gray-500" />
+          ) : (
+            openBoardData &&
+            (isEditing ? (
+              <BoardTitleInput
+                isValid={isTitleValid}
+                defaultValue={openBoardData.title}
+              />
+            ) : (
+              <BoardItemTitles title={openBoardData.title} />
+            ))
+          )}
+        </BoardItemRowContainer>
         <BoardItemRowContainer>
           {openBoardData &&
             (isEditing ? (
@@ -278,7 +320,7 @@ export default function BoardItemDetail({
                 defaultValue={openBoardData.content}
               />
             ) : (
-              openBoardData.content
+              <div className="break-keep">{openBoardData.content}</div>
             ))}
         </BoardItemRowContainer>
         {openBoardData &&
@@ -299,7 +341,7 @@ export default function BoardItemDetail({
             </button>
           </Center>
         )}
-      </BoardItemContainer>
+      </BoardModalContainer>
     </editFetcher.Form>
   );
 }

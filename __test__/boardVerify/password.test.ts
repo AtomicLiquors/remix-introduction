@@ -1,4 +1,4 @@
-import { validatePassword } from "@/routes/board._index/util/validateForm";
+import { validatePassword } from "@/routes/board._index/utils/validateForm";
 
 describe('isValidPassword', () => {
     test('유효 케이스', () => {

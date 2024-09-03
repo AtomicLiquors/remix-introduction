@@ -53,7 +53,7 @@ export const projectData: ProjectProps[] = [
     links: {
       demo: "https://www.youtube.com/watch?v=Zujd17yREBY",
     },
-    screenshots: [],
+    screenshots: ["/img/project/ringo/ringo.png"],
   },
   {
     emoji: "🐶",

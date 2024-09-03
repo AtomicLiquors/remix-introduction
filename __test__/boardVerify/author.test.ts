@@ -1,5 +1,5 @@
-import { invalidMessage } from "@/routes/board._index/util/invalidMessage";
-import { validateAuthor } from "@/routes/board._index/util/validateForm";
+import { invalidMessage } from "@/routes/board._index/utils/invalidMessage";
+import { validateAuthor } from "@/routes/board._index/utils/validateForm";
 
 describe('작성자 이름 검증', () => {
     console.log(`현재 규칙 : ${invalidMessage.author}`)

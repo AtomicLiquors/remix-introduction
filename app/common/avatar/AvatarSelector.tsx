@@ -21,7 +21,7 @@ export default function AvatarSelector({handleAvatarChange, defaultAvatarId}:Ava
     <div>
       <Avatar avatarId={avatarId} className="relative cursor-pointer" onClick={() => setIsAvatarSelectorOpen(!isAvatarSelectorOpen)} />
       {isAvatarSelectorOpen &&
-      <div className="absolute flex gap-2 p-1 bg-gray-200 rounded">
+      <div className="absolute flex flex-wrap gap-2 p-1 bg-gray-200 rounded overflow-clip mr-4">
         {avatarSources.map((_, idx) => (
           <Avatar className="cursor-pointer" key={idx} avatarId={idx} onClick={() => handleAvatarSelection(idx)}/>
         ))}
