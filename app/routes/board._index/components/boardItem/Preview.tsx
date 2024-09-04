@@ -129,7 +129,6 @@ export default function BoardItemPreview({
             <div className="text-sm">{author}</div>
           </BoardItemFirstBlock>
           <BoardItemMiddleBlock>
-            <div>
               {isEditPwCheckOpen || isDeletePwCheckOpen ? (
                 <>
                   {isEditPwCheckOpen && (
@@ -178,7 +177,6 @@ export default function BoardItemPreview({
               <div className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
                 {dateToString(created_at)}
               </div>
-            </div>
           </BoardItemMiddleBlock>
         </BoardItemBlockWrapper>
 

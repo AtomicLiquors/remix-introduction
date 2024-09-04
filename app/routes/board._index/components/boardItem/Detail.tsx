@@ -205,12 +205,13 @@ export default function BoardItemDetail({
     <editFetcher.Form onSubmit={handleEditSubmit} className="h-full">
       <BoardModalContainer>
         {!!invalidFormMsg && <InvalidFormMsg msg={invalidFormMsg} />}
+        {/* To-Do : sm 이상 화면에서 배경 블러처리 PWCheck 숨기고, 수정 삭제 버튼 옆에 PWCheck 띄우기 */}
         <BoardItemRowContainer className="relative">
           {openBoardData && (isEditPwCheckOpen || isDeletePwCheckOpen) && (
             <Center
               flex
               flexCol
-              className="sm:hidden absolute w-[101%] h-full backdrop-blur-sm"
+              className="absolute w-[101%] h-full backdrop-blur-sm"
             >
               {isEditPwCheckOpen && editPasswordChecker(openBoardData.post_id)}
               {isDeletePwCheckOpen &&
