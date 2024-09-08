@@ -129,26 +129,7 @@ export default function BoardItemPreview({
             <div className="text-sm">{author}</div>
           </BoardItemFirstBlock>
           <BoardItemMiddleBlock>
-              {isEditPwCheckOpen || isDeletePwCheckOpen ? (
-                <>
-                  {isEditPwCheckOpen && (
-                    <PasswordChecker
-                      label="수정하려면 "
-                      post_id={post_id}
-                      onPwCheckPassed={handleEditPwCheckPass}
-                      onQuitBtnClick={handleEditPwCheckQuit}
-                    />
-                  )}
-                  {isDeletePwCheckOpen && (
-                    <PasswordChecker
-                      label="삭제하려면 "
-                      post_id={post_id}
-                      onPwCheckPassed={handleDeletePwCheckPass}
-                      onQuitBtnClick={handleDeletePwCheckQuit}
-                    />
-                  )}
-                </>
-              ) : limited ? (
+            {limited ? (
                 isOpenPwCheckOpen ? (
                   <PasswordChecker
                     label="조회하려면 "
@@ -177,10 +158,34 @@ export default function BoardItemPreview({
               <div className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
                 {dateToString(created_at)}
               </div>
+              
+           
           </BoardItemMiddleBlock>
         </BoardItemBlockWrapper>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 relative">
+          
+          {isEditPwCheckOpen || isDeletePwCheckOpen && (
+                <div className="absolute min-w-256 right-[1rem]">
+                  {isEditPwCheckOpen && (
+                    <PasswordChecker
+                      label="수정하려면 "
+                      post_id={post_id}
+                      onPwCheckPassed={handleEditPwCheckPass}
+                      onQuitBtnClick={handleEditPwCheckQuit}
+                    />
+                  )}
+                  {isDeletePwCheckOpen && (
+                    <PasswordChecker
+                      label="삭제하려면 "
+                      post_id={post_id}
+                      onPwCheckPassed={handleDeletePwCheckPass}
+                      onQuitBtnClick={handleDeletePwCheckQuit}
+                    />
+                  )}
+                </div>
+              )}
+          
           <FontAwesomeIcon
             className={`cursor-pointer w-5 ${
               isEditPwCheckOpen ? "text-blue-400" : "text-gray-400"
