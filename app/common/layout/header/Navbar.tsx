@@ -13,6 +13,7 @@ return (
         >
             HOME
         </NavLink>
+        {/*
         <NavLink
             preventScrollReset={true}
             to="posts"
@@ -22,6 +23,7 @@ return (
         >
             POSTS
         </NavLink>
+        */}
         <NavLink
             preventScrollReset={true}
             to="board"
