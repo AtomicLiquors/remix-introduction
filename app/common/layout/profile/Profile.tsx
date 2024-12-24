@@ -1,5 +1,6 @@
 import Center from "@/common/components/atoms/Center";
 import RoundImage from "@/common/components/atoms/RoundImage";
+import { PHOTO_PATHS } from "@/paths/photoPaths";
 import { themeClasses } from "@/theme/theme";
 
 /*
@@ -12,7 +13,7 @@ export default function Profile() {
   return (
     <div className={`${themeClasses.bg.card} w-full p-8`}>
       <Center flex flexCol className="gap-3">
-        <RoundImage src="/img/photos/profile.jpg" className="w-64 h-64 object-cover" />
+        <RoundImage src={PHOTO_PATHS.PROFILE} className="w-64 h-64 object-cover" />
         <p
           id="index-page"
           className={`${themeClasses.text.primary} mb-5 text-3xl font-bold underline`}
