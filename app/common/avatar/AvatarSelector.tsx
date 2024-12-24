@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Avatar from "./Avatar";
-import { avatarSources } from "./avatarLinks";
+import { avatarSources } from "../../paths/avatarPaths";
 
 interface AvatarSelectorProps {
   handleAvatarChange?: (arg0: number) => void;
