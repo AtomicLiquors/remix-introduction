@@ -7,6 +7,7 @@ export default function IndexIntroduction() {
   return (
     <div>
       <IndexItemTitles title="Introduction" />
+      {/* 데이터 분리할 수 있나? 파싱할 때 반응형 분리(LineBreak)/무조건 분리(div) 구분자는 어떻게 할까? */}
       <Center className={`mt-5 ${themeClasses.text.secondary} space-y-2`}>
         <div>
           <LineBreak>안녕하세요!</LineBreak>

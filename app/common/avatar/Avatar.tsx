@@ -1,4 +1,4 @@
-import { avatarSourcePrefix, avatarSources } from "./avatarLinks";
+import { avatarSourcePrefix, avatarSources } from "../../paths/avatarPaths";
 
 interface AvatarProps {
     avatarId: number;

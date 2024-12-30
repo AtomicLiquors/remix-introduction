@@ -26,9 +26,10 @@ import { applyExistingTheme, themeClasses } from "./theme/theme";
 import Center from "@/common/components/atoms/Center";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import Profile from "./common/layout/profile/Profile";
+import Profile from "./common/layout/header/Profile";
 import LineBreak from "./common/components/atoms/LineBreak";
-import Footer from "./common/layout/Footer";
+import Footer from "@/common/layout/Footer";
+import Header from "@/common/layout/Header";
 
 export const action = async () => {
   const contact = await createEmptyContact();
@@ -113,27 +114,7 @@ export default function App() {
             ></div>
           )}
 
-          <Profile />
-          <Center flex className="border-t gap-5 h-8 p-5 shadow-md">
-          <NavLink
-            preventScrollReset={true}
-            to="."
-            className={({ isActive, isPending }) =>
-              isPending ? "text-gray-200" : isActive ? "text-blue-500" : ""
-            }
-          >
-            HOME
-          </NavLink>
-          <NavLink
-            preventScrollReset={true}
-            to="board"
-            className={({ isActive, isPending }) =>
-              isPending ? "text-gray-200" : isActive ? "text-blue-500" : ""
-            }
-          >
-            BOARD
-          </NavLink>
-        </Center>
+          <Header />
 
           <ScrollRestoration />
           <Outlet />
