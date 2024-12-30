@@ -21,7 +21,7 @@ export default function Profile() {
           최 효 빈
         </p>
         <div className={themeClasses.text.secondary}>
-          <p>Java & JavaScript 개발자</p>
+          <p>React.js 웹 애플리케이션 개발자</p>
         </div>
 
         <div className={themeClasses.text.secondary}>
