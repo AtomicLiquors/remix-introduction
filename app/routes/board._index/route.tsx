@@ -22,14 +22,16 @@ export const loader = async () => {
 };
 
 export default function BoardRoute() {
+
+  /* To-Do : 일관성 있는 변수명 사용 바람. */
+  const result = useLoaderData<typeof loader>();
+
   const openBoardDataFetcher = useFetcher<BoardDetailResponseDTO>();
   const loading = openBoardDataFetcher.state !== "idle";
   
   // To-Do: 모달 닫으면 setOpenBoardData(null);
   // To-Do: Loading시 기존 화면 뿌옇게 표시.
 
-    /* To-Do : 일관성 있는 변수명 사용 바람. */
-  const result = useLoaderData<typeof loader>();
 
   /* 모달 통제 */
   const [
