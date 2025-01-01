@@ -3,11 +3,11 @@ import { useState, useEffect, forwardRef } from "react";
 export const useScrollReachedToImage = (
     ref: React.RefObject<HTMLImageElement>
     ) => {
-    const [isImageVisible, setIsImageVisible] = useState<boolean>(false);
+    const [hasScrollReachedImage, setHasScrollReachedImage] = useState<boolean>(false);
 
     useEffect(() => {
         if (ref && typeof ref !== "function" && ref.current) {
-        registerObserver(ref.current, setIsImageVisible);
+            registerObserver(ref.current, setHasScrollReachedImage);
         }
     }, [ref]);
 
@@ -32,5 +32,5 @@ export const useScrollReachedToImage = (
         observer.observe(imageElement);
     };
 
-    return isImageVisible;
+    return hasScrollReachedImage;
 };

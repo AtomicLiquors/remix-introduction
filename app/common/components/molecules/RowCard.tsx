@@ -1,4 +1,4 @@
-import { useScrollReachedToImage } from "@/hooks/useScrollReachedToImage";
+import { useScrollReachedToImage } from "@/hooks/useScrollReachedImage";
 import { themeClasses } from "@/theme/theme";
 import { ReactNode, useEffect, useRef, useState } from "react";
 

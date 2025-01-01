@@ -4,7 +4,7 @@ import { themeClasses } from "@/theme/theme";
 import BulletListContainer from "@/common/components/molecules/BulletListContainer";
 import BulletListItem from "@/common/components/atoms/BulletListItem";
 import GridWithFarLeftItem from "@/common/components/atoms/GridWithFarLeftItem";
-import { useScrollReachedToImage } from "@/hooks/useScrollReachedToImage";
+import { useScrollReachedToImage } from "@/hooks/useScrollReachedImage";
 import { useEffect, useRef } from "react";
 
 const path = "/img/skills";
