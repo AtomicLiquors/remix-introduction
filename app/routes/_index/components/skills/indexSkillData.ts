@@ -2,6 +2,7 @@ import { breakpoint } from "@/common/components/atoms/LineBreak";
 import { SkillProps } from "./indexSkillType";
 
 export const skillData: SkillProps[] = [
+  // last update : 25.01.01
   {
     title: "JavaScript",
     content: [

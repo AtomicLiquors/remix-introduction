@@ -1,4 +1,5 @@
 import Center from "@/common/components/atoms/Center";
+import { CONTACT_PATHS } from "@/paths/contactPaths";
 import { themeClasses } from "@/theme/theme";
 import { faDiscord, faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,16 +18,16 @@ export default function IndexContactMe() {
         Contact Me!
       </div>
       <Center flex className={`mt-4 gap-4 text-gray-400`}>
-        <a href="https://www.linkedin.com/in/atomicliquors/" target="blank">
+        <a href={CONTACT_PATHS.LINKED_IN} target="blank">
           <FontAwesomeIcon icon={faLinkedin} className={tailwindIconSizing}/>
         </a>
         <a
-          href="https://discordapp.com/users/1026412188753207356"
+          href={CONTACT_PATHS.DISCORD_PROFILE}
           target="blank"
         >
           <FontAwesomeIcon icon={faDiscord} className={tailwindIconSizing}/>
         </a>
-        <a href="https://github.com/atomicliquors" target="blank">
+        <a href={CONTACT_PATHS.GITHUB} target="blank">
           <FontAwesomeIcon icon={faGithub} className={tailwindIconSizing}/>
         </a>
 {/*
