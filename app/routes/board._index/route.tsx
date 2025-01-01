@@ -16,6 +16,7 @@ import BoardItemContainer from "./components/boardItem/layout/ItemContainer";
 import { useBoardModal } from "./useBoardModal.hook";
 
 export const loader = async () => {
+  /* To-Do: 성능 이슈 조치바람. */
   const list = await getBoards();
   return list;
 };
@@ -27,6 +28,7 @@ export default function BoardRoute() {
   // To-Do: 모달 닫으면 setOpenBoardData(null);
   // To-Do: Loading시 기존 화면 뿌옇게 표시.
 
+    /* To-Do : 일관성 있는 변수명 사용 바람. */
   const result = useLoaderData<typeof loader>();
 
   /* 모달 통제 */
@@ -116,14 +118,18 @@ export default function BoardRoute() {
       <Modal isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal} closeBtn>
         <BoardItemCreate isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal}/>
       </Modal>
-      {result?.data!.map((board, idx) => (
-        <BoardItemPreview
-          key={idx}
-          {...(board as BoardItemProps)}
-          onBoardSelect={() => handleBoardItemClick(board.post_id)}
-          onEditPwCheckPass={handleBoardEditPWCheckPass}
-        />
-      ))}
+      {/*To-Do: !, as 키워드 대체바람. */}
+      {result ? 
+        result.data!.map((board, idx) => (
+          <BoardItemPreview
+            key={idx}
+            {...(board as BoardItemProps)}
+            onBoardSelect={() => handleBoardItemClick(board.post_id)}
+            onEditPwCheckPass={handleBoardEditPWCheckPass}
+          />
+        )) :
+        <div></div>
+        }
     </>
   );
 }
