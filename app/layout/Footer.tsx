@@ -1,7 +1,7 @@
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import LineBreak from "../components/atoms/LineBreak";
+import LineBreak from "@/common/components/atoms/LineBreak";
 
 export default function Footer() {
   return (
