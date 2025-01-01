@@ -1,4 +1,4 @@
-import { ScrollRestoration, useFetcher, useLoaderData } from "@remix-run/react";
+import { defer, ScrollRestoration, useFetcher, useLoaderData } from "@remix-run/react";
 import { BoardDetailResponseDTO, getBoards } from "@/model/board.server";
 import BoardItemPreview, {
   BoardItemProps,
@@ -18,7 +18,7 @@ import { useBoardModal } from "./useBoardModal.hook";
 export const loader = async () => {
   /* To-Do: 성능 이슈 조치바람. */
   const list = await getBoards();
-  return list;
+  return defer(list);
 };
 
 export default function BoardRoute() {
