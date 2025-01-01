@@ -1,3 +1,4 @@
+import { useScrollReachedToImage } from "@/hooks/useScrollReachedToImage";
 import { themeClasses } from "@/theme/theme";
 import { ReactNode, useEffect, useRef, useState } from "react";
 
@@ -8,43 +9,8 @@ interface RowCardProps {
 }
 
 const RowCard: React.FC<RowCardProps> = ({ children, imgSrc, imgLink }) => {
-  const [isImageVisible, setIsImageVisible] = useState<boolean>(false);
   const imageRef = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    if (imageRef.current) {
-      registerObserver(imageRef.current, setIsImageVisible);
-    }
-  }, [])
-
-  const registerObserver = (
-    imageElement: HTMLImageElement, // Pass actual HTMLImageElement instead of `Element`
-    setIsImageVisible: React.Dispatch<React.SetStateAction<boolean>>
-  ) => {
-    // Create a new IntersectionObserver
-    const observer = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach(entry => {
-          console.log(entry); // Debug log to check if observer is working
-          
-          if (!entry.isIntersecting) return; // If not in view, exit early
-
-          // Set image visibility to true when it is in the viewport
-          setIsImageVisible(true);
-
-          // Disconnect the observer once the image is visible
-          observer.disconnect();
-        });
-      },
-      {
-        threshold: 0.1, // Trigger the observer when 10% of the image is visible
-      }
-    );
-
-    // Observe the image element
-    observer.observe(imageElement);
-  };
-
+  const isImageVisible = useScrollReachedToImage(imageRef);
 
   const img: ReactNode = (
   
