@@ -15,22 +15,24 @@ import Center from "@/common/components/atoms/Center";
 import BoardItemContainer from "./components/boardItem/layout/ItemContainer";
 import { useBoardModal } from "./useBoardModal.hook";
 
-export const loader = async () => {
-  /*
+export const loader = () => {
   const boards = getBoards();
-  return defer({boards});
-  */
-  return null;
+  return defer({boards});  
 };
 
 export default function BoardRoute() {
+
+  
+  const fallbackComponent = () => <div>loading</div>;
+
+
   const openBoardDataFetcher = useFetcher<BoardDetailResponseDTO>();
   const loading = openBoardDataFetcher.state !== "idle";
   
   // To-Do: 모달 닫으면 setOpenBoardData(null);
   // To-Do: Loading시 기존 화면 뿌옇게 표시.
 
- // const {boards} = useLoaderData<typeof loader>();
+  const {boards} = useLoaderData<typeof loader>();
 
   /* 모달 통제 */
   const [
@@ -119,8 +121,7 @@ export default function BoardRoute() {
       <Modal isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal} closeBtn>
         <BoardItemCreate isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal}/>
       </Modal>
-      <Suspense fallback={<div>loading</div>}>
-      {/*
+      <Suspense fallback={fallbackComponent()}>
         <Await resolve={boards}>
           {(boards) => boards.data.map((board, idx) => (
             <BoardItemPreview
@@ -131,7 +132,6 @@ export default function BoardRoute() {
             />
           ))}
       </Await>
-      */}
       </Suspense>
     </>
   );
