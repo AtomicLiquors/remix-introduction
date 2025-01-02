@@ -1,9 +1,9 @@
-import { ScrollRestoration, useFetcher, useLoaderData } from "@remix-run/react";
+import { Await, defer, ScrollRestoration, useFetcher, useLoaderData } from "@remix-run/react";
 import { BoardDetailResponseDTO, getBoards } from "@/model/board.server";
 import BoardItemPreview, {
   BoardItemProps,
 } from "./components/boardItem/Preview";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Modal } from "@/common/modal/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -17,8 +17,8 @@ import { useBoardModal } from "./useBoardModal.hook";
 
 export const loader = async () => {
   /* To-Do: 성능 이슈 조치바람. */
-  const list = await getBoards();
-  return list;
+  const list = getBoards();
+  return defer({list});
 };
 
 export default function BoardRoute() {
@@ -29,7 +29,7 @@ export default function BoardRoute() {
   // To-Do: Loading시 기존 화면 뿌옇게 표시.
 
     /* To-Do : 일관성 있는 변수명 사용 바람. */
-  const result = useLoaderData<typeof loader>();
+  const {list} = useLoaderData<typeof loader>();
 
   /* 모달 통제 */
   const [
@@ -119,17 +119,18 @@ export default function BoardRoute() {
         <BoardItemCreate isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal}/>
       </Modal>
       {/*To-Do: !, as 키워드 대체바람. */}
-      {result ? 
-        result.data!.map((board, idx) => (
-          <BoardItemPreview
-            key={idx}
-            {...(board as BoardItemProps)}
-            onBoardSelect={() => handleBoardItemClick(board.post_id)}
-            onEditPwCheckPass={handleBoardEditPWCheckPass}
-          />
-        )) :
-        <div></div>
-        }
+      <Suspense fallback={<div>2kooong2</div>}>
+        <Await resolve={list}>
+          {(list) => list.data!.map((board, idx) => (
+            <BoardItemPreview
+              key={idx}
+              {...(board as BoardItemProps)}
+              onBoardSelect={() => handleBoardItemClick(board.post_id)}
+              onEditPwCheckPass={handleBoardEditPWCheckPass}
+            />
+          ))}
+        </Await>
+      </Suspense>
     </>
   );
 }
