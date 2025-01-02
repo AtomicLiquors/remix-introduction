@@ -1,9 +1,9 @@
-import { ScrollRestoration, useFetcher, useLoaderData } from "@remix-run/react";
+import { Await, defer, ScrollRestoration, useFetcher, useLoaderData } from "@remix-run/react";
 import { BoardDetailResponseDTO, getBoards } from "@/model/board.server";
 import BoardItemPreview, {
   BoardItemProps,
 } from "./components/boardItem/Preview";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Modal } from "@/common/modal/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,8 +16,8 @@ import BoardItemContainer from "./components/boardItem/layout/ItemContainer";
 import { useBoardModal } from "./useBoardModal.hook";
 
 export const loader = async () => {
-  const list = await getBoards();
-  return list;
+  const boards = getBoards();
+  return defer({boards});
 };
 
 export default function BoardRoute() {
@@ -27,7 +27,7 @@ export default function BoardRoute() {
   // To-Do: 모달 닫으면 setOpenBoardData(null);
   // To-Do: Loading시 기존 화면 뿌옇게 표시.
 
-  const result = useLoaderData<typeof loader>();
+  const {boards} = useLoaderData<typeof loader>();
 
   /* 모달 통제 */
   const [
@@ -116,14 +116,18 @@ export default function BoardRoute() {
       <Modal isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal} closeBtn>
         <BoardItemCreate isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal}/>
       </Modal>
-      {result?.data!.map((board, idx) => (
-        <BoardItemPreview
-          key={idx}
-          {...(board as BoardItemProps)}
-          onBoardSelect={() => handleBoardItemClick(board.post_id)}
-          onEditPwCheckPass={handleBoardEditPWCheckPass}
-        />
-      ))}
+      <Suspense fallback={<div>loading</div>}>
+        <Await resolve={boards}>
+          {(boards) => boards.data.map((board, idx) => (
+            <BoardItemPreview
+              key={idx}
+              {...(board as BoardItemProps)}
+              onBoardSelect={() => handleBoardItemClick(board.post_id)}
+              onEditPwCheckPass={handleBoardEditPWCheckPass}
+            />
+          ))}
+      </Await>
+      </Suspense>
     </>
   );
 }
