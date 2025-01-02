@@ -16,8 +16,10 @@ import BoardItemContainer from "./components/boardItem/layout/ItemContainer";
 import { useBoardModal } from "./useBoardModal.hook";
 
 export const loader = async () => {
+  /*
   const boards = getBoards();
   return defer({boards});
+  */
 };
 
 export default function BoardRoute() {
@@ -117,6 +119,7 @@ export default function BoardRoute() {
         <BoardItemCreate isModalOpen={isBoardCreateOpen} closeModal={closeBoardCreateModal}/>
       </Modal>
       <Suspense fallback={<div>loading</div>}>
+      {/*
         <Await resolve={boards}>
           {(boards) => boards.data.map((board, idx) => (
             <BoardItemPreview
@@ -127,6 +130,7 @@ export default function BoardRoute() {
             />
           ))}
       </Await>
+      */}
       </Suspense>
     </>
   );
