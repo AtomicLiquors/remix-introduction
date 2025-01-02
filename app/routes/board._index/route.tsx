@@ -20,6 +20,7 @@ export const loader = async () => {
   const boards = getBoards();
   return defer({boards});
   */
+  return null;
 };
 
 export default function BoardRoute() {
@@ -29,7 +30,7 @@ export default function BoardRoute() {
   // To-Do: 모달 닫으면 setOpenBoardData(null);
   // To-Do: Loading시 기존 화면 뿌옇게 표시.
 
-  const {boards} = useLoaderData<typeof loader>();
+ // const {boards} = useLoaderData<typeof loader>();
 
   /* 모달 통제 */
   const [
