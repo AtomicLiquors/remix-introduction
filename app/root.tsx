@@ -26,10 +26,10 @@ import { applyExistingTheme, themeClasses } from "./theme/theme";
 import Center from "@/common/components/atoms/Center";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import Profile from "./common/layout/header/Profile";
+import Profile from "@/layout/header/Profile";
 import LineBreak from "./common/components/atoms/LineBreak";
-import Footer from "@/common/layout/Footer";
-import Header from "@/common/layout/Header";
+import Footer from "@/layout/Footer";
+import Header from "@/layout/Header";
 
 export const action = async () => {
   const contact = await createEmptyContact();

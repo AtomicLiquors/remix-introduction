@@ -1,5 +1,5 @@
-import Profile from "@/common/layout/header/Profile";
-import NavBar from "@/common/layout/header/Navbar";
+import Profile from "@/layout/header/Profile";
+import NavBar from "@/layout/header/Navbar";
 
 export default function Header() {
     return (
