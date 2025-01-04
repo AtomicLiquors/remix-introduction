@@ -17,7 +17,7 @@ export function handleDataRequest(
   }: LoaderFunctionArgs | ActionFunctionArgs
 ) {
   response.headers.set("X-Custom-Header", "Proof That Entry-server-tsx actually works");
-  response.headers.set("Cache-Control", "max-age=3600");
+  // response.headers.set("Cache-Control", "max-age=3600");
 
   return response;
 }

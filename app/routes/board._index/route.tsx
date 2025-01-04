@@ -1,4 +1,4 @@
-import { Await, defer, ScrollRestoration, useFetcher, useLoaderData } from "@remix-run/react";
+import { Await, defer, json, ScrollRestoration, useFetcher, useLoaderData } from "@remix-run/react";
 import { BoardDetailResponseDTO, getBoards } from "@/model/board.server";
 import BoardItemPreview, {
   BoardItemProps,
@@ -17,7 +17,7 @@ import { useBoardModal } from "./useBoardModal.hook";
 
 export const loader = () => {
   const boards = getBoards();
-  return defer({boards});  
+  return defer({boards}, {headers: {'Cache-Control': 'max-age=3600'}});  
 };
 
 export default function BoardRoute() {
@@ -32,7 +32,7 @@ export default function BoardRoute() {
   // To-Do: 모달 닫으면 setOpenBoardData(null);
   // To-Do: Loading시 기존 화면 뿌옇게 표시.
 
-  const {boards} = useLoaderData<typeof loader>();
+  const { boards } = useLoaderData<typeof loader>();
 
   /* 모달 통제 */
   const [
