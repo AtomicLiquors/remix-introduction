@@ -33,8 +33,9 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
       ip: ip,
       is_private: is_private === "true",
     }
+
   
     const result = await createBoard(data);
-    return result;
+    return json({result}, {headers: {'Cache-Control': 'must-revalidate'}});
   };
   
