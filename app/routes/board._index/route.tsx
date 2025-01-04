@@ -17,7 +17,8 @@ import { useBoardModal } from "./useBoardModal.hook";
 
 export const loader = () => {
   const boards = getBoards();
-  return defer({boards}, {headers: {'Cache-Control': 'max-age=3600'}});  
+  //return defer({boards}, {headers: {'Cache-Control': 'max-age=3600'}});  
+  return defer({boards});  
 };
 
 export default function BoardRoute() {
