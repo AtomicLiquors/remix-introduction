@@ -1,4 +1,4 @@
-import { Await, defer, json, ScrollRestoration, useFetcher, useLoaderData } from "@remix-run/react";
+import { Await, defer, json, ScrollRestoration, useFetcher, useLoaderData, useRevalidator } from "@remix-run/react";
 import { BoardDetailResponseDTO, getBoards } from "@/model/board.server";
 import BoardItemPreview, {
   BoardItemProps,
@@ -99,6 +99,13 @@ export default function BoardRoute() {
     // To-Do: 런타임에 타입스크립트 fetcher가 유효한 타입을 검증하도록 한다.
     setOpenBoardData(openBoardDataFetcher.data as BoardDetailResponseDTO);
   }, [openBoardDataFetcher.data]);
+
+
+  const revalidator = useRevalidator();
+
+  useEffect(() => {
+    revalidator.revalidate();
+  }, []);
 
   return (
     <>

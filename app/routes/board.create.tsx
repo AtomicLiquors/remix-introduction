@@ -36,6 +36,7 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
 
   
     const result = await createBoard(data);
-    return result;    
+      
+    return result;
   };
   
