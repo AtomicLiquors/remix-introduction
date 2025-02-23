@@ -12,23 +12,15 @@ type PWCheckTypeValue = (typeof PWCheckType)[keyof typeof PWCheckType];
 
 
 export function usePasswordCheckModal() {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isPasswordCheckModalOpen, setIsPasswordCheckModalOpen] = useState<boolean>(false);
   const [passwordCheckType, setPasswordCheckType] = useState<PWCheckTypeValue>(PWCheckType.None);
-
-  function getIsPwCheckModalOpen(){
-    return isModalOpen;
-  }
-
-  function getPasswordCheckType(){
-    return passwordCheckType;
-  }
   
   function openPasswordCheckModal() {
-    setIsModalOpen(true);
+    setIsPasswordCheckModalOpen(true);
   }
 
   function closePasswordCheckModal() {
-    setIsModalOpen(false);
+    setIsPasswordCheckModalOpen(false);
   }
 
   function switchPasswordCheckType(type: PWCheckTypeValue) {
@@ -37,8 +29,8 @@ export function usePasswordCheckModal() {
 
 
   return [
-    getIsPwCheckModalOpen,
-    getPasswordCheckType,
+    isPasswordCheckModalOpen,
+    passwordCheckType,
     openPasswordCheckModal,
     closePasswordCheckModal,
     switchPasswordCheckType

@@ -58,8 +58,8 @@ export default function BoardRoute() {
 
   /* 패스워드 확인 모달 통제 */
   const [
-    getIsPwCheckModalOpen,
-    getPasswordCheckType,
+    isPasswordCheckModalOpen,
+    passwordCheckType,
     openPasswordCheckModal,
     closePasswordCheckModal,
     switchPasswordCheckType
@@ -136,11 +136,11 @@ export default function BoardRoute() {
         </Center>
       </BoardItemContainer>
       <Modal
-        isModalOpen={getIsPwCheckModalOpen()}
-        closeModal={closeBoardDetailModal}
+        isModalOpen={isPasswordCheckModalOpen}
+        closeModal={closePasswordCheckModal}
         closeBtn
       >
-        <div>2kooong2</div>
+        {passwordCheckType}
       </Modal>
 
       <Modal
