@@ -97,9 +97,9 @@ export default function BoardRoute() {
     openBoard(postId);
   };
 
-  /* 삭제 후 Revalidation 문제 : */
-  // 1. 스크롤 상태가 유지되지 않음.
-  // 2. 삭제한 게시글이 남아있는 것으로 보임.
+  /* 삭제 후 Revalidation 문제 확인 : */
+  // 1. 스크롤 상태가 유지되는가?
+  // 2. 삭제한 게시글이 남아있는지는 않는가?
   const handleBoardEditPWCheckPass = (postId: number) => {
     openBoard(postId);
     toggleBoardDetailUpdate(!boardDetailUpdate);
