@@ -22,7 +22,8 @@ import BoardItemDetail from "./components/boardItem/Detail";
 import Center from "@/common/components/atoms/Center";
 import BoardItemContainer from "./components/boardItem/layout/ItemContainer";
 import { useBoardModal } from "./hooks/useBoardModal.hook";
-import { usePasswordCheckModal } from "./hooks/usePasswordCheckModal.hook";
+import usePasswordCheckModal from "@/routes/board._index/hooks/usePasswordCheckModal.hook";
+
 import { cacheClientLoader, useCachedLoaderData } from "remix-client-cache";
 
 export const loader = () => {
@@ -56,14 +57,13 @@ export default function BoardRoute() {
     setIsBoardDetailEditMode,
   ] = useBoardModal();
 
-  /* 패스워드 확인 모달 통제 */
-  const [
+  const { 
+    PasswordCheckModal, 
     isPasswordCheckModalOpen,
     passwordCheckType,
     openPasswordCheckModal,
     closePasswordCheckModal,
-    switchPasswordCheckType
-  ] = usePasswordCheckModal();
+  } = usePasswordCheckModal();
 
   const [boardDetailUpdate, toggleBoardDetailUpdate] = useState<boolean>(false);
 
@@ -135,15 +135,8 @@ export default function BoardRoute() {
           <FontAwesomeIcon className="w-8" icon={faCirclePlus} />
         </Center>
       </BoardItemContainer>
-      
-      <Modal
-        isModalOpen={isPasswordCheckModalOpen}
-        closeModal={closePasswordCheckModal}
-        closeBtn
-      >
-        {passwordCheckType}
-      </Modal>
 
+      <PasswordCheckModal/>
       <Modal
         isModalOpen={isBoardDetailOpen}
         closeModal={closeBoardDetailModal}
@@ -178,6 +171,7 @@ export default function BoardRoute() {
               key={idx}
               {...(board as BoardItemProps)}
               onBoardSelect={() => handleBoardItemClick(board.post_id)}
+              openPasswordCheckModal={openPasswordCheckModal}
               onEditPwCheckPass={handleBoardEditPWCheckPass}
             />
           ))

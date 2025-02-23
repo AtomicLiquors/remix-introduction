@@ -1,6 +1,7 @@
 import { useFetcher } from "@remix-run/react";
 import { useEffect, useState, MouseEvent } from "react";
 import PasswordChecker from "../PasswordChecker";
+import { PWCheckType, PWCheckTypeValue } from "@/routes/board._index/hooks/usePasswordCheckModal.hook";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleMinus,
@@ -15,7 +16,6 @@ import BoardItemRowContainer from "./layout/RowContainer";
 import Avatar from "@/common/avatar/Avatar";
 import { QueryResult } from "@vercel/postgres";
 import { dateToString } from "@/utils/date";
-import { PWCheckType, usePasswordCheckModal } from "../../hooks/usePasswordCheckModal.hook";
 
 export interface BoardItemProps {
   post_id: number;
@@ -27,6 +27,7 @@ export interface BoardItemProps {
   updated_at: Date;
   approved: boolean;
   is_private: boolean;
+  openPasswordCheckModal: (type: PWCheckTypeValue) => void;
   onBoardSelect: () => void;
   onEditPwCheckPass: (postId: number) => void;
 }
@@ -41,6 +42,7 @@ export default function BoardItemPreview({
   updated_at,
   approved,
   is_private,
+  openPasswordCheckModal,
   onBoardSelect,
   onEditPwCheckPass,
 }: BoardItemProps) {
@@ -51,15 +53,6 @@ export default function BoardItemPreview({
   const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
   const [isOpenPwCheckOpen, setIsOpenPwCheckOpen] = useState<boolean>(false);
 
-  const [
-      isPasswordCheckModalOpen,
-      passwordCheckType,
-      openPasswordCheckModal,
-      closePasswordCheckModal,
-      switchPasswordCheckType
-    ] = usePasswordCheckModal();
-  
-
   const handleOpenPwCheckOpen = () => {
     setIsOpenPwCheckOpen(true);
     setIsDeletePwCheckOpen(false);
@@ -67,8 +60,7 @@ export default function BoardItemPreview({
   };
 
   const handleEditBtnClick = () => {
-    openPasswordCheckModal();
-    switchPasswordCheckType(PWCheckType.Edit);
+    openPasswordCheckModal(PWCheckType.Edit);
     
     setIsOpenPwCheckOpen(false);
     setIsEditPwCheckOpen(true);
