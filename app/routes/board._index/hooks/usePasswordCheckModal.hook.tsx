@@ -47,7 +47,6 @@ export const PasswordCheckModal = ({
   closeModal: () => void;
 }) => (
   <>
-    <div>PWModal {isOpen ? "open" : "close"}</div>
     <Modal isModalOpen={isOpen} closeModal={closeModal} closeBtn>
       <div>2kooong2</div>
     </Modal>
