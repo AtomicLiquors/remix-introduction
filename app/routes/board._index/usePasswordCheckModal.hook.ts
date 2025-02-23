@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+/* Type, TypeValue Renaming 고려하라. */
 export const PWCheckType = {
   ViewDetail: 'viewDetail',
   Delete: 'delete',
