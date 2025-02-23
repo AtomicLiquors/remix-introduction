@@ -97,7 +97,6 @@ export default function BoardItemCreate({
 
   useEffect(() => {
     // fetcher로 submit하고 그 결과가 여기서 반응한다.
-
     // To-Do :
     // 실패시 컴포넌트 내부에 에러 메시지를 띄워라.
     if (createBoardFetcher.data?.rowCount) {
