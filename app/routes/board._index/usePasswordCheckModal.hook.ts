@@ -17,6 +17,7 @@ export function usePasswordCheckModal() {
   
   function openPasswordCheckModal() {
     setIsPasswordCheckModalOpen(true);
+    alert(isPasswordCheckModalOpen);
   }
 
   function closePasswordCheckModal() {
@@ -25,6 +26,7 @@ export function usePasswordCheckModal() {
 
   function switchPasswordCheckType(type: PWCheckTypeValue) {
     setPasswordCheckType(type);
+    alert(passwordCheckType);
   }
 
 

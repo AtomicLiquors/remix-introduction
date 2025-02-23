@@ -135,6 +135,7 @@ export default function BoardRoute() {
           <FontAwesomeIcon className="w-8" icon={faCirclePlus} />
         </Center>
       </BoardItemContainer>
+      
       <Modal
         isModalOpen={isPasswordCheckModalOpen}
         closeModal={closePasswordCheckModal}

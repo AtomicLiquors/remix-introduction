@@ -15,6 +15,7 @@ import BoardItemRowContainer from "./layout/RowContainer";
 import Avatar from "@/common/avatar/Avatar";
 import { QueryResult } from "@vercel/postgres";
 import { dateToString } from "@/utils/date";
+import { PWCheckType, usePasswordCheckModal } from "../../usePasswordCheckModal.hook";
 
 export interface BoardItemProps {
   post_id: number;
@@ -50,6 +51,15 @@ export default function BoardItemPreview({
   const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
   const [isOpenPwCheckOpen, setIsOpenPwCheckOpen] = useState<boolean>(false);
 
+  const [
+      isPasswordCheckModalOpen,
+      passwordCheckType,
+      openPasswordCheckModal,
+      closePasswordCheckModal,
+      switchPasswordCheckType
+    ] = usePasswordCheckModal();
+  
+
   const handleOpenPwCheckOpen = () => {
     setIsOpenPwCheckOpen(true);
     setIsDeletePwCheckOpen(false);
@@ -57,6 +67,9 @@ export default function BoardItemPreview({
   };
 
   const handleEditBtnClick = () => {
+    openPasswordCheckModal();
+    switchPasswordCheckType(PWCheckType.Edit);
+    
     setIsOpenPwCheckOpen(false);
     setIsEditPwCheckOpen(true);
     setIsDeletePwCheckOpen(false);
