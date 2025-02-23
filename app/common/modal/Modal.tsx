@@ -47,6 +47,7 @@ export function Modal({ children, closeBtn, isModalOpen, closeModal }: ModalProp
   }, []);
 
   useEffect(() => {
+    console.log(isModalOpen);
     if(isModalOpen){
       modal?.showModal();
     }else{

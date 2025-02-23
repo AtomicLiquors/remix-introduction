@@ -22,7 +22,7 @@ import BoardItemDetail from "./components/boardItem/Detail";
 import Center from "@/common/components/atoms/Center";
 import BoardItemContainer from "./components/boardItem/layout/ItemContainer";
 import { useBoardModal } from "./hooks/useBoardModal.hook";
-import usePasswordCheckModal from "@/routes/board._index/hooks/usePasswordCheckModal.hook";
+import usePasswordCheckModal, { PasswordCheckModal } from "@/routes/board._index/hooks/usePasswordCheckModal.hook";
 
 import { cacheClientLoader, useCachedLoaderData } from "remix-client-cache";
 
@@ -58,11 +58,9 @@ export default function BoardRoute() {
   ] = useBoardModal();
 
   const { 
-    PasswordCheckModal, 
-    isPasswordCheckModalOpen,
-    passwordCheckType,
+    isPasswordCheckModalOpen, 
     openPasswordCheckModal,
-    closePasswordCheckModal,
+    closePasswordCheckModal
   } = usePasswordCheckModal();
 
   const [boardDetailUpdate, toggleBoardDetailUpdate] = useState<boolean>(false);
@@ -136,7 +134,6 @@ export default function BoardRoute() {
         </Center>
       </BoardItemContainer>
 
-      <PasswordCheckModal/>
       <Modal
         isModalOpen={isBoardDetailOpen}
         closeModal={closeBoardDetailModal}
@@ -162,6 +159,11 @@ export default function BoardRoute() {
           closeModal={closeBoardCreateModal}
         />
       </Modal>
+
+      <PasswordCheckModal
+      isOpen={isPasswordCheckModalOpen}
+      closeModal={closePasswordCheckModal}
+    />
       {/* To-Do : Do we need Await Component? */}
       <Await resolve={boards}>
         {(boards) =>
