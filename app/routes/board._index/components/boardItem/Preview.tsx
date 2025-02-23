@@ -1,7 +1,7 @@
 import { useFetcher } from "@remix-run/react";
 import { useEffect, useState, MouseEvent } from "react";
 import PasswordChecker from "../PasswordChecker";
-import { PWCheckType, PWCheckTypeValue } from "@/routes/board._index/hooks/usePasswordCheckModal.hook";
+import { PWCheckOption, PWCheckOptionType } from "@/routes/board._index/hooks/usePasswordCheckModal.hook";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleMinus,
@@ -27,7 +27,7 @@ export interface BoardItemProps {
   updated_at: Date;
   approved: boolean;
   is_private: boolean;
-  openPasswordCheckModal: (type: PWCheckTypeValue) => void;
+  openPasswordCheckModal: (type: PWCheckOptionType) => void;
   onBoardSelect: () => void;
   onEditPwCheckPass: (postId: number) => void;
 }
@@ -60,7 +60,7 @@ export default function BoardItemPreview({
   };
 
   const handleEditBtnClick = () => {
-    openPasswordCheckModal(PWCheckType.Edit);
+    openPasswordCheckModal(PWCheckOption.Edit);
     
     setIsOpenPwCheckOpen(false);
     setIsEditPwCheckOpen(true);

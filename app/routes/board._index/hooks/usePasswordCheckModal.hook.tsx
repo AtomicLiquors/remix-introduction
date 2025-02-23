@@ -2,33 +2,33 @@ import { Modal } from "@/common/modal/Modal";
 import { Children, useEffect, useState } from "react";
 
 /* Type, TypeValue Renaming 고려하라. */
-export const PWCheckType = {
+export const PWCheckOption = {
   ViewDetail: 'viewDetail',
   Delete: 'delete',
   Edit: 'edit',
   None: 'none'
 } as const;
 
-export type PWCheckTypeValue = (typeof PWCheckType)[keyof typeof PWCheckType];
+export type PWCheckOptionType = (typeof PWCheckOption)[keyof typeof PWCheckOption];
 
 
 const usePasswordCheckModal = () => {
 
   const [isPasswordCheckModalOpen, setIsPasswordCheckModalOpen] = useState<boolean>(false);
-  const [passwordCheckType, setPasswordCheckType] = useState<PWCheckTypeValue>(PWCheckType.None);
+  const [passwordCheckType, setPasswordCheckType] = useState<PWCheckOptionType>(PWCheckOption.None);
   
   useEffect(() => {
     alert("Modal open state changed: " + isPasswordCheckModalOpen);
   }, [isPasswordCheckModalOpen]);
 
-  function openPasswordCheckModal(type: PWCheckTypeValue) {
+  function openPasswordCheckModal(type: PWCheckOptionType) {
     setIsPasswordCheckModalOpen(true);
     setPasswordCheckType(type);
   }
 
   function closePasswordCheckModal() {
     setIsPasswordCheckModalOpen(false);
-    setPasswordCheckType(PWCheckType.None);
+    setPasswordCheckType(PWCheckOption.None);
   }
 
   return {
