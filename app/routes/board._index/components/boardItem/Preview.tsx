@@ -61,7 +61,7 @@ export default function BoardItemPreview({
     setIsEditPwCheckOpen(true);
     setIsDeletePwCheckOpen(false);
   };
-  const handleDeleteBtnClick = async () => {
+  const handleDeleteBtnClick = () => {
     setIsOpenPwCheckOpen(false);
     setIsDeletePwCheckOpen(true);
     setIsEditPwCheckOpen(false);
@@ -158,8 +158,7 @@ export default function BoardItemPreview({
               <div className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
                 {dateToString(created_at)}
               </div>
-              
-           
+          
           </BoardItemMiddleBlock>
         </BoardItemBlockWrapper>
 
