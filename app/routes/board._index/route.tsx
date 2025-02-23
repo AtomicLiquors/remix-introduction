@@ -21,8 +21,8 @@ import BoardItemCreate from "./components/boardItem/Create";
 import BoardItemDetail from "./components/boardItem/Detail";
 import Center from "@/common/components/atoms/Center";
 import BoardItemContainer from "./components/boardItem/layout/ItemContainer";
-import { useBoardModal } from "./useBoardModal.hook";
-import { usePasswordCheckModal } from "./usePasswordCheckModal.hook";
+import { useBoardModal } from "./hooks/useBoardModal.hook";
+import { usePasswordCheckModal } from "./hooks/usePasswordCheckModal.hook";
 import { cacheClientLoader, useCachedLoaderData } from "remix-client-cache";
 
 export const loader = () => {

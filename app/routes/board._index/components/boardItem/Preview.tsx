@@ -15,7 +15,7 @@ import BoardItemRowContainer from "./layout/RowContainer";
 import Avatar from "@/common/avatar/Avatar";
 import { QueryResult } from "@vercel/postgres";
 import { dateToString } from "@/utils/date";
-import { PWCheckType, usePasswordCheckModal } from "../../usePasswordCheckModal.hook";
+import { PWCheckType, usePasswordCheckModal } from "../../hooks/usePasswordCheckModal.hook";
 
 export interface BoardItemProps {
   post_id: number;
