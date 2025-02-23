@@ -8,6 +8,7 @@ import {
   useLoaderData,
   useRevalidator,
 } from "@remix-run/react";
+
 import { BoardDetailResponseDTO, getBoards } from "@/model/board.server";
 import BoardItemPreview, {
   BoardItemProps,
@@ -40,6 +41,7 @@ export default function BoardRoute() {
   // To-Do: Loading시 기존 화면 뿌옇게 표시.
 
   const { boards } = useCachedLoaderData<typeof loader>();
+
 
   /* 모달 통제 */
   const [
@@ -152,6 +154,7 @@ export default function BoardRoute() {
       <Await resolve={boards}>
         {(boards) =>
           boards.data.map((board, idx) => (
+
             <BoardItemPreview
               key={idx}
               {...(board as BoardItemProps)}
