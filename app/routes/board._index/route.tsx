@@ -22,6 +22,7 @@ import BoardItemDetail from "./components/boardItem/Detail";
 import Center from "@/common/components/atoms/Center";
 import BoardItemContainer from "./components/boardItem/layout/ItemContainer";
 import { useBoardModal } from "./useBoardModal.hook";
+import { usePasswordCheckModal } from "./usePasswordCheckModal.hook";
 import { cacheClientLoader, useCachedLoaderData } from "remix-client-cache";
 
 export const loader = () => {
@@ -43,7 +44,7 @@ export default function BoardRoute() {
   const { boards } = useCachedLoaderData<typeof loader>();
 
 
-  /* 모달 통제 */
+  /* 게시판 모달 통제 */
   const [
     isBoardDetailOpen,
     isBoardCreateOpen,
@@ -54,6 +55,15 @@ export default function BoardRoute() {
     closeBoardCreateModal,
     setIsBoardDetailEditMode,
   ] = useBoardModal();
+
+  /* 패스워드 확인 모달 통제 */
+  const [
+    getIsPwCheckModalOpen,
+    getPasswordCheckType,
+    openPasswordCheckModal,
+    closePasswordCheckModal,
+    switchPasswordCheckType
+  ] = usePasswordCheckModal();
 
   const [boardDetailUpdate, toggleBoardDetailUpdate] = useState<boolean>(false);
 
@@ -125,6 +135,14 @@ export default function BoardRoute() {
           <FontAwesomeIcon className="w-8" icon={faCirclePlus} />
         </Center>
       </BoardItemContainer>
+      <Modal
+        isModalOpen={getIsPwCheckModalOpen()}
+        closeModal={closeBoardDetailModal}
+        closeBtn
+      >
+        <div>2kooong2</div>
+      </Modal>
+
       <Modal
         isModalOpen={isBoardDetailOpen}
         closeModal={closeBoardDetailModal}

@@ -10,13 +10,12 @@ export const PWCheckType = {
 
 type PWCheckTypeValue = (typeof PWCheckType)[keyof typeof PWCheckType];
 
-const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-const [passwordCheckType, setPasswordCheckType] = useState<PWCheckTypeValue>(PWCheckType.None);
 
+export function usePasswordCheckModal() {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [passwordCheckType, setPasswordCheckType] = useState<PWCheckTypeValue>(PWCheckType.None);
 
-export function useBoardModal() {
-
-  function getIsModalOpen(){
+  function getIsPwCheckModalOpen(){
     return isModalOpen;
   }
 
@@ -38,7 +37,7 @@ export function useBoardModal() {
 
 
   return [
-    getIsModalOpen,
+    getIsPwCheckModalOpen,
     getPasswordCheckType,
     openPasswordCheckModal,
     closePasswordCheckModal,
