@@ -9,7 +9,6 @@ import BoardItemBlockWrapper from "../boardItem/layout/BlockWrapper";
 import BoardItemFirstBlock from "../boardItem/layout/FirstBlock";
 import Avatar from "@/common/avatar/Avatar";
 import { dateToString } from "@/utils/date";
-import { title } from "process";
 import BoardItemTitles from "../boardItem/content/Titles";
 import BoardItemMiddleBlock from "../boardItem/layout/MiddleBlock";
 
