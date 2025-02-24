@@ -18,31 +18,22 @@ import BoardItemBlockWrapper from "./layout/BlockWrapper";
 import BoardItemRowContainer from "./layout/RowContainer";
 import PasswordChecker from "../PasswordChecker";
 import { PWCheckOption, PWCheckOptionType } from "../../types/PasswordCheckOptionType";
+import { BoardItemType } from "../../types/BoardItemType";
+
 
 export interface BoardItemProps {
-  post_id: number;
-  avatar_id: number;
-  title: string;
-  content: string;
-  author: string;
-  created_at: Date;
-  updated_at: Date;
-  approved: boolean;
-  is_private: boolean;
-}
-
-export interface BoardActionProps {
-  openPasswordCheckModal: (type: PWCheckOptionType, boardData: BoardItemProps) => void;
+  board: BoardItemType
+  openPasswordCheckModal: (type: PWCheckOptionType, boardData: BoardItemType) => void;
   onBoardSelect: () => void;
   onEditPwCheckPass: (postId: number) => void;
 }
 
 export default function BoardItemPreview({
+  board,
   openPasswordCheckModal,
   onBoardSelect,
-  onEditPwCheckPass,
-  ...board
-}: BoardItemProps & BoardActionProps ) {
+  onEditPwCheckPass
+}: BoardItemProps ) {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
 

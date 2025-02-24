@@ -27,6 +27,7 @@ import usePasswordCheckModal from "./components/modal/hook/usePasswordCheckModal
 
 import { cacheClientLoader, useCachedLoaderData } from "remix-client-cache";
 import { PasswordCheckModal } from "./components/modal/PasswordCheckModal";
+import { BoardItemType } from "./types/BoardItemType";
 
 export const loader = () => {
   const boards = getBoards();
@@ -167,7 +168,8 @@ export default function BoardRoute() {
 
       <PasswordCheckModal
         isOpen={isPasswordCheckModalOpen}
-        closeModal={closePasswordCheckModal}
+        closeModal={closePasswordCheckModal} 
+        boardItem={selectedBoardItemData}      
       />
       {/* To-Do : Do we need Await Component? */}
       <Suspense fallback={<div>loading</div>}>
@@ -176,7 +178,7 @@ export default function BoardRoute() {
             boards.data.map((board, idx) => (
               <BoardItemPreview
                 key={idx}
-                {...(board as BoardItemProps)}
+                board={board as BoardItemType}
                 onBoardSelect={() => handleBoardItemClick(board.post_id)}
                 openPasswordCheckModal={openPasswordCheckModal}
                 onEditPwCheckPass={handleBoardEditPWCheckPass}
