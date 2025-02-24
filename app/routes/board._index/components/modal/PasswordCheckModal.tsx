@@ -4,6 +4,7 @@ import { ModalSize } from "@/common/modal/type/ModalSizeType";
 import PasswordChecker from "../PasswordChecker";
 import { BoardItemType } from "../../types/BoardItemType";
 import { PWCheckOptionType } from "../../types/PasswordCheckOptionType";
+import { getCaptionByPWCheckOption } from "./util/getCaptionByPWCheckOption";
 
 export const PasswordCheckModal = ({
   isOpen,
@@ -26,7 +27,7 @@ export const PasswordCheckModal = ({
       {boardItem ? (
         <>
           <Center>
-            <div>{pwCheckOption}</div>
+            <div>{getCaptionByPWCheckOption(pwCheckOption)}</div>
             <div>{boardItem.post_id}번 게시글</div>
             <PasswordChecker
               post_id={0}
