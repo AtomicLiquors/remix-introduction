@@ -12,14 +12,14 @@ interface PasswordCheckerProps {
   label?: string;
   post_id: number;
   onPwCheckPassed: () => void;
-  onQuitBtnClick: (event: MouseEvent) => void;
+  // onQuitBtnClick: (event: MouseEvent) => void;
 }
 
 export default function PasswordChecker({
-  label,
+  label = "",
   post_id,
   onPwCheckPassed,
-  onQuitBtnClick,
+  // onQuitBtnClick,
 }: PasswordCheckerProps) {
   const pwCheckFetcher = useFetcher<boolean>();
  
@@ -84,11 +84,11 @@ export default function PasswordChecker({
           type="password"
           className={`w-5/6 ${loading && "text-gray-500"}`}
         />
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           className="w-2.5 cursor-pointer"
           onClick={onQuitBtnClick}
           icon={faX}
-        />
+        /> */}
       </div>
     </div>
   );

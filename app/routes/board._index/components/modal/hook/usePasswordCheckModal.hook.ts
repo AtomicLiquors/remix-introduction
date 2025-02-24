@@ -5,9 +5,8 @@ const usePasswordCheckModal = () => {
   const [isPasswordCheckModalOpen, setIsPasswordCheckModalOpen] =
     useState<boolean>(false);
     
-  const [passwordCheckType, setPasswordCheckType] = useState<PWCheckOptionType>(
-    PWCheckOption.None
-  );
+  const [passwordCheckType, setPasswordCheckType] = 
+    useState<PWCheckOptionType>(PWCheckOption.None);
 
   function openPasswordCheckModal(type: PWCheckOptionType) {
     setIsPasswordCheckModalOpen(true);
