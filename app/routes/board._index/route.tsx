@@ -10,7 +10,7 @@ import { BoardDetailResponseDTO, getBoards } from "@/model/board.server";
 import { Suspense, useEffect, useState } from "react";
 import { Modal } from "@/common/modal/Modal";
 import Center from "@/common/components/atoms/Center";
-import { ModalSizes } from "@/common/modal/type/ModalSizeType";
+import { ModalSize } from "@/common/modal/type/ModalSizeType";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
@@ -139,7 +139,7 @@ export default function BoardRoute() {
       <Modal
         isModalOpen={isBoardDetailOpen}
         closeModal={closeBoardDetailModal}
-        modalSize={ModalSizes.FULL}
+        modalSize={ModalSize.FULL}
         closeBtn
       >
         <BoardItemDetail
@@ -155,7 +155,7 @@ export default function BoardRoute() {
       <Modal
         isModalOpen={isBoardCreateOpen}
         closeModal={closeBoardCreateModal}
-        modalSize={ModalSizes.FULL}
+        modalSize={ModalSize.FULL}
         closeBtn
       >
         <BoardItemCreate

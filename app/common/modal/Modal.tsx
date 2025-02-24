@@ -1,28 +1,16 @@
-import {
-  ReactNode,
-  useEffect,
-  useRef,
-} from "react";
 import Center from "@/common/components/atoms/Center";
-import { ModalSizesType } from "./type/ModalSizeType";
 import useModal from "./hook/useModal.hook";
+import { ModalProps } from "./type/ModalProps";
+import { getTailwindFromModalsize } from "./util/getTailwindFromModalSize";
 
-interface ModalProps {
-  children: ReactNode;
-  closeBtn?: boolean;
-  isModalOpen: boolean;
-  modalSize: ModalSizesType;
-  closeModal: () => void;
-}
-
-export function Modal({ children, closeBtn, isModalOpen, closeModal }: ModalProps){
+export function Modal({ children, closeBtn, isModalOpen, modalSize, closeModal }: ModalProps){
   
   const modalRef = useModal(isModalOpen, closeModal);
 
   return (
     <dialog
       ref={modalRef}
-      className="modal rounded w-full h-full md:w-5/6 md:h-5/6"
+      className={`modal rounded ${getTailwindFromModalsize(modalSize)}}`}
     >
       <div className="flex flex-col justify-between h-full">
         <div className="modal-box sm:m-5 h-full">{children}</div>

@@ -1,7 +1,7 @@
-export const ModalSizes = {
+export const ModalSize = {
     FULL: "full",
     SMALL: "small",
 } as const;
 
-export type ModalSizesType =
-    (typeof ModalSizes)[keyof typeof ModalSizes];
+export type ModalSizeType =
+    (typeof ModalSize)[keyof typeof ModalSize];

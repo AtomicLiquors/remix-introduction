@@ -1,5 +1,5 @@
 import { Modal } from "@/common/modal/Modal";
-import { ModalSizes } from "@/common/modal/type/ModalSizeType";
+import { ModalSize } from "@/common/modal/type/ModalSizeType";
 import { useState } from "react";
 import { PWCheckOption, PWCheckOptionType } from "@/routes/board._index/types/PasswordCheckOptionType";
 
@@ -39,7 +39,7 @@ export const PasswordCheckModal = ({
   closeModal: () => void;
 }) => (
   <>
-    <Modal isModalOpen={isOpen} closeModal={closeModal} modalSize={ModalSizes.SMALL} closeBtn>
+    <Modal isModalOpen={isOpen} closeModal={closeModal} modalSize={ModalSize.SMALL} closeBtn>
       <div>2kooong2</div>
     </Modal>
   </>
