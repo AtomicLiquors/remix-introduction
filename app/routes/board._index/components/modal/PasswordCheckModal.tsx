@@ -2,7 +2,6 @@ import Center from "@/common/components/atoms/Center";
 import { Modal } from "@/common/modal/Modal";
 import { ModalSize } from "@/common/modal/type/ModalSizeType";
 import PasswordChecker from "../PasswordChecker";
-import { MouseEvent } from "react";
 
 /* Props로 데이터를 받나? hook으로 데이터를 받나? */
 export const PasswordCheckModal = ({

@@ -29,31 +29,38 @@ export interface BoardItemProps {
   updated_at: Date;
   approved: boolean;
   is_private: boolean;
-  openPasswordCheckModal: (type: PWCheckOptionType) => void;
+}
+
+export interface BoardActionProps {
+  openPasswordCheckModal: (type: PWCheckOptionType, boardData: BoardItemProps) => void;
   onBoardSelect: () => void;
   onEditPwCheckPass: (postId: number) => void;
 }
 
 export default function BoardItemPreview({
-  post_id,
-  avatar_id,
-  title,
-  content,
-  author,
-  created_at,
-  updated_at,
-  approved,
-  is_private,
   openPasswordCheckModal,
   onBoardSelect,
   onEditPwCheckPass,
-}: BoardItemProps) {
+  ...board
+}: BoardItemProps & BoardActionProps ) {
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
 
   const [isEditPwCheckOpen, setIsEditPwCheckOpen] = useState(false);
   const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
   const [isOpenPwCheckOpen, setIsOpenPwCheckOpen] = useState<boolean>(false);
+
+  const {
+    post_id,
+    avatar_id,
+    title,
+    content,
+    author,
+    created_at,
+    updated_at,
+    approved,
+    is_private
+  } = board;
 
   const handleOpenPwCheckOpen = () => {
     setIsOpenPwCheckOpen(true);
@@ -62,7 +69,7 @@ export default function BoardItemPreview({
   };
 
   const handleEditBtnClick = () => {
-    openPasswordCheckModal(PWCheckOption.Edit);
+    openPasswordCheckModal(PWCheckOption.Edit, board);
     
     setIsOpenPwCheckOpen(false);
     setIsEditPwCheckOpen(true);

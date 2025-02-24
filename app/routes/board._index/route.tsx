@@ -60,6 +60,8 @@ export default function BoardRoute() {
 
   const {
     isPasswordCheckModalOpen,
+    selectedBoardItemData, 
+    setSelectedBoardItemData,
     openPasswordCheckModal,
     closePasswordCheckModal,
   } = usePasswordCheckModal();

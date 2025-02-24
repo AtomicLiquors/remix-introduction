@@ -12,8 +12,9 @@ const usePasswordCheckModal = () => {
   const [selectedBoardItemData, setSelectedBoardItemData] = 
     useState<BoardItemProps | null>(null);
 
-  function openPasswordCheckModal(type: PWCheckOptionType) {
+  function openPasswordCheckModal(type: PWCheckOptionType, boardData: BoardItemProps) {
     setIsPasswordCheckModalOpen(true);
+    setSelectedBoardItemData(boardData);
     setPasswordCheckType(type);
   }
 
@@ -25,7 +26,8 @@ const usePasswordCheckModal = () => {
 
   return {
     isPasswordCheckModalOpen,
-    passwordCheckType,
+    selectedBoardItemData, 
+    setSelectedBoardItemData,
     openPasswordCheckModal,
     closePasswordCheckModal,
   };
