@@ -23,12 +23,21 @@ export function PasswordCheckModal({
   closeModal,
   boardItem,
   pwCheckOption,
+  onPWCheckPass,
 }: {
   isOpen: boolean;
   closeModal: () => void;
   boardItem: BoardItemType | null;
   pwCheckOption: PWCheckOptionType;
+  onPWCheckPass: (post_id: number, option: PWCheckOptionType) => void;
 }) {
+
+  const handlePWCheckPass = () => {
+    /* To-Do: 에러처리 */
+    if(boardItem)
+      onPWCheckPass(boardItem.post_id, pwCheckOption);
+  }
+
   return (
     <>
       <Modal
@@ -64,9 +73,7 @@ export function PasswordCheckModal({
               )}
               <PasswordChecker
                 post_id={boardItem.post_id}
-                onPwCheckPassed={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
+                onPwCheckPassed={handlePWCheckPass}
               />
             </Center>
           </>

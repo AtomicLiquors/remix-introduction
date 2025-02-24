@@ -28,6 +28,7 @@ import usePasswordCheckModal from "./components/modal/hook/usePasswordCheckModal
 import { cacheClientLoader, useCachedLoaderData } from "remix-client-cache";
 import { PasswordCheckModal } from "./components/modal/PasswordCheckModal";
 import { BoardItemType } from "./types/BoardItemType";
+import { PWCheckOptionType } from "./types/PasswordCheckOptionType";
 
 export const loader = () => {
   const boards = getBoards();
@@ -94,6 +95,10 @@ export default function BoardRoute() {
 
   function handleBoardItemClick(postId: number) {
     openBoard(postId);
+  }
+
+  const handlePWCheckPassFromModal = (postId: number, option: PWCheckOptionType) => {
+      alert(`${postId}번 게시글의 ${option} 요청 통과`);
   }
 
   /* 조회, 수정, 삭제 패스워드 체크 */
@@ -173,6 +178,7 @@ export default function BoardRoute() {
         closeModal={closePasswordCheckModal} 
         boardItem={selectedBoardItemData}      
         pwCheckOption={passwordCheckOption}
+        onPWCheckPass={handlePWCheckPassFromModal}
       />
       {/* To-Do : Do we need Await Component? */}
       <Suspense fallback={<div>loading</div>}>
