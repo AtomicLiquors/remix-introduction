@@ -33,9 +33,11 @@ export function PasswordCheckModal({
 }) {
 
   const handlePWCheckPass = () => {
+    
     /* To-Do: 에러처리 */
     if(boardItem)
       onPWCheckPass(boardItem.post_id, pwCheckOption);
+    closeModal();
   }
 
   return (
