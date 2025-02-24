@@ -27,6 +27,7 @@ interface BoardItemCreateProps {
   closeModal: () => void;
 }
 
+{/* To-Do: 글 하나 쓰고 새로 쓰면 이전 글 내용이 남는다. */}
 export default function BoardItemCreate({
   isModalOpen,
   closeModal,

@@ -54,7 +54,7 @@ export default function BoardRoute() {
   const deleteBoardFetcher = useFetcher<QueryResult>();
 
   /* 게시판 모달 통제 */
-  const [
+  const {
     isBoardDetailOpen,
     isBoardCreateOpen,
     isBoardDetailEditMode,
@@ -63,7 +63,7 @@ export default function BoardRoute() {
     openBoardCreateModal,
     closeBoardCreateModal,
     setIsBoardDetailEditMode,
-  ] = useBoardModal();
+  } = useBoardModal();
 
   const {
     isPasswordCheckModalOpen,

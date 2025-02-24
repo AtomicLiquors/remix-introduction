@@ -23,7 +23,7 @@ export function useBoardModal() {
     setIsBoardCreateOpen(false);
   }
 
-  return [
+  return {
     isBoardDetailOpen,
     isBoardCreateOpen,
     isBoardDetailEditMode,
@@ -32,5 +32,5 @@ export function useBoardModal() {
     openBoardCreateModal,
     closeBoardCreateModal,
     setIsBoardDetailEditMode
-  ] as const;
+  }
 }
