@@ -6,6 +6,7 @@ import { BoardItemType } from "../../types/BoardItemType";
 import { PWCheckOptionType } from "../../types/PasswordCheckOptionType";
 import { getCaptionByPWCheckOption } from "./util/getCaptionByPWCheckOption";
 
+{/* To-Do: Desktop 뷰에서는 클릭 위치 근처에 보이게 가능할까? */}
 export const PasswordCheckModal = ({
   isOpen,
   closeModal,
@@ -27,10 +28,10 @@ export const PasswordCheckModal = ({
       {boardItem ? (
         <>
           <Center>
-            <div>{getCaptionByPWCheckOption(pwCheckOption)}</div>
+            <div className="text-gray-500">{getCaptionByPWCheckOption(pwCheckOption)}</div>
             <div>{boardItem.post_id}번 게시글</div>
             <PasswordChecker
-              post_id={0}
+              post_id={boardItem.post_id}
               onPwCheckPassed={function (): void {
                 throw new Error("Function not implemented.");
               }}
