@@ -7,7 +7,7 @@ import {
 } from "@remix-run/react";
 
 import { BoardDetailResponseDTO, getBoards } from "@/model/board.server";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Modal } from "@/common/modal/Modal";
 import Center from "@/common/components/atoms/Center";
 import { ModalSizes } from "@/common/modal/ModalSizeType";
@@ -18,10 +18,14 @@ import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import BoardItemCreate from "./components/boardItem/Create";
 import BoardItemDetail from "./components/boardItem/Detail";
 import BoardItemContainer from "./components/boardItem/layout/ItemContainer";
-import BoardItemPreview, { BoardItemProps } from "./components/boardItem/Preview";
+import BoardItemPreview, {
+  BoardItemProps,
+} from "./components/boardItem/Preview";
 
 import { useBoardModal } from "./hooks/modals/useBoardModal.hook";
-import usePasswordCheckModal, { PasswordCheckModal } from "./hooks/modals/usePasswordCheckModal.hook";
+import usePasswordCheckModal, {
+  PasswordCheckModal,
+} from "./hooks/modals/usePasswordCheckModal.hook";
 
 import { cacheClientLoader, useCachedLoaderData } from "remix-client-cache";
 
@@ -43,7 +47,6 @@ export default function BoardRoute() {
 
   const { boards } = useCachedLoaderData<typeof loader>();
 
-
   /* 게시판 모달 통제 */
   const [
     isBoardDetailOpen,
@@ -56,10 +59,10 @@ export default function BoardRoute() {
     setIsBoardDetailEditMode,
   ] = useBoardModal();
 
-  const { 
-    isPasswordCheckModalOpen, 
+  const {
+    isPasswordCheckModalOpen,
     openPasswordCheckModal,
-    closePasswordCheckModal
+    closePasswordCheckModal,
   } = usePasswordCheckModal();
 
   const [boardDetailUpdate, toggleBoardDetailUpdate] = useState<boolean>(false);
@@ -162,24 +165,25 @@ export default function BoardRoute() {
       </Modal>
 
       <PasswordCheckModal
-      isOpen={isPasswordCheckModalOpen}
-      closeModal={closePasswordCheckModal}
-    />
+        isOpen={isPasswordCheckModalOpen}
+        closeModal={closePasswordCheckModal}
+      />
       {/* To-Do : Do we need Await Component? */}
-      <Await resolve={boards}>
-        {(boards) =>
-          boards.data.map((board, idx) => (
-
-            <BoardItemPreview
-              key={idx}
-              {...(board as BoardItemProps)}
-              onBoardSelect={() => handleBoardItemClick(board.post_id)}
-              openPasswordCheckModal={openPasswordCheckModal}
-              onEditPwCheckPass={handleBoardEditPWCheckPass}
-            />
-          ))
-        }
-      </Await>
+      <Suspense fallback={<div>2kooong2</div>}>
+        <Await resolve={boards}>
+          {(boards) =>
+            boards.data.map((board, idx) => (
+              <BoardItemPreview
+                key={idx}
+                {...(board as BoardItemProps)}
+                onBoardSelect={() => handleBoardItemClick(board.post_id)}
+                openPasswordCheckModal={openPasswordCheckModal}
+                onEditPwCheckPass={handleBoardEditPWCheckPass}
+              />
+            ))
+          }
+        </Await>
+      </Suspense>
     </>
   );
 }
