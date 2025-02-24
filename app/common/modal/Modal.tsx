@@ -4,11 +4,13 @@ import {
   useRef,
 } from "react";
 import Center from "@/common/components/atoms/Center";
+import { ModalSizesType } from "./ModalSizeType";
 
 interface ModalProps {
   children: ReactNode;
   closeBtn?: boolean;
   isModalOpen: boolean;
+  modalSize: ModalSizesType;
   closeModal: () => void;
 }
 

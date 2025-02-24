@@ -1,5 +1,6 @@
 import { Modal } from "@/common/modal/Modal";
-import { Children, useCallback, useEffect, useState } from "react";
+import { ModalSizes } from "@/common/modal/ModalSizeType";
+import { useState } from "react";
 
 export const PWCheckOption = {
   ViewDetail: "viewDetail",
@@ -46,7 +47,7 @@ export const PasswordCheckModal = ({
   closeModal: () => void;
 }) => (
   <>
-    <Modal isModalOpen={isOpen} closeModal={closeModal} closeBtn>
+    <Modal isModalOpen={isOpen} closeModal={closeModal} modalSize={ModalSizes.SMALL} closeBtn>
       <div>2kooong2</div>
     </Modal>
   </>

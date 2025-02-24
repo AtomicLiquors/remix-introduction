@@ -25,6 +25,7 @@ import { useBoardModal } from "./hooks/useBoardModal.hook";
 import usePasswordCheckModal, { PasswordCheckModal } from "@/routes/board._index/hooks/usePasswordCheckModal.hook";
 
 import { cacheClientLoader, useCachedLoaderData } from "remix-client-cache";
+import { ModalSizes } from "@/common/modal/ModalSizeType";
 
 export const loader = () => {
   const boards = getBoards();
@@ -137,6 +138,7 @@ export default function BoardRoute() {
       <Modal
         isModalOpen={isBoardDetailOpen}
         closeModal={closeBoardDetailModal}
+        modalSize={ModalSizes.FULL}
         closeBtn
       >
         <BoardItemDetail
@@ -152,6 +154,7 @@ export default function BoardRoute() {
       <Modal
         isModalOpen={isBoardCreateOpen}
         closeModal={closeBoardCreateModal}
+        modalSize={ModalSizes.FULL}
         closeBtn
       >
         <BoardItemCreate
