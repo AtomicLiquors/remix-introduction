@@ -183,9 +183,9 @@ export default function BoardItemDetail({
     <PasswordChecker
       post_id={post_id}
       onPwCheckPassed={handleEditingPWCheckPassed}
-      onQuitBtnClick={() => {
-        setIsEditPwCheckOpen(false);
-      }}
+      // onQuitBtnClick={() => {
+      //   setIsEditPwCheckOpen(false);
+      // }}
       label="수정하려면 "
     />
   );
@@ -194,9 +194,9 @@ export default function BoardItemDetail({
     <PasswordChecker
       post_id={post_id}
       onPwCheckPassed={handleDeletePwCheckPassed}
-      onQuitBtnClick={() => {
-        setIsDeletePwCheckOpen(false);
-      }}
+      // onQuitBtnClick={() => {
+      //   setIsDeletePwCheckOpen(false);
+      // }}
       label="삭제하려면 "
     />
   );

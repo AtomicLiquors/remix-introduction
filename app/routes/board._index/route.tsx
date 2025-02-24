@@ -2,27 +2,37 @@ import {
   Await,
   ClientLoaderFunctionArgs,
   defer,
-  json,
   ScrollRestoration,
   useFetcher,
-  useLoaderData,
-  useRevalidator,
 } from "@remix-run/react";
 
 import { BoardDetailResponseDTO, getBoards } from "@/model/board.server";
+import { Suspense, useEffect, useState } from "react";
+import { Modal } from "@/common/modal/Modal";
+import Center from "@/common/components/atoms/Center";
+import { ModalSize } from "@/common/modal/type/ModalSizeType";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+
+import BoardItemCreate from "./components/boardItem/Create";
+import BoardItemDetail from "./components/boardItem/Detail";
+import BoardItemContainer from "./components/boardItem/layout/ItemContainer";
 import BoardItemPreview, {
   BoardItemProps,
 } from "./components/boardItem/Preview";
-import { Suspense, useEffect, useState } from "react";
-import { Modal } from "@/common/modal/Modal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-import BoardItemCreate from "./components/boardItem/Create";
-import BoardItemDetail from "./components/boardItem/Detail";
-import Center from "@/common/components/atoms/Center";
-import BoardItemContainer from "./components/boardItem/layout/ItemContainer";
-import { useBoardModal } from "./useBoardModal.hook";
+
+import { useBoardModal } from "./components/modal/hook/useBoardModal.hook";
+import usePasswordCheckModal from "./components/modal/hook/usePasswordCheckModal.hook";
+
 import { cacheClientLoader, useCachedLoaderData } from "remix-client-cache";
+import { PasswordCheckModal } from "./components/modal/PasswordCheckModal";
+import { BoardItemType } from "./types/BoardItemType";
+import {
+  PWCheckOption,
+  PWCheckOptionType,
+} from "./types/PasswordCheckOptionType";
+import { QueryResult } from "@vercel/postgres";
 
 export const loader = () => {
   const boards = getBoards();
@@ -41,10 +51,10 @@ export default function BoardRoute() {
   // To-Do: Loading시 기존 화면 뿌옇게 표시.
 
   const { boards } = useCachedLoaderData<typeof loader>();
+  const deleteBoardFetcher = useFetcher<QueryResult>();
 
-
-  /* 모달 통제 */
-  const [
+  /* 게시판 모달 통제 */
+  const {
     isBoardDetailOpen,
     isBoardCreateOpen,
     isBoardDetailEditMode,
@@ -53,7 +63,15 @@ export default function BoardRoute() {
     openBoardCreateModal,
     closeBoardCreateModal,
     setIsBoardDetailEditMode,
-  ] = useBoardModal();
+  } = useBoardModal();
+
+  const {
+    isPasswordCheckModalOpen,
+    selectedBoardItemData,
+    passwordCheckOption,
+    openPasswordCheckModal,
+    closePasswordCheckModal,
+  } = usePasswordCheckModal();
 
   const [boardDetailUpdate, toggleBoardDetailUpdate] = useState<boolean>(false);
 
@@ -63,7 +81,9 @@ export default function BoardRoute() {
     useState<BoardDetailResponseDTO | null>(null);
 
   const openBoard = (postId: number) => {
+    /* 이건 Board Close 동작에 작동해야 하지 않을까? */
     setOpenBoardData(null);
+
     openBoardDetailModal();
     requestBoardById(postId);
   };
@@ -82,14 +102,48 @@ export default function BoardRoute() {
     openBoard(postId);
   }
 
+  const handlePWCheckPassFromModal = (
+    postId: number,
+    option: PWCheckOptionType
+  ) => {
+    switch (option) {
+      case PWCheckOption.ViewDetail:
+        handleBoardOpenPWCheckPass(postId);
+        break;
+      case PWCheckOption.Delete:
+        handleDeletePwCheckPass(postId);
+        break;
+      case PWCheckOption.Edit:
+        handleBoardEditPWCheckPass(postId);
+        break;
+    }
+  };
+
+  const handleDeletePwCheckPass = (postId: number) => {
+    /* To-Do: 이거 confirm 대신 따로 Small 모달 하나 만들어서 구현. */
+    if (confirm("삭제하시겠습니까? 삭제한 게시글은 복구되지 않습니다.")) {
+      sendBoardDeleteRequest(postId);
+    }
+  };
+
+  const sendBoardDeleteRequest = (postId: number) => {
+    deleteBoardFetcher.submit(
+      {},
+      {
+        action: `/board/${postId}/destroy`,
+        method: "DELETE",
+      }
+    );
+  };
+
   /* 조회, 수정, 삭제 패스워드 체크 */
   const handleBoardOpenPWCheckPass = (postId: number) => {
     openBoard(postId);
   };
 
-  /* 삭제 후 Revalidation 문제 : */
-  // 1. 스크롤 상태가 유지되지 않음.
-  // 2. 삭제한 게시글이 남아있는 것으로 보임.
+  /* 삭제 후 Revalidation 문제 확인 : */
+  // 1. 스크롤 상태가 유지되는가?
+  // 2. 삭제한 게시글이 남아있는지는 않는가?
   const handleBoardEditPWCheckPass = (postId: number) => {
     openBoard(postId);
     toggleBoardDetailUpdate(!boardDetailUpdate);
@@ -125,9 +179,11 @@ export default function BoardRoute() {
           <FontAwesomeIcon className="w-8" icon={faCirclePlus} />
         </Center>
       </BoardItemContainer>
+
       <Modal
         isModalOpen={isBoardDetailOpen}
         closeModal={closeBoardDetailModal}
+        modalSize={ModalSize.FULL}
         closeBtn
       >
         <BoardItemDetail
@@ -143,6 +199,7 @@ export default function BoardRoute() {
       <Modal
         isModalOpen={isBoardCreateOpen}
         closeModal={closeBoardCreateModal}
+        modalSize={ModalSize.FULL}
         closeBtn
       >
         <BoardItemCreate
@@ -150,20 +207,30 @@ export default function BoardRoute() {
           closeModal={closeBoardCreateModal}
         />
       </Modal>
-      {/* To-Do : Do we need Await Component? */}
-      <Await resolve={boards}>
-        {(boards) =>
-          boards.data.map((board, idx) => (
 
-            <BoardItemPreview
-              key={idx}
-              {...(board as BoardItemProps)}
-              onBoardSelect={() => handleBoardItemClick(board.post_id)}
-              onEditPwCheckPass={handleBoardEditPWCheckPass}
-            />
-          ))
-        }
-      </Await>
+      <PasswordCheckModal
+        isOpen={isPasswordCheckModalOpen}
+        closeModal={closePasswordCheckModal}
+        boardItem={selectedBoardItemData}
+        pwCheckOption={passwordCheckOption}
+        onPWCheckPass={handlePWCheckPassFromModal}
+      />
+      {/* To-Do : Do we need Await Component? */}
+      <Suspense fallback={<div>loading</div>}>
+        <Await resolve={boards}>
+          {(boards) =>
+            boards.data.map((board, idx) => (
+              <BoardItemPreview
+                key={idx}
+                board={board as BoardItemType}
+                onBoardSelect={() => handleBoardItemClick(board.post_id)}
+                openPasswordCheckModal={openPasswordCheckModal}
+                onEditPwCheckPass={handleBoardEditPWCheckPass}
+              />
+            ))
+          }
+        </Await>
+      </Suspense>
     </>
   );
 }

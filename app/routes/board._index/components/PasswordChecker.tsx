@@ -12,17 +12,17 @@ interface PasswordCheckerProps {
   label?: string;
   post_id: number;
   onPwCheckPassed: () => void;
-  onQuitBtnClick: (event: MouseEvent) => void;
+  // onQuitBtnClick: (event: MouseEvent) => void;
 }
 
 export default function PasswordChecker({
-  label,
+  label = "",
   post_id,
   onPwCheckPassed,
-  onQuitBtnClick,
+  // onQuitBtnClick,
 }: PasswordCheckerProps) {
   const pwCheckFetcher = useFetcher<boolean>();
- 
+
   const handlePasswordCheckPass = () => {
     onPwCheckPassed();
   };
@@ -70,13 +70,12 @@ export default function PasswordChecker({
   }
 
   return (
-    <div
-      className={`w-auto max-w-52 text-left`}
-    >
-      <div className={'text-xs pl-2'}>{getPasswordInputLabel()}</div>
-      <div className={`flex border bg-white max-h-8 p-1 gap-1 ${
-        pwCheckFetcher.data === false && "border-red-500"
-      }`}>
+    <Center flexCol>
+      {/* To-Do: 왼쪽 정렬 옵션 필요한가? */}
+      <label className={'text-sm text-gray-500'}>{getPasswordInputLabel()}</label>
+      <div className={`flex border bg-white w-4/6 max-h-8 p-1 gap-1 mx-auto
+        ${pwCheckFetcher.data === false && "border-red-500"}`}>
+          
         <FontAwesomeIcon icon={faLock} className="text-sm w-4 text-gray-500" />
         <input
           onChange={() => handelPasswordInput(post_id, inputRef.current!.value)}
@@ -84,12 +83,15 @@ export default function PasswordChecker({
           type="password"
           className={`w-5/6 ${loading && "text-gray-500"}`}
         />
-        <FontAwesomeIcon
+        {/* To-Do: 눈깔 아이콘으로 보이게 토글 */}
+        {/* <FontAwesomeIcon
           className="w-2.5 cursor-pointer"
           onClick={onQuitBtnClick}
           icon={faX}
-        />
+        /> */}
+         
       </div>
-    </div>
+
+      </Center>
   );
 }
