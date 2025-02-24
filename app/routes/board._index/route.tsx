@@ -108,7 +108,7 @@ export default function BoardRoute() {
   ) => {
     switch (option) {
       case PWCheckOption.ViewDetail:
-        openBoard(postId);
+        handleBoardOpenPWCheckPass(postId);
         break;
       case PWCheckOption.Delete:
         handleDeletePwCheckPass(postId);
