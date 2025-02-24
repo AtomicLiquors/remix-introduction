@@ -62,7 +62,7 @@ export default function BoardRoute() {
   const {
     isPasswordCheckModalOpen,
     selectedBoardItemData, 
-    setSelectedBoardItemData,
+    passwordCheckOption,
     openPasswordCheckModal,
     closePasswordCheckModal,
   } = usePasswordCheckModal();
@@ -170,6 +170,7 @@ export default function BoardRoute() {
         isOpen={isPasswordCheckModalOpen}
         closeModal={closePasswordCheckModal} 
         boardItem={selectedBoardItemData}      
+        pwCheckOption={passwordCheckOption}
       />
       {/* To-Do : Do we need Await Component? */}
       <Suspense fallback={<div>loading</div>}>

@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { PWCheckOption, PWCheckOptionType } from "@/routes/board._index/types/PasswordCheckOptionType";
-import { BoardItemProps } from "../../boardItem/Preview";
 import { BoardItemType } from "@/routes/board._index/types/BoardItemType";
 
 const usePasswordCheckModal = () => {
   const [isPasswordCheckModalOpen, setIsPasswordCheckModalOpen] =
     useState<boolean>(false);
     
-  const [passwordCheckType, setPasswordCheckType] = 
+  const [passwordCheckOption, setPasswordCheckOption] = 
     useState<PWCheckOptionType>(PWCheckOption.None);
 
   const [selectedBoardItemData, setSelectedBoardItemData] = 
@@ -16,19 +15,19 @@ const usePasswordCheckModal = () => {
   function openPasswordCheckModal(type: PWCheckOptionType, boardData: BoardItemType) {
     setIsPasswordCheckModalOpen(true);
     setSelectedBoardItemData(boardData);
-    setPasswordCheckType(type);
+    setPasswordCheckOption(type);
   }
 
   function closePasswordCheckModal() {
     setIsPasswordCheckModalOpen(false);
-    setPasswordCheckType(PWCheckOption.None);
+    setPasswordCheckOption(PWCheckOption.None);
     setSelectedBoardItemData(null);
   }
 
   return {
     isPasswordCheckModalOpen,
     selectedBoardItemData, 
-    setSelectedBoardItemData,
+    passwordCheckOption,
     openPasswordCheckModal,
     closePasswordCheckModal,
   };
