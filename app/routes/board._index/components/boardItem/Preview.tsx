@@ -40,9 +40,9 @@ export default function BoardItemPreview({
   const fetcher = useFetcher();
   const loading = fetcher.state !== "idle";
 
-  const [isEditPwCheckOpen, setIsEditPwCheckOpen] = useState(false);
-  const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
-  const [isOpenPwCheckOpen, setIsOpenPwCheckOpen] = useState<boolean>(false);
+  // const [isEditPwCheckOpen, setIsEditPwCheckOpen] = useState(false);
+  // const [isDeletePwCheckOpen, setIsDeletePwCheckOpen] = useState(false);
+  // const [isOpenPwCheckOpen, setIsOpenPwCheckOpen] = useState<boolean>(false);
 
   const {
     post_id,
@@ -56,11 +56,11 @@ export default function BoardItemPreview({
     is_private
   } = board;
 
-  const handleOpenPwCheckOpen = () => {
-    setIsOpenPwCheckOpen(true);
-    setIsDeletePwCheckOpen(false);
-    setIsEditPwCheckOpen(false);
-  };
+  // const handleOpenPwCheckOpen = () => {
+  //   setIsOpenPwCheckOpen(true);
+  //   setIsDeletePwCheckOpen(false);
+  //   setIsEditPwCheckOpen(false);
+  // };
 
   const handleEditBtnClick = () => {
     openPasswordCheckModal(PWCheckOption.Edit, board);
@@ -70,53 +70,55 @@ export default function BoardItemPreview({
     // setIsDeletePwCheckOpen(false);
   };
   const handleDeleteBtnClick = () => {
-    setIsOpenPwCheckOpen(false);
-    setIsDeletePwCheckOpen(true);
-    setIsEditPwCheckOpen(false);
+    openPasswordCheckModal(PWCheckOption.Delete, board);
+
+    // setIsOpenPwCheckOpen(false);
+    // setIsDeletePwCheckOpen(true);
+    // setIsEditPwCheckOpen(false);
   };
 
-  const handleEditPwCheckQuit = (event: MouseEvent<Element>) => {
-    event.stopPropagation();
-    setIsEditPwCheckOpen(false);
-  };
+  // const handleEditPwCheckQuit = (event: MouseEvent<Element>) => {
+  //   event.stopPropagation();
+  //   setIsEditPwCheckOpen(false);
+  // };
 
-  const handleDeletePwCheckQuit = (event: MouseEvent<Element>) => {
-    event.stopPropagation();
-    setIsDeletePwCheckOpen(false);
-  };
+  // const handleDeletePwCheckQuit = (event: MouseEvent<Element>) => {
+  //   event.stopPropagation();
+  //   setIsDeletePwCheckOpen(false);
+  // };
 
-  const handleEditPwCheckPass = () => {
-    setIsEditPwCheckOpen(false);
-    onEditPwCheckPass(post_id);
-  };
+  // const handleEditPwCheckPass = () => {
+  //   // setIsEditPwCheckOpen(false);
+  //   onEditPwCheckPass(post_id);
+  // };
 
-  const handleDeletePwCheckPass = () => {
-    setIsDeletePwCheckOpen(false);
-    if (confirm("삭제하시겠습니까? 삭제한 게시글은 복구되지 않습니다.")) {
-      sendBoardDeleteRequest(post_id);
-    }
-  };
+  // const handleDeletePwCheckPass = () => {
+  //   // setIsDeletePwCheckOpen(false);
+  //   if (confirm("삭제하시겠습니까? 삭제한 게시글은 복구되지 않습니다.")) {
+  //     sendBoardDeleteRequest(post_id);
+  //   }
+  // };
 
   const deleteBoardFetcher = useFetcher<QueryResult>();
 
-  /* To-Do: 모달로 바꾸게 되면 여기서는 더 이상 불필요. */
-  const sendBoardDeleteRequest = (post_id: number) => {
-    deleteBoardFetcher.submit(
-      {},
-      {
-        action: `/board/${post_id}/destroy`,
-        method: "DELETE",
-      }
-    );
-  };
+  // /* To-Do: 모달로 바꾸게 되면 여기서는 더 이상 불필요. */
+  // const sendBoardDeleteRequest = (post_id: number) => {
+  //   deleteBoardFetcher.submit(
+  //     {},
+  //     {
+  //       action: `/board/${post_id}/destroy`,
+  //       method: "DELETE",
+  //     }
+  //   );
+  // };
 
   const limited = is_private || !approved;
 
   const handleBoardItemClick = () => {
-    if (isDeletePwCheckOpen || isEditPwCheckOpen) return;
+    // if (isDeletePwCheckOpen || isEditPwCheckOpen) return;
 
     if (limited) {
-      handleOpenPwCheckOpen();
+      openPasswordCheckModal(PWCheckOption.ViewDetail, board);
     } else {
       onBoardSelect();
     }
@@ -139,17 +141,17 @@ export default function BoardItemPreview({
           </BoardItemFirstBlock>
           <BoardItemMiddleBlock>
             {limited ? (
-                isOpenPwCheckOpen ? (
-                  <PasswordChecker
-                    label="조회하려면 "
-                    post_id={post_id}
-                    onPwCheckPassed={handlePWCheckPass}
-                    // onQuitBtnClick={(event) => {
-                    //   event!.stopPropagation();
-                    //   setIsOpenPwCheckOpen(false);
-                    // }}
-                  />
-                ) : (
+                // isOpenPwCheckOpen ? (
+                //   <PasswordChecker
+                //     label="조회하려면 "
+                //     post_id={post_id}
+                //     onPwCheckPassed={handlePWCheckPass}
+                //     // onQuitBtnClick={(event) => {
+                //     //   event!.stopPropagation();
+                //     //   setIsOpenPwCheckOpen(false);
+                //     // }}
+                //   />
+                // ) : (
                   <BoardItemTitles
                     title={
                       is_private
@@ -160,7 +162,7 @@ export default function BoardItemPreview({
                     }
                     subtitle={"작성자만 열람할 수 있습니다."}
                   />
-                )
+               // )
               ) : (
                 <BoardItemTitles title={title} subtitle={content} />
               )}
@@ -172,7 +174,7 @@ export default function BoardItemPreview({
         </BoardItemBlockWrapper>
 
         <div className="flex gap-2 relative">
-          
+{/*           
           {isEditPwCheckOpen || isDeletePwCheckOpen && (
                 <div className="absolute min-w-256 right-[1rem]">
                   {isEditPwCheckOpen && (
@@ -193,17 +195,19 @@ export default function BoardItemPreview({
                   )}
                 </div>
               )}
-          
+           */}
           <FontAwesomeIcon
             className={`cursor-pointer w-5 ${
-              isEditPwCheckOpen ? "text-blue-400" : "text-gray-400"
+              // isEditPwCheckOpen ? "text-blue-400" : "text-gray-400"
+              false ? "text-blue-400" : "text-gray-400"
             }`}
             onClick={handleEditBtnClick}
             icon={faPenToSquare}
           />
           <FontAwesomeIcon
             className={`cursor-pointer w-5 ${
-              isDeletePwCheckOpen ? "text-red-400" : "text-gray-400"
+              //isDeletePwCheckOpen ? "text-red-400" : "text-gray-400"
+              false ? "text-red-400" : "text-gray-400"
             }`}
             onClick={handleDeleteBtnClick}
             icon={faCircleMinus}
