@@ -4,7 +4,8 @@ import {
   useRef,
 } from "react";
 import Center from "@/common/components/atoms/Center";
-import { ModalSizesType } from "./ModalSizeType";
+import { ModalSizesType } from "./type/ModalSizeType";
+import useModal from "./hook/useModal.hook";
 
 interface ModalProps {
   children: ReactNode;
@@ -16,45 +17,7 @@ interface ModalProps {
 
 export function Modal({ children, closeBtn, isModalOpen, closeModal }: ModalProps){
   
-  const modalRef = useRef<HTMLDialogElement>(null);
-  const modal = modalRef.current;
-
-  useEffect(() => {
-    const modal = modalRef.current;
-
-    if (modal) {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (event.target === modal){
-          
-          /* getBoundingclientRect는 event 발생 시에 지정해줘야 한다. (스크롤바 유무가 반영되는 것 같다.) */
-          const rect = modal.getBoundingClientRect();
-          const isClickedOutside =
-          event.clientX >= rect.right ||
-          event.clientY >= rect.bottom ||
-          event.clientX <= rect.left ||
-          event.clientY <= rect.top;
-
-          if (isClickedOutside)
-            closeModal();
-          }
-
-      };
-
-      modal.addEventListener("mousedown", handleClickOutside);
-
-      return () => {
-        modal.removeEventListener("mousedown", handleClickOutside);
-      };
-    }
-  }, []);
-
-  useEffect(() => {
-    if(isModalOpen){
-      modal?.showModal();
-    }else{
-      modal?.close();
-    }
-  }, [isModalOpen])
+  const modalRef = useModal(isModalOpen, closeModal);
 
   return (
     <dialog

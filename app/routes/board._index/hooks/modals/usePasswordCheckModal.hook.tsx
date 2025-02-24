@@ -1,5 +1,5 @@
 import { Modal } from "@/common/modal/Modal";
-import { ModalSizes } from "@/common/modal/ModalSizeType";
+import { ModalSizes } from "@/common/modal/type/ModalSizeType";
 import { useState } from "react";
 import { PWCheckOption, PWCheckOptionType } from "@/routes/board._index/types/PasswordCheckOptionType";
 

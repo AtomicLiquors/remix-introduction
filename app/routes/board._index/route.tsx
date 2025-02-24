@@ -10,7 +10,7 @@ import { BoardDetailResponseDTO, getBoards } from "@/model/board.server";
 import { Suspense, useEffect, useState } from "react";
 import { Modal } from "@/common/modal/Modal";
 import Center from "@/common/components/atoms/Center";
-import { ModalSizes } from "@/common/modal/ModalSizeType";
+import { ModalSizes } from "@/common/modal/type/ModalSizeType";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
@@ -169,7 +169,7 @@ export default function BoardRoute() {
         closeModal={closePasswordCheckModal}
       />
       {/* To-Do : Do we need Await Component? */}
-      <Suspense fallback={<div>2kooong2</div>}>
+      <Suspense fallback={<div>loading</div>}>
         <Await resolve={boards}>
           {(boards) =>
             boards.data.map((board, idx) => (
