@@ -81,9 +81,9 @@ export default function BoardRoute() {
     useState<BoardDetailResponseDTO | null>(null);
 
   const openBoard = (postId: number) => {
-    /* 이건 Board Close로 가야 하지 않을까? */
+    /* 이건 Board Close 동작에 작동해야 하지 않을까? */
     setOpenBoardData(null);
-    
+
     openBoardDetailModal();
     requestBoardById(postId);
   };
@@ -106,15 +106,14 @@ export default function BoardRoute() {
     postId: number,
     option: PWCheckOptionType
   ) => {
-    alert(`${postId}번 게시글의 ${option} 요청 통과`);
     switch (option) {
-      case "viewDetail":
+      case PWCheckOption.ViewDetail:
         openBoard(postId);
         break;
-      case "delete":
+      case PWCheckOption.Delete:
         handleDeletePwCheckPass(postId);
         break;
-      case "edit":
+      case PWCheckOption.Edit:
         handleBoardEditPWCheckPass(postId);
         break;
     }
