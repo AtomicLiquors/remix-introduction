@@ -81,7 +81,9 @@ export default function BoardRoute() {
     useState<BoardDetailResponseDTO | null>(null);
 
   const openBoard = (postId: number) => {
+    /* 이건 Board Close로 가야 하지 않을까? */
     setOpenBoardData(null);
+    
     openBoardDetailModal();
     requestBoardById(postId);
   };
@@ -110,6 +112,7 @@ export default function BoardRoute() {
         openBoard(postId);
         break;
       case "delete":
+        handleDeletePwCheckPass(postId);
         break;
       case "edit":
         handleBoardEditPWCheckPass(postId);
@@ -118,7 +121,7 @@ export default function BoardRoute() {
   };
 
   const handleDeletePwCheckPass = (postId: number) => {
-    /* To-Do: 이거 따로 Small 모달 하나 만들어서 구현. */
+    /* To-Do: 이거 confirm 대신 따로 Small 모달 하나 만들어서 구현. */
     if (confirm("삭제하시겠습니까? 삭제한 게시글은 복구되지 않습니다.")) {
       sendBoardDeleteRequest(postId);
     }
