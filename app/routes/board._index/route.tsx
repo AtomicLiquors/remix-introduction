@@ -74,6 +74,8 @@ export default function BoardRoute() {
   const [openBoardData, setOpenBoardData] =
     useState<BoardDetailResponseDTO | null>(null);
 
+  
+
   const openBoard = (postId: number) => {
     setOpenBoardData(null);
     openBoardDetailModal();

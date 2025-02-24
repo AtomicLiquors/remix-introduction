@@ -23,7 +23,10 @@ import { BoardItemType } from "../../types/BoardItemType";
 
 export interface BoardItemProps {
   board: BoardItemType
-  openPasswordCheckModal: (type: PWCheckOptionType, boardData: BoardItemType) => void;
+  openPasswordCheckModal: (
+    type: PWCheckOptionType, 
+    boardData: BoardItemType
+  ) => void;
   onBoardSelect: () => void;
   onEditPwCheckPass: (postId: number) => void;
 }

@@ -3,7 +3,10 @@ import { Modal } from "@/common/modal/Modal";
 import { ModalSize } from "@/common/modal/type/ModalSizeType";
 import PasswordChecker from "../PasswordChecker";
 import { BoardItemType } from "../../types/BoardItemType";
-import { PWCheckOption, PWCheckOptionType } from "../../types/PasswordCheckOptionType";
+import {
+  PWCheckOption,
+  PWCheckOptionType,
+} from "../../types/PasswordCheckOptionType";
 import { getCaptionByPWCheckOption } from "./util/getCaptionByPWCheckOption";
 import BoardItemBlockWrapper from "../boardItem/layout/BlockWrapper";
 import BoardItemFirstBlock from "../boardItem/layout/FirstBlock";
@@ -34,26 +37,31 @@ export function PasswordCheckModal({
         modalSize={ModalSize.SMALL}
         closeBtn
       >
-        {boardItem && (pwCheckOption != PWCheckOption.ViewDetail) && (pwCheckOption != PWCheckOption.None) ? (
+        {boardItem ? (
           <>
             <Center>
               <div className="text-gray-500">
                 {getCaptionByPWCheckOption(pwCheckOption)}
-              </div> 
+              </div>
 
-              <BoardItemBlockWrapper>
-                <BoardItemFirstBlock>
-                  <Avatar avatarId={boardItem.avatar_id} />
-                  <div className="text-sm">{boardItem.author}</div>
-                </BoardItemFirstBlock>
-                <BoardItemMiddleBlock>
-                  <BoardItemTitles title={boardItem.title} subtitle={boardItem.content} />
-                  <div className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
-                    {dateToString(boardItem.created_at)}
-                  </div>
-                </BoardItemMiddleBlock>
-              </BoardItemBlockWrapper>
-
+              {/* To-Do: 게시글 미리보기 부분만 따로 빼고 싶다. */}
+              {!boardItem.is_private && boardItem.approved && (
+                <BoardItemBlockWrapper>
+                  <BoardItemFirstBlock>
+                    <Avatar avatarId={boardItem.avatar_id} />
+                    <div className="text-sm">{boardItem.author}</div>
+                  </BoardItemFirstBlock>
+                  <BoardItemMiddleBlock>
+                    <BoardItemTitles
+                      title={boardItem.title}
+                      subtitle={boardItem.content}
+                    />
+                    <div className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
+                      {dateToString(boardItem.created_at)}
+                    </div>
+                  </BoardItemMiddleBlock>
+                </BoardItemBlockWrapper>
+              )}
               <PasswordChecker
                 post_id={boardItem.post_id}
                 onPwCheckPassed={function (): void {
