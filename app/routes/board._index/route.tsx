@@ -28,7 +28,11 @@ import usePasswordCheckModal from "./components/modal/hook/usePasswordCheckModal
 import { cacheClientLoader, useCachedLoaderData } from "remix-client-cache";
 import { PasswordCheckModal } from "./components/modal/PasswordCheckModal";
 import { BoardItemType } from "./types/BoardItemType";
-import { PWCheckOptionType } from "./types/PasswordCheckOptionType";
+import {
+  PWCheckOption,
+  PWCheckOptionType,
+} from "./types/PasswordCheckOptionType";
+import { QueryResult } from "@vercel/postgres";
 
 export const loader = () => {
   const boards = getBoards();
@@ -47,6 +51,7 @@ export default function BoardRoute() {
   // To-Do: Loading시 기존 화면 뿌옇게 표시.
 
   const { boards } = useCachedLoaderData<typeof loader>();
+  const deleteBoardFetcher = useFetcher<QueryResult>();
 
   /* 게시판 모달 통제 */
   const [
@@ -62,7 +67,7 @@ export default function BoardRoute() {
 
   const {
     isPasswordCheckModalOpen,
-    selectedBoardItemData, 
+    selectedBoardItemData,
     passwordCheckOption,
     openPasswordCheckModal,
     closePasswordCheckModal,
@@ -74,8 +79,6 @@ export default function BoardRoute() {
   // To-Do: Type 안정성 확보.
   const [openBoardData, setOpenBoardData] =
     useState<BoardDetailResponseDTO | null>(null);
-
-  
 
   const openBoard = (postId: number) => {
     setOpenBoardData(null);
@@ -97,9 +100,39 @@ export default function BoardRoute() {
     openBoard(postId);
   }
 
-  const handlePWCheckPassFromModal = (postId: number, option: PWCheckOptionType) => {
-      alert(`${postId}번 게시글의 ${option} 요청 통과`);
-  }
+  const handlePWCheckPassFromModal = (
+    postId: number,
+    option: PWCheckOptionType
+  ) => {
+    alert(`${postId}번 게시글의 ${option} 요청 통과`);
+    switch (option) {
+      case "viewDetail":
+        openBoard(postId);
+        break;
+      case "delete":
+        break;
+      case "edit":
+        handleBoardEditPWCheckPass(postId);
+        break;
+    }
+  };
+
+  const handleDeletePwCheckPass = (postId: number) => {
+    /* To-Do: 이거 따로 Small 모달 하나 만들어서 구현. */
+    if (confirm("삭제하시겠습니까? 삭제한 게시글은 복구되지 않습니다.")) {
+      sendBoardDeleteRequest(postId);
+    }
+  };
+
+  const sendBoardDeleteRequest = (postId: number) => {
+    deleteBoardFetcher.submit(
+      {},
+      {
+        action: `/board/${postId}/destroy`,
+        method: "DELETE",
+      }
+    );
+  };
 
   /* 조회, 수정, 삭제 패스워드 체크 */
   const handleBoardOpenPWCheckPass = (postId: number) => {
@@ -175,8 +208,8 @@ export default function BoardRoute() {
 
       <PasswordCheckModal
         isOpen={isPasswordCheckModalOpen}
-        closeModal={closePasswordCheckModal} 
-        boardItem={selectedBoardItemData}      
+        closeModal={closePasswordCheckModal}
+        boardItem={selectedBoardItemData}
         pwCheckOption={passwordCheckOption}
         onPWCheckPass={handlePWCheckPassFromModal}
       />

@@ -65,9 +65,9 @@ export default function BoardItemPreview({
   const handleEditBtnClick = () => {
     openPasswordCheckModal(PWCheckOption.Edit, board);
     
-    setIsOpenPwCheckOpen(false);
-    setIsEditPwCheckOpen(true);
-    setIsDeletePwCheckOpen(false);
+    // setIsOpenPwCheckOpen(false);
+    // setIsEditPwCheckOpen(true);
+    // setIsDeletePwCheckOpen(false);
   };
   const handleDeleteBtnClick = () => {
     setIsOpenPwCheckOpen(false);
@@ -99,6 +99,7 @@ export default function BoardItemPreview({
 
   const deleteBoardFetcher = useFetcher<QueryResult>();
 
+  /* To-Do: 모달로 바꾸게 되면 여기서는 더 이상 불필요. */
   const sendBoardDeleteRequest = (post_id: number) => {
     deleteBoardFetcher.submit(
       {},
