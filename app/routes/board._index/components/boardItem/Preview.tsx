@@ -1,21 +1,23 @@
 import { useFetcher } from "@remix-run/react";
-import { useEffect, useState, MouseEvent } from "react";
-import PasswordChecker from "../PasswordChecker";
-import { PWCheckOption, PWCheckOptionType } from "@/routes/board._index/hooks/modals/usePasswordCheckModal.hook";
+import { useState, MouseEvent } from "react";
+import Avatar from "@/common/avatar/Avatar";
+import { QueryResult } from "@vercel/postgres";
+import { dateToString } from "@/utils/date";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleMinus,
   faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
+
 import BoardItemContainer from "./layout/ItemContainer";
 import BoardItemFirstBlock from "./layout/FirstBlock";
 import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemTitles from "./content/Titles";
 import BoardItemBlockWrapper from "./layout/BlockWrapper";
 import BoardItemRowContainer from "./layout/RowContainer";
-import Avatar from "@/common/avatar/Avatar";
-import { QueryResult } from "@vercel/postgres";
-import { dateToString } from "@/utils/date";
+import PasswordChecker from "../PasswordChecker";
+import { PWCheckOption, PWCheckOptionType } from "../../types/PasswordCheckOptionType";
 
 export interface BoardItemProps {
   post_id: number;

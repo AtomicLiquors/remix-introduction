@@ -2,30 +2,28 @@ import {
   Await,
   ClientLoaderFunctionArgs,
   defer,
-  json,
   ScrollRestoration,
   useFetcher,
-  useLoaderData,
-  useRevalidator,
 } from "@remix-run/react";
 
 import { BoardDetailResponseDTO, getBoards } from "@/model/board.server";
-import BoardItemPreview, {
-  BoardItemProps,
-} from "./components/boardItem/Preview";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "@/common/modal/Modal";
+import Center from "@/common/components/atoms/Center";
+import { ModalSizes } from "@/common/modal/ModalSizeType";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+
 import BoardItemCreate from "./components/boardItem/Create";
 import BoardItemDetail from "./components/boardItem/Detail";
-import Center from "@/common/components/atoms/Center";
 import BoardItemContainer from "./components/boardItem/layout/ItemContainer";
-import { useBoardModal } from "./hooks/useBoardModal.hook";
-import usePasswordCheckModal, { PasswordCheckModal } from "@/routes/board._index/hooks/modals/usePasswordCheckModal.hook";
+import BoardItemPreview, { BoardItemProps } from "./components/boardItem/Preview";
+
+import { useBoardModal } from "./hooks/modals/useBoardModal.hook";
+import usePasswordCheckModal, { PasswordCheckModal } from "./hooks/modals/usePasswordCheckModal.hook";
 
 import { cacheClientLoader, useCachedLoaderData } from "remix-client-cache";
-import { ModalSizes } from "@/common/modal/ModalSizeType";
 
 export const loader = () => {
   const boards = getBoards();

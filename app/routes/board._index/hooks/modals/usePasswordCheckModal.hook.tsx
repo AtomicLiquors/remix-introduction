@@ -1,16 +1,7 @@
 import { Modal } from "@/common/modal/Modal";
 import { ModalSizes } from "@/common/modal/ModalSizeType";
 import { useState } from "react";
-
-export const PWCheckOption = {
-  ViewDetail: "viewDetail",
-  Delete: "delete",
-  Edit: "edit",
-  None: "none",
-} as const;
-
-export type PWCheckOptionType =
-  (typeof PWCheckOption)[keyof typeof PWCheckOption];
+import { PWCheckOption, PWCheckOptionType } from "@/routes/board._index/types/PasswordCheckOptionType";
 
 const usePasswordCheckModal = () => {
   const [isPasswordCheckModalOpen, setIsPasswordCheckModalOpen] =
