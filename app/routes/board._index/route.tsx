@@ -28,6 +28,11 @@ import usePasswordCheckModal from "./components/modal/hook/usePasswordCheckModal
 import { cacheClientLoader, useCachedLoaderData } from "remix-client-cache";
 import { PasswordCheckModal } from "./components/modal/PasswordCheckModal";
 import { BoardItemType } from "./types/BoardItemType";
+import {
+  PWCheckOption,
+  PWCheckOptionType,
+} from "./types/PasswordCheckOptionType";
+import { QueryResult } from "@vercel/postgres";
 
 export const loader = () => {
   const boards = getBoards();
@@ -46,9 +51,10 @@ export default function BoardRoute() {
   // To-Do: Loading시 기존 화면 뿌옇게 표시.
 
   const { boards } = useCachedLoaderData<typeof loader>();
+  const deleteBoardFetcher = useFetcher<QueryResult>();
 
   /* 게시판 모달 통제 */
-  const [
+  const {
     isBoardDetailOpen,
     isBoardCreateOpen,
     isBoardDetailEditMode,
@@ -57,12 +63,12 @@ export default function BoardRoute() {
     openBoardCreateModal,
     closeBoardCreateModal,
     setIsBoardDetailEditMode,
-  ] = useBoardModal();
+  } = useBoardModal();
 
   const {
     isPasswordCheckModalOpen,
-    selectedBoardItemData, 
-    setSelectedBoardItemData,
+    selectedBoardItemData,
+    passwordCheckOption,
     openPasswordCheckModal,
     closePasswordCheckModal,
   } = usePasswordCheckModal();
@@ -75,7 +81,9 @@ export default function BoardRoute() {
     useState<BoardDetailResponseDTO | null>(null);
 
   const openBoard = (postId: number) => {
+    /* 이건 Board Close 동작에 작동해야 하지 않을까? */
     setOpenBoardData(null);
+
     openBoardDetailModal();
     requestBoardById(postId);
   };
@@ -93,6 +101,40 @@ export default function BoardRoute() {
   function handleBoardItemClick(postId: number) {
     openBoard(postId);
   }
+
+  const handlePWCheckPassFromModal = (
+    postId: number,
+    option: PWCheckOptionType
+  ) => {
+    switch (option) {
+      case PWCheckOption.ViewDetail:
+        handleBoardOpenPWCheckPass(postId);
+        break;
+      case PWCheckOption.Delete:
+        handleDeletePwCheckPass(postId);
+        break;
+      case PWCheckOption.Edit:
+        handleBoardEditPWCheckPass(postId);
+        break;
+    }
+  };
+
+  const handleDeletePwCheckPass = (postId: number) => {
+    /* To-Do: 이거 confirm 대신 따로 Small 모달 하나 만들어서 구현. */
+    if (confirm("삭제하시겠습니까? 삭제한 게시글은 복구되지 않습니다.")) {
+      sendBoardDeleteRequest(postId);
+    }
+  };
+
+  const sendBoardDeleteRequest = (postId: number) => {
+    deleteBoardFetcher.submit(
+      {},
+      {
+        action: `/board/${postId}/destroy`,
+        method: "DELETE",
+      }
+    );
+  };
 
   /* 조회, 수정, 삭제 패스워드 체크 */
   const handleBoardOpenPWCheckPass = (postId: number) => {
@@ -168,8 +210,10 @@ export default function BoardRoute() {
 
       <PasswordCheckModal
         isOpen={isPasswordCheckModalOpen}
-        closeModal={closePasswordCheckModal} 
-        boardItem={selectedBoardItemData}      
+        closeModal={closePasswordCheckModal}
+        boardItem={selectedBoardItemData}
+        pwCheckOption={passwordCheckOption}
+        onPWCheckPass={handlePWCheckPassFromModal}
       />
       {/* To-Do : Do we need Await Component? */}
       <Suspense fallback={<div>loading</div>}>
