@@ -1,7 +1,6 @@
 import { Modal } from "@/common/modal/Modal";
 import { Children, useCallback, useEffect, useState } from "react";
 
-/* Type, TypeValue Renaming 고려하라. */
 export const PWCheckOption = {
   ViewDetail: "viewDetail",
   Delete: "delete",
