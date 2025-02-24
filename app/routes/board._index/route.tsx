@@ -22,12 +22,11 @@ import BoardItemPreview, {
   BoardItemProps,
 } from "./components/boardItem/Preview";
 
-import { useBoardModal } from "./hooks/modals/useBoardModal.hook";
-import usePasswordCheckModal, {
-  PasswordCheckModal,
-} from "./hooks/modals/usePasswordCheckModal.hook";
+import { useBoardModal } from "./components/modal/hook/useBoardModal.hook";
+import usePasswordCheckModal from "./components/modal/hook/usePasswordCheckModal.hook";
 
 import { cacheClientLoader, useCachedLoaderData } from "remix-client-cache";
+import { PasswordCheckModal } from "./components/modal/PasswordCheckModal";
 
 export const loader = () => {
   const boards = getBoards();
