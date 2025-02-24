@@ -142,10 +142,10 @@ export default function BoardItemPreview({
                     label="조회하려면 "
                     post_id={post_id}
                     onPwCheckPassed={handlePWCheckPass}
-                    onQuitBtnClick={(event) => {
-                      event!.stopPropagation();
-                      setIsOpenPwCheckOpen(false);
-                    }}
+                    // onQuitBtnClick={(event) => {
+                    //   event!.stopPropagation();
+                    //   setIsOpenPwCheckOpen(false);
+                    // }}
                   />
                 ) : (
                   <BoardItemTitles
@@ -178,7 +178,7 @@ export default function BoardItemPreview({
                       label="수정하려면 "
                       post_id={post_id}
                       onPwCheckPassed={handleEditPwCheckPass}
-                      onQuitBtnClick={handleEditPwCheckQuit}
+                      // onQuitBtnClick={handleEditPwCheckQuit}
                     />
                   )}
                   {isDeletePwCheckOpen && (
@@ -186,7 +186,7 @@ export default function BoardItemPreview({
                       label="삭제하려면 "
                       post_id={post_id}
                       onPwCheckPassed={handleDeletePwCheckPass}
-                      onQuitBtnClick={handleDeletePwCheckQuit}
+                      // onQuitBtnClick={handleDeletePwCheckQuit}
                     />
                   )}
                 </div>
