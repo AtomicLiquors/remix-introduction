@@ -22,7 +22,7 @@ import BoardItemDetail from "./components/boardItem/Detail";
 import Center from "@/common/components/atoms/Center";
 import BoardItemContainer from "./components/boardItem/layout/ItemContainer";
 import { useBoardModal } from "./hooks/useBoardModal.hook";
-import usePasswordCheckModal, { PasswordCheckModal } from "@/routes/board._index/hooks/usePasswordCheckModal.hook";
+import usePasswordCheckModal, { PasswordCheckModal } from "@/routes/board._index/hooks/modals/usePasswordCheckModal.hook";
 
 import { cacheClientLoader, useCachedLoaderData } from "remix-client-cache";
 import { ModalSizes } from "@/common/modal/ModalSizeType";

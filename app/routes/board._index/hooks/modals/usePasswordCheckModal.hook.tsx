@@ -15,6 +15,7 @@ export type PWCheckOptionType =
 const usePasswordCheckModal = () => {
   const [isPasswordCheckModalOpen, setIsPasswordCheckModalOpen] =
     useState<boolean>(false);
+    
   const [passwordCheckType, setPasswordCheckType] = useState<PWCheckOptionType>(
     PWCheckOption.None
   );

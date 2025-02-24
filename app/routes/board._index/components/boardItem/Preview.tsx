@@ -1,7 +1,7 @@
 import { useFetcher } from "@remix-run/react";
 import { useEffect, useState, MouseEvent } from "react";
 import PasswordChecker from "../PasswordChecker";
-import { PWCheckOption, PWCheckOptionType } from "@/routes/board._index/hooks/usePasswordCheckModal.hook";
+import { PWCheckOption, PWCheckOptionType } from "@/routes/board._index/hooks/modals/usePasswordCheckModal.hook";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleMinus,
