@@ -29,11 +29,11 @@
     "allowJs": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
+    "baseUrl": "app",
     "paths": {
-      "@/*": ["./app/*"],
-      "@index/*": ["./app/routes/_index/*"],
-      "@board/*": ["./app/routes/board._index/*"]
+      "@/*": ["./*"],
+      "@index/*": ["./routes/_index/*"],
+      "@board/*": ["./routes/board._index/*"]
     },
 
     // Remix takes care of building everything in `remix build`.
