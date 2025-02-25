@@ -1,7 +1,7 @@
 import { useFetcher } from "@remix-run/react";
-import { MouseEvent, useEffect, useRef } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import _ from "lodash";
-import { faCircleXmark, faLock, faX } from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark, faEye, faEyeSlash, faLock, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Center from "@/components/common/general/atoms/Center";
 
@@ -45,9 +45,16 @@ export default function PasswordChecker({
     );
   };
 
+
   const inputRef = useRef<HTMLInputElement>(null);
   const loading = pwCheckFetcher.state !== "idle";
   const defaultLabel = `${label} 비밀번호를 입력해 주세요.`;
+
+  const [isPasswordHidden, setIsPasswordHidden] = useState<boolean>(true);
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordHidden(!isPasswordHidden);
+  }
 
   useEffect(() => {
     // 반드시 false or true여야 하며 false는 아무 falsy한 값으로 대체해선 안 됨. (초기값이 undefined)
@@ -72,23 +79,20 @@ export default function PasswordChecker({
     <Center flexCol>
       {/* To-Do: 왼쪽 정렬 옵션 필요한가? */}
       <label className={'text-sm text-gray-500'}>{getPasswordInputLabel()}</label>
-      <div className={`flex border bg-white w-4/6 max-h-8 p-1 gap-1 mx-auto
+      <div className={`flex justify-between border bg-white w-4/6 max-h-8 p-1 gap-1 mx-auto
         ${pwCheckFetcher.data === false && "border-red-500"}`}>
-          
         <FontAwesomeIcon icon={faLock} className="text-sm w-4 text-gray-500" />
         <input
           onChange={() => handelPasswordInput(post_id, inputRef.current!.value)}
           ref={inputRef}
-          type="password"
+          type={isPasswordHidden ? 'password' : 'text'}
           className={`w-5/6 ${loading && "text-gray-500"}`}
         />
-        {/* To-Do: 눈깔 아이콘으로 보이게 토글 */}
-        {/* <FontAwesomeIcon
-          className="w-2.5 cursor-pointer"
-          onClick={onQuitBtnClick}
-          icon={faX}
-        /> */}
-         
+        <FontAwesomeIcon
+          className="w-5 cursor-pointer"
+          onClick={togglePasswordVisibility}
+          icon={isPasswordHidden ? faEye : faEyeSlash}
+        />
       </div>
 
       </Center>
