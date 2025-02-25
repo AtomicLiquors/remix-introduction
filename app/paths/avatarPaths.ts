@@ -1,7 +1,7 @@
 export const avatarSourcePrefix = "/img/avatars/"
 
 export const avatarSources = [
-   "blank.png",
+    "blank.png",
     "avatar(1).jpg",
     "avatar(2).jpg",
     "avatar(3).jpg",

@@ -1,9 +1,6 @@
 import { json, redirect } from "@remix-run/node";
 import {
-  Form,
-  Link,
   Links,
-  NavLink,
   Meta,
   Outlet,
   Scripts,
@@ -19,17 +16,12 @@ import tailwindStylesheet from "./tailwind.css?url";
 import themeStylesheet from "./theme/theme.css?url";
 import fontStylesheet from "./font.css?url";
 import removeDefaultStylesheet from "./removeDefault.css?url";
-import appStylesHref from "./app.css?url";
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect, useState } from "react";
 import { applyExistingTheme, themeClasses } from "./theme/theme";
-import Center from "@/common/components/atoms/Center";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import Profile from "@/layout/header/Profile";
-import LineBreak from "./common/components/atoms/LineBreak";
 import Footer from "@/layout/Footer";
 import Header from "@/layout/Header";
+import Center from "./components/common/general/atoms/Center";
 
 export const action = async () => {
   const contact = await createEmptyContact();

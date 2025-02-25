@@ -1,6 +1,6 @@
 import { createBoard, BoardCreateRequestDTO } from "@/model/board/board.server";
 import { ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
-import { validateCreateInput } from "./board._index/utils/validateForm";
+import { validateCreateInput } from "../utils/board/validateForm";
 
 export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
     const formData = await request.formData();

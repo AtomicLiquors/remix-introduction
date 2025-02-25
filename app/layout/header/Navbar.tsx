@@ -1,4 +1,4 @@
-import Center from "@/common/components/atoms/Center";
+import Center from "@/components/common/general/atoms/Center";
 import { NavLink } from "@remix-run/react";
 
 export default function NavBar() {

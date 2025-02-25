@@ -1,5 +1,5 @@
-import Center from "@/common/components/atoms/Center";
-import RoundImage from "@/common/components/atoms/RoundImage";
+import Center from "@/components/common/general/atoms/Center";
+import RoundImage from "@/components/common/general/atoms/RoundImage";
 import { PHOTO_PATHS } from "@/paths/photoPaths";
 import { themeClasses } from "@/theme/theme";
 

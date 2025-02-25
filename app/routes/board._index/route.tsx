@@ -8,31 +8,27 @@ import {
 
 import { BoardDetailResponseDTO, getBoards } from "@/model/board/board.server";
 import { Suspense, useEffect, useState } from "react";
-import { Modal } from "@/common/modal/Modal";
-import Center from "@/common/components/atoms/Center";
-import { ModalSize } from "@/common/modal/type/ModalSizeType";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
-import BoardItemCreate from "./components/boardItem/Create";
-import BoardItemDetail from "./components/boardItem/Detail";
-import BoardItemContainer from "./components/boardItem/layout/ItemContainer";
-import BoardItemPreview, {
-  BoardItemProps,
-} from "./components/boardItem/Preview";
-
-import { useBoardModal } from "./components/modal/hook/useBoardModal.hook";
-import usePasswordCheckModal from "./components/modal/hook/usePasswordCheckModal.hook";
-
 import { cacheClientLoader, useCachedLoaderData } from "remix-client-cache";
-import { PasswordCheckModal } from "./components/modal/PasswordCheckModal";
-import { BoardItemType } from "./types/BoardItemType";
+import { BoardItemType } from "../../types/board/BoardItemType";
 import {
   PWCheckOption,
   PWCheckOptionType,
-} from "./types/PasswordCheckOptionType";
+} from "../../types/board/PasswordCheckOptionType";
 import { QueryResult } from "@vercel/postgres";
+import usePasswordCheckModal from "@/components/board/boardModal/hook/usePasswordCheckModal.hook";
+import { useBoardModal } from "@/components/board/boardModal/hook/useBoardModal.hook";
+import BoardItemCreate from "@/components/board/boardItem/Create";
+import BoardItemDetail from "@/components/board/boardItem/Detail";
+import BoardItemContainer from "@/components/board/boardItem/layout/ItemContainer";
+import BoardItemPreview from "@/components/board/boardItem/Preview";
+import { PasswordCheckModal } from "@/components/board/boardModal/PasswordCheckModal";
+import Center from "@/components/common/general/atoms/Center";
+import { Modal } from "@/components/common/modal/Modal";
+import { ModalSize } from "@/components/common/modal/type/ModalSizeType";
 
 export const loader = () => {
   const boards = getBoards();
