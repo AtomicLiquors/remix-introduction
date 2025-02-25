@@ -1,4 +1,4 @@
-import { deleteBoardById } from "@/model/board.server";
+import { deleteBoardById } from "@/model/board/board.server";
 import { ActionFunction, ActionFunctionArgs, redirect } from "@remix-run/node";
 
 export const action: ActionFunction = async ({ params }: ActionFunctionArgs) => {

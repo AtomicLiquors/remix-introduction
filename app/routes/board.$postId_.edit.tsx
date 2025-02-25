@@ -1,7 +1,7 @@
 import {
   BoardEditRequestDTO,
   editBoard,
-} from "@/model/board.server";
+} from "@/model/board/board.server";
 import { ErrorResponse, ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
 import { isValidEditInput } from "./board._index/utils/validateForm";
 

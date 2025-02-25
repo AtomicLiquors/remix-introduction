@@ -1,4 +1,4 @@
-import { checkPassword } from "@/model/board.server";
+import { checkPassword } from "@/model/board/board.server";
 import { ActionFunction, ActionFunctionArgs } from "@remix-run/node";
 
 export const action: ActionFunction = async ({ params, request }: ActionFunctionArgs): Promise<boolean> => {

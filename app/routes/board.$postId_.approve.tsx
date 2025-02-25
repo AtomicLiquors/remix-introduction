@@ -1,6 +1,6 @@
 import {
   approveBoardById,
-} from "@/model/board.server";
+} from "@/model/board/board.server";
 import { ActionFunction, ActionFunctionArgs } from "@remix-run/node";
 
 export const action: ActionFunction = async ({

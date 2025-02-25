@@ -6,7 +6,7 @@ import {
   useFetcher,
 } from "@remix-run/react";
 
-import { BoardDetailResponseDTO, getBoards } from "@/model/board.server";
+import { BoardDetailResponseDTO, getBoards } from "@/model/board/board.server";
 import { Suspense, useEffect, useState } from "react";
 import { Modal } from "@/common/modal/Modal";
 import Center from "@/common/components/atoms/Center";

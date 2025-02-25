@@ -10,7 +10,7 @@ import BoardItemContainer from "./layout/ItemContainer";
 import BoardItemFirstBlock from "./layout/FirstBlock";
 import BoardItemMiddleBlock from "./layout/MiddleBlock";
 import BoardItemRowContainer from "./layout/RowContainer";
-import { BoardDetailResponseDTO } from "@/model/board.server";
+import { BoardDetailResponseDTO } from "@/model/board/board.server";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useFetcher } from "@remix-run/react";
 import Center from "@/common/components/atoms/Center";

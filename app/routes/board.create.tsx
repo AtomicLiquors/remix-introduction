@@ -1,4 +1,4 @@
-import { createBoard, BoardCreateRequestDTO } from "@/model/board.server";
+import { createBoard, BoardCreateRequestDTO } from "@/model/board/board.server";
 import { ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
 import { validateCreateInput } from "./board._index/utils/validateForm";
 
