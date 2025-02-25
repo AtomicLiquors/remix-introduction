@@ -1,24 +1,21 @@
 import { useFetcher } from "@remix-run/react";
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import _ from "lodash";
-import { faCircleXmark, faEye, faEyeSlash, faLock, faX } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faLock, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Center from "@/components/common/general/atoms/Center";
 
 // To-Do: 모바일에서 패스워드 체크 모달로 띄우기.
-
 interface PasswordCheckerProps {
   label?: string;
   post_id: number;
   onPwCheckPassed: () => void;
-  // onQuitBtnClick: (event: MouseEvent) => void;
 }
 
 export default function PasswordChecker({
   label = "",
   post_id,
   onPwCheckPassed,
-  // onQuitBtnClick,
 }: PasswordCheckerProps) {
   const pwCheckFetcher = useFetcher<boolean>();
 
