@@ -1,4 +1,4 @@
-import Container from "@/common/components/atoms/Container";
+import Container from "@/components/common/general/atoms/Container";
 
 export default function IndexRoute() {
   return (

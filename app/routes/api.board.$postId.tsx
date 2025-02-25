@@ -1,4 +1,4 @@
-import { getBoardById } from "@/model/board.server";
+import { getBoardById } from "@/model/board/board.server";
 import { LoaderFunction, LoaderFunctionArgs } from "@remix-run/node";
 
 export const loader:LoaderFunction = async ({ params }: LoaderFunctionArgs) => {

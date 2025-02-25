@@ -1,9 +1,9 @@
 import {
   BoardEditRequestDTO,
   editBoard,
-} from "@/model/board.server";
+} from "@/model/board/board.server";
 import { ErrorResponse, ActionFunction, ActionFunctionArgs, json } from "@remix-run/node";
-import { isValidEditInput } from "./board._index/utils/validateForm";
+import { isValidEditInput } from "../utils/board/validateForm";
 
 export const action: ActionFunction = async ({
   params, request,

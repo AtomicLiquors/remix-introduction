@@ -1,11 +1,11 @@
-import Container from "@/common/components/atoms/Container";
-import IndexCertificates from "@/routes/_index/components/certificates/IndexCertificates";
-import IndexContactMe from "@/routes/_index/components/contact_me/IndexContactMe";
-import IndexEducations from "@/routes/_index/components/eductaions/IndexEducations";
-import IndexProjects from "@/routes/_index/components/projects/IndexProjects";
-import IndexSkills from "@/routes/_index/components/skills/IndexSkills";
-import IndexAwards from "@/routes/_index/components/awards/IndexAwards";
-import IndexIntroduction from "./components/introduction/IndexIntroduction";
+import IndexCertificates from "@/components/index/certificates/IndexCertificates";
+import IndexContactMe from "@/components/index/contact_me/IndexContactMe";
+import IndexEducations from "@/components/index/eductaions/IndexEducations";
+import IndexProjects from "@/components/index/projects/IndexProjects";
+import IndexSkills from "@/components/index/skills/IndexSkills";
+import IndexAwards from "@/components/index/awards/IndexAwards";
+import IndexIntroduction from "@/components/index/introduction/IndexIntroduction";
+import Container from "@/components/common/general/atoms/Container";
 
 export default function IndexRoute() {
   return (
