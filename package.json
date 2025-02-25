@@ -1,5 +1,6 @@
 {
   "name": "remix-introduction",
+  
   "private": true,
   "sideEffects": false,
   "type": "module",

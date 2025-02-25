@@ -1,17 +1,15 @@
 import Center from "@/common/components/atoms/Center";
 import { Modal } from "@/common/modal/Modal";
 import { ModalSize } from "@/common/modal/type/ModalSizeType";
-import PasswordChecker from "../PasswordChecker";
+import Avatar from "@/common/avatar/Avatar";
+import { dateToString } from "@/utils/date";
+
+import PasswordChecker from "@board/components/PasswordChecker";
 import { BoardItemType } from "../../types/BoardItemType";
-import {
-  PWCheckOption,
-  PWCheckOptionType,
-} from "../../types/PasswordCheckOptionType";
+import { PWCheckOptionType } from "../../types/PasswordCheckOptionType";
 import { getCaptionByPWCheckOption } from "./util/getCaptionByPWCheckOption";
 import BoardItemBlockWrapper from "../boardItem/layout/BlockWrapper";
 import BoardItemFirstBlock from "../boardItem/layout/FirstBlock";
-import Avatar from "@/common/avatar/Avatar";
-import { dateToString } from "@/utils/date";
 import BoardItemTitles from "../boardItem/content/Titles";
 import BoardItemMiddleBlock from "../boardItem/layout/MiddleBlock";
 

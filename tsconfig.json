@@ -6,13 +6,19 @@
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
     "**/.client/**/*.tsx",
-    "jest.config.ts", 
-    "scripts/seed.js", ],
+    "jest.config.ts",
+    "scripts/seed.js"
+  ],
 
   "compilerOptions": {
     "module": "ES2022",
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "types": ["@testing-library/jest-dom", "@remix-run/node", "vite/client", "jest"],
+    "types": [
+      "@testing-library/jest-dom",
+      "@remix-run/node",
+      "vite/client",
+      "jest"
+    ],
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
@@ -25,7 +31,9 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./app/*"]
+      "@/*": ["./app/*"],
+      "@index/*": ["./app/routes/_index/*"],
+      "@board/*": ["./app/routes/board._index/*"]
     },
 
     // Remix takes care of building everything in `remix build`.
