@@ -5,13 +5,14 @@ import Avatar from "@/common/avatar/Avatar";
 import { dateToString } from "@/utils/date";
 
 import PasswordChecker from "@board/components/PasswordChecker";
-import { BoardItemType } from "../../types/BoardItemType";
-import { PWCheckOptionType } from "../../types/PasswordCheckOptionType";
-import { getCaptionByPWCheckOption } from "./util/getCaptionByPWCheckOption";
-import BoardItemBlockWrapper from "../boardItem/layout/BlockWrapper";
-import BoardItemFirstBlock from "../boardItem/layout/FirstBlock";
-import BoardItemTitles from "../boardItem/content/Titles";
-import BoardItemMiddleBlock from "../boardItem/layout/MiddleBlock";
+import BoardItemBlockWrapper from "@board/components/boardItem/layout/BlockWrapper";
+import BoardItemFirstBlock from "@board/components/boardItem/layout/FirstBlock";
+import BoardItemTitles from "@board/components/boardItem/content/Titles";
+import BoardItemMiddleBlock from "@board/components/boardItem/layout/MiddleBlock";
+import { getCaptionByPWCheckOption } from "@board/components/modal/util/getCaptionByPWCheckOption";
+
+import { BoardItemType } from "@board/types/BoardItemType";
+import { PWCheckOptionType } from "@board/types/PasswordCheckOptionType";
 
 {
   /* To-Do: Desktop 뷰에서는 클릭 위치 근처에 보이게 가능할까? */
