@@ -12,7 +12,7 @@ import BoardItemTitles from "../boardItem/content/Titles";
 import BoardItemBlockWrapper from "../boardItem/layout/BlockWrapper";
 import BoardItemFirstBlock from "../boardItem/layout/FirstBlock";
 import BoardItemMiddleBlock from "../boardItem/layout/MiddleBlock";
-import { getCaptionByPWCheckOption } from "./util/getCaptionByPWCheckOption";
+import { getCaptionByPWCheckOption } from "./PasswordCheckModal.util";
 
 {
   /* To-Do: Desktop 뷰에서는 클릭 위치 근처에 보이게 가능할까? */

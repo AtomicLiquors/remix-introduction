@@ -19,8 +19,8 @@ import {
   PWCheckOptionType,
 } from "../../types/board/PasswordCheckOptionType";
 import { QueryResult } from "@vercel/postgres";
-import usePasswordCheckModal from "@/components/board/boardModal/hook/usePasswordCheckModal.hook";
-import { useBoardModal } from "@/components/board/boardModal/hook/useBoardModal.hook";
+import usePasswordCheckModal from "@/components/board/boardModal/PasswordCheckModal.hook";
+import { useBoardModal } from "@/components/board/boardModal/useBoardModal.hook";
 import BoardItemCreate from "@/components/board/boardItem/Create";
 import BoardItemDetail from "@/components/board/boardItem/Detail";
 import BoardItemContainer from "@/components/board/boardItem/layout/ItemContainer";
