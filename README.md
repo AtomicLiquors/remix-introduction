@@ -18,10 +18,12 @@ Remix와 TypeScript를 사용해 만든 자기소개 페이지입니다.
 
 <!-- ![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white) --> 
 
+<!--
 ## 실행 및 빌드
 - pnpm 커맨드를 사용합니다.
 - pnpm i로 의존성을 설치합니다.
 - vercel postgreSQL 연동을 위해 .env 파일이 필요합니다.
+-->
 
 ### 실행
 ```sh
